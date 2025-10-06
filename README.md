@@ -22,9 +22,15 @@ Sumber Inisial Dataset :
 
 Role beserta Deskripsi :
 - Guest
+
 Hanya dapat melihat map, komunitas, blog dan online shop. Tidak dapat memodifikasi, membuat atau menghapus pada komunitas dan blog. Tidak dapat berbelanja di online shop.
 - Signed In User
+
 Bisa berinteraksi dengan map, komunitas, blog dan online shop. Bisa join dan leave komunitas. Bisa membuat ataupun menghapus entry blog. Bisa berbelanja di online shop
 - Admin
+
 Bisa menghapus, memodifikasi komunitas apapun, blog apapun, produk apapun pada online shop.
+
+https://www.figma.com/design/nMfrar4mjbZpF2BT1urUUw/Untitled?node-id=0-1&t=kXZhmmJZgIfNKbWh-1
+pws soon
 
