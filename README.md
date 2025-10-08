@@ -35,12 +35,12 @@ Modul ini membangun social network di dalam platform. User dapat melihat informa
   
 - Online Shop --> Aaron Nathanael Suhaendi
 
-Modul yang bertindak sebagai e-commerce dimana user bisa melakukan pembelian perlengkapan olahraga seperti bola, pakaian, alat gym, dll.
+Modul yang bertindak sebagai catalog shop di setiap tempat olahraga di mana user bisa melakukan pembelian perlengkapan olahraga seperti bola, pakaian, alat gym, dll.
 
 
 Sumber Inisial Dataset :
 - Google Maps API
-
+- Scrapping data dari e-commerce dengan kata kunci "sports equipment"
 
 Role beserta Deskripsi :
 - Guest
