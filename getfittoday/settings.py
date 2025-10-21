@@ -35,7 +35,7 @@ if PRODUCTION:
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id", "wildan-anshari-get-fit-today.pbp.cs.ui.ac.id"]
 
 # --- Google Maps API Key ---
 if PRODUCTION:
