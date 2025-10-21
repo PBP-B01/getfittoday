@@ -30,7 +30,7 @@ PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id"] 
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id"]
 
 if PRODUCTION:
     # In production (PaaS), get the key from the 'API_KEY' environment variable
@@ -38,6 +38,7 @@ if PRODUCTION:
     if not GOOGLE_MAPS_API_KEY:
         print("WARNING: GOOGLE_MAPS_API_KEY (from API_KEY env var) is not set in production!")
 else:
+    # In development, get the key from the 'GOOGLE_MAPS_API_KEY' variable in your .env file
     GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
     if not GOOGLE_MAPS_API_KEY:
         print("WARNING: GOOGLE_MAPS_API_KEY is not set in your .env file for development!")
@@ -57,7 +58,6 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
