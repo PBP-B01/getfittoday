@@ -1,0 +1,112 @@
+[
+{
+  "model": "home.placetype",
+  "pk": "adventure_sports_center",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "athletic_field",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "dance_hall",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "establishment",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "fitness_center",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "golf_course",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "gym",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "health",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "hiking_area",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "ice_skating_rink",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "off_roading_area",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "park",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "playground",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "point_of_interest",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "sports_activity_location",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "sports_club",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "sports_coaching",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "sports_complex",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "stadium",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "swimming_pool",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "wellness_center",
+  "fields": {}
+},
+{
+  "model": "home.placetype",
+  "pk": "yoga_studio",
+  "fields": {}
+}
+]
