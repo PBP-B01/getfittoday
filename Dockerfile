@@ -42,6 +42,8 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy the rest of the application code into the container
 COPY . .
 
+RUN python manage.py migrate --noinput
+
 # Run collectstatic to gather static files for WhiteNoise
 # Use --noinput to automatically confirm
 RUN python manage.py collectstatic --noinput
