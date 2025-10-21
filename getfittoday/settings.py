@@ -32,6 +32,12 @@ PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 # Set DEBUG based on PRODUCTION environment variable
 if PRODUCTION:
     DEBUG = False
+    SESSION_COOKIE_SECURE = True  # Send session cookie only over HTTPS
+    CSRF_COOKIE_SECURE = True     # Send CSRF cookie only over HTTPS
+    CSRF_TRUSTED_ORIGINS = [
+        'https://samuel-indriano-get-fit-today.pbp.cs.ui.ac.id',
+        'https://wildan-anshari-get-fit-today.pbp.cs.ui.ac.id' # Add your domain(s) here
+    ]
 else:
     DEBUG = True
 
