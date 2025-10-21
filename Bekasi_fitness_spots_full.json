@@ -1,0 +1,3507 @@
+[
+    {
+        "id": "ChIJGQjEH2SJaS4RXXMJre8YVoo",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-8037-9541",
+        "formattedAddress": "R2W5+M8X, Jl. Mutiara Gading City, Babelan Kota, Kec. Tarumajaya, Kabupaten Bekasi, Jawa Barat 17215, Indonesia",
+        "location": {
+            "latitude": -6.1532716999999995,
+            "longitude": 107.0083655
+        },
+        "rating": 4.6,
+        "userRatingCount": 69,
+        "displayName": {
+            "text": "MGC STADIUM",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJXyK1oIaLaS4Rw1LVKxA671c",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0838-9663-8880",
+        "formattedAddress": "Jl. Mutiara Gading City No.Kav. No. 2, Setia Asih, Kec. Tarumajaya, Kabupaten Bekasi, Jawa Barat 17215, Indonesia",
+        "location": {
+            "latitude": -6.162787799999999,
+            "longitude": 107.0031721
+        },
+        "rating": 4.4,
+        "websiteUri": "https://instagram.com/bodyfit.badmintonhall?igshid=YmMyMTA2M2Y=",
+        "userRatingCount": 24,
+        "displayName": {
+            "text": "Body Fit Badminton Hall",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJRdT9NGuLaS4RlXdfwXSFfJA",
+        "types": [
+            "gym",
+            "fitness_center",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-0989-8998",
+        "formattedAddress": "RXRX+JV, Setia Asih, Tarumajaya, Bekasi Regency, West Java 17215, Indonesia",
+        "location": {
+            "latitude": -6.159317499999999,
+            "longitude": 106.99808069999999
+        },
+        "rating": 5,
+        "websiteUri": "https://www.thegym.id/",
+        "userRatingCount": 47,
+        "displayName": {
+            "text": "The Gym Evolution - SCG Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJw-rysj2JaS4R88OhYPFuzZ0",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R2X5+83C, Jl. Cluster Manhattan Jl. Mutiara Gading City, Setia Asih, Kec. Tarumajaya, Kabupaten Bekasi, Jawa Barat 17215, Indonesia",
+        "location": {
+            "latitude": -6.151679,
+            "longitude": 107.007638
+        },
+        "rating": 4.5,
+        "userRatingCount": 40,
+        "displayName": {
+            "text": "Taman Cluster Manhattan",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJb6V-lu-JaS4RzP_0xlA0CHQ",
+        "types": [
+            "gym",
+            "yoga_studio",
+            "fitness_center",
+            "sports_complex",
+            "wellness_center",
+            "school",
+            "sports_club",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-6155-1600",
+        "formattedAddress": "Jl. Pulo Timaha No.10, Babelan Kota, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.1608922999999995,
+            "longitude": 107.01803729999999
+        },
+        "rating": 5,
+        "websiteUri": "https://glstudio.id/",
+        "userRatingCount": 57,
+        "displayName": {
+            "text": "GL Studio",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ21ZrtmiLaS4RJyqITJ73x84",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0838-9663-8880",
+        "formattedAddress": "Jl. Mutiara Gading City, Setia Asih, Kec. Tarumajaya, Kabupaten Bekasi, Jawa Barat 17215, Indonesia",
+        "location": {
+            "latitude": -6.1629484,
+            "longitude": 107.0031655
+        },
+        "rating": 4.5,
+        "userRatingCount": 35,
+        "displayName": {
+            "text": "Body Fit Station Ultimate",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJA3HIBEGKaS4R-uDk9UFmjuU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "RXWH+8VV, Pusaka Rakyat, Tarumajaya, Bekasi Regency, West Java 17214, Indonesia",
+        "location": {
+            "latitude": -6.1541301,
+            "longitude": 106.9796655
+        },
+        "rating": 4.3,
+        "userRatingCount": 20,
+        "displayName": {
+            "text": "Lapangan Danau Harapan Indah",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJXXYRUwCJaS4RPO7UtUgRdGE",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "V236+XW3, Kedungjaya, Babelan, Bekasi Regency, West Java 17610, Indonesia",
+        "location": {
+            "latitude": -6.1462693999999995,
+            "longitude": 107.0122768
+        },
+        "rating": 5,
+        "userRatingCount": 26,
+        "displayName": {
+            "text": "Airsoft Spring Bekasi (ASB) Sukir Field",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ99Oz10aLaS4Rw_1NgTMXtm0",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9478-9351",
+        "formattedAddress": "RXHW+J9W, Setia Asih, Tarumajaya, Bekasi Regency, West Java 17215, Indonesia",
+        "location": {
+            "latitude": -6.1708997,
+            "longitude": 106.9959519
+        },
+        "rating": 4.9,
+        "userRatingCount": 14,
+        "displayName": {
+            "text": "LAPANGAN BOLA PANDAWA 5",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJyfH4zAmKaS4RRu6cPFq_JnQ",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "VX9R+HMX, Jl. Taruma Jaya, Setiamulya, Kec. Tarumajaya, Kabupaten Bekasi, Jawa Barat 17213, Indonesia",
+        "location": {
+            "latitude": -6.1310183,
+            "longitude": 106.9917375
+        },
+        "rating": 4.6,
+        "userRatingCount": 18,
+        "displayName": {
+            "text": "Pro Gym Fitness Club",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJK_qL19qJaS4Rr6B5xio3Bec",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-2121-0909",
+        "formattedAddress": "Jl. Panjibuwono Residence, Kedung Pengawas, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.1497011,
+            "longitude": 107.03889559999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 15,
+        "displayName": {
+            "text": "Estadio Arena Minisoccer Panjibuwono",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJs48_QoiJaS4RAjcAB-Gz-48",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Taman The Plaza Panjibuwono City, V22Q+57V, Kedung Pengawas, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.1495049999999996,
+            "longitude": 107.0381867
+        },
+        "rating": 4.6,
+        "userRatingCount": 19,
+        "displayName": {
+            "text": "Panji buwono",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJkeKnt3uLaS4RPFAP7Wfr2rA",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-8160-7699",
+        "formattedAddress": "Ruko Graha Harapan Regency Blok AI-1, Babelan Kota, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.1611066999999995,
+            "longitude": 107.0304737
+        },
+        "rating": 5,
+        "websiteUri": "https://www.instagram.com/destroyer_musclegym/",
+        "userRatingCount": 117,
+        "displayName": {
+            "text": "DESTROYER MUSCLE GYM",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJdT5ncaaJaS4RJqgGn9Erqcc",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R2PR+442, Babelan Kota, Babelan, Bekasi Regency, West Java 17610, Indonesia",
+        "location": {
+            "latitude": -6.1647386,
+            "longitude": 107.0402563
+        },
+        "rating": 4.3,
+        "userRatingCount": 174,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Babelan Kota",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ5bD_J2eJaS4Rx2RcbUMwRSE",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0899-8266-058",
+        "formattedAddress": "R2VQ+XP5, Kedungjaya, Babelan, Bekasi Regency, West Java 17610, Indonesia",
+        "location": {
+            "latitude": -6.1551211,
+            "longitude": 107.03935469999999
+        },
+        "rating": 4.6,
+        "websiteUri": "https://m.facebook.com/Javaarchery/",
+        "userRatingCount": 13,
+        "displayName": {
+            "text": "Wisata Memanah Bekasi Java Archery Club",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ475iTACJaS4RmElws5U1Rk4",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0898-3873-297",
+        "formattedAddress": "Jl. Pertamina kp Wates No.Rt03/03, Kedungjaya, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.1480342,
+            "longitude": 107.0319381
+        },
+        "rating": 5,
+        "userRatingCount": 11,
+        "displayName": {
+            "text": "PB CWD JAYA WATES",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ6zgy5emHaS4RQsuQRF6sGUM",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-0121-9240",
+        "formattedAddress": "kp jaer suka bakti, R4W9+WW4, Sukarahayu, Kec. Tambelang, Kabupaten Bekasi, Jawa Barat 17620, Indonesia",
+        "location": {
+            "latitude": -6.1527423,
+            "longitude": 107.11983839999999
+        },
+        "rating": 4.4,
+        "websiteUri": "http://www.meoreyo.blogspot.com/",
+        "userRatingCount": 23,
+        "displayName": {
+            "text": "Lapangan Bola Balong Jaer",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJMbmeVb2JaS4RqD_Uv4j_TAQ",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R3MP+HCJ, Jl. Griya Srimahi Indah Raya 1, Srimahi, Kec. Tambun Utara, Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.1660366,
+            "longitude": 107.0860215
+        },
+        "rating": 4.6,
+        "userRatingCount": 15,
+        "displayName": {
+            "text": "GOR SRIMAHI (bulutangkis)",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJWYAYVgD1aS4RDJgnY9J7m18",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-7057-0220",
+        "formattedAddress": "RW85+3P6, Jl. Raya Bekasi No.Km 19 3, RW.2, Rw. Terate, Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13920, Indonesia",
+        "location": {
+            "latitude": -6.1847879,
+            "longitude": 106.9092163
+        },
+        "rating": 5,
+        "websiteUri": "http://bulltank.id/",
+        "userRatingCount": 127,
+        "displayName": {
+            "text": "Bulltank Badminton",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJIYPHNoeMaS4R7D06snyRmYI",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "QXJ5+J3F, Jl. Harapan Baru, RT.006/RW.3, Kota Baru, Kec. Bekasi Bar., Kota Bks, Jawa Barat 17133, Indonesia",
+        "location": {
+            "latitude": -6.2184314999999994,
+            "longitude": 106.95768439999999
+        },
+        "rating": 4,
+        "userRatingCount": 386,
+        "displayName": {
+            "text": "Harapan Baru Swimming Pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJsQ2mZ2CJaS4R0q3t8nReRIM",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 89134205",
+        "formattedAddress": "Jl. Ujung Harapan No.42, Bahagia, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17125, Indonesia",
+        "location": {
+            "latitude": -6.189672,
+            "longitude": 107.009057
+        },
+        "rating": 4.4,
+        "userRatingCount": 963,
+        "displayName": {
+            "text": "Dariza Sport Club",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJDZn_RlSJaS4RSQqa87wet2w",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0816-1750-1288",
+        "formattedAddress": "Jl. Kompleks Villa Mas Indah A6 No.01 & 02, RT.002/RW.018, Perwira, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17122, Indonesia",
+        "location": {
+            "latitude": -6.2075717,
+            "longitude": 107.01032479999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 415,
+        "displayName": {
+            "text": "Gor Badminton Villa Mas Indah Blok A",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJn1aJcgaJaS4RijSmpTknPFE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-5766-6957",
+        "formattedAddress": "Jl. Reformasi 1, RT.004/RW.017, Perwira, Kec. Bekasi Utara, Kota Bks, Jawa Barat, Indonesia",
+        "location": {
+            "latitude": -6.1987954,
+            "longitude": 107.01596359999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 72,
+        "displayName": {
+            "text": "GOR KUSUMA",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJs9sLf2SJaS4R99Qe43IkSic",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R286+QVQ, Jl. Marrakash Square, Bahagia, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.1830434,
+            "longitude": 107.01223039999999
+        },
+        "rating": 3.7,
+        "userRatingCount": 453,
+        "displayName": {
+            "text": "Kolam Renang Marrakash",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ0_hPDQCJaS4RRLyTW4iDIaE",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R227+P8Q, Jl. Melati 3, RT.004/RW.016, Perwira, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17125, Indonesia",
+        "location": {
+            "latitude": -6.1981636,
+            "longitude": 107.0133483
+        },
+        "rating": 4.1,
+        "userRatingCount": 16,
+        "displayName": {
+            "text": "GOR Betawi Nusantara",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJUYTgLvyLaS4R_iPG-jAST6Q",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q2V3+H7G, RT.002/RW.012, Perwira, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17124, Indonesia",
+        "location": {
+            "latitude": -6.2060642,
+            "longitude": 107.0032062
+        },
+        "rating": 4.3,
+        "userRatingCount": 145,
+        "displayName": {
+            "text": "Lapangan Perwira",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ40mcGs-PaS4Rmo_dBL1OPQ0",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kompleks Villa Mas Indah No.D5 No 4, RT.005/RW.014, Perwira, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17123, Indonesia",
+        "location": {
+            "latitude": -6.2068867999999995,
+            "longitude": 107.01036359999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 11,
+        "displayName": {
+            "text": "Villa Mas Indah Blok A",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ9e7qEgCJaS4RK_A-erFLIPA",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q2V5+V79, RT.006/RW.024, Kaliabang Tengah, Kec. Bekasi Utara, Kota Bks, Jawa Barat, Indonesia",
+        "location": {
+            "latitude": -6.2053289,
+            "longitude": 107.00824779999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 51,
+        "displayName": {
+            "text": "Kiddie Crabs Kaliabang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJbyOFnb-LaS4RZiWlSOCeDGU",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 88894715",
+        "formattedAddress": "Bekasi, JL. Palem Hijau, Blok G No. 1, Boulervard Hijau, Harapan Indah, RT.007/RW.024, Pejuang, Kecamatan Medan Satria, Kota Bks, Jawa Barat 17131, Indonesia",
+        "location": {
+            "latitude": -6.189317,
+            "longitude": 106.9811434
+        },
+        "rating": 4.2,
+        "userRatingCount": 257,
+        "displayName": {
+            "text": "Barsid Futsal",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJTw-BcOSLaS4RtlSJaHfCeiQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-2849-9847",
+        "formattedAddress": "Kaliabang Tengah Rt No.05/01, RT.003/RW.025, Kaliabang Tengah, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17125, Indonesia",
+        "location": {
+            "latitude": -6.198655899999999,
+            "longitude": 107.00030410000001
+        },
+        "rating": 4.4,
+        "userRatingCount": 97,
+        "displayName": {
+            "text": "Tembok Bolong",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJF54m-m2JaS4R1_HpdoK9ZcA",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R287+PQC, Bahagia, Babelan, Bekasi Regency, West Java 17610, Indonesia",
+        "location": {
+            "latitude": -6.1831833,
+            "longitude": 107.01438309999999
+        },
+        "rating": 4.2,
+        "userRatingCount": 26,
+        "displayName": {
+            "text": "Rainbow Lake Wahana Bermain Danau Marakash",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJk9TQRwKMaS4RNS84slcLNxY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q2J3+RRR, RT.010/RW.006, Marga Mulya, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17142, Indonesia",
+        "location": {
+            "latitude": -6.217895599999999,
+            "longitude": 107.00451249999999
+        },
+        "rating": 4,
+        "userRatingCount": 48,
+        "displayName": {
+            "text": "Tytyan Kencana Football Field",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ6971bVaJaS4R78cUHfShqAg",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-4140-6031",
+        "formattedAddress": "RT.006/RW.024, Kaliabang Tengah, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17123, Indonesia",
+        "location": {
+            "latitude": -6.2053037,
+            "longitude": 107.00969819999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 67,
+        "displayName": {
+            "text": "DBano Gym Bekasi",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJVVJYDGSJaS4RhuoPCEjPuoA",
+        "types": [
+            "sports_club",
+            "place_of_worship",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R286+8PR, Bahagia, Babelan, Bekasi Regency, West Java 17610, Indonesia",
+        "location": {
+            "latitude": -6.184127,
+            "longitude": 107.011758
+        },
+        "rating": 4.5,
+        "userRatingCount": 32,
+        "displayName": {
+            "text": "Victory volleyball club taman elok bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJCyHGN5SNaS4RNdAZXH2Cy5o",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. St. Trenggono No.1, RT.04/RW.04, Marga Mulya, Kec. Bekasi Utara, Bekasi Kota, Jawa Barat 17142, Indonesia",
+        "location": {
+            "latitude": -6.2189328,
+            "longitude": 107.0044235
+        },
+        "rating": 4.7,
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "Gedung Tenis Meja PTM Tytyan Kencana",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJBc1EIACPaS4RXUvnB-qONAs",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-6514-4904",
+        "formattedAddress": "Jl. Raya Perjuangan-Teluk Pucung, Tlk. Pucung, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17121, Indonesia",
+        "location": {
+            "latitude": -6.2122664,
+            "longitude": 107.03134759999999
+        },
+        "rating": 4.5,
+        "websiteUri": "https://ayo.co.id/v/planet-soccer-arena",
+        "userRatingCount": 49,
+        "displayName": {
+            "text": "Planet Soccer Arena",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJSzNpQF2PaS4RV21maQ3YAZ0",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1237-7636",
+        "formattedAddress": "Q3M2+FPV, Jl. Kp. Bend. Gg. Kav. No.Ds, Satriajaya, Kec. Tambun Utara, Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.216499799999999,
+            "longitude": 107.05140229999999
+        },
+        "rating": 4.1,
+        "userRatingCount": 36,
+        "displayName": {
+            "text": "GOR Badminton Baraya",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJr1aKMDeJaS4RFVXq7s5fbME",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q2XP+484, Kebalen, Babelan, Bekasi Regency, West Java 17610, Indonesia",
+        "location": {
+            "latitude": -6.202229699999999,
+            "longitude": 107.03582159999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 192,
+        "displayName": {
+            "text": "GOR Taman Kebalen",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJH2gHyRmJaS4RJljIPw1orWM",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Blok C3 Perum Bumi, Anugerah Sejahtera, Jl. Rajawali 5 No.4, RT.10/RW.013, Kebalen, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.1872114,
+            "longitude": 107.04226260000002
+        },
+        "rating": 4.6,
+        "userRatingCount": 37,
+        "displayName": {
+            "text": "Perumahan Bumi Anugerah Sejahtera - Kebalen Kab,Bekasi",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJA4JLLh-JaS4RLKyVce1y760",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R27X+2FJ, Jl. Gabus Raya, Sriamur, Kec. Tambun Utara, Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.1874141,
+            "longitude": 107.0486452
+        },
+        "rating": 4.5,
+        "userRatingCount": 293,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Sriamur Tambun Utara Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJvxXc2wmPaS4RNGnPkQbKlpQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kp. Gebang, Satriajaya, Kec. Tambun Utara, Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2124967,
+            "longitude": 107.04659
+        },
+        "rating": 4.2,
+        "userRatingCount": 60,
+        "displayName": {
+            "text": "gelora satria jaya",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJDQW02_eJaS4RMMag_QOQuiA",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R364+73J, Sriamur, Tambun Utara, Bekasi Regency, West Java 17510, Indonesia",
+        "location": {
+            "latitude": -6.1890297,
+            "longitude": 107.05497489999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 27,
+        "displayName": {
+            "text": "Taman Bermain Yoehan Busana",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJCQ10J1qJaS4RXnlug3MYCLo",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-9344-7408",
+        "formattedAddress": "Jl. Taman Kebalen Indah No.15-16 Blok G1, Kebalen, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.196496499999999,
+            "longitude": 107.03309329999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "TRAPEZIUS GYM",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ5V4jciKJaS4Rt54tYDIp9hA",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-1166-6246",
+        "formattedAddress": "Jl. Raya Kebalen, Kebalen, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.2007995,
+            "longitude": 107.03768339999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.instagram.com/rnbgymfitnesss?igsh=MXI5OG9zbHBoeHR3bg==%20TIK%20TOK::%20https://www.tiktok.com/@rnbgym?_r=1%20YOUTUBE:%20https://youtube.com/@rnbgymfitness4577?si=aOOIwcr74TnEX2No%20NO%ED%A0%BD%ED%B3%9Ehttps://wa.me/qr/HZQNJ6HCWIDVF1",
+        "userRatingCount": 25,
+        "displayName": {
+            "text": "R n B Fitness & Club",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJM_GAdDyJaS4Ru1oWuczvlRc",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-2674-0455",
+        "formattedAddress": "R24Q+45J, Jl. Marga Sari 2, Kebalen, Kec. Babelan, Kabupaten Bekasi, Jawa Barat 17610, Indonesia",
+        "location": {
+            "latitude": -6.1946736,
+            "longitude": 107.0378803
+        },
+        "rating": 5,
+        "userRatingCount": 23,
+        "displayName": {
+            "text": "ATE GYM",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJz7paT5OJaS4R2DD2CSaDfLI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "R358+5H9, Srijaya, Tambun Utara, Bekasi Regency, West Java 17510, Indonesia",
+        "location": {
+            "latitude": -6.1920996,
+            "longitude": 107.0664889
+        },
+        "rating": 4.2,
+        "userRatingCount": 17,
+        "displayName": {
+            "text": "Stadion Mini Gabus Rawa",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJS3wu51mPaS4RMwqx5W8-82Q",
+        "types": [
+            "gym",
+            "yoga_studio",
+            "fitness_center",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1004-7317",
+        "formattedAddress": "Jl. Raya Bumi Anggrek Blok X1 No 9, Karangsatria, Kec. Tambun Utara, Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.214419299999999,
+            "longitude": 107.0364974
+        },
+        "rating": 5,
+        "userRatingCount": 11,
+        "displayName": {
+            "text": "KANIA HAPPY SANGGAR SENAM & RUMAH NUTRISI",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ8wrhDWmJaS4RcRaTTVYHUCo",
+        "types": [
+            "sports_club",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-9299-9221",
+        "formattedAddress": "Jl. Raya Pisangan Gg. Kb. Singkong, Satriajaya, Kec. Tambun Utara, Kabupaten Bekasi, Jawa Barat 13940, Indonesia",
+        "location": {
+            "latitude": -6.2046401,
+            "longitude": 107.0420772
+        },
+        "rating": 4.9,
+        "websiteUri": "https://www.facebook.com/PutraSetia.Pisangan.kebon.singakong.kabupaten.beka/",
+        "userRatingCount": 26,
+        "displayName": {
+            "text": "Pedepokan Pencak Silat ISMD PUTRA SETIA. Kp.Pisangan Ranting tambun Utara",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJHyRCuN2JaS4RGR7H_hX_168",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-7619-0517",
+        "formattedAddress": "Jl. Raya Kali CBL, Sarimukti, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.2016035,
+            "longitude": 107.08766469999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.griyafamily.com/",
+        "userRatingCount": 180,
+        "displayName": {
+            "text": "Playground Siti Khadijah Cibitung",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ0zRZExWJaS4RRt1Ngqxbuz8",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Perum Griya Family 4 Cibitung, Sarimukti, Cibitung, Bekasi Regency, West Java 17520, Indonesia",
+        "location": {
+            "latitude": -6.1999732,
+            "longitude": 107.0835518
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.griyafamily.com/playground-siti-khadijah-food-court/",
+        "userRatingCount": 160,
+        "displayName": {
+            "text": "Taman Bermain Griya Family 4",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJHXVmpY2PaS4Rs6yVR0kB9lA",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "formattedAddress": "Q3HW+CCP, Muktiwari, Cibitung, Bekasi Regency, West Java, Indonesia",
+        "location": {
+            "latitude": -6.2214062,
+            "longitude": 107.0960712
+        },
+        "rating": 4.9,
+        "userRatingCount": 41,
+        "displayName": {
+            "text": "BONDAN FITNESS",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJbyxWBgCNaS4RHKXzz7K8qAM",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0858-3118-6789",
+        "formattedAddress": "Jl. kota bintang boulevard No.kavling 1B, RT.004/RW.002, Jakasampurna, Bekasi Barat, Bekasi, West Java, Indonesia",
+        "location": {
+            "latitude": -6.2448114,
+            "longitude": 106.9560526
+        },
+        "rating": 4.9,
+        "userRatingCount": 2958,
+        "displayName": {
+            "text": "FuniFun! - Grand Kota Bintang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJb2qX6P2NaS4RqWWMK0JiX_s",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-2882-2032",
+        "formattedAddress": "Jl. Raya Kalimalang No.68, RT.01/RW.016, Jakasampurna, Kec. Bekasi Bar., Kota Bks, Jawa Barat 17412, Indonesia",
+        "location": {
+            "latitude": -6.2495058,
+            "longitude": 106.95529069999999
+        },
+        "rating": 4.5,
+        "websiteUri": "https://ftlgym.com/",
+        "userRatingCount": 303,
+        "displayName": {
+            "text": "FTL Gym Kalimalang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ7aiR3U-MaS4Ri8UIE7zWtIo",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-6297-5161",
+        "formattedAddress": "Jl. Kemala Raya Blok. 11 No. 1 T.003, RT.003/RW.006, Jakasampurna, Kec. Bekasi Bar., Kota Bks, Jawa Barat 17145, Indonesia",
+        "location": {
+            "latitude": -6.2444444,
+            "longitude": 106.97166670000001
+        },
+        "rating": 4.5,
+        "websiteUri": "https://taplink.cc/tamansarisportclubprsdkemala",
+        "userRatingCount": 1157,
+        "displayName": {
+            "text": "Kolam Renang Persada Kemala",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJYR9Qdq2NaS4ReL6J14dGTHw",
+        "types": [
+            "sports_complex",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Sedap Malam No.499, RT.003/RW.012, Jaka Setia, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17147, Indonesia",
+        "location": {
+            "latitude": -6.255674399999999,
+            "longitude": 106.97059759999999
+        },
+        "rating": 4.3,
+        "websiteUri": "http://kinarapilates.com/",
+        "userRatingCount": 13,
+        "displayName": {
+            "text": "Kinara Studio",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ80G1cfWMaS4R2uV8XcO91OA",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1627-5157",
+        "formattedAddress": "Jl. Bintara XI, RT.010/RW.002, Bintara Jaya, Kec. Bekasi Bar., Kota Bks, Jawa Barat 17136, Indonesia",
+        "location": {
+            "latitude": -6.2354714,
+            "longitude": 106.9584697
+        },
+        "rating": 4.3,
+        "userRatingCount": 715,
+        "displayName": {
+            "text": "Silma Badminton",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJd7PHyryNaS4RyNkIabaLEv0",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "PXW2+M2G, Perumahan Taman Bougenville Estate, RT.004/RW.005, Jatibening, Kec. Bekasi Bar., Kota Bks, Jawa Barat 17412, Indonesia",
+        "location": {
+            "latitude": -6.253547999999999,
+            "longitude": 106.9503299
+        },
+        "rating": 4.8,
+        "userRatingCount": 29,
+        "displayName": {
+            "text": "Bougenville Tennis Court",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ3-xJExWNaS4RJ2nADxR8eOs",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1747-9799",
+        "formattedAddress": "Jatibening Baru, Pondok Gede, Bekasi, West Java 17412, Indonesia",
+        "location": {
+            "latitude": -6.2653222,
+            "longitude": 106.9420341
+        },
+        "rating": 4.8,
+        "userRatingCount": 35,
+        "displayName": {
+            "text": "PB.Lisa Jatibening",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJw2BLcwCNaS4RTIvo9evNPT0",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-8888-6657",
+        "formattedAddress": "Near RT.006/RW.017, Jakasampurna, Bekasi Barat, Bekasi, West Java Bks, Jawa Barat, Jakasampurna, Kec. Bekasi Bar., Kota Bks, DKI Jakarta 17145, Indonesia",
+        "location": {
+            "latitude": -6.245133900000001,
+            "longitude": 106.95668579999999
+        },
+        "rating": 4.4,
+        "websiteUri": "https://www.anytimefitness.id/gyms/id-0067/jakasampurna-bekasi-17145/",
+        "userRatingCount": 82,
+        "displayName": {
+            "text": "Anytime Fitness Kota Bintang - Kota Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJx-mVT3yNaS4R_TLEMeFRFdI",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2292-9006",
+        "formattedAddress": "Jl. Taman Galaxy Raya No.8, RT.001/RW.011, Jaka Setia, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17147, Indonesia",
+        "location": {
+            "latitude": -6.2540568,
+            "longitude": 106.9688041
+        },
+        "rating": 4.7,
+        "websiteUri": "http://fithub.id/free-trial/v3/fit-hub-Taman-Galaxy?source=GoogleMaps",
+        "userRatingCount": 89,
+        "displayName": {
+            "text": "FIT HUB Taman Galaxy",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJk3HaKVeMaS4RPLcS35R4gEA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "sporting_goods_store",
+            "point_of_interest",
+            "store",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 88855211",
+        "formattedAddress": "Jl. Al Falah No.77, RT.005/RW.003, Jakasampurna, Kec. Bekasi Bar., Kota Bks, Jawa Barat 17145, Indonesia",
+        "location": {
+            "latitude": -6.2458244999999994,
+            "longitude": 106.9648069
+        },
+        "rating": 4.4,
+        "userRatingCount": 325,
+        "displayName": {
+            "text": "GOR Fantastic Sport Bekasi Barat",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJeW8OnJuNaS4RYFmmB50nSX4",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Jend. Sudirman, RT.004/RW.016, Kayuringin Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17143, Indonesia",
+        "location": {
+            "latitude": -6.23836,
+            "longitude": 106.99192649999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 19916,
+        "displayName": {
+            "text": "Patriot Candrabhaga Stadium",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJMTyyRiCNaS4RRBeilIKLNdk",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-1988-4705",
+        "formattedAddress": "Jl. Cut Mutia, RT.003/RW.009, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113, Indonesia",
+        "location": {
+            "latitude": -6.2552671,
+            "longitude": 107.0107723
+        },
+        "rating": 4.8,
+        "userRatingCount": 240,
+        "displayName": {
+            "text": "Bekasi International Soccer Field",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJdR_M-mmNaS4RhHPbIpVda4Y",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Summarecon Bekasi, Jl. Pangeran Jayakarta, RT.008/RW.003, Harapan Mulya, Kecamatan Medan Satria, Kota Bks, Jawa Barat 17143, Indonesia",
+        "location": {
+            "latitude": -6.2305085,
+            "longitude": 106.9961598
+        },
+        "rating": 4.7,
+        "websiteUri": "https://www.youtube.com/@mjccstadion?sub_confirmation=1",
+        "userRatingCount": 877,
+        "displayName": {
+            "text": "Muda Jaya Soccer Field",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJOY6TRyaMaS4RsIvW6jkfjh0",
+        "types": [
+            "sports_complex",
+            "event_venue",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-6064-8744",
+        "formattedAddress": "Bekasi Junction, Jl. Insinyur H. Juanda Lantai Paling Atas No.115 Lt.1, RT.001/RW.001, Margahayu, Bekasi Kota, Kota Bks, Jawa Barat 17113, Indonesia",
+        "location": {
+            "latitude": -6.2412075,
+            "longitude": 107.00315309999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 645,
+        "displayName": {
+            "text": "Java Golden Billiard ( JG Billiard )",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJYXTLqBaNaS4RIsKRIO8EUB8",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-687-858",
+        "formattedAddress": "Jl. Insinyur H. Juanda No.91, RT.001/RW.004, Bekasi Jaya, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113, Indonesia",
+        "location": {
+            "latitude": -6.242507700000001,
+            "longitude": 107.0049463
+        },
+        "rating": 4.7,
+        "websiteUri": "http://ftlgym.com/",
+        "userRatingCount": 386,
+        "displayName": {
+            "text": "FTL Gym Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJeaRC7_qPaS4RJwMuTSR1-rU",
+        "types": [
+            "athletic_field",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-1117-4818",
+        "formattedAddress": "Jl. Cut Mutia, RT.005/RW.009, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113, Indonesia",
+        "location": {
+            "latitude": -6.2540207,
+            "longitude": 107.0109231
+        },
+        "rating": 4.6,
+        "userRatingCount": 230,
+        "displayName": {
+            "text": "GOR Badminton Betos",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJZa2hIDiMaS4R1yalLMJ5TBo",
+        "types": [
+            "athletic_field",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8163-8060",
+        "formattedAddress": "Jl. Letnan Arsyad Raya No.2, RT.005/RW.012, Kayuringin Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17144, Indonesia",
+        "location": {
+            "latitude": -6.243005800000001,
+            "longitude": 106.9865521
+        },
+        "rating": 4.6,
+        "userRatingCount": 1155,
+        "displayName": {
+            "text": "Dian Jaya Badminton Gor",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ6RJsrZ2OaS4RzW_uwQREVzA",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8009-2234",
+        "formattedAddress": "Q266+F9V, Jl. Perumahan Taman Kota, RT.008/RW.016, Bekasi Jaya, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17112, Indonesia",
+        "location": {
+            "latitude": -6.238755299999999,
+            "longitude": 107.0109086
+        },
+        "rating": 4.4,
+        "userRatingCount": 608,
+        "displayName": {
+            "text": "Swimming Pool City Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJFVcVEYGOaS4RPHiTsA_-ZjM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q226+Q9X, Jl. Lap. Serbaguna No.1, RT.002/RW.009, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113, Indonesia",
+        "location": {
+            "latitude": -6.2486315999999995,
+            "longitude": 107.01053069999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 1190,
+        "displayName": {
+            "text": "Lapangan Serbaguna Kota Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJPzMAYSWNaS4Rj4c8VWvn87I",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0815-1113-9090",
+        "formattedAddress": "Ruko Summarecon Bekasi. 74B, RT.003/RW.005, Marga Mulya, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17142, Indonesia",
+        "location": {
+            "latitude": -6.228252899999999,
+            "longitude": 107.00192489999999
+        },
+        "rating": 4.3,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-summarecon-bekasi/?source=Google%20Maps",
+        "userRatingCount": 97,
+        "displayName": {
+            "text": "FIT HUB Summarecon Bekasi",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJy_rxYDyMaS4RxGS-aBVdm_w",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Ahmad Yani No.2, RT.004/RW.016, Kayuringin Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17144, Indonesia",
+        "location": {
+            "latitude": -6.2361596,
+            "longitude": 106.9917143
+        },
+        "rating": 4.2,
+        "userRatingCount": 161,
+        "displayName": {
+            "text": "GOR Basket Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ32ARL7ePaS4Ri-UA_0G7eYE",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Khairil Anwar, RT.003/RW.012, Margahayu, Kec. Bekasi Tim., Kota Bks, Jawa Barat 17113, Indonesia",
+        "location": {
+            "latitude": -6.2589494000000006,
+            "longitude": 107.0137867
+        },
+        "rating": 4.7,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-margahayu-bekasi?source=GoogleMaps",
+        "userRatingCount": 80,
+        "displayName": {
+            "text": "FIT HUB Margahayu Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ7eJO9QeNaS4ROF_-ZCQMd4o",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-8316-8869",
+        "formattedAddress": "Ruko Sinpasa, Summarecon, Block A33 Lantai 2, Marga Mulya, Kec. Bekasi Utara, Kota Bks, Jawa Barat 17124, Indonesia",
+        "location": {
+            "latitude": -6.2287965,
+            "longitude": 107.00063659999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://yoona-pilates-bekasi.web.app/",
+        "userRatingCount": 74,
+        "displayName": {
+            "text": "Yoona Pilates Studio Bekasi",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJmW7aW4KNaS4R6pbzzDNiaL8",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2866-8409",
+        "formattedAddress": "Tennis Court, Jl. Villa Bar. Jl. Taman Villa Baru, Pekayon Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17148, Indonesia",
+        "location": {
+            "latitude": -6.250124899999999,
+            "longitude": 106.9859693
+        },
+        "rating": 4,
+        "userRatingCount": 34,
+        "displayName": {
+            "text": "TVB Tennis Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJfQwxu9KNaS4R2eV9N9GNPgM",
+        "types": [
+            "night_club",
+            "cafe",
+            "karaoke",
+            "bar",
+            "sports_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0823-4999-0876",
+        "formattedAddress": "Lagoon Avenue, Jl. Chandrabaga, Pekayon Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17148, Indonesia",
+        "location": {
+            "latitude": -6.251849300000001,
+            "longitude": 106.9790555
+        },
+        "rating": 4.7,
+        "websiteUri": "https://instagram.com/clubsevensix",
+        "userRatingCount": 37,
+        "displayName": {
+            "text": "Club Sevensix",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJLwXaJDCNaS4RAL8G4Mv6XBA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "PXRM+Q2H, RT.005/RW.015, Pekayon Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 17148, Indonesia",
+        "location": {
+            "latitude": -6.2580697999999995,
+            "longitude": 106.9826109
+        },
+        "rating": 4.5,
+        "userRatingCount": 161,
+        "displayName": {
+            "text": "GSK (Gelora Samping Kober) ex Lapangan ALI",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ5fey5yKNaS4Ref6W2um69pw",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-1010-126",
+        "formattedAddress": "Jl. Ketapang XVI blok DD25, Pekayon Jaya, Kec. Bekasi Sel., Kota Bks, Jawa Barat 14000, Indonesia",
+        "location": {
+            "latitude": -6.2628378,
+            "longitude": 106.9817685
+        },
+        "rating": 4.9,
+        "userRatingCount": 15,
+        "displayName": {
+            "text": "Pekayon Tennis Court",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZVjzrLWPaS4Rwl_lqJmFkvU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Gg. Kobra I No.34, Tambun, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2681007,
+            "longitude": 107.0571997
+        },
+        "rating": 4.4,
+        "userRatingCount": 436,
+        "displayName": {
+            "text": "Lapangan Kobra",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJQUKXwkONaS4R8xE0j1tHEnE",
+        "types": [
+            "gym",
+            "fitness_center",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-7777-6389",
+        "formattedAddress": "Jalan K.H Noor Ali No.08B Ruko Sentral Niaga Kalimas, Setiadarma, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2722997,
+            "longitude": 107.0500698
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.boosterfits.id/",
+        "userRatingCount": 142,
+        "displayName": {
+            "text": "BoosterFits",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJp0WRO_6OaS4R2xk2Z11rH3A",
+        "types": [
+            "sports_club",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "formattedAddress": "GOR GEMILANG, Jl. Perumahan Papan Mas, Mangunjaya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.245939,
+            "longitude": 107.05307119999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 233,
+        "displayName": {
+            "text": "GOR Gemilang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJxzsp2_SPaS4Ry9vu6nKyHqU",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1849-7652",
+        "formattedAddress": "Jl. Setiadarma 2 No.45, RT.01/RW.02, Setiadarma, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.268904699999999,
+            "longitude": 107.0489242
+        },
+        "rating": 4.6,
+        "userRatingCount": 27,
+        "displayName": {
+            "text": "FIT FLEX Fitness",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJj7PRPfeOaS4RIkmcGWbtdVI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q23R+539, Jl. Manunggal, Setiamekar, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.247087199999999,
+            "longitude": 107.0402482
+        },
+        "rating": 4.3,
+        "userRatingCount": 150,
+        "displayName": {
+            "text": "Lapangan Haji Banjar",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJk_gYx6WPaS4RWBf0uhndhjY",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kaum II, Setiamekar, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2490099,
+            "longitude": 107.0453551
+        },
+        "rating": 4.6,
+        "userRatingCount": 122,
+        "displayName": {
+            "text": "Stadion Mini Setiamekar",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJRdo3FxuPaS4RqFDthL9rL2U",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-5504-4133",
+        "formattedAddress": "ganda agung, Jl. Kp. Siluman, Mangunjaya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.240024,
+            "longitude": 107.0552872
+        },
+        "rating": 4.2,
+        "userRatingCount": 100,
+        "displayName": {
+            "text": "Ganda agung futsal kp siluman",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJy7TwJ6SPaS4RZB-5iZUUb7k",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Teratai Raya No.133, Mekarsari, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2553883,
+            "longitude": 107.0692955
+        },
+        "rating": 4.4,
+        "userRatingCount": 215,
+        "displayName": {
+            "text": "GOR Mekarsari Jaya",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJBfu1doyPaS4RhC_uIdabkTs",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q28V+92G, Setiamekar, Tambun Selatan, Bekasi Regency, West Java 17510, Indonesia",
+        "location": {
+            "latitude": -6.234073599999999,
+            "longitude": 107.0425908
+        },
+        "rating": 3.8,
+        "userRatingCount": 189,
+        "displayName": {
+            "text": "Kolam renang hafana",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJaQVrGQCPaS4RbOk_oCmMYAI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Stadion No.51, Tambun, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.262224,
+            "longitude": 107.06611079999999
+        },
+        "rating": 4.9,
+        "userRatingCount": 12,
+        "displayName": {
+            "text": "Stadion Mini Tambun",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ1cEllQ-PaS4RtiokE-bjmIg",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2356-4879",
+        "formattedAddress": "Q359+F39, Jl. Raya Sumber Jaya, Sumberjaya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2413253,
+            "longitude": 107.0677037
+        },
+        "rating": 3.8,
+        "userRatingCount": 237,
+        "displayName": {
+            "text": "Kolam Renang Sukaria",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJqftmDqyPaS4RoWCBmMMr3mg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-3598-45974",
+        "formattedAddress": "Mekarsari, Tambun Selatan, Bekasi Regency, West Java 17510, Indonesia",
+        "location": {
+            "latitude": -6.2563778,
+            "longitude": 107.0586988
+        },
+        "rating": 4.4,
+        "userRatingCount": 201,
+        "displayName": {
+            "text": "GOR Bulutangkis Mason",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJUxMpNtSPaS4RDGehr-OxfPI",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pendidikan II Gg. Hj Kemil No.rt04/01, Tambun, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2640761,
+            "longitude": 107.06262439999999
+        },
+        "rating": 4.9,
+        "userRatingCount": 28,
+        "displayName": {
+            "text": "GOR BADMINTON D'BANK JAYA SPORT AREA",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJKY58bsWPaS4RXf8LOUTUFCo",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-1912-8210",
+        "formattedAddress": "Q374+962, Mangunjaya, Tambun Selatan, Bekasi Regency, West Java 17510, Indonesia",
+        "location": {
+            "latitude": -6.2366190999999995,
+            "longitude": 107.055511
+        },
+        "rating": 5,
+        "userRatingCount": 21,
+        "displayName": {
+            "text": "PB Volly Citra Villa",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ7SvcZSKPaS4Rqk70cHNE0s8",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8707-7659",
+        "formattedAddress": "Jl. Mas Indah No.19, Setiamekar, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.241997899999999,
+            "longitude": 107.05118019999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 22,
+        "displayName": {
+            "text": "GOR MAS INDAH RW.007 - SETIA MEKAR",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJi-qKnQCPaS4RLof_9VIeNSY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "P3X5+R56, Jl. Muharam II, Mangunjaya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.250451699999999,
+            "longitude": 107.0579039
+        },
+        "rating": 4.3,
+        "userRatingCount": 52,
+        "displayName": {
+            "text": "Lapangan Botan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJI8kRwNePaS4RER0wRWhFjzk",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kp. Legon No.26, Jatimulya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2613463,
+            "longitude": 107.0400782
+        },
+        "rating": 4.1,
+        "userRatingCount": 68,
+        "displayName": {
+            "text": "GOR Green Legon.Bekasi",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ5x47oKSPaS4RN3KH-nNLnCM",
+        "types": [
+            "housing_complex",
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Villa Mutiara Jaya Blok M, RW.10 No.40, Wanajaya, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.248313,
+            "longitude": 107.09608779999999
+        },
+        "rating": 4.5,
+        "websiteUri": "http://tiyoviassa.com/",
+        "userRatingCount": 119,
+        "displayName": {
+            "text": "Villa Mutiara Jaya Cibitung",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJURSajqeFaS4RUmUeV0_oHbk",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0858-1129-1556",
+        "formattedAddress": "Jl Raya Metland Cibitung, Perumahan Metland Cibitung (Depan, Ruko NAGOYA, Telagamurni, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.2514737,
+            "longitude": 107.1195875
+        },
+        "rating": 4.5,
+        "userRatingCount": 51,
+        "displayName": {
+            "text": "Sport Club Metland Cibitung",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJt58uxWqPaS4R83eAUenhBDQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1165-086",
+        "formattedAddress": "Kp Jl. Selang Tengah, RT.03/RW02, Wanasari, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.238345799999999,
+            "longitude": 107.0935044
+        },
+        "rating": 4.7,
+        "userRatingCount": 94,
+        "displayName": {
+            "text": "Gor MG Sport",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJgZdQcQCFaS4RtgfYwQ3B6Ro",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "P4P9+W8G, Jl. Telaga Murni, Telagamurni, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.262687499999999,
+            "longitude": 107.1183281
+        },
+        "rating": 4.7,
+        "userRatingCount": 63,
+        "displayName": {
+            "text": "Waterpark H ABDUL MALIK",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJn8fDqV-FaS4RWGcZr3C162w",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-6018-4798",
+        "formattedAddress": "P4H3+6HW, Jl. Telaga Asih No.17, Telaga Asih, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.2718875,
+            "longitude": 107.1039531
+        },
+        "rating": 4.4,
+        "userRatingCount": 103,
+        "displayName": {
+            "text": "Lapangan Bola Persebta Desa Telaga Asih",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ3bTY54GPaS4R4zDEmlyKjAM",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Wanajaya, Cibitung, Bekasi Regency, West Java 17520, Indonesia",
+        "location": {
+            "latitude": -6.2498818,
+            "longitude": 107.0966936
+        },
+        "rating": 4.2,
+        "userRatingCount": 96,
+        "displayName": {
+            "text": "Gedung Olahraga (GOR) ARS",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJLUaWoHaPaS4Rxh1Vbt144fo",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1081-7763",
+        "formattedAddress": "Q34P+PGG, No Jl. Kp. Selang Cau No.75, Wanasari, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.2456968,
+            "longitude": 107.0836214
+        },
+        "rating": 4.5,
+        "userRatingCount": 342,
+        "displayName": {
+            "text": "Gor PH Selang Cau",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJFaCFmX6PaS4RmP0TIEMMcmg",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-3602-82269",
+        "formattedAddress": "Jalan Tata Markim Jl. Kp. Selang No.2, Bulak, Wanajaya, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.244566799999999,
+            "longitude": 107.0970979
+        },
+        "rating": 4,
+        "userRatingCount": 249,
+        "displayName": {
+            "text": "Mini Stadium Cibitung",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJUyLhQDSPaS4R7SqcgLIhnrk",
+        "types": [
+            "wellness_center",
+            "gym",
+            "sports_complex",
+            "sports_coaching",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-8926-6205",
+        "formattedAddress": "Jl. KH. Mas'ud No.153, RT.003/RW.04, Tridaya Sakti, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17518, Indonesia",
+        "location": {
+            "latitude": -6.2475724999999995,
+            "longitude": 107.07826969999999
+        },
+        "rating": 4.9,
+        "userRatingCount": 16,
+        "displayName": {
+            "text": "360FITCLUB.",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJdbpp7XKPaS4RNa_p5V2SvTs",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1513-1727",
+        "formattedAddress": "Q35H+JVX, Jl. Buwek Jaya, Sumberjaya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.240889,
+            "longitude": 107.07972129999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 309,
+        "displayName": {
+            "text": "Gor Jaya Abadi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ_-jHgIOFaS4RarDonbBQ1Z8",
+        "types": [
+            "athletic_field",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q445+GRQ, Jl. Tulip Raya, Wanajaya, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.2436571,
+            "longitude": 107.1096129
+        },
+        "rating": 3.9,
+        "userRatingCount": 64,
+        "displayName": {
+            "text": "Fields Block E",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJbfO6PQSFaS4RfVZHySKAYiI",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8131-6014",
+        "formattedAddress": "Jl. Selang Jati No.3, RW.3, Wanajaya, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.2470722,
+            "longitude": 107.102907
+        },
+        "rating": 4.5,
+        "userRatingCount": 54,
+        "displayName": {
+            "text": "Ondin Badminton & Jati Bintang Futsal Academy",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJB3Ov7H2FaS4RBvGZQew4kYc",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8130-5965",
+        "formattedAddress": "Wanajaya, Cibitung, Bekasi Regency, West Java 17520, Indonesia",
+        "location": {
+            "latitude": -6.254228899999999,
+            "longitude": 107.10175249999999
+        },
+        "rating": 4.2,
+        "userRatingCount": 20,
+        "displayName": {
+            "text": "WNJ Sport",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJM5YZFwCFaS4R6E4ES2XId3A",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Q467+F4, Wanajaya, Cibitung, Bekasi Regency, West Java 17520, Indonesia",
+        "location": {
+            "latitude": -6.2387866,
+            "longitude": 107.1131527
+        },
+        "rating": 4.6,
+        "userRatingCount": 20,
+        "displayName": {
+            "text": "Lapangan Minisoccer Pesona Wanajaya",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ_d6PCNCFaS4Rg8bjqaWCtWw",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_coaching",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-6267-7525",
+        "formattedAddress": "Jl. Telaga Murni Raya, Telagamurni, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.2598841,
+            "longitude": 107.1134941
+        },
+        "rating": 4.9,
+        "userRatingCount": 55,
+        "displayName": {
+            "text": "No Mercy Training Camp",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJpXM1NIGPaS4Rlz0oQwsY7kk",
+        "types": [
+            "athletic_field",
+            "bar",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0858-4202-4712",
+        "formattedAddress": "Perumahan villa mutiara jaya cibitung, Villa Mutiara Jaya, Wanajaya, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.2539358,
+            "longitude": 107.09698499999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 74,
+        "displayName": {
+            "text": "Gor Villa Mutiara Jaya 3",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJM_Hi5aGPaS4RrTSuvFmMddQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-1092-7079",
+        "formattedAddress": "P4X2+V24, Jl. Kp. Selang Jati No.77, RT./RW/RW.003/003, Wanajaya, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.2503829,
+            "longitude": 107.1000456
+        },
+        "rating": 4.2,
+        "userRatingCount": 72,
+        "displayName": {
+            "text": "GOR YOKIMA",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJKzuF89WPaS4R-HSLNMClbYM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-4155-2300",
+        "formattedAddress": "Kp Jl. Selang Nangka No.83, RT.02/RW.030, Wanasari, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.2576835,
+            "longitude": 107.0911424
+        },
+        "rating": 4.2,
+        "websiteUri": "https://www.instagram.com/arsena_footbal_club?igsh=MWxqOGhlMXo3djdtdg==",
+        "userRatingCount": 55,
+        "displayName": {
+            "text": "Lapangan Selang Nangka ( Arsena FC )",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJcQR1PomPaS4RfEuoZRBrRmo",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0859-1353-3987",
+        "formattedAddress": "Gramaupri Tamansari No. 14 cc, RW.37, Wanasari, Kec. Cibitung, Kabupaten Bekasi, Jawa Barat 17520, Indonesia",
+        "location": {
+            "latitude": -6.2564664,
+            "longitude": 107.08277729999999
+        },
+        "rating": 4.9,
+        "websiteUri": "https://drp-fitness.vercel.app/",
+        "userRatingCount": 32,
+        "displayName": {
+            "text": "DRP GYM",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJi7BQ85WSaS4RHLsPa2H2Lf4",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "MWQP+8C9, RT.005/RW.004, Jatimelati, Bekasi, Kota Bks, Jawa Barat 17415, Indonesia",
+        "location": {
+            "latitude": -6.3117101,
+            "longitude": 106.93611159999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 246,
+        "displayName": {
+            "text": "Kolam Renang Green Park",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJFUgHBwCTaS4RcGjq03R3-lE",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-9000-9811",
+        "formattedAddress": "Padurenan, Mustika Jaya, Bekasi, West Java, Indonesia",
+        "location": {
+            "latitude": -6.3067744999999995,
+            "longitude": 107.0157888
+        },
+        "rating": 4.9,
+        "userRatingCount": 30,
+        "displayName": {
+            "text": "GOR BMCA BADMINTON ACADEMY",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJcQc46QKOaS4RJhb_Hk3mZic",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1120-8275",
+        "formattedAddress": "Jl. Dahlia 4 Blok, D No.87, RT.002/RW.007, Mustikasari, Mustika Jaya, Bekasi, West Java 17158, Indonesia",
+        "location": {
+            "latitude": -6.2910207,
+            "longitude": 107.0167152
+        },
+        "rating": 4.4,
+        "userRatingCount": 157,
+        "displayName": {
+            "text": "GOR Badminton Trinox",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJiZ9wSsiPaS4RVB4fswPc8PA",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1030-0070",
+        "formattedAddress": "Ruko Celebration Blok AA9, No. 61, Jl. Grand Wisata No.63 62, Lambangjaya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.282286699999999,
+            "longitude": 107.04591549999999
+        },
+        "rating": 4.7,
+        "websiteUri": "http://fithub.id/free-trial/v3/fit-hub-Grand-Wisata-Bekasi?source=GoogleMaps",
+        "userRatingCount": 41,
+        "displayName": {
+            "text": "FIT HUB Grand Wisata Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ7Zo8_4SPaS4RyhRRwBYfDxQ",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-8822-3335",
+        "formattedAddress": "Jl. Celebration Boulevard No.10, Lambangsari, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.286023699999999,
+            "longitude": 107.0389235
+        },
+        "rating": 4.9,
+        "userRatingCount": 90,
+        "displayName": {
+            "text": "Grand Wisata Inline Skate (GWIS Arena)",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJU2iJJ6GPaS4RhxUKjKokbBA",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-3502-3500",
+        "formattedAddress": "Grand Wisata Cafe Walk Lot 2A, Jl.Festival Avenue Boulevard Samping Warung Leko, Lambangsari, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.278486,
+            "longitude": 107.0466242
+        },
+        "rating": 4.5,
+        "websiteUri": "https://www.instagram.com/hob_grandwisata",
+        "userRatingCount": 130,
+        "displayName": {
+            "text": "House of Billiard",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJg-NNBACPaS4RShZd2CCFNPE",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1373-8022",
+        "formattedAddress": "Jl. Celebration Boulevard Jl. Grand Wisata No.95 No. 93, Lambangsari, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.288893,
+            "longitude": 107.0438351
+        },
+        "rating": 4.7,
+        "websiteUri": "http://houseofmetamorfit.co.id/",
+        "userRatingCount": 64,
+        "displayName": {
+            "text": "House of Metamorfit Grand Wisata Bekasi",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJSwrDFIePaS4R2syaf6LWcrw",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0858-8023-2446",
+        "formattedAddress": "Grand Bussines Park, Jl. Grand Wisata No.31 Blok GB1, Lambangsari, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2951717,
+            "longitude": 107.0430598
+        },
+        "rating": 4.4,
+        "websiteUri": "https://www.instagram.com/fitnesstime.indonesia?igsh=MXJ5NmZtb2Q5bmh1MA==",
+        "userRatingCount": 107,
+        "displayName": {
+            "text": "Fitness Time Gym Grand Wisata",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJg3-Dv6ORaS4RulD_97DrR7M",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "M3J3+RVJ, Jl. Lubang Buaya, Lubangbuaya, Kec. Setu, Kabupaten Bekasi, Jawa Barat 17320, Indonesia",
+        "location": {
+            "latitude": -6.317923599999999,
+            "longitude": 107.0546328
+        },
+        "rating": 4.5,
+        "websiteUri": "http://citrasetu.blogspot.com/",
+        "userRatingCount": 13,
+        "displayName": {
+            "text": "Citra Setu Residence Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJAcenIi6QaS4RQJO5FGuJ-8M",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "M3X6+MG8, Cibuntu, Cibitung, Bekasi Regency, West Java 17520, Indonesia",
+        "location": {
+            "latitude": -6.3008333,
+            "longitude": 107.0613334
+        },
+        "rating": 4.6,
+        "userRatingCount": 140,
+        "displayName": {
+            "text": "Lapangan Sepakbola Gapura",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJTWsHLeqPaS4RFTFa8T5OgPk",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Grand Wisata Ruko AA 12.27, Jl. Celebration Boulevard No.27, Lambangsari, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2865383,
+            "longitude": 107.0423464
+        },
+        "rating": 4.9,
+        "websiteUri": "https://instagram.com/aygolf_grandwisatabekasi?igshid=NTc4MTIwNjQ2YQ==",
+        "userRatingCount": 63,
+        "displayName": {
+            "text": "AY Screen Golf",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJa5YQ0tKRaS4Riy5TmDED890",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-9175-3139",
+        "formattedAddress": "P335+7F9, Lambangjaya, Tambun Selatan, Bekasi Regency, West Java 17510, Indonesia",
+        "location": {
+            "latitude": -6.2968493,
+            "longitude": 107.058741
+        },
+        "rating": 4.4,
+        "userRatingCount": 22,
+        "displayName": {
+            "text": "Lapangan Pekopen Bulak Jambu",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJY2gACwCRaS4RXxEKLljbdpw",
+        "types": [
+            "amusement_center",
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Esplanade Avenue, Lambangjaya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.292664299999999,
+            "longitude": 107.0472961
+        },
+        "rating": 5,
+        "websiteUri": "https://www.timezonegames.com/id-id/",
+        "userRatingCount": 464,
+        "displayName": {
+            "text": "Timezone Living World Grand Wisata Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJuy2pTACPaS4RGbotiq7TrXw",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1792-1214",
+        "formattedAddress": "Jl. Celebration Boulevard No.30 Blk. AA10, Lambangjaya, Kec. Tambun Sel., Kabupaten Bekasi, Jawa Barat 17510, Indonesia",
+        "location": {
+            "latitude": -6.2832977,
+            "longitude": 107.04414039999999
+        },
+        "rating": 4.2,
+        "websiteUri": "https://poesellebody.id/",
+        "userRatingCount": 18,
+        "displayName": {
+            "text": "Poeselle Reformer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJbd26LUyPaS4RwUagriCDlhE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0823-1127-2600",
+        "formattedAddress": "Gg. Monyet Jl. Kw. Industri No.60, Gandamekar, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.2860748,
+            "longitude": 107.09285709999999
+        },
+        "rating": 4.7,
+        "websiteUri": "https://www.gosport.co.id/",
+        "userRatingCount": 79,
+        "displayName": {
+            "text": "Cibitung Mini Soccer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJBU8WmPmPaS4R_0mfuvG1ixI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Inspeksi Kalimalang No.1, Sukadanau, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.2817767,
+            "longitude": 107.0966785
+        },
+        "rating": 4.4,
+        "userRatingCount": 243,
+        "displayName": {
+            "text": "Stadion Sukadanau",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ8XdF9xGQaS4RMMr6VrtXbq4",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Sulawesi No.3 Blok M 3, Gandamekar, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.306114,
+            "longitude": 107.08830499999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 47,
+        "displayName": {
+            "text": "Bonded Sport Centre",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJYTGFjSybaS4R3KjkR0nL9yo",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Sukadanau, Cikarang Barat, Bekasi Regency, West Java 17530, Indonesia",
+        "location": {
+            "latitude": -6.2939478,
+            "longitude": 107.1051001
+        },
+        "rating": 4.1,
+        "userRatingCount": 14,
+        "displayName": {
+            "text": "Lapangan Puma Fc (GBB)",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJExw-QKOaaS4RjbbvS897Erw",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "M4V6+HJQ, Danau Indah, Cikarang Barat, Bekasi Regency, West Java 17530, Indonesia",
+        "location": {
+            "latitude": -6.3060477,
+            "longitude": 107.11160339999999
+        },
+        "rating": 3.7,
+        "userRatingCount": 20,
+        "displayName": {
+            "text": "Lapangan Irekav fc",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJC-7cAFiFaS4RenzM--2HPUA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0815-4271-4767",
+        "formattedAddress": "P4C2+6GP, Kp.Cikedokan, RT.002/RW.010 Ds, Sukadanau, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.2794004999999995,
+            "longitude": 107.1013399
+        },
+        "rating": 4.2,
+        "userRatingCount": 59,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Irtuda",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ6xP5YqOaaS4RV6jaI6lx2D8",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "M4V6+X9W, Jl. Desa Suka Danau, Danau Indah, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3050061,
+            "longitude": 107.1109602
+        },
+        "rating": 5,
+        "userRatingCount": 13,
+        "displayName": {
+            "text": "IKSPI JARAKOSTA",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJTcHbzuCRaS4Rm70OTTyj0no",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-2332-2813",
+        "formattedAddress": "M269+78J, Burangkeng, Setu, Bekasi Regency, West Java 17320, Indonesia",
+        "location": {
+            "latitude": -6.339567,
+            "longitude": 107.0182944
+        },
+        "rating": 4.6,
+        "userRatingCount": 136,
+        "displayName": {
+            "text": "CENNING GOR BADMINTON",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJh74CoXmRaS4RC7dsV03s4K8",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "M268+XCG, Cimuning, Mustika Jaya, Bekasi, West Java 17155, Indonesia",
+        "location": {
+            "latitude": -6.3375509,
+            "longitude": 107.01609119999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 193,
+        "displayName": {
+            "text": "Lapangan Asem",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJKc-IpKSRaS4RKaN0UWlf3fA",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Setu Cilengsi-Taman Rahayu No.4, Ciledug, Kec. Setu, Kabupaten Bekasi, Jawa Barat 17320, Indonesia",
+        "location": {
+            "latitude": -6.3502671,
+            "longitude": 107.0361116
+        },
+        "rating": 4.5,
+        "userRatingCount": 182,
+        "displayName": {
+            "text": "Situ Burangkeng",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ8V5uiDaRaS4RKWONf9pDYdc",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "M364+CG7, Telajung, Cikarang Barat, Bekasi Regency, West Java 17530, Indonesia",
+        "location": {
+            "latitude": -6.3389600999999995,
+            "longitude": 107.05630389999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 14,
+        "displayName": {
+            "text": "LAPANGAN ATUM",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ8zCMzhKRaS4RF34sHEpb27w",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-9780-8168",
+        "formattedAddress": "M25Q+C45, Burangkeng, Setu, Bekasi Regency, West Java 17320, Indonesia",
+        "location": {
+            "latitude": -6.341490299999999,
+            "longitude": 107.03786439999999
+        },
+        "rating": 4.7,
+        "websiteUri": "https://instagram.com/mdbadminton_setu_bekasi?igshid=MzRlODBiNWFlZA==",
+        "userRatingCount": 49,
+        "displayName": {
+            "text": "GOR Badminton MD",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJT8qEQPCRaS4RMw0UdpEQzyk",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8419-8702",
+        "formattedAddress": "Burangkeng, Setu, Bekasi Regency, West Java, Indonesia",
+        "location": {
+            "latitude": -6.3466559,
+            "longitude": 107.0326961
+        },
+        "rating": 4.9,
+        "userRatingCount": 32,
+        "displayName": {
+            "text": "GOR BADMINTON LSB Burangkeng",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJRR7Pjh2RaS4R1-NU9wsyh1s",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Tonggong Londok, M333+HFG, Setu, rawa atug, Cibening, Kec. Setu, Kabupaten Bekasi, Jawa Barat 17320, Indonesia",
+        "location": {
+            "latitude": -6.346073800000001,
+            "longitude": 107.05370649999999
+        },
+        "rating": 4.1,
+        "userRatingCount": 27,
+        "displayName": {
+            "text": "Lapangan Rawa Atug",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJv9mvWTmRaS4RRR3bfu6N5CU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-1257-3271",
+        "formattedAddress": "Jl. Sasak Dempul Cinyosog Cijengkol, Ds, Burangkeng, Kec. Setu, Kabupaten Bekasi, Jawa Barat 17320, Indonesia",
+        "location": {
+            "latitude": -6.336323999999999,
+            "longitude": 107.03878739999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 40,
+        "displayName": {
+            "text": "Stadion Bukit Tengkorak Cijengkol",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJrXM5l-yRaS4RODVVNohNVUM",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1027-7012",
+        "formattedAddress": "M3C5+2P3, perumahan Jl. Grand Mutiara Gading, Telajung, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3299964,
+            "longitude": 107.0592983
+        },
+        "rating": 3.6,
+        "userRatingCount": 62,
+        "displayName": {
+            "text": "GOR Badminton Grand Mutiara Gading",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ_eu6JH6RaS4RPQNdzni2iVM",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "M374+RGP, Jl. Praja, Telajung, Kec. Cikarang Bar., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3354099,
+            "longitude": 107.0563411
+        },
+        "rating": 4.4,
+        "userRatingCount": 15,
+        "displayName": {
+            "text": "TELAJUNG FUTSAL",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJAQiwpdaQaS4Remgb0RUmoGs",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Cisaat, Kertarahayu, Kec. Setu, Kabupaten Bekasi, Jawa Barat 17320, Indonesia",
+        "location": {
+            "latitude": -6.367633100000001,
+            "longitude": 107.0585959
+        },
+        "rating": 4,
+        "userRatingCount": 110,
+        "displayName": {
+            "text": "Rawa field Glagah",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJQW8bM3ORaS4R3s1jEkE4k1c",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "J3Q8+Q5C, Jl. Setu Cisaat, Cibening, Kec. Setu, Kabupaten Bekasi, Jawa Barat 17320, Indonesia",
+        "location": {
+            "latitude": -6.3605518,
+            "longitude": 107.06537650000001
+        },
+        "rating": 4.7,
+        "userRatingCount": 11,
+        "displayName": {
+            "text": "Lapangan bola KUD",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJgSq1XU2RaS4RcWpCk8Gu-U0",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-3535-92822",
+        "formattedAddress": "Perum Mustika Gandaria Blk. A4 No.22, Ciledug, Kec. Setu, Kabupaten Bekasi, Jawa Barat 17320, Indonesia",
+        "location": {
+            "latitude": -6.343878999999999,
+            "longitude": 107.03906239999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 24,
+        "displayName": {
+            "text": "Tara Fitnes",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJM_TgnWGRaS4RdFiY3KVc9Eo",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8679-8932",
+        "formattedAddress": "Perumahan Grand Tamansari Resident Blok G, Taman Sari, Kec. Setu, Kabupaten Bekasi, Jawa Barat 17320, Indonesia",
+        "location": {
+            "latitude": -6.3589275999999995,
+            "longitude": 107.03340829999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 60,
+        "displayName": {
+            "text": "G-SPORT. Perum GTR blok G",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ7Q7fhm6aaS4RHXANqVJ4Ua4",
+        "types": [
+            "sporting_goods_store",
+            "athletic_field",
+            "sports_activity_location",
+            "store",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-3252-88833",
+        "formattedAddress": "Dragon Futsal, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3452524,
+            "longitude": 107.11578360000001
+        },
+        "rating": 4.4,
+        "userRatingCount": 499,
+        "displayName": {
+            "text": "Dragonball Sport Center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJG59_T82baS4RNZEEzgsK7Os",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Cifest, M44C+V3M, Sukadami, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17550, Indonesia",
+        "location": {
+            "latitude": -6.3427789,
+            "longitude": 107.1201851
+        },
+        "rating": 4.3,
+        "userRatingCount": 30,
+        "displayName": {
+            "text": "Welcome Cifest Walk",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJNYMzCjSbaS4RAdUMlsPPEjU",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-1999-2462",
+        "formattedAddress": "M453+MW9, Ciantra, Cikarang Selatan, Bekasi Regency, West Java 17530, Indonesia",
+        "location": {
+            "latitude": -6.3408392,
+            "longitude": 107.10485609999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 87,
+        "displayName": {
+            "text": "Bulle Mini Soccer",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJc_pOQvSbaS4RB85jq1XOLeY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-1516-2227",
+        "formattedAddress": "Ciantra, Cikarang Selatan, Bekasi Regency, West Java 17530, Indonesia",
+        "location": {
+            "latitude": -6.3538087999999995,
+            "longitude": 107.1042893
+        },
+        "rating": 4.6,
+        "websiteUri": "https://linktr.ee/albiminisoccer",
+        "userRatingCount": 171,
+        "displayName": {
+            "text": "Albi Mini Soccer",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJYTSb0miaaS4RxSnIeHSnwJ4",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-8614-567",
+        "formattedAddress": "Jl. Villa Mutiara Cikarang, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3423256,
+            "longitude": 107.1191039
+        },
+        "rating": 4.8,
+        "websiteUri": "https://m.facebook.com/Victory-Gym-Fitness-Center-Cifest-Cikarang-1505322663074918/",
+        "userRatingCount": 559,
+        "displayName": {
+            "text": "Victory Gym Fitness Cikarang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJbdUvU4ubaS4RjkBx6gatwlM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-7727-2754",
+        "formattedAddress": "Jl. Apel 18 Bumi Cikarang Makmur No.1, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3502534,
+            "longitude": 107.11279220000002
+        },
+        "rating": 4.8,
+        "userRatingCount": 55,
+        "displayName": {
+            "text": "BCM SQUARE",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJCclVeGSbaS4Rglu3AAxK6i4",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1102-0720",
+        "formattedAddress": "M458+W39, Ciantra, Cikarang Selatan, Bekasi Regency, West Java 17530, Indonesia",
+        "location": {
+            "latitude": -6.3402081,
+            "longitude": 107.1152391
+        },
+        "rating": 4.5,
+        "userRatingCount": 51,
+        "displayName": {
+            "text": "GOR BADMINTON AL-LUTHFAH",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJEWuA_Y2baS4R3ZdZwbAlTLo",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-9810-1937",
+        "formattedAddress": "Jl. Bah kilong Perumahan, Jl. Telaga Pasir Raya No.06 Block F 07, RT.05/RW.11, Sukasari, Kec. Serang Baru, Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3707483,
+            "longitude": 107.102272
+        },
+        "rating": 4.8,
+        "userRatingCount": 66,
+        "displayName": {
+            "text": "ABAH FITNESS CLUB",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJOaIEHkqbaS4RqODsAIFl4vQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-0585-5165",
+        "formattedAddress": "Perumahan Jl. Villa Mutiara No.22 Block D8, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3462467,
+            "longitude": 107.10709279999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 20,
+        "displayName": {
+            "text": "Yaman Hall Badminton",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJWbppieCbaS4R5mMIrsBqKbY",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8770-2992",
+        "formattedAddress": "Jl. Bumi Cikarang Makmur No.12A BLOK A5, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.350757799999999,
+            "longitude": 107.1135025
+        },
+        "rating": 4.8,
+        "userRatingCount": 137,
+        "displayName": {
+            "text": "POWER GYM FITNESS CIKARANG",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJy4YKe3GaaS4RkAQOasjfTYQ",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "M435+RRR, Jl. Raya Ciantra, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3453795,
+            "longitude": 107.1095052
+        },
+        "rating": 4.5,
+        "userRatingCount": 22,
+        "displayName": {
+            "text": "Iadecco workshop",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJxS2jViubaS4R-SUh4NgjQxM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0882-9719-7402",
+        "formattedAddress": "Sukadami, Cikarang Selatan, Bekasi Regency, West Java 17530, Indonesia",
+        "location": {
+            "latitude": -6.3648071999999996,
+            "longitude": 107.1149246
+        },
+        "rating": 4.4,
+        "userRatingCount": 27,
+        "displayName": {
+            "text": "Badminton Hall 139",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJcTS3QgCRaS4RE57wG7qBX1o",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9717-7015",
+        "formattedAddress": "Jl. Kenari Raya 1 Jl. Taman Cikarang Indah II No.8, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3581186,
+            "longitude": 107.0909047
+        },
+        "rating": 5,
+        "userRatingCount": 21,
+        "displayName": {
+            "text": "Farzana Playground",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJVQbWlnCaaS4RjQCmhxCBUYs",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-7115-70204",
+        "formattedAddress": "Jl. Villa Mutiara No.38 Blok F.04, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.341600499999999,
+            "longitude": 107.1088219
+        },
+        "rating": 4.4,
+        "userRatingCount": 51,
+        "displayName": {
+            "text": "Kirana Fitness Center Cikarang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZQ2pYZ6baS4R9iy1VpBAJPA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "J4W3+8WM, Jl. Bumi Cikarang Makmur, Sukadami, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.354160299999999,
+            "longitude": 107.1047981
+        },
+        "rating": 4.5,
+        "userRatingCount": 11,
+        "displayName": {
+            "text": "Blok e26 perumahan BCM 1",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJnTdRnJ2baS4RLgRw9RxQvTA",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Villa Mutiara Cikarang No.15 Blok R3, Ciantra, Cikarang Sel., Kabupaten Bekasi, Jawa Barat 17530, Indonesia",
+        "location": {
+            "latitude": -6.3395984,
+            "longitude": 107.1080776
+        },
+        "rating": 4.6,
+        "userRatingCount": 24,
+        "displayName": {
+            "text": "Solution Fitness",
+            "languageCode": "id"
+        }
+    }
+]

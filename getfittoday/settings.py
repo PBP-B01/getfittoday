@@ -30,7 +30,17 @@ PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id"] 
+
+if PRODUCTION:
+    # In production (PaaS), get the key from the 'API_KEY' environment variable
+    GOOGLE_MAPS_API_KEY = os.getenv('API_KEY') 
+    if not GOOGLE_MAPS_API_KEY:
+        print("WARNING: GOOGLE_MAPS_API_KEY (from API_KEY env var) is not set in production!")
+else:
+    GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
+    if not GOOGLE_MAPS_API_KEY:
+        print("WARNING: GOOGLE_MAPS_API_KEY is not set in your .env file for development!")
 
 
 # Application definition
@@ -42,6 +52,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home'
 ]
 
 MIDDLEWARE = [
@@ -139,7 +150,25 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# HAPUS ATAU BERI KOMENTAR PADA STATICFILES_DIRS
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+# ]
+
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'LOCATION': 'unique-snowflake',
+    }
+}
+
+STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'

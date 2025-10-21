@@ -1,0 +1,5082 @@
+[
+    {
+        "id": "ChIJNQUjwVYDai4Ru68AZWj85uE",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kp. Belakang No.47, RT.10/RW.3, Kamal, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11810, Indonesia",
+        "location": {
+            "latitude": -6.0992197,
+            "longitude": 106.6954028
+        },
+        "rating": 4.8,
+        "userRatingCount": 14,
+        "displayName": {
+            "text": "Lapangan kalicabang fc",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJy2zvefIDai4RXBHaZK8V0r0",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "2, Jl. Sahabat No.45, RT.2/RW.3, Kamal, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11810, Indonesia",
+        "location": {
+            "latitude": -6.102759900000001,
+            "longitude": 106.70025679999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 88,
+        "displayName": {
+            "text": "Kamal Park",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJp1gMXhUDai4RNYk3DvlMcLs",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 90570726",
+        "formattedAddress": "WP32+7VX, Jl. Kb. Dua Ratus, RT.5/RW.6, Kamal, Jakarta, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11810, Indonesia",
+        "location": {
+            "latitude": -6.0967575,
+            "longitude": 106.7022379
+        },
+        "rating": 4.4,
+        "userRatingCount": 27,
+        "displayName": {
+            "text": "LAPANGAN KJK FC.",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ5e5Ea40Dai4RJseWyrj9llU",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-7135-1554",
+        "formattedAddress": "Jl. Gaga Rawa Kompeni No.23 5, RT.5/RW.4, Kamal, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11810, Indonesia",
+        "location": {
+            "latitude": -6.101896699999999,
+            "longitude": 106.6929476
+        },
+        "rating": 4.3,
+        "userRatingCount": 15,
+        "displayName": {
+            "text": "Lapangan Anak Bale Item FC",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJw0mCO1YDai4R53kp_WhOW5k",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2354-8389",
+        "formattedAddress": "Jl. Kp. Belakang No.3 3, RT.011/03/RW.3, Kamal, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11810, Indonesia",
+        "location": {
+            "latitude": -6.098898,
+            "longitude": 106.6990271
+        },
+        "rating": 4.3,
+        "userRatingCount": 22,
+        "displayName": {
+            "text": "Lapangan Voli Kp Belakang",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJPRlK6GsDai4RqNbsTj0HqRE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-9619-9854",
+        "formattedAddress": "Jl. Gaga Rawa Kompeni, Kamal, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11810, Indonesia",
+        "location": {
+            "latitude": -6.1055207,
+            "longitude": 106.69334479999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 15,
+        "displayName": {
+            "text": "Lapangan Boelak FC",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJuVZfqTcdai4RrkbesdonUPA",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 5882388",
+        "formattedAddress": "Jl. Marina Raya, Kapuk, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14470, Indonesia",
+        "location": {
+            "latitude": -6.113454099999999,
+            "longitude": 106.7446123
+        },
+        "rating": 4.5,
+        "websiteUri": "http://www.damaiindahgolf.com/",
+        "userRatingCount": 2997,
+        "displayName": {
+            "text": "Damai Indah Golf - PIK Course",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJOXEKwrYdai4RILwo2z0hhEs",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 50208088",
+        "formattedAddress": "Golf Island, Jl. Marina Indah Pantai Indah Kapuk St No.1, DKI Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.0867328,
+            "longitude": 106.74943640000001
+        },
+        "rating": 4.6,
+        "websiteUri": "http://www.sedayuindogolf.com/",
+        "userRatingCount": 1183,
+        "displayName": {
+            "text": "Sedayu Indo Golf",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJNS5o-Xcdai4RSHjQg63b6fE",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0817-801-126",
+        "formattedAddress": "Ozone Hotel, Jl. Marina Raya No.40 1st Floor, Kapuk Muara, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.1127908,
+            "longitude": 106.752577
+        },
+        "rating": 4.5,
+        "websiteUri": "https://zycle.co/pik1",
+        "userRatingCount": 84,
+        "displayName": {
+            "text": "ZYCLE + Pilates PIK 1",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJYyTT6OEdai4R_f5qWEHBicM",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 5882355",
+        "formattedAddress": "Jl. Marina Raya Jl. Pantai Indah Kapuk, Kamal Muara, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14470, Indonesia",
+        "location": {
+            "latitude": -6.112932,
+            "longitude": 106.74515369999999
+        },
+        "rating": 4.7,
+        "websiteUri": "https://therangedamaiindah.com/",
+        "userRatingCount": 406,
+        "displayName": {
+            "text": "The Range - Damai Indah Golf PIK",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJDyEODuQdai4RnATtQRprIBw",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-4902-9849",
+        "formattedAddress": "Trimaran Indah 1 No.2, RW.7, Kapuk Muara, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.1153914,
+            "longitude": 106.7569644
+        },
+        "rating": 4.5,
+        "websiteUri": "http://katrieleven.com/Booking",
+        "userRatingCount": 30,
+        "displayName": {
+            "text": "Badminton Katri (Katamaran Trimaran)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ-_8ut9Mdai4RKb459VDX6Zw",
+        "types": [
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 31182807",
+        "formattedAddress": "Golf Island, Jl. Marina Indah No.1, Kamal Muara, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14470, Indonesia",
+        "location": {
+            "latitude": -6.085196799999999,
+            "longitude": 106.7488322
+        },
+        "rating": 4.6,
+        "websiteUri": "https://www.instagram.com/sedayuindogolf/",
+        "userRatingCount": 116,
+        "displayName": {
+            "text": "Driving Range Sedayu Indo Golf",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJLbtzeRcdai4RW57fpf567E8",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 56946699",
+        "formattedAddress": "Pik Fit, Jalan Lingkar Timur Bukit Golf Mediterania No.7, RT.7/RW.2, Kamal Muara, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14470, Indonesia",
+        "location": {
+            "latitude": -6.1080735,
+            "longitude": 106.7505316
+        },
+        "rating": 4.4,
+        "userRatingCount": 504,
+        "displayName": {
+            "text": "PIK FIT",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJq21ZXtYdai4RHkW9UCTebt8",
+        "types": [
+            "sports_club",
+            "asian_restaurant",
+            "sports_complex",
+            "sporting_goods_store",
+            "sports_activity_location",
+            "restaurant",
+            "food",
+            "store",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "The Gallery, Jl. Pantai Indah Utara 2 No.1 Kavling K, Kapuk Muara, Kecamatan Penjaringan, Jakarta, Daerah Khusus Ibukota Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.1160575999999995,
+            "longitude": 106.75747249999999
+        },
+        "rating": 4.1,
+        "userRatingCount": 35,
+        "displayName": {
+            "text": "Urban Racquet Club ( PIK )",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJQ2xs9Osdai4RdW8W3pEoSe0",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-9686-868",
+        "formattedAddress": "Golf Island Beach Theme Park, #99-101, Jakarta, Daerah Khusus Ibukota Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.0895975,
+            "longitude": 106.74356209999999
+        },
+        "rating": 4.9,
+        "websiteUri": "https://posturejakarta.com/",
+        "userRatingCount": 151,
+        "displayName": {
+            "text": "Posture Pilates Studio",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJhykzdwAdai4RbuohhlM67iY",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Batavia Pantai Indah Kapuk, Unit 29. Kawasan Pantai Maju, Kamal Muara. Kec. Penjaringan - Penjaringan Jakarta Utara, Jakarta, 14470, Indonesia",
+        "location": {
+            "latitude": -6.0891107,
+            "longitude": 106.73974419999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 45,
+        "displayName": {
+            "text": "Timezone Batavia Riverwalk Island-PIK",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJN6Ozx7Mdai4Rn1QT8OYgoSs",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-9980-772",
+        "formattedAddress": "Arcade Business Center 2nd Floor 6-03, Jl. Pantai Indah No.Kav. C1 2, Kapuk Muara, Penjaringan, North Jakarta City, Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.1168004,
+            "longitude": 106.75688799999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 148,
+        "displayName": {
+            "text": "Pilates Re Bar PIK",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJlQfk_3cdai4RnN_jrDbzbBs",
+        "types": [
+            "yoga_studio",
+            "fitness_center",
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1826-8168",
+        "formattedAddress": "Ruko Arcade, Jl. Pantai Indah Utara 2 Blok 3 ME & 3 MF, RT.2/RW.7, Kapuk Muara, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.1165522999999995,
+            "longitude": 106.7579942
+        },
+        "rating": 5,
+        "websiteUri": "http://sunyoga.id/",
+        "userRatingCount": 23,
+        "displayName": {
+            "text": "Sun Yoga PIK Studio",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJVSlt1Zcdai4RigAhWJauuGE",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-9999-9333",
+        "formattedAddress": "Ruko Paladium Golf Island Blok G. 1, DKI Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.0918243,
+            "longitude": 106.74717609999999
+        },
+        "rating": 5,
+        "websiteUri": "http://www.teamfusion.id/",
+        "userRatingCount": 58,
+        "displayName": {
+            "text": "Team Fusion Indonesia",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJv10o8EABQi4RUzndC4EwwxA",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_coaching",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1004-8484",
+        "formattedAddress": "Sedayu Indo Golf Driving Range, Golf island, Jalan marina indah No.1, Kamal Muara, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14470, Indonesia",
+        "location": {
+            "latitude": -6.0851584999999995,
+            "longitude": 106.7488278
+        },
+        "rating": 4.5,
+        "websiteUri": "https://golfsolutions.id/",
+        "userRatingCount": 19,
+        "displayName": {
+            "text": "Golf Solutions PIK",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJxcEG1Zodai4RMfQOWf7OCTQ",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-2728-8810",
+        "formattedAddress": "Ruko Golf Island, Pantai Indah Kapuk St.60 Blok L. 59, Jkt Utara, Daerah Khusus Ibukota Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.0936714,
+            "longitude": 106.7438013
+        },
+        "rating": 5,
+        "userRatingCount": 48,
+        "displayName": {
+            "text": "PILAFIT - Pilates Studio",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJn1rIwqIdai4RTvxjL2-yyZE",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-5269-9000",
+        "formattedAddress": "Ben Gong Tea PIK, Ruko The Metro 6KA, Jl. Mandara Permai VII Lantai 4, Kapuk Muara, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.1148057,
+            "longitude": 106.75530470000001
+        },
+        "rating": 5,
+        "websiteUri": "http://pilatwist.com/",
+        "userRatingCount": 121,
+        "displayName": {
+            "text": "Pilatwist Studio",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJFzx3_ucdai4RWajLJ9t7ajU",
+        "types": [
+            "yoga_studio",
+            "fitness_center",
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 39700424",
+        "formattedAddress": "Rukan The Beach, Jl. Pantai Indah Kapuk No.062-063, Daerah Khusus Ibukota Jakarta 14460, Indonesia",
+        "location": {
+            "latitude": -6.0924007,
+            "longitude": 106.7406268
+        },
+        "rating": 5,
+        "websiteUri": "https://www.yogafitid.com/",
+        "userRatingCount": 43,
+        "displayName": {
+            "text": "Yoga Fit PIK",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ37TAt6cdai4RSWxGBdjUAcY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pendaratan Udang Jl. Muara Angke, Pluit, Kecamatan Penjaringan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14450, Indonesia",
+        "location": {
+            "latitude": -6.1084266,
+            "longitude": 106.7728212
+        },
+        "rating": 4.7,
+        "userRatingCount": 121,
+        "displayName": {
+            "text": "Fields Muara Angke",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ__wYFAAdai4RVdXZt3sOsCo",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-600-123",
+        "formattedAddress": "No. 6 - 8, Rukan Cordoba, Jl. Pantai Indah Kapuk Blok G, Kamal Muara, Kecamatan Penjaringan, Jakarta, Daerah Khusus Ibukota Jakarta 14470, Indonesia",
+        "location": {
+            "latitude": -6.112202099999999,
+            "longitude": 106.74485969999999
+        },
+        "rating": 5,
+        "userRatingCount": 51,
+        "displayName": {
+            "text": "Euphoria Movement Studio",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJNZMOhMQfai4R7U6MSWSjvbI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9565-6151",
+        "formattedAddress": "The Forest, blok C2A no 28, Ancol, Kec. Pademangan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14430, Indonesia",
+        "location": {
+            "latitude": -6.118395899999999,
+            "longitude": 106.8257172
+        },
+        "rating": 4.6,
+        "userRatingCount": 41,
+        "displayName": {
+            "text": "Olympus Tennis Center",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ8xf6AQ4eai4RDDr7O4XJwQo",
+        "types": [
+            "sports_complex",
+            "marina",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8905-1833",
+        "formattedAddress": "VRHH+RVF, Ancol, Pademangan, North Jakarta City, Jakarta 14430, Indonesia",
+        "location": {
+            "latitude": -6.1204374999999995,
+            "longitude": 106.82968749999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "Marina Jetski Club Ancol",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJS-Y1G78fai4RjaHDLTvlIak",
+        "types": [
+            "sporting_goods_store",
+            "sports_club",
+            "sports_activity_location",
+            "store",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-8676-688",
+        "formattedAddress": "Indonesia National Sailing Center, Ancol, Kec. Pademangan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14430, Indonesia",
+        "location": {
+            "latitude": -6.1170708,
+            "longitude": 106.8209465
+        },
+        "rating": 4.8,
+        "websiteUri": "https://kayak-archipelago.com/",
+        "userRatingCount": 14,
+        "displayName": {
+            "text": "Archipelago Kayak Indonesia",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJs_fA1A0eai4RSAViOmqGBGg",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 26070005",
+        "formattedAddress": "Marina Coast The Forest Blok CA2 No. 2B, Ancol, RT.9, Ancol, Kec. Pademangan, Jkt Utara, Daerah Khusus Ibukota Jakarta 14430, Indonesia",
+        "location": {
+            "latitude": -6.1200168999999995,
+            "longitude": 106.8267946
+        },
+        "rating": 4.9,
+        "userRatingCount": 16,
+        "displayName": {
+            "text": "Lux Studio",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ6d1CusAfai4Rbbv8w0G8eDg",
+        "types": [
+            "train_station",
+            "playground",
+            "transit_station",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 43986523",
+        "formattedAddress": "Daerah Khusus Ibukota, Sungai Bambu, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14310, Indonesia",
+        "location": {
+            "latitude": -6.1141388999999995,
+            "longitude": 106.8835824
+        },
+        "rating": 4,
+        "websiteUri": "http://www.terminalbustanjungpriokk.com/",
+        "userRatingCount": 27,
+        "displayName": {
+            "text": "Terminal Bus Tanjung Priokk",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJwblsR60fai4RkIuY41_v6hs",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 24621213",
+        "formattedAddress": "Jl. Kebon Bawang VI, RT.6/RW.6, Kb. Bawang, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14320, Indonesia",
+        "location": {
+            "latitude": -6.115396,
+            "longitude": 106.89277899999999
+        },
+        "rating": 4.6,
+        "websiteUri": "https://www.instagram.com/absolutefit2play.tanjungpriok",
+        "userRatingCount": 982,
+        "displayName": {
+            "text": "AbsoluteFit Tanjung Priok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJdQwvOuwfai4RpI2sYnJDgxs",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. RawaBinangun VIII No.23 12, RT.12/RW.8, Rawabadak Utara, Kec. Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14230, Indonesia",
+        "location": {
+            "latitude": -6.1173798,
+            "longitude": 106.8965903
+        },
+        "rating": 4.4,
+        "userRatingCount": 667,
+        "displayName": {
+            "text": "RPTRA Rawa Badak Utara",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJlVfycfQfai4RjiP-uCJBRBs",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 22432510",
+        "formattedAddress": "Gedung olahraga muncang, Jl. Muncang No.17 Blok L, RT.3/RW.12, Koja, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14270, Indonesia",
+        "location": {
+            "latitude": -6.1160476,
+            "longitude": 106.9069548
+        },
+        "rating": 4.4,
+        "userRatingCount": 170,
+        "displayName": {
+            "text": "Muncang Futsal",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJKW9wXQAfai4R3YdVA2DdGpw",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0859-7324-7194",
+        "formattedAddress": "Jl. Gadang No.2, RT.10/RW.2, Sungai Bambu, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14330, Indonesia",
+        "location": {
+            "latitude": -6.112891299999999,
+            "longitude": 106.883682
+        },
+        "rating": 4.6,
+        "websiteUri": "https://www.instagram.com/flob.billiard/profilecard/?igsh=b2QwMzFudzhxd3Mx",
+        "userRatingCount": 56,
+        "displayName": {
+            "text": "FLOB BILLIARD",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ0zKxI5Mfai4Rxwpow3Fowu4",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-2225-5505",
+        "formattedAddress": "Jl. Sindang No.30, RT.8/RW.9, Koja, Kec. Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14220, Indonesia",
+        "location": {
+            "latitude": -6.1122944,
+            "longitude": 106.8968865
+        },
+        "rating": 4.3,
+        "userRatingCount": 125,
+        "displayName": {
+            "text": "RPTRA Sindang Raya",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJz-5vm-Yfai4RQ0x76YY4OsM",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Lagoa Kanal No.001/Okh, RT.7/RW.2, Kb. Bawang, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14320, Indonesia",
+        "location": {
+            "latitude": -6.112070699999999,
+            "longitude": 106.8860339
+        },
+        "rating": 4.8,
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "Lapangan mini soccer arhanud 6",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJR3jy4uofai4R9CfENtM3Cag",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1451-7701",
+        "formattedAddress": "Jl. Kebon Bawang VII No.18 5, RT.3/RW.6, Kb. Bawang, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14320, Indonesia",
+        "location": {
+            "latitude": -6.1144563,
+            "longitude": 106.8918368
+        },
+        "rating": 4.3,
+        "userRatingCount": 44,
+        "displayName": {
+            "text": "RPTRA Bawang Putih",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJh71K4u4fai4R8HzuKnE04S8",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1613-6213",
+        "formattedAddress": "RT.5/RW.3, North Rawabadak, Koja, North Jakarta City, Jakarta 14230, Indonesia",
+        "location": {
+            "latitude": -6.1201875,
+            "longitude": 106.8965625
+        },
+        "rating": 4.6,
+        "userRatingCount": 155,
+        "displayName": {
+            "text": "RPTRA Radar Pembangunan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ01RFiTQfai4RT63v-6wxWwM",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0882-1279-1593",
+        "formattedAddress": "Jl. Bugis No.7A, RT.18/RW.2, Kb. Bawang, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14320, Indonesia",
+        "location": {
+            "latitude": -6.115468099999999,
+            "longitude": 106.8851545
+        },
+        "rating": 4.5,
+        "userRatingCount": 28,
+        "displayName": {
+            "text": "Fun Kingdom",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ0XOExa8fai4RgmlexzVd_Rw",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8833-9959",
+        "formattedAddress": "Jl. Gadang, RT.9/RW.2, Sungai Bambu, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14430, Indonesia",
+        "location": {
+            "latitude": -6.115623299999999,
+            "longitude": 106.88359469999999
+        },
+        "rating": 5,
+        "userRatingCount": 123,
+        "displayName": {
+            "text": "Gadang Party and Playground",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJRWsR4-ofai4RSko76kUz_4E",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "VVPR+3G5, Jl. Kb. Bawang XIV, RT.5/RW.6, Kb. Bawang, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14320, Indonesia",
+        "location": {
+            "latitude": -6.1148544,
+            "longitude": 106.89134670000001
+        },
+        "rating": 4.6,
+        "userRatingCount": 69,
+        "displayName": {
+            "text": "taman segi empat",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJn6_S40Ufai4R0queDl6g60w",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "3, Jl. Kb. Bawang XVI No.14, RT.17/RW.2, Kb. Bawang, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14320, Indonesia",
+        "location": {
+            "latitude": -6.1147089999999995,
+            "longitude": 106.8848575
+        },
+        "rating": 4.5,
+        "userRatingCount": 78,
+        "displayName": {
+            "text": "M10 Gym Fitness Center jakarta utara",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJJRzh-Iwfai4RySTPH8FPBGU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "VVQX+3VQ, Jl. Cipeucang 1, RT.2/RW.12, Koja, Kec. Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14220, Indonesia",
+        "location": {
+            "latitude": -6.1122757,
+            "longitude": 106.8997464
+        },
+        "rating": 4.7,
+        "userRatingCount": 47,
+        "displayName": {
+            "text": "Lapangan Basket CP 1",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJTVG9qLEfai4Roq-6d8bqSTY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "RT.008 RW.02 No.18, RT.8/RW.2, Rawabadak Utara, Kec. Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14230, Indonesia",
+        "location": {
+            "latitude": -6.1166808999999995,
+            "longitude": 106.9019428
+        },
+        "rating": 4.9,
+        "userRatingCount": 12,
+        "displayName": {
+            "text": "Lapangan Badminton Tunas Muda",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJWfkvSEsfai4RQaFE-BtM8fs",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Laks Yos Sudarso Jl. Lorong Z. Timur No.25, RT.2/RW.1, Koja, Kec. Koja, Jkt Utara, Daerah Khusus Ibukota Jakarta 14220, Indonesia",
+        "location": {
+            "latitude": -6.1112269999999995,
+            "longitude": 106.894578
+        },
+        "rating": 5,
+        "userRatingCount": 12,
+        "displayName": {
+            "text": "Les renang Jakarta Utara",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJaZgLF50hai4R8ULk0rMXVmQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "VXX5+3G6, Jl. Marunda Makmur, RT.2/RW.1, Marunda, Kec. Cilincing, Jkt Utara, Daerah Khusus Ibukota Jakarta 14150, Indonesia",
+        "location": {
+            "latitude": -6.1024286,
+            "longitude": 106.9598577
+        },
+        "rating": 4.6,
+        "userRatingCount": 17,
+        "displayName": {
+            "text": "Lapangan Bola STIP",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJQ2tUAmwhai4R_0VbLmRUZEY",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jalan Rusunawa Marunda Cluster D , Rt016, RT.9/RW.7, Marunda, Kec. Cilincing, Jkt Utara, Daerah Khusus Ibukota Jakarta 14150, Indonesia",
+        "location": {
+            "latitude": -6.096286,
+            "longitude": 106.9614355
+        },
+        "rating": 5,
+        "userRatingCount": 11,
+        "displayName": {
+            "text": "RPTRA SI PITUNG",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJcbbZIpUhai4RYlRhRPIKPXw",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-0584-7111",
+        "formattedAddress": "Jalan Jl. Rusun Marunda Cluster B No.A9 RT 09 9, RT.9/RW.010, Marunda, Kec. Cilincing, Jkt Utara, Daerah Khusus Ibukota Jakarta 14150, Indonesia",
+        "location": {
+            "latitude": -6.0986889,
+            "longitude": 106.96209019999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 261,
+        "displayName": {
+            "text": "RPTRA Marunda",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJJ4rpDfYhai4RJnyLDNtBD68",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0838-0851-4263",
+        "formattedAddress": "RT.1/RW.2, Marunda, Cilincing, North Jakarta City, Jakarta 14150, Indonesia",
+        "location": {
+            "latitude": -6.1103762,
+            "longitude": 106.9684341
+        },
+        "rating": 4.7,
+        "websiteUri": "https://www.instagram.com/pos_24official/",
+        "userRatingCount": 12,
+        "displayName": {
+            "text": "Pos24",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ515U1HP4aS4RQ8tBAF6PNO8",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Bukit Permai 11 No.E1 16 6, RT.6/RW.9, Kalideres, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11840, Indonesia",
+        "location": {
+            "latitude": -6.1473711,
+            "longitude": 106.6937092
+        },
+        "rating": 4.3,
+        "userRatingCount": 491,
+        "displayName": {
+            "text": "Kolam Renang Citra 1",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJiSaAjE75aS4R051E7Ms_BmU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-121-290",
+        "formattedAddress": "Jl. Komp. Alastua Raya No.6, RT.1/RW.4, Semanan, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11850, Indonesia",
+        "location": {
+            "latitude": -6.172352699999999,
+            "longitude": 106.6882227
+        },
+        "rating": 4.8,
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "Amatir Badminton Hall",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJQ66qCLD5aS4RIW9M1wKcmBQ",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8097-8583",
+        "formattedAddress": "Jl. Kp. Gaga No.3, RT.7/RW.3, Semanan, Kec. Kalideres, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11850, Indonesia",
+        "location": {
+            "latitude": -6.1724323,
+            "longitude": 106.6978656
+        },
+        "rating": 4.9,
+        "userRatingCount": 32,
+        "displayName": {
+            "text": "RAIN GYM SEMANAN",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJDfr_BTf3aS4Rt0RSbhcHHDA",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9993-8288",
+        "formattedAddress": "Jl. Adhikarya I No.52, RT.2/RW.2, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.177793299999999,
+            "longitude": 106.7564967
+        },
+        "rating": 4.4,
+        "websiteUri": "https://www.neotennisarena.com/",
+        "userRatingCount": 354,
+        "displayName": {
+            "text": "Neo Tennis Arena",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJF_-60dZqdEAReSfeaSk5k4o",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1887-4502",
+        "formattedAddress": "Jl. Daan Mogot No.51 6, RT.9/RW.1, Kedoya Utara, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1617273,
+            "longitude": 106.7697676
+        },
+        "rating": 4.5,
+        "userRatingCount": 44,
+        "displayName": {
+            "text": "Max Padel Indonesia",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJgeHrQAD3aS4Rabz0_lZEVlg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1841-7285",
+        "formattedAddress": "Jl. Kedoya Pesing No.18e, RT.2/RW.7, Kedoya Utara, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1855245,
+            "longitude": 106.7615177
+        },
+        "rating": 4.6,
+        "userRatingCount": 63,
+        "displayName": {
+            "text": "Padel One Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ4ca2WgD3aS4R9SjmI-pXT-g",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Adhi Karya No.I No.25, RT.2/RW.2, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1776743,
+            "longitude": 106.7565508
+        },
+        "rating": 4.3,
+        "websiteUri": "https://booking.neotennisarena.com/",
+        "userRatingCount": 69,
+        "displayName": {
+            "text": "Neo Padel Arena",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJh91OU9L3aS4RSgL-U_YOuoc",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2322-2154",
+        "formattedAddress": "Jl. Kedoya Pesing No.30, RT.14/RW.8, Kedoya Utara, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1634977,
+            "longitude": 106.76559759999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 244,
+        "displayName": {
+            "text": "Asuka Badminton Hall",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJpWAkESj3aS4RuNq7bsIzvGs",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-687-858",
+        "formattedAddress": "Jl. Panjang Arteri Klp. Dua Raya, RT.1/RW.3, Kedoya Utara, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1652306999999995,
+            "longitude": 106.7626968
+        },
+        "rating": 4.8,
+        "websiteUri": "https://ftlgym.com/",
+        "userRatingCount": 264,
+        "displayName": {
+            "text": "FTL Gym Green Garden",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJg4VehrD3aS4R0hkTX39AL1E",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kedoya Akasia VIII Blok B9 No.16, RT.1/RW.4, Grogol Utara, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.165569,
+            "longitude": 106.7591319
+        },
+        "rating": 4.4,
+        "userRatingCount": 517,
+        "displayName": {
+            "text": "Green Garden Billiard",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJWWGY4r4dai4R9eViAZrCH1A",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-3635-9994",
+        "formattedAddress": "Jl. Kali Kapuk Timur No.6, Kedaung Kali Angke, Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11720, Indonesia",
+        "location": {
+            "latitude": -6.1469187,
+            "longitude": 106.75084509999999
+        },
+        "rating": 4.1,
+        "userRatingCount": 59,
+        "displayName": {
+            "text": "GOR JAWARA BADMINTON HALL KAPUK",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJy6g3LIT3aS4RH3lr9wGrBLQ",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 56970303",
+        "formattedAddress": "Jl. Panjang No.29, RT.8/RW.1, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11510, Indonesia",
+        "location": {
+            "latitude": -6.181648000000001,
+            "longitude": 106.76760759999999
+        },
+        "rating": 4.7,
+        "websiteUri": "http://www.baliutd.com/",
+        "userRatingCount": 179,
+        "displayName": {
+            "text": "Bali United Office",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJr1KMdgD3aS4R7odzY4buq7E",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "RT.2/RW.6, North Kedoya, Kebonjeruk, West Jakarta City, Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1742593,
+            "longitude": 106.7591662
+        },
+        "rating": 4.7,
+        "userRatingCount": 41,
+        "displayName": {
+            "text": "Boss Padel",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJCTu2iA33aS4RWTPeLTg1hDg",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "RQPF+95R, RT.3/RW.5, Duri Kepa, Kebonjeruk, West Jakarta City, Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1640016,
+            "longitude": 106.7728886
+        },
+        "rating": 4.5,
+        "userRatingCount": 31,
+        "displayName": {
+            "text": "GOR Tenis PGN",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJifKyGWf3aS4RKbrFYmGWIEg",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pilar Mas Utama, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta, Indonesia",
+        "location": {
+            "latitude": -6.183186699999999,
+            "longitude": 106.7581258
+        },
+        "rating": 4.8,
+        "websiteUri": "https://ayo.co.id/v/metro-puri-tennis-indoor",
+        "userRatingCount": 71,
+        "displayName": {
+            "text": "Metro Puri Tennis Indoor",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJYVyuDLj3aS4R85lYz7OHHM0",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-6285-5137",
+        "formattedAddress": "Jl. Green Ville Blk. BJ-BK No.5, RT.8/RW.14, Duri Kepa, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11510, Indonesia",
+        "location": {
+            "latitude": -6.1694502,
+            "longitude": 106.773397
+        },
+        "rating": 4.3,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-Greenville?source=GoogleMaps",
+        "userRatingCount": 362,
+        "displayName": {
+            "text": "FIT HUB Greenville",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJv4RUnQf3aS4RDu_icd_wy88",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1826-8526",
+        "formattedAddress": "Jl. Musirin 1 No.23a, RT.10/RW.2, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1800631,
+            "longitude": 106.7620371
+        },
+        "rating": 4.4,
+        "userRatingCount": 800,
+        "displayName": {
+            "text": "Gedung Bulutangkis Mitra Utama",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJCWEo2GT3aS4R7hbNfSpq-sA",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8682-8223",
+        "formattedAddress": "Duri Kepa, Kebonjeruk, West Jakarta City, Duri Kepa, Kec. Kb. Jeruk, Jakarta, Daerah Khusus Ibukota Jakarta 11510, Indonesia",
+        "location": {
+            "latitude": -6.1697470999999995,
+            "longitude": 106.76958909999999
+        },
+        "rating": 4.1,
+        "websiteUri": "https://www.anytimefitness.id/gyms/id-0039/west-jakarta-city-jakarta/",
+        "userRatingCount": 53,
+        "displayName": {
+            "text": "Anytime Fitness Greenville",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ9RVJh5H3aS4RFN4rAAWJXz4",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1880-8033",
+        "formattedAddress": "Jl. Kedoya Pesing No.4, Kedoya Utara, Kec. Kb. Jeruk, Jakarta, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.168975499999999,
+            "longitude": 106.7614835
+        },
+        "rating": 4.9,
+        "websiteUri": "https://jakartabilliard.com/",
+        "userRatingCount": 126,
+        "displayName": {
+            "text": "Jakarta Billiard - Jakbil",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJU7PD9xT3aS4RrsVXglAnWkM",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-1931-1555",
+        "formattedAddress": "RQ86+CMC, Jl. Kedoya Pesing No.A15 No. 27, RT.1/RW.4, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1839414,
+            "longitude": 106.7616297
+        },
+        "rating": 4.7,
+        "websiteUri": "http://yourekaworld.id/",
+        "userRatingCount": 108,
+        "displayName": {
+            "text": "Youreka Kids Garden",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJFcKIHML3aS4RnN9eFMjDn3k",
+        "types": [
+            "playground",
+            "park",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pedongkelan No.2, RT.6/RW.4, Cengkareng Tim., Kecamatan Cengkareng, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11730, Indonesia",
+        "location": {
+            "latitude": -6.1518303,
+            "longitude": 106.74862639999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 833,
+        "displayName": {
+            "text": "Taman Pedongkelan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJsSpBtrH3aS4Rv3ShHGGpZfw",
+        "types": [
+            "art_studio",
+            "yoga_studio",
+            "fitness_center",
+            "dance_hall",
+            "sports_complex",
+            "gym",
+            "event_venue",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "store",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-5617-7762",
+        "formattedAddress": "Ruko Green Garden, Jl. Komp. Green Garden No.49 Blok I-9, Taman kedoya, Jakarta, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 14140, Indonesia",
+        "location": {
+            "latitude": -6.1670473999999995,
+            "longitude": 106.76269099999999
+        },
+        "rating": 4.9,
+        "websiteUri": "https://instagram.com/sp_studioku?igshid=MzRlODBiNWFlZA==",
+        "userRatingCount": 86,
+        "displayName": {
+            "text": "Studioku.id",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJPWBXTbj3aS4Rwgz5jAmx5t8",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0889-0880-2889",
+        "formattedAddress": "Jl. Pilar 2 Dalam No.17, RT.8/RW.3, Kedoya Sel., Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520, Indonesia",
+        "location": {
+            "latitude": -6.1824015,
+            "longitude": 106.7609525
+        },
+        "rating": 5,
+        "websiteUri": "https://instagram.com/sweatboxfnp",
+        "userRatingCount": 42,
+        "displayName": {
+            "text": "Sweatbox Fitness & Performance",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJSZ_V-8T1aS4R9FlUE9O9mPk",
+        "types": [
+            "hotel",
+            "fitness_center",
+            "swimming_pool",
+            "gym",
+            "sports_activity_location",
+            "lodging",
+            "restaurant",
+            "point_of_interest",
+            "food",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 50881000",
+        "formattedAddress": "Jl. Pintu Air V No.53, RT.5/RW.8, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10710, Indonesia",
+        "location": {
+            "latitude": -6.163070599999999,
+            "longitude": 106.83229999999999
+        },
+        "rating": 4.4,
+        "websiteUri": "https://bookingku.bookandlink.com/booking-page.php?id=yuan-garden-pasar-baru&checkin=24-09-2025&checkout=25-09-2025",
+        "userRatingCount": 4078,
+        "displayName": {
+            "text": "YUAN GARDEN HOTEL, Pasar Baru - Jakarta Pusat",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJNY8xtXn2aS4RiD0Pd8q5iq8",
+        "types": [
+            "hotel",
+            "playground",
+            "water_park",
+            "amusement_park",
+            "lodging",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1534-6301",
+        "formattedAddress": "Jl. Prajurit KKO Usman dan Harun No.28, RT.1/RW.5, Senen, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10410, Indonesia",
+        "location": {
+            "latitude": -6.1807056000000005,
+            "longitude": 106.8381019
+        },
+        "rating": 4.5,
+        "websiteUri": "https://linktr.ee/grenaliajakartahotel",
+        "userRatingCount": 3032,
+        "displayName": {
+            "text": "Hotel Gren Alia Jakarta",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJRxpEcMX1aS4R1jFvUWX2EWc",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "sporting_goods_store",
+            "clothing_store",
+            "point_of_interest",
+            "store",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0882-1159-0695",
+        "formattedAddress": "Jl. Pintu Air Raya No.40-A, RT.6/RW.1, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10710, Indonesia",
+        "location": {
+            "latitude": -6.1650824,
+            "longitude": 106.83211650000001
+        },
+        "rating": 4.9,
+        "websiteUri": "http://www.metro.tennis/",
+        "userRatingCount": 760,
+        "displayName": {
+            "text": "Metro Tennis Terminal ( Metro Sports Pintu Air )",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJpa8UPT71aS4RRaxJ-2cyB8I",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 3805555",
+        "formattedAddress": "RRGP+M7R, Pasar Baru, Sawah Besar, Central Jakarta City, Jakarta 10710, Indonesia",
+        "location": {
+            "latitude": -6.1732697,
+            "longitude": 106.8356329
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.hotelborobudur.com/id/topic/fasilitas/fasilitas-olahraga/",
+        "userRatingCount": 655,
+        "displayName": {
+            "text": "Borobudur Hotel Swimming Pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJx1yKH6r3aS4Rz8jDXdJKGSo",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 63866646",
+        "formattedAddress": "SBM Sports Club, Jl. A.M Sangaji No.20 3, RT.3/RW.4, Petojo Utara, Kecamatan Gambir, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10130, Indonesia",
+        "location": {
+            "latitude": -6.1636926,
+            "longitude": 106.81256859999999
+        },
+        "rating": 4.6,
+        "websiteUri": "https://sbmsportsclub.id/",
+        "userRatingCount": 180,
+        "displayName": {
+            "text": "SBM Sports Club Petojo",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ0XKgReP1aS4RPN4NZCE_KxY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-9522-8177",
+        "formattedAddress": "Jalan Mangga Besar Raya, Lokasari Square Lantai 2 Blok FK, No, 43, RT.6/RW.2, Tangki, Kec. Taman Sari, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11180, Indonesia",
+        "location": {
+            "latitude": -6.1466541999999995,
+            "longitude": 106.82262949999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 349,
+        "displayName": {
+            "text": "GOR Lokasari",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ-ZHfTWz3aS4Rh5ooYEdbOXY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-0239-4465",
+        "formattedAddress": "Jl. KH.Moh.Mansyur No.129, Jemb. Lima, Kec. Tambora, Jakarta, Daerah Khusus Ibukota Jakarta 11270, Indonesia",
+        "location": {
+            "latitude": -6.156191199999999,
+            "longitude": 106.8079908
+        },
+        "rating": 4.5,
+        "userRatingCount": 49,
+        "displayName": {
+            "text": "Royal Badminton Center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJgVrp0PX1aS4RibdHu7R0wBA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-9648-9090",
+        "formattedAddress": "PD. Pasar Jaya Pasar Baru Metro Atom Plaza Lt. 8 (Gedung Parkir, RT.1/RW.3, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10710, Indonesia",
+        "location": {
+            "latitude": -6.1613644999999995,
+            "longitude": 106.83279080000001
+        },
+        "rating": 4.5,
+        "userRatingCount": 217,
+        "displayName": {
+            "text": "PD Pasar Jaya Metro Atom Plaza Futsal & Bulutangkis",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJrwvYpAH2aS4R8W8aHsXK_OA",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "government_office",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pasar Senen No.1, Senen, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10410, Indonesia",
+        "location": {
+            "latitude": -6.175505299999999,
+            "longitude": 106.8436795
+        },
+        "rating": 4.4,
+        "websiteUri": "http://dispora.jakarta.go.id/",
+        "userRatingCount": 120,
+        "displayName": {
+            "text": "Central Jakarta Youth Center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJISZpjtf1aS4RePqzsak_uIw",
+        "types": [
+            "gym",
+            "fitness_center",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1994-9777",
+        "formattedAddress": "Jl. Hayam Wuruk No.55, Maphar, Kec. Taman Sari, Jakarta, Daerah Khusus Ibukota Jakarta 11160, Indonesia",
+        "location": {
+            "latitude": -6.1583217999999995,
+            "longitude": 106.81905069999999
+        },
+        "rating": 4,
+        "websiteUri": "https://bit.ly/willfitness",
+        "userRatingCount": 108,
+        "displayName": {
+            "text": "Willfitness Hayam Wuruk",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJUeTBF7X1aS4RIfz_RIx5dOg",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pasar Senen No.1, Senen, Kec. Senen, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10410, Indonesia",
+        "location": {
+            "latitude": -6.1745261,
+            "longitude": 106.8434527
+        },
+        "rating": 4.1,
+        "userRatingCount": 614,
+        "displayName": {
+            "text": "Swimming Pool GOR Senen",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJa4I6Xdv1aS4RJsIqGPAN1PQ",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-7739-5828",
+        "formattedAddress": "Jl. Krekot Jaya Molek No.C2 Lt.2, RT.1/RW.7, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10710, Indonesia",
+        "location": {
+            "latitude": -6.1615134,
+            "longitude": 106.8285873
+        },
+        "rating": 4.1,
+        "userRatingCount": 479,
+        "displayName": {
+            "text": "Oriental Futsal",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJv4_idgP3aS4RsWU1cKQZsaM",
+        "types": [
+            "tourist_attraction",
+            "sports_club",
+            "museum",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9995-5055",
+        "formattedAddress": "Jl. Cilamaya No.3, Cideng, Kecamatan Gambir, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10150, Indonesia",
+        "location": {
+            "latitude": -6.1783645,
+            "longitude": 106.8105113
+        },
+        "rating": 4.9,
+        "websiteUri": "http://www.holeomuseum.com/",
+        "userRatingCount": 1687,
+        "displayName": {
+            "text": "HOLEO Golf & Museum",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJmdH5ZTb1aS4RdxJOfwuTkUY",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-9018-0180",
+        "formattedAddress": "Gg. Mandor VI No.16 12, RT.11/RW.5, Ps. Baru, Kecamatan Sawah Besar, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10710, Indonesia",
+        "location": {
+            "latitude": -6.1575985,
+            "longitude": 106.8351556
+        },
+        "rating": 4.9,
+        "userRatingCount": 76,
+        "displayName": {
+            "text": "Oneighty Fitness",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJr1TqCtb1aS4R82Q_1IZpw3I",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "No., Jl. Tanah Abang I No.2, RT.11/RW.8, Petojo Sel., Kecamatan Gambir, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10160, Indonesia",
+        "location": {
+            "latitude": -6.1713764,
+            "longitude": 106.81891789999999
+        },
+        "rating": 4.2,
+        "userRatingCount": 517,
+        "displayName": {
+            "text": "Kolam Renang Kebon Jahe Tanah Abang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJc2l4K_P1aS4RbzwvTp4XSTk",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-1008-1819",
+        "formattedAddress": "Kec, Jl. Batu Tulis Raya No.31 dan 33, Kb. Klp., Kecamatan Gambir, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10120, Indonesia",
+        "location": {
+            "latitude": -6.1631326,
+            "longitude": 106.8244098
+        },
+        "rating": 4.2,
+        "websiteUri": "https://stridegym.id/",
+        "userRatingCount": 42,
+        "displayName": {
+            "text": "Stride Gym Pecenongan",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJP8IZIgD1aS4RC2rVPkVa4-4",
+        "types": [
+            "bar",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0815-2349-069",
+        "formattedAddress": "iNews Tower, MNC Center, lt 2, Kb. Sirih, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10340, Indonesia",
+        "location": {
+            "latitude": -6.1841376,
+            "longitude": 106.8320418
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.probilliardcenter.com/",
+        "userRatingCount": 112,
+        "displayName": {
+            "text": "PRO BILLIARD CENTER",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ92MEFnv2aS4RbZcYX1wdxic",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Stadion Vij Petojo, Jl. Petojo Vij VI No.2 3, RT.3/RW.6, Cideng, Kecamatan Gambir, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10150, Indonesia",
+        "location": {
+            "latitude": -6.170175599999999,
+            "longitude": 106.8074747
+        },
+        "rating": 4.3,
+        "userRatingCount": 382,
+        "displayName": {
+            "text": "Stadion VIJ Petojo",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJjy54ICr1aS4RJDwwSXUYprg",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1582-208",
+        "formattedAddress": "Jl. M.H. Thamrin No.9, RT.2/RW.1, Kb. Sirih, Kec. Menteng, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10340, Indonesia",
+        "location": {
+            "latitude": -6.186479599999999,
+            "longitude": 106.82364779999999
+        },
+        "rating": 4.5,
+        "websiteUri": "https://www.anytimefitness.com/locations/id/jakarta/",
+        "userRatingCount": 117,
+        "displayName": {
+            "text": "Anytime Fitness Menara Cakrawala",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ96JlEST3aS4RFQZCeMABwhA",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-7335-0052",
+        "formattedAddress": "Jl. Cideng Barat No.72ab Lantai 1, Cideng, Kecamatan Gambir, Jakarta, Daerah Khusus Ibukota Jakarta 10150, Indonesia",
+        "location": {
+            "latitude": -6.1766475,
+            "longitude": 106.8119404
+        },
+        "rating": 4.6,
+        "websiteUri": "https://kfitness.id/",
+        "userRatingCount": 397,
+        "displayName": {
+            "text": "K Fitness Cideng",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ_9sJ7DT1aS4RPxP5uTp5z0U",
+        "types": [
+            "hotel",
+            "fitness_center",
+            "gym",
+            "night_club",
+            "swimming_pool",
+            "bar",
+            "sports_activity_location",
+            "lodging",
+            "restaurant",
+            "food",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 45878200",
+        "formattedAddress": "Jl. Boulevard Raya Blok M, Klp. Gading Tim., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.1573440999999995,
+            "longitude": 106.9104213
+        },
+        "rating": 4.7,
+        "websiteUri": "https://www.discoverasr.com/en/harris/indonesia/harris-hotel-conventions-kelapa-gading-jakarta?utm_source=google&utm_medium=gmb&utm_campaign=-google-gmb-alwayson-20220101-all-en-id-id-HKPG--&utm_content=--",
+        "userRatingCount": 8811,
+        "displayName": {
+            "text": "HARRIS Hotel & Conventions Kelapa Gading",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJxQr4O0T1aS4R_xIiPNPm82o",
+        "types": [
+            "fitness_center",
+            "tourist_attraction",
+            "gym",
+            "sports_complex",
+            "amusement_center",
+            "sports_activity_location",
+            "playground",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 29745791",
+        "formattedAddress": "Jalan sentra bisnis Jl. Artha Gading Sel. No.8 blok d Kav, RT.18/RW.8, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.1477873,
+            "longitude": 106.8962243
+        },
+        "rating": 4.5,
+        "websiteUri": "https://bouncestreetasia.com/",
+        "userRatingCount": 2510,
+        "displayName": {
+            "text": "Bounce Street Asia - Trampoline Park",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJfbBk1RD1aS4R-6vu1pFWH0Q",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-687-858",
+        "formattedAddress": "Jl. Yos Sudarso No.84, RT.6/RW.11, Sunter Jaya, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14360, Indonesia",
+        "location": {
+            "latitude": -6.1535582,
+            "longitude": 106.8864547
+        },
+        "rating": 4.5,
+        "websiteUri": "https://ftlgym.com/",
+        "userRatingCount": 389,
+        "displayName": {
+            "text": "FTL Gym Gading Sunter",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJqxgeSMj1aS4RAyVa981qtoo",
+        "types": [
+            "shopping_mall",
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 4531101",
+        "formattedAddress": "Menara Satu Sentra Klp. Gading, Jl. Boulevard Raya, Klp. Gading Tim., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.1574602,
+            "longitude": 106.90742859999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 811,
+        "displayName": {
+            "text": "Mal Kelapa Gading 2",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJlwwpHZL1aS4Rz4La0KdTUIk",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pulo Mas Utara, Kayu Putih, Kec. Pulo Gadung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13201, Indonesia",
+        "location": {
+            "latitude": -6.1714822,
+            "longitude": 106.87923699999999
+        },
+        "rating": 4.5,
+        "websiteUri": "http://www.rajarumput.com/",
+        "userRatingCount": 317,
+        "displayName": {
+            "text": "Mini Soccer POP Jakarta",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJvyTshqT1aS4RiTAdSJm2HN4",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1948-0850",
+        "formattedAddress": "7, RT.7/RW.2, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.1650018,
+            "longitude": 106.88452269999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 658,
+        "displayName": {
+            "text": "Stadion Militer Viyata Jales Yudha Kolat Koarmada I",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJbZp9qd30aS4RZ9sRNaoNlT4",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 4750419",
+        "formattedAddress": "Jl. Kayu Putih Empat No.37A, RT.5/RW.6, Pulo Gadung, Kec. Pulo Gadung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13260, Indonesia",
+        "location": {
+            "latitude": -6.1857641999999995,
+            "longitude": 106.89191410000001
+        },
+        "rating": 4.2,
+        "userRatingCount": 2728,
+        "displayName": {
+            "text": "Kolam Renang Tirtamas",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJcxt8Ibr1aS4RBBcyBEgNmjw",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-1644-7978",
+        "formattedAddress": "Jalan Pulomas I RT.8/RW.12, Jl. Kayu Putih Utara No.12, RT.12/RW.8, Pulo Gadung, Kec. Pulo Gadung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13210, Indonesia",
+        "location": {
+            "latitude": -6.180780899999999,
+            "longitude": 106.8955216
+        },
+        "rating": 4.7,
+        "userRatingCount": 455,
+        "displayName": {
+            "text": "Lapangan Akademi Persija kayu putih",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJyZ7mbQD1aS4RS67nMbgNu3U",
+        "types": [
+            "sports_club",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-8888-0866",
+        "formattedAddress": "Jl. Boulevard Bar. Raya No.18, RT.15/RW.3, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.153151200000001,
+            "longitude": 106.8949837
+        },
+        "rating": 4.8,
+        "userRatingCount": 167,
+        "displayName": {
+            "text": "Gaskan Arena Minisoccer",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJuwI24D71aS4RQlJu9qQrZPM",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-7078-5283",
+        "formattedAddress": "Altira Business Park, Lantai 2 Jakarta No.9 Blok A01-A03, RT.9/RW.11, Sunter Jaya, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14350, Indonesia",
+        "location": {
+            "latitude": -6.1520459999999995,
+            "longitude": 106.8860895
+        },
+        "rating": 4.4,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-sunter-altira?source=GoogleMaps",
+        "userRatingCount": 456,
+        "displayName": {
+            "text": "FIT HUB Sunter Altira Business Park",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJMdF7_kr1aS4RGsmMihA0wyA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2556-2853",
+        "formattedAddress": "Persis sebelah komplek BossFood, Belakang Kensington Apartment, Jl. Kirana Avenue, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.1729238,
+            "longitude": 106.894199
+        },
+        "rating": 4.5,
+        "websiteUri": "https://www.ayo.co.id/v/pandawa-badminton-arena",
+        "userRatingCount": 102,
+        "displayName": {
+            "text": "Pandawa Badminton Arena + Billiards",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJQZppIwD1aS4RCHYR1qfJcvk",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Yos Sudarso, Sunter Jaya, Kec. Tj. Priok, Jakarta, Daerah Khusus Ibukota Jakarta 14440, Indonesia",
+        "location": {
+            "latitude": -6.1464381,
+            "longitude": 106.8897358
+        },
+        "rating": 4.6,
+        "userRatingCount": 105,
+        "displayName": {
+            "text": "Master padel",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJy-D_iUD1aS4RmGyH5tkGwr4",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-6111-4604",
+        "formattedAddress": "Ruko Inkopal, Jl. Boulevard Bar. Raya No.46 2, RT.2/RW.9, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.1528867,
+            "longitude": 106.8915962
+        },
+        "rating": 4.6,
+        "websiteUri": "http://pandoraexperience.com/episode/city/2",
+        "userRatingCount": 486,
+        "displayName": {
+            "text": "Pandora Experience Kelapa Gading",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJnZ40nVP1aS4RtVjkJ0mUYMM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-8165-6773",
+        "formattedAddress": "Jl. Kayu Putih Utara II No.4, RT.12/RW.8, Pulo Gadung, Kec. Pulo Gadung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13210, Indonesia",
+        "location": {
+            "latitude": -6.1804833,
+            "longitude": 106.896141
+        },
+        "rating": 4.7,
+        "userRatingCount": 429,
+        "displayName": {
+            "text": "Lapangan Latihan Persija Pulomas",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJxVqB_DH1aS4R0DVnZwheUUk",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Gading Raya No.5 7, RT.7/RW.2, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.1658598,
+            "longitude": 106.885408
+        },
+        "rating": 4.7,
+        "userRatingCount": 161,
+        "displayName": {
+            "text": "Kolam Renang Tirto Sagoro 01 Kolat Koarmada I",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJz-97jx_1aS4RCtLMy6LBzyY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8899-9652",
+        "formattedAddress": "Jalan Perintis Kemerdekaan KM20, RT.1/RW.13, Pegangsaan Dua, Jakarta, Jkt Utara, Daerah Khusus Ibukota Jakarta 14250, Indonesia",
+        "location": {
+            "latitude": -6.1798854,
+            "longitude": 106.91201530000001
+        },
+        "rating": 4.5,
+        "websiteUri": "https://ayola.co/experiences/perintis-badminton",
+        "userRatingCount": 103,
+        "displayName": {
+            "text": "Perintis Badminton SJH",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJT9dvmjH1aS4RszLponuz-HM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 4535125",
+        "formattedAddress": "Jl. Putih Salju No.26, RT.16/RW.9, Klp. Gading Tim., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.164511,
+            "longitude": 106.9084378
+        },
+        "rating": 4.5,
+        "userRatingCount": 243,
+        "displayName": {
+            "text": "Gor Kelapa Gading",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJp1tYK1T1aS4RvOWsspZCsOg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-0540-1140",
+        "formattedAddress": "Pergudangan Eks GORO, Jl. Kirana Avenue Jl. Pelepah Raya No.5, RW.5, Klp. Gading Bar., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.17298,
+            "longitude": 106.8936085
+        },
+        "rating": 4.8,
+        "userRatingCount": 39,
+        "displayName": {
+            "text": "Gavrila Gymnastics Kelapa Gading",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJQ-0rSLH1aS4RwC_EENu0PQI",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-3368-64414",
+        "formattedAddress": "Jl. Boulevard Raya Blok DF No. 6, RT.4/RW.17, Klp. Gading Tim., Kec. Klp. Gading, Jkt Utara, Daerah Khusus Ibukota Jakarta 14240, Indonesia",
+        "location": {
+            "latitude": -6.172703299999999,
+            "longitude": 106.8979391
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.tokopedia.com/dealergolf",
+        "userRatingCount": 14,
+        "displayName": {
+            "text": "Dealergolf Kelapa Gading",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJtypNwxL1aS4Rl0IboNkyQ_Y",
+        "types": [
+            "night_club",
+            "bar",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-8888-0179",
+        "formattedAddress": "BOS, Bursa Otomotif Sunter, Jl. Yos Sudarso No.Kav. 87-88, RT.10/RW.11, Sunter Jaya, Kec. Tj. Priok, Jkt Utara, Daerah Khusus Ibukota Jakarta 14350, Indonesia",
+        "location": {
+            "latitude": -6.1475453,
+            "longitude": 106.88764979999999
+        },
+        "rating": 4.6,
+        "websiteUri": "https://www.instagram.com/elitebilliard.id?igsh=YzBzMHdwdHI2NHM2&utm_source=qr",
+        "userRatingCount": 82,
+        "displayName": {
+            "text": "Elite Billiard & Lounge",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJbXQlcQKLaS4RYHt2Nvcmi74",
+        "types": [
+            "ice_skating_rink",
+            "sports_complex",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 80607526",
+        "formattedAddress": "Aeon Mall, Jl. Jkt Garden City Boulevard No.1, RT.1/RW.6, Cakung Tim., Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13910, Indonesia",
+        "location": {
+            "latitude": -6.172771900000001,
+            "longitude": 106.95177679999999
+        },
+        "rating": 4.5,
+        "websiteUri": "http://www.oasiscentrearena.com/",
+        "userRatingCount": 486,
+        "displayName": {
+            "text": "Oasis Centre Arena GC",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJPXB54ciLaS4R2Ta0zbatIWM",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0817-7099-5558",
+        "formattedAddress": "Ruko New East, Jl. Jkt Garden City Boulevard no.25, Cakung Tim., Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13910, Indonesia",
+        "location": {
+            "latitude": -6.171571699999999,
+            "longitude": 106.9594664
+        },
+        "rating": 4.5,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-jgc/?source=Google%20Maps",
+        "userRatingCount": 242,
+        "displayName": {
+            "text": "FIT HUB Jakarta Garden City (JGC)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJjTe4i_2KaS4RWuMHlDVVgEE",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 22463400",
+        "formattedAddress": "Lantai 3, JGC, Aeon Mall, Jl. Jkt Garden City Boulevard Jl. Cassia Utama No.46, RT.8/RW.6, Cakung Tim., Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13910, Indonesia",
+        "location": {
+            "latitude": -6.1723943,
+            "longitude": 106.95104590000001
+        },
+        "rating": 4.5,
+        "websiteUri": "https://www.aeonfantasy.co.id/store/",
+        "userRatingCount": 760,
+        "displayName": {
+            "text": "FANPEKKA Aeon Mall JGC",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJUzkwif2KaS4RBtNCDezdKpI",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 22463360",
+        "formattedAddress": "1, Aeon Mall, Jl. Komp. Perumahan Jkt Garden City Jl. Cassia Utama No.46, RT.8/RW.6, Cakung Tim., Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13910, Indonesia",
+        "location": {
+            "latitude": -6.172428999999999,
+            "longitude": 106.9521673
+        },
+        "rating": 4.5,
+        "websiteUri": "http://aeonfantasy.co.id/",
+        "userRatingCount": 511,
+        "displayName": {
+            "text": "kidzooona AEON Mall JGC",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJI3iKHACLaS4Rh-4zjHDMLhM",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-7208-5728",
+        "formattedAddress": "Ruko, No.10 no 37, Jl. Sentra Niaga V, Harapan Indah, Kec. Tarumajaya, Kabupaten Bekasi, DKI Jakarta 17214, Indonesia",
+        "location": {
+            "latitude": -6.1644571,
+            "longitude": 106.97435809999999
+        },
+        "rating": 5,
+        "userRatingCount": 120,
+        "displayName": {
+            "text": "SORA PILATES HARAPAN INDAH",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZ8x8b66LaS4R22WqRTXosf0",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0859-2072-0650",
+        "formattedAddress": "Jl. Menteng Madya No.RT.1, RT.1, Ujung Menteng, Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13960, Indonesia",
+        "location": {
+            "latitude": -6.177456299999999,
+            "longitude": 106.9688741
+        },
+        "rating": 4.9,
+        "websiteUri": "http://jayaraya.org/klub-satelit.php?page=2",
+        "userRatingCount": 36,
+        "displayName": {
+            "text": "Pb. Jaya Raya Metland",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ-fniPwiLaS4R2lf0-vedlZg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 46825672",
+        "formattedAddress": "RX85+H6P, Jl. Balai Rakyat, RT.15/RW.1, Cakung Tim., Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13910, Indonesia",
+        "location": {
+            "latitude": -6.1835383,
+            "longitude": 106.95808459999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 279,
+        "displayName": {
+            "text": "Cakung Youth Center, Hall of the People",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJI3ClWd2LaS4REY6dhj1LV3Q",
+        "types": [
+            "sports_complex",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-8530-2414",
+        "formattedAddress": "VX24+M8V, Jl. Rorotan 6, RT.9/RW.6, Rorotan, Kec. Cilincing, Jkt Utara, Daerah Khusus Ibukota Jakarta 14140, Indonesia",
+        "location": {
+            "latitude": -6.1482614,
+            "longitude": 106.9557851
+        },
+        "rating": 4.8,
+        "userRatingCount": 47,
+        "displayName": {
+            "text": "Gym central fitness 2 malaka",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJzwXagj6LaS4R4dy3gxkgKjw",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-2090-996",
+        "formattedAddress": "Ruko New East, Jl. Jkt Garden City Boulevard, RT.11/RW.8, Cakung Tim., Kec. Cakung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13910, Indonesia",
+        "location": {
+            "latitude": -6.171511499999999,
+            "longitude": 106.9592188
+        },
+        "rating": 5,
+        "websiteUri": "http://www.curvesindonesia.com/",
+        "userRatingCount": 256,
+        "displayName": {
+            "text": "Curves Jakarta Garden City",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJcfogE9nwaS4RTZaY4bkQirk",
+        "types": [
+            "playground",
+            "tourist_attraction",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 7202868",
+        "formattedAddress": "Jl. Masjid Jami' Nurul Yaqin Gang H. Ali Sairi No.1A, Grogol Sel., Kec. Kebayoran Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12220, Indonesia",
+        "location": {
+            "latitude": -6.2324511000000005,
+            "longitude": 106.76580760000002
+        },
+        "rating": 4.3,
+        "websiteUri": "http://kampung-main-cipulir.blogspot.tw/p/hubungi-kami.html",
+        "userRatingCount": 4663,
+        "displayName": {
+            "text": "Kampung Main Cipulir",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJsQMKwhrzaS4R9qkK36vyZKM",
+        "types": [
+            "sports_coaching",
+            "athletic_field",
+            "sports_activity_location",
+            "school",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-5299-9995",
+        "formattedAddress": "Jl. Inspeksi Kali Pesanggrahan Barat No.9, Srengseng, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11630, Indonesia",
+        "location": {
+            "latitude": -6.2127453,
+            "longitude": 106.76501710000001
+        },
+        "rating": 4.5,
+        "websiteUri": "https://ayo.co.id/v/jungle-tennis",
+        "userRatingCount": 24,
+        "displayName": {
+            "text": "Jungle Tennis",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJyRqVqO_waS4RGkFE9ja1lqI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1893-0000",
+        "formattedAddress": "5, Raya No Pesanggrahan 9A Jalan Muhammad Saidi, RT.1/RW.1, Petukangan Sel., Kec. Pesanggrahan, DKI Jakarta, Daerah Khusus Ibukota Jakarta 12270, Indonesia",
+        "location": {
+            "latitude": -6.2483274,
+            "longitude": 106.7567045
+        },
+        "rating": 4.6,
+        "userRatingCount": 1255,
+        "displayName": {
+            "text": "NF Mini Soccer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJtVDg2i7xaS4RbVFNtL2LEIw",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8262-1963",
+        "formattedAddress": "Jl. SMA 63 No.6, Petukangan Utara, Kec. Pesanggrahan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12260, Indonesia",
+        "location": {
+            "latitude": -6.2294861,
+            "longitude": 106.74949199999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 222,
+        "displayName": {
+            "text": "Wins 63 Soccer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJg0uK7iXxaS4Rojc0G_mNZp4",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-0639-1761",
+        "formattedAddress": "Joglo, Kolam Renang Taman Alfa Indah, Jl. Taman Alfa Indah No.A 10 Lantai 2, RT.8/RW.7, Joglo, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11640, Indonesia",
+        "location": {
+            "latitude": -6.2202961,
+            "longitude": 106.7518563
+        },
+        "rating": 4.2,
+        "userRatingCount": 855,
+        "displayName": {
+            "text": "PROFITNESS Taman Alfa Indah",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJPT7qoI7xaS4ReN1-dd2CTbI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-7536-0908",
+        "formattedAddress": "Jl. M. Saidi Raya No.13-14, RT.1/RW.5, Petukangan Sel., Kec. Pesanggrahan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12270, Indonesia",
+        "location": {
+            "latitude": -6.2475771,
+            "longitude": 106.7566653
+        },
+        "rating": 4.8,
+        "userRatingCount": 46,
+        "displayName": {
+            "text": "Orion Tennis Court",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJy6eUUpfxaS4R5fUFTEteEp8",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1993-8555",
+        "formattedAddress": "Pakubuwono Terrace, Jl. Ciledug Raya No.99, RT.4/RW.5, Cipulir, Kec. Kebayoran Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12230, Indonesia",
+        "location": {
+            "latitude": -6.2374263,
+            "longitude": 106.768768
+        },
+        "rating": 4.6,
+        "websiteUri": "https://www.instagram.com/absolutefit2play.kebayoranlama",
+        "userRatingCount": 551,
+        "displayName": {
+            "text": "AbsoluteFit Kebayoran Lama",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJqX8uUyr3aS4Rn_HoCWO-z9s",
+        "types": [
+            "apartment_building",
+            "real_estate_agency",
+            "sports_complex",
+            "gym",
+            "sports_activity_location",
+            "clothing_store",
+            "consultant",
+            "point_of_interest",
+            "store",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9218-948",
+        "formattedAddress": "QQM7+CW4, Jl. Raya Pos Pengumben, RT.1/RW.6, Klp. Dua, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11550, Indonesia",
+        "location": {
+            "latitude": -6.216496600000001,
+            "longitude": 106.76483239999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 129,
+        "displayName": {
+            "text": "Apartment Permata Eksekutif",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJteK2P6DxaS4RnX7aieHiMYM",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1994-9777",
+        "formattedAddress": "Selatan Jl. Ciledug Raya No.82 4, RT.4/RW.4, Cipulir, Kec. Kebayoran Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12230, Indonesia",
+        "location": {
+            "latitude": -6.237919,
+            "longitude": 106.77358590000001
+        },
+        "rating": 4.2,
+        "websiteUri": "https://willfitness.id/",
+        "userRatingCount": 54,
+        "displayName": {
+            "text": "Willfitness Kebayoran Lama",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ455smcvwaS4RFTjpYmoHqO0",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 5841600",
+        "formattedAddress": "Jl. Taman Alfa Indah No.7 Blok A10, RT.3/RW.7, Joglo, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11640, Indonesia",
+        "location": {
+            "latitude": -6.220267499999999,
+            "longitude": 106.7518376
+        },
+        "rating": 3.9,
+        "userRatingCount": 817,
+        "displayName": {
+            "text": "Kolam Renang Taman Alfa Indah",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJRW0Vk0r3aS4RQc9TxE504Js",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 5856977",
+        "formattedAddress": "Jl. Joglo Raya No.48, RT.6/RW.9, Joglo, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 15157, Indonesia",
+        "location": {
+            "latitude": -6.217056299999999,
+            "longitude": 106.7472384
+        },
+        "rating": 4.2,
+        "userRatingCount": 472,
+        "displayName": {
+            "text": "Copylas Indonesia Sport Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ9wrMUADxaS4ReLtcFuDHN4I",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. SMA 63, RT.6/RW.10, Petukangan Utara, Kec. Pesanggrahan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12260, Indonesia",
+        "location": {
+            "latitude": -6.229380600000001,
+            "longitude": 106.7493226
+        },
+        "rating": 3.9,
+        "userRatingCount": 61,
+        "displayName": {
+            "text": "Wins 63 Badminton Hall",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJIRwff9TwaS4RsMZvZFqOtOc",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 5873777",
+        "formattedAddress": "Perumahan Permata Mediterania, Jl. Raya Pos Pengumben No.Raya, Srengseng, Kembangan, West Jakarta City, Jakarta 11630, Indonesia",
+        "location": {
+            "latitude": -6.2221329999999995,
+            "longitude": 106.764872
+        },
+        "rating": 4.2,
+        "websiteUri": "http://www.jakartatennis.com/",
+        "userRatingCount": 312,
+        "displayName": {
+            "text": "Club House Permata Mediterania",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJd53y50f3aS4RlbWSmdUTkuE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Taman Kb. Jeruk No.M-1 26-27 Blok M-1, RT.2/RW.4, Srengseng, Kec. Kembangan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11630, Indonesia",
+        "location": {
+            "latitude": -6.2088035,
+            "longitude": 106.74604070000001
+        },
+        "rating": 4.4,
+        "userRatingCount": 422,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Intercon",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJaTFsZMXwaS4Rn9s6KCRulfg",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Komp. Kostrad No.3, RT.1/RW.6, Petukangan Utara, Kec. Pesanggrahan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12260, Indonesia",
+        "location": {
+            "latitude": -6.2300667,
+            "longitude": 106.756895
+        },
+        "rating": 4.5,
+        "userRatingCount": 284,
+        "displayName": {
+            "text": "The ball field complex KOSTRAD Kiwal North Petukangan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJi3UxDE7xaS4RLcOFuS4REeQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "QRG3+HWX, Jl. Pintu Satu Senayan, RT.1/RW.3, Gelora, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10270, Indonesia",
+        "location": {
+            "latitude": -6.2235081999999995,
+            "longitude": 106.80484799999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 963,
+        "displayName": {
+            "text": "GBK Softball Stadium",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJBcRKho_zaS4RK5XShPy7N8s",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 25034640",
+        "formattedAddress": "Jl. Gatot Subroto No.72, RT.1/RW.4, Pancoran, Kec. Pancoran, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12780, Indonesia",
+        "location": {
+            "latitude": -6.243969700000001,
+            "longitude": 106.8422233
+        },
+        "rating": 4.8,
+        "websiteUri": "https://pancoransoccerfield.com/",
+        "userRatingCount": 1015,
+        "displayName": {
+            "text": "Pancoran Soccer Field (Lapangan Sepak Bola TNI AU Pancoran)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJKaKBuvbzaS4RMV0bwR1zzVQ",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "QRHM+8QQ, Kuningan, Karet, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940, Indonesia",
+        "location": {
+            "latitude": -6.2216708999999994,
+            "longitude": 106.8344728
+        },
+        "rating": 4.5,
+        "userRatingCount": 2616,
+        "displayName": {
+            "text": "Soemantri Brodjonegoro Stadium",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ3xrdYcfzaS4R6x_B7Aqhcc0",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 25034640",
+        "formattedAddress": "Wisma Aldiron, Jl. Gatot Subroto No.72, RT.1/RW.4, Pancoran, Kec. Pancoran, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12780, Indonesia",
+        "location": {
+            "latitude": -6.2434017,
+            "longitude": 106.8406416
+        },
+        "rating": 4.6,
+        "userRatingCount": 1266,
+        "displayName": {
+            "text": "Lapangan Bola Aldiron",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ0SLD9O7zaS4RR8FKL4UkyRk",
+        "types": [
+            "fitness_center",
+            "gym",
+            "swimming_pool",
+            "athletic_field",
+            "sports_activity_location",
+            "doctor",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-8601-000",
+        "formattedAddress": "Jl. Karet Sawah No.216, RT.4/RW.4, Karet Semanggi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12930, Indonesia",
+        "location": {
+            "latitude": -6.2206608999999995,
+            "longitude": 106.8180451
+        },
+        "rating": 4.5,
+        "websiteUri": "https://bio.kyzn.life/kuningan",
+        "userRatingCount": 718,
+        "displayName": {
+            "text": "KYZN Kuningan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJAb_KMgDxaS4RxZUDirqZSzk",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "RT.1/RW.3, Gelora, Tanah Abang, Central Jakarta City, Jakarta 10270, Indonesia",
+        "location": {
+            "latitude": -6.223457499999999,
+            "longitude": 106.8037719
+        },
+        "rating": 4.8,
+        "userRatingCount": 107,
+        "displayName": {
+            "text": "Pintu 5 Gelora Bung Karno",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZcaCAHrxaS4RWAQbbQprnP0",
+        "types": [
+            "pub",
+            "wine_bar",
+            "night_club",
+            "bar",
+            "event_venue",
+            "sports_club",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-901-771",
+        "formattedAddress": "Jl. Gunawarman No.41, Fourth Floor, Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12180, Indonesia",
+        "location": {
+            "latitude": -6.2358689,
+            "longitude": 106.80775369999999
+        },
+        "rating": 4.4,
+        "websiteUri": "https://www.izzysocialclub.com/",
+        "userRatingCount": 444,
+        "displayName": {
+            "text": "Izzy Social Club",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJI6N6vZLzaS4RY5PD-MDIisY",
+        "types": [
+            "sporting_goods_store",
+            "athletic_field",
+            "sports_activity_location",
+            "store",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1180-1168",
+        "formattedAddress": "Jl. Prof. DR. Satrio, RT.11/RW.4, Kuningan, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940, Indonesia",
+        "location": {
+            "latitude": -6.2230431,
+            "longitude": 106.8242494
+        },
+        "rating": 4,
+        "websiteUri": "https://www.instagram.com/wins.arena/",
+        "userRatingCount": 67,
+        "displayName": {
+            "text": "Win's Arena - Kuningan (Padel & Tennis)",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJCXP-QfzzaS4RVwpqLdeGWes",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0817-801-122",
+        "formattedAddress": "Menara SMBC, Jl. DR. Ide Anak Agung Gde Agung No.Kav. 5 Floor 2nd, RT.5/RW.6, Kuningan, Kuningan Tim., Kecamatan Setiabudi, DKI, Daerah Khusus Ibukota Jakarta 12950, Indonesia",
+        "location": {
+            "latitude": -6.229866299999999,
+            "longitude": 106.82770130000002
+        },
+        "rating": 4.6,
+        "websiteUri": "https://zycle.co/megakuningan/",
+        "userRatingCount": 346,
+        "displayName": {
+            "text": "ZYCLE + Pilates Mega Kuningan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJt4gspoT1aS4RWgKa50rFIMs",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-6288-4466",
+        "formattedAddress": "Jl. Kuningan Mulia, RW.1, Menteng Atas Kecamatan Setiabudi, Kota Jakarta Selatan, Menteng Atas, Kecamatan Setiabudi, Jakarta, Daerah Khusus Ibukota Jakarta 12920, Indonesia",
+        "location": {
+            "latitude": -6.213322799999999,
+            "longitude": 106.83636330000002
+        },
+        "rating": 4.4,
+        "userRatingCount": 294,
+        "displayName": {
+            "text": "Epic Wesoccer by Doospace",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJsbNXrefzaS4RXUvcMan3Pt8",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. H. R. Rasuna Said No.10b, RT.2/RW.5, Kuningan, Karet Kuningan, Kecamatan Kuningan, Kabupaten Kuningan, Daerah Khusus Ibukota Jakarta 12950, Indonesia",
+        "location": {
+            "latitude": -6.2208309999999996,
+            "longitude": 106.83308679999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 322,
+        "displayName": {
+            "text": "Sumantri Sports Centre Kuningan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJU0cqSF7xaS4RX_iuk4hQGao",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "QR77+8VM, Jl. Suryo, RT.5/RW.6, Rw. Bar., Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12180, Indonesia",
+        "location": {
+            "latitude": -6.2366662999999996,
+            "longitude": 106.8146763
+        },
+        "rating": 4.5,
+        "userRatingCount": 1267,
+        "displayName": {
+            "text": "Blok S Football Field",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ53TzaAD3aS4RAfmCQJ24Uhk",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0817-0618-088",
+        "formattedAddress": "Jl. Karet Pasar Baru Barat VII, RT.11/RW.3, Karet Tengsin, Kecamatan Tanah Abang, Kota Jakarta Pusat, Daerah Khusus Ibukota Jakarta 10250, Indonesia",
+        "location": {
+            "latitude": -6.211966599999999,
+            "longitude": 106.81473609999999
+        },
+        "rating": 4.4,
+        "websiteUri": "https://athletiqs.id/",
+        "userRatingCount": 89,
+        "displayName": {
+            "text": "Athletiqs Airdome",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJY1eSdXfzaS4RB_0rGg5wS7Y",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0882-0007-28686",
+        "formattedAddress": "Jl. Mampang Prpt. Raya No.81, RT.7/RW.1, Tegal Parang, Kec. Mampang Prpt., Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12790, Indonesia",
+        "location": {
+            "latitude": -6.2495515,
+            "longitude": 106.82687779999999
+        },
+        "rating": 4.5,
+        "websiteUri": "http://fithub.id/free-trial/v3/fit-hub-Mampang?source=GoogleMaps",
+        "userRatingCount": 288,
+        "displayName": {
+            "text": "FIT HUB Mampang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJNZzaRADxaS4RqixEYFk4rHI",
+        "types": [
+            "yoga_studio",
+            "fitness_center",
+            "gym",
+            "wellness_center",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-2200-0337",
+        "formattedAddress": "Jl. Cikatomas 1 No.3, RT.5/RW.7, Rw. Bar., Kec. Kby. Baru, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12180, Indonesia",
+        "location": {
+            "latitude": -6.237222699999999,
+            "longitude": 106.8084124
+        },
+        "rating": 4.6,
+        "websiteUri": "https://rawyoga.id/",
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "RAW YOGA JAKARTA",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJG1tpFgDxaS4RuRlEEPS8Io8",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Jenderal Sudirman No.18 1, RT.5/RW.3, Gelora, Kecamatan Tanah Abang, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12190, Indonesia",
+        "location": {
+            "latitude": -6.223655,
+            "longitude": 106.8063696
+        },
+        "rating": 4.8,
+        "userRatingCount": 35,
+        "displayName": {
+            "text": "Pintu 6 Gelora Bung Karno",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJnX0Xb7HzaS4RU-lTWR4dswo",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0858-8548-5440",
+        "formattedAddress": "Setiabudi, ex Elite outdoor court, Jl. H. R. Rasuna Said No.Kav C22, RT.2/RW.5, Karet Kuningan, Jakarta, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940, Indonesia",
+        "location": {
+            "latitude": -6.220454,
+            "longitude": 106.8350437
+        },
+        "rating": 4.6,
+        "websiteUri": "http://www.lovetennisacademy.co.id/",
+        "userRatingCount": 117,
+        "displayName": {
+            "text": "Love Tennis Academy",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJtbMCMjT1aS4ROtvS29NgLmU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-5115-1232",
+        "formattedAddress": "Jl. Setia Budi Barat Kecamatan No.1, RT.1/RW.7, Kuningan, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12920, Indonesia",
+        "location": {
+            "latitude": -6.2104061999999995,
+            "longitude": 106.82462110000002
+        },
+        "rating": 4.2,
+        "websiteUri": "https://sports-sr32.com/",
+        "userRatingCount": 196,
+        "displayName": {
+            "text": "SR32 Minisoccer Setiabudi",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJO9fi8i_zaS4Ro4WHrScoqzA",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2244-1081",
+        "formattedAddress": "Jl. Guru Mughni No.27A, RT.8/RW.1, Kuningan, Kuningan Tim., Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12930, Indonesia",
+        "location": {
+            "latitude": -6.2258537,
+            "longitude": 106.8215462
+        },
+        "rating": 4.8,
+        "userRatingCount": 346,
+        "displayName": {
+            "text": "Gatsu Sports Center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJK4lswvnzaS4RUavbhvu5OX8",
+        "types": [
+            "sports_club",
+            "sports_complex",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-0254-6547",
+        "formattedAddress": "Jl. Karet Pedurenan Masjid No.45, RT.6/RW.7, Kuningan, Karet Kuningan, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12940, Indonesia",
+        "location": {
+            "latitude": -6.2207497,
+            "longitude": 106.82874869999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 2578,
+        "displayName": {
+            "text": "Grand Sports Center Kuningan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJaQmJyFHzaS4RSdnf8-ON9kk",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Balai Rakyat No.6, RT.1/RW.9, Pd. Bambu, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13470, Indonesia",
+        "location": {
+            "latitude": -6.223698,
+            "longitude": 106.9038887
+        },
+        "rating": 4.4,
+        "userRatingCount": 2231,
+        "displayName": {
+            "text": "GOR Pondok Bambu",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJhXsdE4LzaS4R4Xi9PW-eAnA",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9206-0118",
+        "formattedAddress": "Jl. Kolonel Sugiono No.3, RT.1/RW.3, Duren Sawit, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13440, Indonesia",
+        "location": {
+            "latitude": -6.2294106,
+            "longitude": 106.91110289999999
+        },
+        "rating": 4.5,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-duren-sawit/?source=Google%20Maps",
+        "userRatingCount": 285,
+        "displayName": {
+            "text": "FIT HUB Duren Sawit",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJB3MHSFfzaS4R-OYXsJczhYI",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 86606981",
+        "formattedAddress": "Jl. Dermaga Raya No.322 5, RT.5/RW.5, Klender, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13470, Indonesia",
+        "location": {
+            "latitude": -6.2192298,
+            "longitude": 106.9015938
+        },
+        "rating": 4.3,
+        "userRatingCount": 1303,
+        "displayName": {
+            "text": "Futsal Arena Silma",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ7YY9LD7zaS4RSZpapar2r8I",
+        "types": [
+            "gym",
+            "sports_complex",
+            "primary_school",
+            "preschool",
+            "sports_activity_location",
+            "child_care_agency",
+            "school",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 29827245",
+        "formattedAddress": "No.5A 11, Jl. Cipinang Bali I Jl. Raya Kalimalang, Cipinang Muara, Kecamatan Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13420, Indonesia",
+        "location": {
+            "latitude": -6.2383299,
+            "longitude": 106.88948029999999
+        },
+        "rating": 3.8,
+        "websiteUri": "https://www.kidsrepublic.sch.id/",
+        "userRatingCount": 58,
+        "displayName": {
+            "text": "Kids Republic School | Preschool, Kindergarten & Primary School",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJhQ8CfODzaS4RHD0R6ZHykVU",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-898-820",
+        "formattedAddress": "Jl. Pahlawan Revolusi No.10 10, RT.10/RW.3, Pd. Bambu, Kec. Duren Sawit, Jakarta, Daerah Khusus Ibukota Jakarta 13430, Indonesia",
+        "location": {
+            "latitude": -6.2342634,
+            "longitude": 106.8960927
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.gelora.id/v/revominisoccer",
+        "userRatingCount": 131,
+        "displayName": {
+            "text": "Revo Mini Soccer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJQVMRvlTzaS4R9Ngm4oYFsyY",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1998-3559",
+        "formattedAddress": "Jl. Inspeksi Kalimalang Raya No.99, Pd. Bambu, Kec. Duren Sawit, Jakarta, Daerah Khusus Ibukota Jakarta 13450, Indonesia",
+        "location": {
+            "latitude": -6.2436193,
+            "longitude": 106.8993898
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.instagram.com/alfareeda.id/",
+        "userRatingCount": 454,
+        "displayName": {
+            "text": "Alfareeda Gym, Swim, Wellness",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJkSZZvZjzaS4RN5z9vl2ipOE",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-687-858",
+        "formattedAddress": "Jl. Pahlawan Revolusi No.11, RT.5/RW.11, Pd. Bambu, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta, Indonesia",
+        "location": {
+            "latitude": -6.2183871,
+            "longitude": 106.90007179999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://ftlgym.com/",
+        "userRatingCount": 308,
+        "displayName": {
+            "text": "FTL Gym Pondok Bambu",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJszqUF-7zaS4R-qGWpRZV86I",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0859-5459-5204",
+        "formattedAddress": "Jl. Bali Raya No.4, RT.4/RW.16, Cipinang Melayu, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13620, Indonesia",
+        "location": {
+            "latitude": -6.2422702,
+            "longitude": 106.8885586
+        },
+        "rating": 4.5,
+        "userRatingCount": 46,
+        "displayName": {
+            "text": "D'Sams Arena Kalimalang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJQXEjPY_zaS4RPFXyfZOwacE",
+        "types": [
+            "gym",
+            "wellness_center",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0882-7433-7173",
+        "formattedAddress": "Jl. Kolonel Sugiono No.17, RT.12/RW.9, Pd. Bambu, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta, Pd. Bambu, Kec. Duren Sawit, Kota Jakarta Timur, Jambi 13430, Indonesia",
+        "location": {
+            "latitude": -6.229466599999999,
+            "longitude": 106.9075649
+        },
+        "rating": 4.3,
+        "websiteUri": "https://willfitness.id/trial/",
+        "userRatingCount": 83,
+        "displayName": {
+            "text": "Willfitness Duren Sawit",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ4bxVHFzzaS4RTYzl9cTt5M0",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Cipinang Muara 3 No.8 15, RT.9/RW.15, Cipinang Muara, Kecamatan Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13420, Indonesia",
+        "location": {
+            "latitude": -6.219595399999999,
+            "longitude": 106.8947769
+        },
+        "rating": 4.3,
+        "userRatingCount": 143,
+        "displayName": {
+            "text": "Gor Jatinegara",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJSV2YMQDzaS4Ru_OAxg8dKFg",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-7726-2780",
+        "formattedAddress": "QW55+CWF, Jl. Laut Arafuru, ujung, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13430, Indonesia",
+        "location": {
+            "latitude": -6.2414464,
+            "longitude": 106.9097917
+        },
+        "rating": 4.6,
+        "userRatingCount": 56,
+        "displayName": {
+            "text": "Arsena Arena",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJu46eZW7zaS4RUKKOb21t2Dc",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "athletic_field",
+            "event_venue",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1150-2025",
+        "formattedAddress": "1, Jl. Balai Rakyat 3 No.6, RT.1/RW.1, Pd. Bambu, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13410, Indonesia",
+        "location": {
+            "latitude": -6.225020499999999,
+            "longitude": 106.90224219999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 529,
+        "displayName": {
+            "text": "Sarwendah Badminton Club",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJC9AYMmLzaS4RRtrSYQlgB8M",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-9580-7975",
+        "formattedAddress": "6, QVJM+W39, Jl. Swadaya No.37-43, RT.6/RW.14, Cipinang Besar Utara, Kecamatan Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13410, Indonesia",
+        "location": {
+            "latitude": -6.217642,
+            "longitude": 106.882262
+        },
+        "rating": 4.2,
+        "userRatingCount": 439,
+        "displayName": {
+            "text": "GOR Kurnia Badminton Court",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJq6qqqlXzaS4REhMrZaU8RHU",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-9831-4414",
+        "formattedAddress": "Jl. Duren Sawit Raya (dermaga), Klender, Kec. Duren Sawit, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13470, Indonesia",
+        "location": {
+            "latitude": -6.2209221,
+            "longitude": 106.91181399999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 797,
+        "displayName": {
+            "text": "Hall Bulutangkis Bina Pratama",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ85i-rkHzaS4RIVBZTfx2Mqw",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Cipinang Indah I No.14 6, RT.1/RW.12, Cipinang Muara, Kecamatan Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13420, Indonesia",
+        "location": {
+            "latitude": -6.2328185,
+            "longitude": 106.8911772
+        },
+        "rating": 4.5,
+        "userRatingCount": 111,
+        "displayName": {
+            "text": "Cipinang Indah Tennis Court (CITC)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJCWtB6OnzaS4RNscOUk6rmzo",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pancawarga III No.37a, RT.8/RW.5, Cipinang Besar Sel., Kecamatan Jatinegara, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13410, Indonesia",
+        "location": {
+            "latitude": -6.2341207,
+            "longitude": 106.88292220000001
+        },
+        "rating": 4.6,
+        "userRatingCount": 101,
+        "displayName": {
+            "text": "Bangun Gym",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJveT09APzaS4RAisryXNGw7g",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "5, RT.5/RW.12, Halim Perdanakusuma, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.2514495,
+            "longitude": 106.894447
+        },
+        "rating": 4.6,
+        "userRatingCount": 214,
+        "displayName": {
+            "text": "Stadion Danu Setiawan Dwikora Halim",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJwYkIizvzaS4RZ90dtpwhR9U",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-3212-70730",
+        "formattedAddress": "No, Jl. H. Amsir No.1, RT.4/RW.4, Cipinang Melayu, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13620, Indonesia",
+        "location": {
+            "latitude": -6.2419176,
+            "longitude": 106.8945986
+        },
+        "rating": 4.3,
+        "userRatingCount": 221,
+        "displayName": {
+            "text": "GOR PB Taruna",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJD1RJNZXzaS4R_XKPYFPixwk",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "4, RT.4/RW.12, Halim Perdanakusuma, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.2502854,
+            "longitude": 106.89326179999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 93,
+        "displayName": {
+            "text": "Lapangan Dwikora Suroso",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJw2BLcwCNaS4RTIvo9evNPT0",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-8888-6657",
+        "formattedAddress": "Near RT.006/RW.017, Jakasampurna, Bekasi Barat, Bekasi, West Java Bks, Jawa Barat, Jakasampurna, Kec. Bekasi Bar., Kota Bks, DKI Jakarta 17145, Indonesia",
+        "location": {
+            "latitude": -6.245133900000001,
+            "longitude": 106.95668579999999
+        },
+        "rating": 4.4,
+        "websiteUri": "https://www.anytimefitness.id/gyms/id-0067/jakasampurna-bekasi-17145/",
+        "userRatingCount": 82,
+        "displayName": {
+            "text": "Anytime Fitness Kota Bintang - Kota Bekasi",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ5XxEYObxaS4RxSkR-LBEGHE",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1810-2061",
+        "formattedAddress": "Jl. Taman Bintaro Barat No.Kav 10, Bintaro, Kec. Pesanggrahan, Jakarta, Daerah Khusus Ibukota Jakarta 12330, Indonesia",
+        "location": {
+            "latitude": -6.2735818,
+            "longitude": 106.7567528
+        },
+        "rating": 4.8,
+        "userRatingCount": 114,
+        "displayName": {
+            "text": "Nika Training Pool Bintaro",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJMerwoDPwaS4RfAfeK4TEcNI",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Cemp. No.33 10, RT.10/RW.9, Pd. Pinang, Kec. Kebayoran Lama, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12310, Indonesia",
+        "location": {
+            "latitude": -6.287124899999999,
+            "longitude": 106.7677056
+        },
+        "rating": 4.5,
+        "userRatingCount": 742,
+        "displayName": {
+            "text": "Swimming Pool SEPOLWAN",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJHSgmd8rxaS4ReCDVqnyovqg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0815-9803-193",
+        "formattedAddress": "Jl. Taman Bintaro Barat No.Kav.10, RT.11/RW.11, Bintaro, Kec. Pesanggrahan, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12330, Indonesia",
+        "location": {
+            "latitude": -6.273770799999999,
+            "longitude": 106.75674889999999
+        },
+        "rating": 5,
+        "userRatingCount": 92,
+        "displayName": {
+            "text": "Kanika Gymnastics Club Jakarta",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ51gRN_HtaS4RjrAGueFkExY",
+        "types": [
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1821-7260",
+        "formattedAddress": "Jl. TB Simatupang No.34, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12520, Indonesia",
+        "location": {
+            "latitude": -6.2997045,
+            "longitude": 106.83397029999999
+        },
+        "rating": 4.5,
+        "websiteUri": "https://www.smashpadel.id/",
+        "userRatingCount": 178,
+        "displayName": {
+            "text": "Smash Padel Simatupang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJIYY1WbDtaS4RoAgP_M5A9MA",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-8000-4887",
+        "formattedAddress": "Jl. TB Simatupang, RT.11/RW.4, Tj. Bar., Kec. Jagakarsa, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12530, Indonesia",
+        "location": {
+            "latitude": -6.303947399999999,
+            "longitude": 106.8427178
+        },
+        "rating": 4.7,
+        "userRatingCount": 145,
+        "displayName": {
+            "text": "Republic Padel TB Simatupang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJpSW1GgDvaS4R0yDjQKpslNo",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Margasatwa No.99E, RT.1/RW.7, Jagakarsa, Kec. Jagakarsa, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12620, Indonesia",
+        "location": {
+            "latitude": -6.311058999999999,
+            "longitude": 106.81179189999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 142,
+        "displayName": {
+            "text": "7 Padel Ragunan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJt3aH8PHxaS4Rrhh8RFAR1BI",
+        "types": [
+            "hotel",
+            "auditorium",
+            "coffee_shop",
+            "breakfast_restaurant",
+            "cafe",
+            "wedding_venue",
+            "swimming_pool",
+            "laundry",
+            "event_venue",
+            "sports_activity_location",
+            "lodging",
+            "restaurant",
+            "point_of_interest",
+            "food_store",
+            "food",
+            "store",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 39700191",
+        "formattedAddress": "Jl. Pangeran Antasari No.75, Cilandak Bar., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12430, Indonesia",
+        "location": {
+            "latitude": -6.2848812,
+            "longitude": 106.8068255
+        },
+        "rating": 4.7,
+        "websiteUri": "https://azanahotel.com/hotel/azana-suite-hotel-antasari",
+        "userRatingCount": 2040,
+        "displayName": {
+            "text": "Azana Suite Hotel Antasari",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJa4fs3nrzaS4Rpk3Gp77SqOQ",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-7829-4785",
+        "formattedAddress": "14, Jl. Pejaten Barat I No.18, RT.14/RW.8, West Pejaten, Pasar Minggu, South Jakarta City, Jakarta 12510, Indonesia",
+        "location": {
+            "latitude": -6.2727129,
+            "longitude": 106.82443099999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 414,
+        "displayName": {
+            "text": "The Field @ Pejaten",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJa5thR4jxaS4RqqB4wrsiQbM",
+        "types": [
+            "yoga_studio",
+            "fitness_center",
+            "sports_complex",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-9341-188",
+        "formattedAddress": "no Jalan Kemang Timur Raya No.88 jakarta selatan, Bangka, Kec. Mampang Prpt., Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12730, Indonesia",
+        "location": {
+            "latitude": -6.2729883,
+            "longitude": 106.82116529999999
+        },
+        "rating": 4.7,
+        "websiteUri": "http://www.gudanggudang.com/",
+        "userRatingCount": 235,
+        "displayName": {
+            "text": "Gudang Gudang Yoga",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJT7e6RMfxaS4RGupKZvCEeeo",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-5758-0675",
+        "formattedAddress": "Jl. M.P.R. III Dalam No.4, RT.4/RW.13, Cilandak Bar., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12430, Indonesia",
+        "location": {
+            "latitude": -6.2863288,
+            "longitude": 106.8063832
+        },
+        "rating": 4.4,
+        "websiteUri": "http://racquetpadelclub.com/",
+        "userRatingCount": 109,
+        "displayName": {
+            "text": "Ràcquet Padel Club Cilandak",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZ5CCFeLxaS4RVNfcKlkbHd0",
+        "types": [
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-8771-9383",
+        "formattedAddress": "Jl. Keramat No.1, Cilandak Tim., Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12560, Indonesia",
+        "location": {
+            "latitude": -6.293851999999999,
+            "longitude": 106.81182280000002
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.thegoodpadelclub.com/",
+        "userRatingCount": 81,
+        "displayName": {
+            "text": "The Good Padel Club - Cilandak",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJAeU-vfvxaS4RDQrp1560rBI",
+        "types": [
+            "sports_club",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8342-3136",
+        "formattedAddress": "Jl. Benda Bawah No.77, RT.7/RW.6, Cilandak Tim., Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12560, Indonesia",
+        "location": {
+            "latitude": -6.278747,
+            "longitude": 106.81268299999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://ayo.co.id/v/triboon-mini-soccer-sports-hub",
+        "userRatingCount": 492,
+        "displayName": {
+            "text": "Triboon Mini Soccer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJuQ5K_hTzaS4RmTgxFMkwJ6w",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-687-858",
+        "formattedAddress": "Jl. KH. Guru Amin No.25, RT.1/RW.4, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12520, Indonesia",
+        "location": {
+            "latitude": -6.2865943,
+            "longitude": 106.8435514
+        },
+        "rating": 4.8,
+        "websiteUri": "https://ftlgym.com/",
+        "userRatingCount": 223,
+        "displayName": {
+            "text": "FTL Gym Pasar Minggu",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJU6dRaQDtaS4RmifmfGzziiY",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-8347-2192",
+        "formattedAddress": "Jl. Assakinah I, Kebagusan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12520, Indonesia",
+        "location": {
+            "latitude": -6.3025305,
+            "longitude": 106.83132409999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 71,
+        "displayName": {
+            "text": "Starcampo Minnisoccer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZdWv_BDxaS4RVk0_8sRV6sE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8436-8834",
+        "formattedAddress": "Jl. Ampera Raya No.11-12 1, RT.2/RW.2, Ragunan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12550, Indonesia",
+        "location": {
+            "latitude": -6.287478699999999,
+            "longitude": 106.81860619999999
+        },
+        "rating": 4.5,
+        "websiteUri": "http://www.wa.me/6281284368834",
+        "userRatingCount": 276,
+        "displayName": {
+            "text": "STR Mini Soccer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJs_kn-KzxaS4R18SeCzBDVqE",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1831-0017",
+        "formattedAddress": "Jl : Cilandak Tengah I Dalam No.15 A, RT.022/RW.1, Cilandak Bar., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12430, Indonesia",
+        "location": {
+            "latitude": -6.288780999999999,
+            "longitude": 106.8036166
+        },
+        "rating": 4.9,
+        "websiteUri": "https://www.instagram.com/casadepadel.id/",
+        "userRatingCount": 201,
+        "displayName": {
+            "text": "Casa de Padel",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ3yM1qZPzaS4RUiaJ67lQCuQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-8252-9689",
+        "formattedAddress": "Rooftop PD, Jl. KH. Guru Amin Jl. Raya Ragunan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12520, Indonesia",
+        "location": {
+            "latitude": -6.284109900000001,
+            "longitude": 106.8433996
+        },
+        "rating": 4.4,
+        "userRatingCount": 89,
+        "displayName": {
+            "text": "Pasar Minggu Mini Soccer",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ836npATyaS4RNQO-VWZG9KQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0816-702-708",
+        "formattedAddress": "Jl. Taman Margasatwa Raya No.12, Jati Padang, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540, Indonesia",
+        "location": {
+            "latitude": -6.2897453,
+            "longitude": 106.8244548
+        },
+        "rating": 4.6,
+        "userRatingCount": 857,
+        "displayName": {
+            "text": "GCT Badminton",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJY5VD9E_xaS4Ri0X2zscsOq8",
+        "types": [
+            "sports_club",
+            "sports_complex",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0823-1117-8744",
+        "formattedAddress": "Jl. Pangeran Antasari No.20, Cilandak Bar., Kec. Cilandak, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12430, Indonesia",
+        "location": {
+            "latitude": -6.2863371,
+            "longitude": 106.8073686
+        },
+        "rating": 4.9,
+        "websiteUri": "https://ayo.co.id/v/air-padel",
+        "userRatingCount": 41,
+        "displayName": {
+            "text": "Air Padel Jakarta",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ0UbF5N7zaS4RHEM08rTIG7U",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pekayon 1 Selatan No.15, RT.6/RW.3, Ragunan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12550, Indonesia",
+        "location": {
+            "latitude": -6.278517,
+            "longitude": 106.8253536
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.instagram.com/naracourt.jakarta/?__d=1/",
+        "userRatingCount": 20,
+        "displayName": {
+            "text": "Nara Court Jakarta",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJU9ybXwDxaS4R4WleqcM6q2w",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-0814-2888",
+        "formattedAddress": "Seberang Jl. Madrasah 2 No.Selatan, Cilandak Tim., Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12560, Indonesia",
+        "location": {
+            "latitude": -6.2797075,
+            "longitude": 106.81664750000002
+        },
+        "rating": 4.5,
+        "websiteUri": "https://www.instagram.com/bumi.padel.kemang?igsh=a3Q4em0zd3M0ZnI1",
+        "userRatingCount": 142,
+        "displayName": {
+            "text": "Bumi Padel Kemang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ3xbVFwDzaS4RXHpQ03SPApU",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pekayon 1 No.35A, Ragunan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12540, Indonesia",
+        "location": {
+            "latitude": -6.279174599999999,
+            "longitude": 106.82640839999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 27,
+        "displayName": {
+            "text": "LA NINY TENNIS COURT",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJFTNZwPfzaS4Rv8XG7g1c-jc",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-8378-8114",
+        "formattedAddress": "Jl. TB Simatupang, RT.2/RW.1, Kebagusan, Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12520, Indonesia",
+        "location": {
+            "latitude": -6.2982488,
+            "longitude": 106.8296647
+        },
+        "rating": 4.7,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-Plaza-Oleos?source=GoogleMaps",
+        "userRatingCount": 187,
+        "displayName": {
+            "text": "FIT HUB Plaza Oleos",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJzf_R0BHzaS4R7ARR-T3Yh_s",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1586-873",
+        "formattedAddress": "Jl. Radar Selatan No.1, RT.3/RW.4, Halim Perdanakusuma, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.2850059,
+            "longitude": 106.89455919999999
+        },
+        "rating": 4.5,
+        "websiteUri": "http://suvarnagolf.com/",
+        "userRatingCount": 1798,
+        "displayName": {
+            "text": "Suvarna Jakarta Golf Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJkcHJbs_yaS4RW-_aJeyuDsg",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 8000793",
+        "formattedAddress": "8, Jl. Squadron No.4, RT.6/RW.2, Halim Perdanakusuma, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.2818263,
+            "longitude": 106.8907814
+        },
+        "rating": 4.3,
+        "websiteUri": "http://golfhalim.tripod.com/",
+        "userRatingCount": 1200,
+        "displayName": {
+            "text": "Padang Golf Halim",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJP_C-l1jtaS4RLMBeZbsIZ8Y",
+        "types": [
+            "athletic_field",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-9594-567",
+        "formattedAddress": "Jl. Manunggal XVII No.70 5, RT.5/RW.5, Lubang Buaya, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13810, Indonesia",
+        "location": {
+            "latitude": -6.297126,
+            "longitude": 106.89444300000001
+        },
+        "rating": 4.6,
+        "userRatingCount": 625,
+        "displayName": {
+            "text": "de King's Arena (Futsal and Mini Soccer)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJWaHNJ7DzaS4R7ugm2tOlOHU",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "PWF4+76P, RW.3, Halim Perdanakusuma, Makasar, East Jakarta City, Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.2767874,
+            "longitude": 106.9055897
+        },
+        "rating": 4.9,
+        "userRatingCount": 35,
+        "displayName": {
+            "text": "Lapbak Djamsuri AU",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJB6IGSbLyaS4RQKamDBFEDjs",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Raya Pd. Gede No.3, RW.3, Halim Perdanakusuma, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.2843028,
+            "longitude": 106.90688779999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 1270,
+        "displayName": {
+            "text": "Halim Futsal & Badminton",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJo-oWu5byaS4RivWd1I8Cxy4",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kopatdara No.14, RT.8/RW.1, Pinang Ranti, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13560, Indonesia",
+        "location": {
+            "latitude": -6.2822689,
+            "longitude": 106.88368299999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 275,
+        "displayName": {
+            "text": "Lapangan bola Galaxy Halim",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJIaq6m0zzaS4RgwC3AcO1bDY",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9572-8889",
+        "formattedAddress": "Tamini Square, Jl. Raya Pd. Gede Mall Lt LG, Pinang Ranti, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13560, Indonesia",
+        "location": {
+            "latitude": -6.2915901,
+            "longitude": 106.8810599
+        },
+        "rating": 4.8,
+        "userRatingCount": 247,
+        "displayName": {
+            "text": "Blackpool Billiard Mall Tamini Square Lt. LG",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ02YpdlDtaS4RMxr7v2uXyaA",
+        "types": [
+            "yoga_studio",
+            "fitness_center",
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-8000-1278",
+        "formattedAddress": "Jl. Raya Mabes Hankam No.11, RT.1/RW.3, Bambu Apus, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13890, Indonesia",
+        "location": {
+            "latitude": -6.312801899999999,
+            "longitude": 106.90436659999999
+        },
+        "rating": 4.3,
+        "websiteUri": "http://hhumastudio.com/",
+        "userRatingCount": 30,
+        "displayName": {
+            "text": "Hhuma Studio",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ77yxA3PzaS4RoAUHXMqSY7w",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-9314-0433",
+        "formattedAddress": "Jl. Taman Mini Raya Garuda, Pinang Ranti, Makasar, Tamini Square, Lantai 2, Pinang Ranti, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13560, Indonesia",
+        "location": {
+            "latitude": -6.2917356,
+            "longitude": 106.8815204
+        },
+        "rating": 4.6,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-tamini-square/?source=Google%20Maps",
+        "userRatingCount": 206,
+        "displayName": {
+            "text": "FIT HUB Tamini Square",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJoydI1zLzaS4RmheuSqAFe3g",
+        "types": [
+            "cafe",
+            "diner",
+            "sports_club",
+            "sports_activity_location",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1374-355",
+        "formattedAddress": "Pemancingan PuspitaJl. Kukila Raya Blok C NO 46, RW.3, Halim Perdanakusuma, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.2836096,
+            "longitude": 106.9073202
+        },
+        "rating": 4.2,
+        "userRatingCount": 208,
+        "displayName": {
+            "text": "Pemancingan & Restoran Puspita",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJeTnwtHvzaS4RJ6oxVgY3Asg",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1586-873",
+        "formattedAddress": "Jl. Padang Golf Lkr. Halim, RT.3/RW.4, Halim Perdanakusuma, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.279780799999999,
+            "longitude": 106.89360719999999
+        },
+        "rating": 4.3,
+        "websiteUri": "http://www.suvarnagolf.com/",
+        "userRatingCount": 73,
+        "displayName": {
+            "text": "Suvarna Jakarta Golf Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ6zamUejtaS4RKmJejMem2so",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0858-8889-9580",
+        "formattedAddress": "Jl. Raya Mabes Hankam, Bambu Apus, Kec. Cipayung, ApusCipayung, Daerah Khusus Ibukota Jakarta 13890, Indonesia",
+        "location": {
+            "latitude": -6.3094534,
+            "longitude": 106.900819
+        },
+        "rating": 3.4,
+        "websiteUri": "https://www.anytimefitness.id/gyms/id-0017/east-jakarta-jakarta-13890/",
+        "userRatingCount": 116,
+        "displayName": {
+            "text": "Anytime Fitness The Amboja",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJocQvRRvzaS4RsFgy_K0yMOU",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0852-1657-5603",
+        "formattedAddress": "Jl. Monumen Pancasila Sakti No.60, RT.1/RW.6, Lubang Buaya, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13810, Indonesia",
+        "location": {
+            "latitude": -6.295602199999999,
+            "longitude": 106.903503
+        },
+        "rating": 5,
+        "websiteUri": "https://reshapegymindonesia.com/",
+        "userRatingCount": 168,
+        "displayName": {
+            "text": "Shapers Gym Indonesia",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJTwk0jbDyaS4RvMb4UwR5Yx4",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "park",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-1353-6971",
+        "formattedAddress": "Jl. Suyodono No.751, RT.6/RW.2, Halim Perdanakusuma, Kec. Makasar, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13610, Indonesia",
+        "location": {
+            "latitude": -6.2831905,
+            "longitude": 106.90190369999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 434,
+        "displayName": {
+            "text": "LAPANGAN BOLA DIRGANTARA III",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ5w3MdAjtaS4R633_ESk-E-s",
+        "types": [
+            "playground",
+            "park",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "1, RT.12/RW.2, Bambu Apus, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13890, Indonesia",
+        "location": {
+            "latitude": -6.314552099999999,
+            "longitude": 106.89527749999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 192,
+        "displayName": {
+            "text": "Taman Kelinci Bambu Apus",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJW6pFg_fzaS4RzclAHErKHXA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "RT.6/RW.4, Lubang Buaya, Cipayung, East Jakarta City, Jakarta 13810, Indonesia",
+        "location": {
+            "latitude": -6.2948138,
+            "longitude": 106.8906648
+        },
+        "rating": 4.4,
+        "userRatingCount": 165,
+        "displayName": {
+            "text": "Lapangan MNCTV",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJxSyhFIntaS4RqKfvEyA8mW8",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1165-664",
+        "formattedAddress": "Jl. Prof. DR. Miriam Budiardjo, RW.3, Srengseng Sawah, Kec. Jagakarsa, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12640, Indonesia",
+        "location": {
+            "latitude": -6.351829899999999,
+            "longitude": 106.8307459
+        },
+        "rating": 4.5,
+        "websiteUri": "https://sportcenter.emaara.id/",
+        "userRatingCount": 255,
+        "displayName": {
+            "text": "Driving Range - Felfest Sportcenter",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJn4XCL4PuaS4RxOmvUf4pUks",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-7300-9912",
+        "formattedAddress": "Jl. H.M. Nalim No.54 1, RT.1/RW.8, Srengseng Sawah, Kec. Jagakarsa, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12640, Indonesia",
+        "location": {
+            "latitude": -6.3496228,
+            "longitude": 106.8144846
+        },
+        "rating": 4.1,
+        "userRatingCount": 2407,
+        "displayName": {
+            "text": "Swimming Pool Batoe 54",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJBWn5jz_taS4RYXDwPE2nhwM",
+        "types": [
+            "gym",
+            "swimming_pool",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 72732524",
+        "formattedAddress": "RT.12/RW.3, Srengseng Sawah, Jagakarsa, South Jakarta City, Jakarta 12630, Indonesia",
+        "location": {
+            "latitude": -6.3438485,
+            "longitude": 106.8307499
+        },
+        "rating": 4.5,
+        "userRatingCount": 363,
+        "displayName": {
+            "text": "Kolam Renang Tirta Cakti",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJPVUIuJvvaS4Rs7Awk5R1C-M",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-1155-3267",
+        "formattedAddress": "Jl. Moch. Kahfi II No.177, RT.1/RW.8, Srengseng Sawah, Kec. Jagakarsa, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12640, Indonesia",
+        "location": {
+            "latitude": -6.3516246999999995,
+            "longitude": 106.81460949999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 97,
+        "displayName": {
+            "text": "GOR Dimensi Badminton Academy",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJy52OfDLsaS4RNk-tuFRSc8Y",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1194-4145",
+        "formattedAddress": "MR4H+RHH, Jl. Yonzikon 13, RT.4/RW.13, Srengseng Sawah, Kec. Jagakarsa, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12630, Indonesia",
+        "location": {
+            "latitude": -6.342933899999999,
+            "longitude": 106.8289988
+        },
+        "rating": 4.6,
+        "userRatingCount": 145,
+        "displayName": {
+            "text": "Lap. Bola Yonzikon 13",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJo8ebPtbsaS4Rlk4_7LFcQzw",
+        "types": [
+            "sports_club",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Giri Kencana No.Rt. 05, RT.5/RW.2, Cilangkap, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13840, Indonesia",
+        "location": {
+            "latitude": -6.3389337999999995,
+            "longitude": 106.9043065
+        },
+        "rating": 4.4,
+        "userRatingCount": 218,
+        "displayName": {
+            "text": "GOR KINASIH ( BADMINTON CLUB )",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJF9VRVrjtaS4RRpxSF5fAFrA",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8885-9059",
+        "formattedAddress": "Jl. Raya Cilangkap No.10, RT.2/RW.1, Cilangkap, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13870, Indonesia",
+        "location": {
+            "latitude": -6.342735299999999,
+            "longitude": 106.9082832
+        },
+        "rating": 4.6,
+        "userRatingCount": 310,
+        "displayName": {
+            "text": "Infinity MiniSoccer Jakarta",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJSXSbp__taS4RqfQb5dHOSnM",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Ruko Cibubur Indah 1st Floor No. 3 Blok B Unit 21-22, JL. Lapangan Tembak Raya, RT.1/RW.5, Kelapa Dua Wetan, Ciracas, East Jakarta City, Jakarta 13720, Indonesia",
+        "location": {
+            "latitude": -6.3517189,
+            "longitude": 106.88547969999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 551,
+        "displayName": {
+            "text": "Dinar Billiard",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJl8LKkg3taS4RGDPYGPy9gGI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-4176-61600",
+        "formattedAddress": "10, RT.10/RW.3, Munjul, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13850, Indonesia",
+        "location": {
+            "latitude": -6.3490135,
+            "longitude": 106.89212859999999
+        },
+        "rating": 4.9,
+        "userRatingCount": 39,
+        "displayName": {
+            "text": "Lapangan Bola Komplek Polri Munjul",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJu_5oZZXsaS4RmsYEjbu4dFs",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0882-1467-4722",
+        "formattedAddress": "Jl. Villa Cibubur Blok U1 No.13, RT.6/RW.11, Cibubur, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13720, Indonesia",
+        "location": {
+            "latitude": -6.3600617999999995,
+            "longitude": 106.8875845
+        },
+        "rating": 4.2,
+        "userRatingCount": 407,
+        "displayName": {
+            "text": "Kolam Renang Cibubur Indah",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJmw3nO_TtaS4Rdn-vswqKe-Y",
+        "types": [
+            "sports_complex",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-4613-2524",
+        "formattedAddress": "Jl. Jambore No.6, RT.6/RW.13, Cibubur, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13720, Indonesia",
+        "location": {
+            "latitude": -6.3637691,
+            "longitude": 106.88725020000001
+        },
+        "rating": 4.6,
+        "userRatingCount": 154,
+        "displayName": {
+            "text": "Rai Fitness Cibubur",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJX0GAcu3saS4RAh0mKLjWXvI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-5950-3354",
+        "formattedAddress": "Jl. Blk. Duku No.44 71, RT.13/RW.10, Cibubur, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13720, Indonesia",
+        "location": {
+            "latitude": -6.3562997999999995,
+            "longitude": 106.8787765
+        },
+        "rating": 4.5,
+        "userRatingCount": 210,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Rawa Kuda",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJa7kZD5PsaS4RuTDiByUeDGM",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8180-2255",
+        "formattedAddress": "Jl. H. Abdul Rahman II, RT.3/RW.10, Cibubur, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13720, Indonesia",
+        "location": {
+            "latitude": -6.3608011,
+            "longitude": 106.8800036
+        },
+        "rating": 4.6,
+        "websiteUri": "http://www.rptracibuburberseri.blogspot.com/",
+        "userRatingCount": 292,
+        "displayName": {
+            "text": "RPTRA Cibubur Berseri",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJfb3voAftaS4RLH5xzMfN2lI",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Sepakat VIII No.5, RT.5/RW.1, Cilangkap, Kec. Cipayung, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13870, Indonesia",
+        "location": {
+            "latitude": -6.3423171,
+            "longitude": 106.9035138
+        },
+        "rating": 4.7,
+        "userRatingCount": 88,
+        "displayName": {
+            "text": "RPTRA Garuda",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJx-NHKLvsaS4R87RP8I1PxVU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JVMW+2XG, RT.8/RW.5, Pondok Ranggon, Cipayung, East Jakarta City, Jakarta 13860, Indonesia",
+        "location": {
+            "latitude": -6.367443799999999,
+            "longitude": 106.89746
+        },
+        "rating": 4.5,
+        "userRatingCount": 736,
+        "displayName": {
+            "text": "Lapangan Utama Buperta",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJla4cvO3saS4RGQdVuTaEOmY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "8, RT.8/RW.10, Cibubur, Kec. Ciracas, Kota Jakarta Timur, Daerah Khusus Ibukota Jakarta 13720, Indonesia",
+        "location": {
+            "latitude": -6.3551383999999995,
+            "longitude": 106.8785848
+        },
+        "rating": 4.4,
+        "userRatingCount": 165,
+        "displayName": {
+            "text": "Lap. Bola Bulak Sereh, Cibubur Jakarta Timur",
+            "languageCode": "en"
+        }
+    }
+]

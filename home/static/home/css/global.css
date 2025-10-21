@@ -1,0 +1,8 @@
+/* File ini bisa Anda gunakan nanti untuk menambahkan gaya kustom
+  yang tidak bisa dilakukan dengan kelas Tailwind standar.
+  Misalnya, gaya untuk InfoWindow peta Google.
+*/
+.gm-style .gm-style-iw-c {
+    padding: 10px !important;
+    border-radius: 8px !important;
+}

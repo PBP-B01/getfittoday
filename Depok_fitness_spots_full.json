@@ -1,0 +1,4223 @@
+[
+    {
+        "id": "ChIJPZR74hfuaS4RrYvahmDasB8",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 7513326",
+        "formattedAddress": "Jl. Jati Indah Raya No.1, Pangkalan Jati, Kec. Cinere, Kota Depok, Jawa Barat 16513, Indonesia",
+        "location": {
+            "latitude": -6.3198313,
+            "longitude": 106.78907609999999
+        },
+        "rating": 4.3,
+        "websiteUri": "http://www.golfpangkalanjati.com/",
+        "userRatingCount": 2760,
+        "displayName": {
+            "text": "Pangkalan Jati Golf Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJabcNJDzuaS4RLXH97lJsONA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-5437-4303",
+        "formattedAddress": "Jl. Jati Raya Tim. No.2, Pangkalan Jati, Kec. Cinere, Kota Depok, Jawa Barat 16513, Indonesia",
+        "location": {
+            "latitude": -6.315116499999999,
+            "longitude": 106.7903539
+        },
+        "rating": 4.7,
+        "userRatingCount": 551,
+        "displayName": {
+            "text": "Homecourt Basketball",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJx9XS3mvvaS4R1AivXG9jCao",
+        "types": [
+            "karaoke",
+            "night_club",
+            "bar",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-5555-9273",
+        "formattedAddress": "Ps. Segar Cinere, RUKO RB1&2, Cinere, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.333309400000001,
+            "longitude": 106.78360459999999
+        },
+        "rating": 4.6,
+        "websiteUri": "https://www.tiktok.com/@newviva_entertainment",
+        "userRatingCount": 109,
+        "displayName": {
+            "text": "New Viva Entertainment",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJV3q6CsnvaS4R_sjh-yQDKzM",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-6428-3476",
+        "formattedAddress": "MQ6R+XV8, Gandul, Cinere, Depok City, West Java 16514, Indonesia",
+        "location": {
+            "latitude": -6.3375806,
+            "longitude": 106.7921915
+        },
+        "rating": 4.9,
+        "userRatingCount": 18,
+        "displayName": {
+            "text": "Gandul",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJjd0sRBXvaS4RovZylTzfNoc",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-2345-6418",
+        "formattedAddress": "Jl. Ismaya, RT.04/RW.07, Cinere, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.328977000000001,
+            "longitude": 106.7821505
+        },
+        "rating": 4.9,
+        "userRatingCount": 192,
+        "displayName": {
+            "text": "Rawasi Sport Center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJe94QG0XuaS4RRrgQwjGoSOs",
+        "types": [
+            "fitness_center",
+            "wellness_center",
+            "yoga_studio",
+            "sports_coaching",
+            "sports_complex",
+            "gym",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1373-8022",
+        "formattedAddress": "Jl. Cinere Raya No.20, Cinere, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3308618999999995,
+            "longitude": 106.7834206
+        },
+        "rating": 4.5,
+        "websiteUri": "https://houseofmetamorfit.co.id/",
+        "userRatingCount": 268,
+        "displayName": {
+            "text": "House of Metamorfit | Family Gym & Wellness Cinere",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJyzyWSk_vaS4R7oMTdhyPZqI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8773-9881",
+        "formattedAddress": "Jl. Raya Gandul Jl. A No.38, Gandul, Kec. Cinere, Kota Depok, Jawa Barat 16512, Indonesia",
+        "location": {
+            "latitude": -6.3357703999999995,
+            "longitude": 106.79512349999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 114,
+        "displayName": {
+            "text": "Baslife Arena",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJG_p4FADvaS4RXC8AeWzFcAw",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-8120-9328",
+        "formattedAddress": "Jl. Cinere Raya No.K/7B, RT.006/RW.007, Cinere, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3280262,
+            "longitude": 106.7848042
+        },
+        "rating": 4.3,
+        "websiteUri": "https://www.burnmotion.com/",
+        "userRatingCount": 132,
+        "displayName": {
+            "text": "Burn Fitness Cinere",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJw0leQADvaS4RrcTkSO4I6qg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Andara Raya No.1, Pangkalan Jati Baru, Kec. Cinere, Kota Depok, Jawa Barat 16513, Indonesia",
+        "location": {
+            "latitude": -6.3246999,
+            "longitude": 106.8020681
+        },
+        "rating": 4.7,
+        "userRatingCount": 78,
+        "displayName": {
+            "text": "DOS Padel Andara",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJw-yScQ3uaS4R41hQrqb7gNE",
+        "types": [
+            "wedding_venue",
+            "picnic_ground",
+            "playground",
+            "sports_complex",
+            "swimming_pool",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1775-092",
+        "formattedAddress": "Jl. Andara Raya Green Andara Residences, Pangkalan Jati, Kec. Cinere, Kota Depok, Jawa Barat 16513, Indonesia",
+        "location": {
+            "latitude": -6.3180544,
+            "longitude": 106.8071032
+        },
+        "rating": 4.5,
+        "userRatingCount": 825,
+        "displayName": {
+            "text": "Green Andara Family Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJixV0pl3vaS4R5jcOpwX5aTc",
+        "types": [
+            "sports_complex",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-9919-2611",
+        "formattedAddress": "Jl. H. Nawi Malik, Pd. Petir, Kec. Bojongsari, Kota Depok, Jawa Barat 16517, Indonesia",
+        "location": {
+            "latitude": -6.367019,
+            "longitude": 106.731304
+        },
+        "rating": 4.3,
+        "userRatingCount": 398,
+        "displayName": {
+            "text": "Arhath Sport Center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ1168FDvvaS4ROLBI8LtpXig",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-8800-6500",
+        "formattedAddress": "Jl. Nusa Kenari No.65, Cinangka, Kec. Sawangan, Kota Depok, Jawa Barat 16516, Indonesia",
+        "location": {
+            "latitude": -6.3693941,
+            "longitude": 106.756902
+        },
+        "rating": 4.5,
+        "userRatingCount": 242,
+        "displayName": {
+            "text": "GOR Nusa Kenari (Cinangka)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJCSOg6T_vaS4RXLL4FU-j5vQ",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1594-4368",
+        "formattedAddress": "Jl. Cinangka Raya Kavling Pertamina No.23, Kedaung, Kec. Sawangan, Kota Depok, Jawa Barat 16516, Indonesia",
+        "location": {
+            "latitude": -6.364247,
+            "longitude": 106.7480282
+        },
+        "rating": 4.4,
+        "websiteUri": "https://instagram.com/karimahterrace",
+        "userRatingCount": 124,
+        "displayName": {
+            "text": "Karimah Muslimah Swimming Pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJzynw697vaS4R_0RDghKD2dI",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-1151-1177",
+        "formattedAddress": "Jl. Pendidikan No.RT 01/03, Cinangka, Kec. Sawangan, Kota Depok, Jawa Barat 16516, Indonesia",
+        "location": {
+            "latitude": -6.3725477999999995,
+            "longitude": 106.7578978
+        },
+        "rating": 4.8,
+        "userRatingCount": 12,
+        "displayName": {
+            "text": "Lapangan bola Cinangka Rw 03",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJYR4wIOfvaS4RE4EwswyAiZQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Yayasan No.RT.006/01, Grogol, Kec. Limo, Kota Depok, Jawa Barat 16512, Indonesia",
+        "location": {
+            "latitude": -6.375799,
+            "longitude": 106.7885323
+        },
+        "rating": 4.8,
+        "websiteUri": "https://lynk.id/stadion.ham",
+        "userRatingCount": 668,
+        "displayName": {
+            "text": "H. Abdul Malik Stadium",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJm63AVwDvaS4RGJ2oKEzNBQs",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jalan Taman Pesanggrahan XIII, Cinere, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3409777,
+            "longitude": 106.77351259999999
+        },
+        "rating": 4.9,
+        "userRatingCount": 94,
+        "displayName": {
+            "text": "Hillside Padel Cinere",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJPYSp9CPvaS4Rp0ujKjMCCTE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1691-5989",
+        "formattedAddress": "Jl. Raya Krukut No.1, Krukut, Kec. Limo, Kota Depok, Jawa Barat 16512, Indonesia",
+        "location": {
+            "latitude": -6.349366,
+            "longitude": 106.7902479
+        },
+        "rating": 4.6,
+        "websiteUri": "https://bossminisoccer.com/",
+        "userRatingCount": 228,
+        "displayName": {
+            "text": "Boss Mini Soccer",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJa3li7ZrvaS4RKn4Pi2x1qwY",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Limo Raya, Limo, Kec. Limo, Kota Depok, Jawa Barat, Indonesia",
+        "location": {
+            "latitude": -6.365814,
+            "longitude": 106.7751229
+        },
+        "rating": 4.8,
+        "userRatingCount": 74,
+        "displayName": {
+            "text": "Bale Court",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJl00IeADvaS4RKa0siqpQN3w",
+        "types": [
+            "gym",
+            "wellness_center",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0889-9047-5048",
+        "formattedAddress": "Jalan Cinere Raya No.08 RT. 02 RW. 12, Lantai, RW.2, Cinere, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.345801,
+            "longitude": 106.7773941
+        },
+        "rating": 4.5,
+        "websiteUri": "http://fithub.id/free-trial/v3/fit-hub-Cinere-Raya?source=GoogleMaps",
+        "userRatingCount": 186,
+        "displayName": {
+            "text": "FIT HUB Cinere Raya",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJfYtq0LXvaS4RIq_13e8_Wog",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JQPC+6XM, Limo, Depok City, West Java 16515, Indonesia",
+        "location": {
+            "latitude": -6.364262399999999,
+            "longitude": 106.7725125
+        },
+        "rating": 4.7,
+        "userRatingCount": 38,
+        "displayName": {
+            "text": "GOR Badminton Limo Poncol",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJy-I_eADvaS4RQBgZissoYlA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-940-592",
+        "formattedAddress": "Jl. Raya Krukut No.7, Krukut, Kec. Limo, Kota Depok, Jawa Barat 16512, Indonesia",
+        "location": {
+            "latitude": -6.366858,
+            "longitude": 106.79126799999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 105,
+        "displayName": {
+            "text": "DNA Arena Cinere",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJRV2yTtjuaS4RVnhE95W8NYU",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 22964061",
+        "formattedAddress": "Perumahan Palem Ganda Asri Jl. Tupai Raya PGA No.9, Meruyung, Kec. Limo, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3706992,
+            "longitude": 106.7725147
+        },
+        "rating": 4.3,
+        "userRatingCount": 982,
+        "displayName": {
+            "text": "Palem Ganda Asri Swimming Pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJkxB2EO7uaS4RCyyo4B9ApNc",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JQXP+JWQ, Jl. Masjid Daruttaqwa, Krukut, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3509182,
+            "longitude": 106.7873441
+        },
+        "rating": 4.3,
+        "userRatingCount": 237,
+        "displayName": {
+            "text": "Lapangan Bola Pordek/Citra Remaja",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJaUj2duPuaS4RZUFvoU5eueU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Limo Raya Blok Kramat No.9, Limo, Kec. Limo, Kota Depok, Jawa Barat 16515, Indonesia",
+        "location": {
+            "latitude": -6.3535283,
+            "longitude": 106.7754662
+        },
+        "rating": 4.5,
+        "websiteUri": "http://ssb-sparta1979.blogspot.com/",
+        "userRatingCount": 286,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Sparta Fc. Limo-Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJh3uN5ITvaS4REGsEEOS0x8M",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-8826-4600",
+        "formattedAddress": "Blok F II No, Jl. Anggrek No.25, Cinere, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3460868,
+            "longitude": 106.78061129999999
+        },
+        "rating": 4.9,
+        "userRatingCount": 163,
+        "displayName": {
+            "text": "Drip Padel",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJPwKWlfTuaS4RL_QkQ0OnujA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0881-2142-876",
+        "formattedAddress": "Jl. Raya Gandul No.21, Gandul, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.345163299999999,
+            "longitude": 106.79226469999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 348,
+        "displayName": {
+            "text": "La Liga Futsal",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ5QD05fTuaS4Rhd88YdixGLk",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-3759-1580",
+        "formattedAddress": "Jl. Raya Gandul No.06, Gandul, Kec. Cinere, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3442,
+            "longitude": 106.7923
+        },
+        "rating": 4.4,
+        "websiteUri": "https://wa.me/627737591580.",
+        "userRatingCount": 487,
+        "displayName": {
+            "text": "GOR Badminton Kaliki Jaya",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJCc81kh7saS4RYB4Mg3L-BdQ",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JRMC+VRH, Jl. Prof. DR. Ir Somantri Brodjonegoro, Kukusan, Kecamatan Beji, Kota Depok, Jawa Barat 16425, Indonesia",
+        "location": {
+            "latitude": -6.365323,
+            "longitude": 106.82211889999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 1059,
+        "displayName": {
+            "text": "University of Indonesia Stadium",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJkZG8U6HuaS4R6pjaMUEuYUU",
+        "types": [
+            "swimming_pool",
+            "water_park",
+            "amusement_park",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 7862726",
+        "formattedAddress": "Jl. K.H.M. Usman No.110, Kukusan, Kecamatan Beji, Kota Depok, Jawa Barat 16425, Indonesia",
+        "location": {
+            "latitude": -6.3653542,
+            "longitude": 106.81156080000001
+        },
+        "rating": 4.2,
+        "userRatingCount": 3607,
+        "displayName": {
+            "text": "Water Park Ceria",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJq4CjqLjvaS4R-A0ECnTQAGo",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. M.H. Sanim No.3, RT.2/RW.7, Kukusan, Kecamatan Beji, Kota Depok, Jawa Barat 16425, Indonesia",
+        "location": {
+            "latitude": -6.3697567,
+            "longitude": 106.8166086
+        },
+        "rating": 4.6,
+        "websiteUri": "http://linktr.ee/gorkukusan",
+        "userRatingCount": 412,
+        "displayName": {
+            "text": "GOR Badminton Kukusan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJr7WDOBzsaS4RHLKNGf24sNQ",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 7867222",
+        "formattedAddress": "JRMC+6PC, Jl. Prof. DR. Ir Somantri Brodjonegoro, Kukusan, Kecamatan Beji, Kota Depok, Jawa Barat 16424, Indonesia",
+        "location": {
+            "latitude": -6.366947,
+            "longitude": 106.82176969999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 27,
+        "displayName": {
+            "text": "Gymnasium",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJS4WZiqfuaS4RamfDIcXvwWI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 7868189",
+        "formattedAddress": "Jl. Palakali, Kukusan, Kecamatan Beji, Kota Depok, Jawa Barat 16425, Indonesia",
+        "location": {
+            "latitude": -6.3696867,
+            "longitude": 106.8177935
+        },
+        "rating": 4.4,
+        "websiteUri": "https://twitter.com/ssbmetro",
+        "userRatingCount": 318,
+        "displayName": {
+            "text": "Palakali Kukusan Soccer Field",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ--KVegLsaS4R77qfOFjm1Rw",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0815-2030-8869",
+        "formattedAddress": "Jl. Kabel No. 34 RT. 07/04, Beji, Kecamatan Beji, Kota Depok, Jawa Barat 16425, Indonesia",
+        "location": {
+            "latitude": -6.373986899999999,
+            "longitude": 106.81858000000001
+        },
+        "rating": 4.4,
+        "userRatingCount": 763,
+        "displayName": {
+            "text": "GOR SIMA",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJhfOad7ruaS4RJrUCGqCCc-Q",
+        "types": [
+            "playground",
+            "tourist_attraction",
+            "amusement_center",
+            "amusement_park",
+            "park",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-8111-1808",
+        "formattedAddress": "JRH2+GVG, Jl. Saidan, Tanah Baru, Kecamatan Beji, Kota Depok, Jawa Barat 16426, Indonesia",
+        "location": {
+            "latitude": -6.370957,
+            "longitude": 106.80225899999999
+        },
+        "rating": 4.5,
+        "websiteUri": "http://tamanpratama.id/",
+        "userRatingCount": 3103,
+        "displayName": {
+            "text": "Taman Pemuda Pratama",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ-3iW-C7vaS4RXxMPwb-udjc",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-0414-4217",
+        "formattedAddress": "Jl. Kukusan Raya No.6, RT.10/RW.9, Kukusan, Kecamatan Beji, Kota Depok, Jawa Barat 16425, Indonesia",
+        "location": {
+            "latitude": -6.3572263,
+            "longitude": 106.8152504
+        },
+        "rating": 4.4,
+        "userRatingCount": 82,
+        "displayName": {
+            "text": "Pemancingan Telaga Kukusan",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJtUqSdznsaS4RTD8SqOXUHZk",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9102-0590",
+        "formattedAddress": "Jl. Akses UI, Tugu, Kec. Cimanggis, Kota Depok, Jawa Barat 16451, Indonesia",
+        "location": {
+            "latitude": -6.3526772,
+            "longitude": 106.836451
+        },
+        "rating": 4.8,
+        "websiteUri": "http://sc.gunadarma.ac.id/",
+        "userRatingCount": 238,
+        "displayName": {
+            "text": "Sports Center Gunadarma",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ14cbRXTtaS4R7ClFKjYVrJI",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Karet No.30, RT.01/RW.19, Kemiri Muka, Kecamatan Beji, Kota Depok, Jawa Barat 16423, Indonesia",
+        "location": {
+            "latitude": -6.3721058,
+            "longitude": 106.83488919999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 249,
+        "displayName": {
+            "text": "Playtopia Adventure margoCity",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJAe8zG3TsaS4Rm-2w7PB9MOg",
+        "types": [
+            "wellness_center",
+            "gym",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-5801-1422",
+        "formattedAddress": "Duta Futsal & Fitness Center, Padel, swimpool, Jl. Moch Nail Jl. Kp. Sugutamu No.11A, RT.04/RW.25, Bakti Jaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16418, Indonesia",
+        "location": {
+            "latitude": -6.375063300000001,
+            "longitude": 106.847015
+        },
+        "rating": 4.6,
+        "userRatingCount": 1233,
+        "displayName": {
+            "text": "Duta Futsal & Fitness Centre",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ5Rb7LEXsaS4R7hFK_-uVa7o",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-1903-0475",
+        "formattedAddress": "Jl H Hasan, Gg. H. Meri Areman, RT.2/RW.6, Tugu, Kec. Cimanggis, Kota Depok, Jawa Barat 16451, Indonesia",
+        "location": {
+            "latitude": -6.3518075,
+            "longitude": 106.8529995
+        },
+        "rating": 4.5,
+        "websiteUri": "https://ayo.co.id/v/gor-areman",
+        "userRatingCount": 108,
+        "displayName": {
+            "text": "GOR Areman",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJxZSSID3taS4RKHH6wyQBCq8",
+        "types": [
+            "fitness_center",
+            "adventure_sports_center",
+            "sports_complex",
+            "gym",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-8661-3560",
+        "formattedAddress": "Jl. Akses UI Jl. Komjen. Pol. M. Jasin No.6, Tugu, Kec. Cimanggis, Kota Depok, Jawa Barat 16451, Indonesia",
+        "location": {
+            "latitude": -6.355626,
+            "longitude": 106.8490216
+        },
+        "rating": 4.5,
+        "websiteUri": "https://www.instagram.com/xteamgym.id/?hl=id",
+        "userRatingCount": 144,
+        "displayName": {
+            "text": "X Team Gym Depok",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ0_npaWvsaS4RcdiFbzR3Nag",
+        "types": [
+            "sports_complex",
+            "gym",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-0418-0643",
+        "formattedAddress": "Jl. Rtm, Tugu, Kec. Cimanggis, Kota Depok, Jawa Barat 16451, Indonesia",
+        "location": {
+            "latitude": -6.364095,
+            "longitude": 106.84297959999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 209,
+        "displayName": {
+            "text": "Harini Studio (Body Fit for Woman)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZ9eFRmzsaS4RJYO9_q3dQJc",
+        "types": [
+            "sports_club",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9843-7471",
+        "formattedAddress": "Jl. H. Rijin, Tugu, Kec. Cimanggis, Kota Depok, Jawa Barat 16451, Indonesia",
+        "location": {
+            "latitude": -6.3663872999999995,
+            "longitude": 106.843654
+        },
+        "rating": 4.5,
+        "userRatingCount": 172,
+        "displayName": {
+            "text": "Gor Bulutangkis Shaninaza, Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJvYHtX8XtaS4RL1r-Lf0todg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-1074-9399",
+        "formattedAddress": "KM 30P, Jl. Raya Bogor, Mekarsari, Kec. Cimanggis, Kota Depok, Jawa Barat 16952, Indonesia",
+        "location": {
+            "latitude": -6.367471699999999,
+            "longitude": 106.86008609999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://msha.ke/21billiard.cimanggis?fbclid=PAQ0xDSwK_5pZleHRuA2FlbQIxMQABpzI-gKhLSBgUCWLlHGYbGvsmc5yVd7XU6s9Qtuv3IY4wyc5OeCP8HsavocQx_aem_9W4o4yHQmg4-E-kaeBfhMQ",
+        "userRatingCount": 211,
+        "displayName": {
+            "text": "21 Billiard Cimanggis",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJG_C8GI7saS4RkHmQ27HskhA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-9277-7609",
+        "formattedAddress": "Jl. Merpati Putih, Mekarsari, Kec. Cimanggis, Kota Depok, Jawa Barat 16452, Indonesia",
+        "location": {
+            "latitude": -6.3648102,
+            "longitude": 106.8764028
+        },
+        "rating": 4.4,
+        "userRatingCount": 369,
+        "displayName": {
+            "text": "GOR Lamahu",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJx3XmaYztaS4R_BdxaLua9IA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Tipar Sari No.58 1, RW.9, Mekarsari, Kec. Cimanggis, Kota Depok, Jawa Barat 16452, Indonesia",
+        "location": {
+            "latitude": -6.370285099999999,
+            "longitude": 106.8708657
+        },
+        "rating": 4.4,
+        "userRatingCount": 135,
+        "displayName": {
+            "text": "GOR Gumilang",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJtbiJq4fsaS4Rx-fIrQWH7Uc",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 8726666",
+        "formattedAddress": "Komplek Permata Puri Laguna, JVH9+63Q, Mekarsari, Cimanggis, Mekarsari, Kec. Cimanggis, Kota Depok, Jawa Barat 16452, Indonesia",
+        "location": {
+            "latitude": -6.3719064,
+            "longitude": 106.86774899999999
+        },
+        "rating": 4.2,
+        "userRatingCount": 404,
+        "displayName": {
+            "text": "Swimming Pool Puri Permata Laguna",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJyUoy8lztaS4Reo02wSBMnIQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1110-6800",
+        "formattedAddress": "Taman Rekreasi Wiladatika, Jl. Jambore No.1, Harjamukti, Kec. Cimanggis, Kota Depok, Jawa Barat 13720, Indonesia",
+        "location": {
+            "latitude": -6.3702364,
+            "longitude": 106.89332739999999
+        },
+        "rating": 4.8,
+        "websiteUri": "http://booking.tennisbayjkt.com/",
+        "userRatingCount": 22,
+        "displayName": {
+            "text": "Lapangan Tennis Bay",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJeVhpkdroaS4R4bEuoteSEMA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "no, 16517, Jl. Abdul Wahab No.19, RT.4/RW.3, Sawangan, Kec. Sawangan, Kota Depok, Jawa Barat 16517, Indonesia",
+        "location": {
+            "latitude": -6.3943167,
+            "longitude": 106.7608284
+        },
+        "rating": 4.6,
+        "userRatingCount": 836,
+        "displayName": {
+            "text": "Lapangan Bola PSP",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJYTU5SzbvaS4R34nP3q5djCU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JP8V+X6F, Bojongsari Baru, Bojongsari, Depok City, West Java, Indonesia",
+        "location": {
+            "latitude": -6.3825579999999995,
+            "longitude": 106.74306179999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 58,
+        "displayName": {
+            "text": "Persija Training Center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJE8C6oAnvaS4R0iqSf2ylrfU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-2626-323",
+        "formattedAddress": "Jl. Rotan, Bojongsari Baru, Kec. Bojongsari, Kota Depok, Jawa Barat 16516, Indonesia",
+        "location": {
+            "latitude": -6.382049599999999,
+            "longitude": 106.7397623
+        },
+        "rating": 4.8,
+        "websiteUri": "https://persijadevelopment.id/",
+        "userRatingCount": 36,
+        "displayName": {
+            "text": "Persija Development Center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJM5kBC7XpaS4RS5yk4s_ENnE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HQW7+H9Q LAPANGAN SEPAK BOLA RAWANO, Jl. H. Maksum, Sawangan Baru, Kec. Sawangan, Kota Depok, Jawa Barat 16511, Indonesia",
+        "location": {
+            "latitude": -6.4035278,
+            "longitude": 106.76348499999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 74,
+        "displayName": {
+            "text": "LAPANGAN RAWANO",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJWX22R0vvaS4RGFl5qJhhkA4",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Abdul Rohim No.77, Bojongsari Baru, Kec. Bojongsari, Kota Depok, Jawa Barat 16516, Indonesia",
+        "location": {
+            "latitude": -6.3827286,
+            "longitude": 106.7420315
+        },
+        "rating": 4.4,
+        "userRatingCount": 134,
+        "displayName": {
+            "text": "Lapangan Por Sawangan Depok",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJxW3G9xnpaS4R6pOBluNBgww",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-687-858",
+        "formattedAddress": "Senopati Boulevard Shilla At Sawangan, Bojongsari Lama, Kec. Sawangan, Kota Depok, Jawa Barat 16518, Indonesia",
+        "location": {
+            "latitude": -6.4015889,
+            "longitude": 106.74453129999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://ftlgym.com/",
+        "userRatingCount": 137,
+        "displayName": {
+            "text": "FTL Gym Shila Sawangan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJA2ACXkvvaS4R5IXSn7Lz71s",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-8901-420",
+        "formattedAddress": "Blok Masjid Nurul Iman Jalan Gang Rotan Pelita Jaya Blok Masjid Nurul Iman No.10, Jl. Gg. Rotan Pelita Jaya Blok Masjid Nurul Iman No.61, RT.3/RW.6, Bojongsari Baru, Bojongsari, Depok City, West Java 16516, Indonesia",
+        "location": {
+            "latitude": -6.3820286,
+            "longitude": 106.7391746
+        },
+        "rating": 4.6,
+        "userRatingCount": 98,
+        "displayName": {
+            "text": "Nirwana Park Sawangan",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJRboWV_zvaS4RVW6oFPowXN8",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Gg. Rotan Pelita Jaya Blok Masjid Nurul Iman No.61, RT.3/RW.6, Bojongsari Baru, Kec. Bojongsari, Kota Depok, Jawa Barat 16516, Indonesia",
+        "location": {
+            "latitude": -6.3830059,
+            "longitude": 106.7424858
+        },
+        "rating": 4.8,
+        "websiteUri": "https://instagram.com/persija?utm_medium=copy_link",
+        "userRatingCount": 31,
+        "displayName": {
+            "text": "PERSIJA Training Ground",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJp9aY1RTpaS4RC1PyezhXhV4",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-1727-5747",
+        "formattedAddress": "Jl. Raya Parung, RT.001/RW.002 Kel, Curug, Kec. Bojongsari, Kota Depok, Jawa Barat 16516, Indonesia",
+        "location": {
+            "latitude": -6.406174099999999,
+            "longitude": 106.7375395
+        },
+        "rating": 5,
+        "websiteUri": "http://fithub.id/free-trial/v3/fit-hub-bojongsari-Depok?source=GoogleMaps",
+        "userRatingCount": 131,
+        "displayName": {
+            "text": "FIT HUB Bojongsari Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJLTvENwDpaS4RVcv95qHfguM",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-142-168",
+        "formattedAddress": "Garasi kuliner, Jl. Raya Parung - Ciputat No.KM. 28, RW.No. 80, Bojongsari Baru, Kec. Bojongsari, Kota Depok, Jawa Barat 16516, Indonesia",
+        "location": {
+            "latitude": -6.3948779,
+            "longitude": 106.74294309999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.instagram.com/airgym2021?igsh=dG52bGNjeXdpM3Jw",
+        "userRatingCount": 84,
+        "displayName": {
+            "text": "AIR GYM FITNESS CENTER",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJzckMadLvaS4RH9lu4QuxAVU",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8773-9881",
+        "formattedAddress": "Jl. Meruyung Raya, Meruyung, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3880021,
+            "longitude": 106.7689381
+        },
+        "rating": 3.9,
+        "userRatingCount": 42,
+        "displayName": {
+            "text": "astro billiard",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJI482HUbpaS4R-al2Gbwo-nw",
+        "types": [
+            "wedding_venue",
+            "event_venue",
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-7504-0714",
+        "formattedAddress": "Jl. Perjuangan, Curug, Kec. Bojongsari, Kota Depok, Jawa Barat 16517, Indonesia",
+        "location": {
+            "latitude": -6.3979422,
+            "longitude": 106.73379260000002
+        },
+        "rating": 4.5,
+        "websiteUri": "https://instagram.com/gorhermantajir10?utm_source=qr&igshid=NGExMmI2YTkyZg==",
+        "userRatingCount": 59,
+        "displayName": {
+            "text": "GOR HERMAN TAJIR",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJGYFjdgDvaS4Rb2n8DaesUac",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1020-4112",
+        "formattedAddress": "Kedaung, Sawangan, Depok City, West Java 16516, Indonesia",
+        "location": {
+            "latitude": -6.3791663,
+            "longitude": 106.7472323
+        },
+        "rating": 4.2,
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "GOR BADMINTON SATRIO ARENA",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJT_4jCOfoaS4RWkvl79OyEVY",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0859-5954-4200",
+        "formattedAddress": "Jl. Raya Muchtar No.35, Sawangan Baru, Kec. Sawangan, Kota Depok, Jawa Barat 16511, Indonesia",
+        "location": {
+            "latitude": -6.4053881,
+            "longitude": 106.76193579999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 620,
+        "displayName": {
+            "text": "Duo Shine Fitness Sawangan Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ3ZZ-NgDpaS4RHbZnTvzjSFI",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Panglima Sudirman No.1, Curug, Kec. Bojongsari, Kota Depok, Jawa Barat 16517, Indonesia",
+        "location": {
+            "latitude": -6.3852505,
+            "longitude": 106.7355613
+        },
+        "rating": 4.9,
+        "userRatingCount": 18,
+        "displayName": {
+            "text": "House of Metamorfit Candi Sawangan",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJAYnY5BzpaS4R5NldibvrS0M",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HQX8+FCH, Jl. Jati, Sawangan Baru, Kec. Sawangan, Kota Depok, Jawa Barat 16511, Indonesia",
+        "location": {
+            "latitude": -6.4013233000000005,
+            "longitude": 106.7661124
+        },
+        "rating": 4.4,
+        "userRatingCount": 22,
+        "displayName": {
+            "text": "Taman Sawangan Baru",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJa7bYYZ_paS4R0RaTn19Y8lg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-9965-8882",
+        "formattedAddress": "HQVC+R26, Jl. H. Sulaiman No.10, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4059336,
+            "longitude": 106.7700663
+        },
+        "rating": 4.7,
+        "userRatingCount": 166,
+        "displayName": {
+            "text": "Prima Rahma Sport Mini Soccer",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJQeuqbybpaS4RkxglYgQIWLk",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-1551-1232",
+        "formattedAddress": "Jl. Rd. Sukarma No.48, RT.004/RW.003, Rangkapan Jaya Baru, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16434, Indonesia",
+        "location": {
+            "latitude": -6.3946692999999994,
+            "longitude": 106.77577029999999
+        },
+        "rating": 4.9,
+        "userRatingCount": 38,
+        "displayName": {
+            "text": "Sanggar Senam Ratri",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJGYJ_mzbpaS4RNiI2sYTxBuk",
+        "types": [
+            "gym",
+            "athletic_field",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pramuka Raya No.53, Mampang, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16433, Indonesia",
+        "location": {
+            "latitude": -6.3879711,
+            "longitude": 106.7906234
+        },
+        "rating": 4.3,
+        "userRatingCount": 277,
+        "displayName": {
+            "text": "Gelora Hady Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJOZh18UjpaS4Rd44FPBavKHA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Damai No.6, Mampang, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16433, Indonesia",
+        "location": {
+            "latitude": -6.3901018,
+            "longitude": 106.7974845
+        },
+        "rating": 4.5,
+        "userRatingCount": 312,
+        "displayName": {
+            "text": "Lapangan Bola Godam",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJvVaglZLpaS4RxWySE1LZ10c",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1102-643",
+        "formattedAddress": "Jl. Nuri.01 Blok E.10, Pasir Putih, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4103467,
+            "longitude": 106.7766736
+        },
+        "rating": 4.9,
+        "websiteUri": "http://byur.co.id/",
+        "userRatingCount": 198,
+        "displayName": {
+            "text": "byur private pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJsdwpJD7paS4RdQ48lK9WmUk",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-687-858",
+        "formattedAddress": "Perum Puri, Jl. Raya Sawangan Jl. Puri Depok Mas, Pancoran Mas, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16442, Indonesia",
+        "location": {
+            "latitude": -6.3947793,
+            "longitude": 106.8022597
+        },
+        "rating": 4.9,
+        "websiteUri": "https://ftlgym.com/",
+        "userRatingCount": 60,
+        "displayName": {
+            "text": "FTL Gym Puri Depok Mas",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ-2Xk8wfpaS4Rd6Tp4mS7P3Y",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0816-292-990",
+        "formattedAddress": "Jl. Raya Kali Licin (Jl. Masjid, Jl. Tiank 2 No.81 RT. 06/13, Pancoran Mas, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16436, Indonesia",
+        "location": {
+            "latitude": -6.402800399999999,
+            "longitude": 106.80021149999999
+        },
+        "rating": 4.7,
+        "websiteUri": "http://pesonaair.com/",
+        "userRatingCount": 236,
+        "displayName": {
+            "text": "Pesona Air - Private Pool dan Villa",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJXybqqWLvaS4RaTRNMXbI5kk",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9587-1012",
+        "formattedAddress": "Jl Tiga Putra RT 03 RW 05 Meruyung, Grogol, Kec. Limo, Kota Depok, Jawa Barat 16515, Indonesia",
+        "location": {
+            "latitude": -6.3788494,
+            "longitude": 106.7783724
+        },
+        "rating": 4.8,
+        "userRatingCount": 47,
+        "displayName": {
+            "text": "3 Putra Badminton Sport Center",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJFXwTCxTpaS4Rxhomn1lfXzg",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-7242-9462",
+        "formattedAddress": "HQRQ+XQ5, Jl. Raya Keadilan, Rangkapan Jaya Baru, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16434, Indonesia",
+        "location": {
+            "latitude": -6.407623699999999,
+            "longitude": 106.78948749999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 271,
+        "displayName": {
+            "text": "GOR Raden Tegar",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJhTxOUC7paS4Riwewvp77puU",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-1039-0262",
+        "formattedAddress": "di atas \"Selma, Jl. Raya Sawangan No.1 Lantai 2, Rangkapan Jaya, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16435, Indonesia",
+        "location": {
+            "latitude": -6.3947987,
+            "longitude": 106.79332989999999
+        },
+        "rating": 4.6,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-depok-town-center/?source=Google%20Maps",
+        "userRatingCount": 187,
+        "displayName": {
+            "text": "FIT HUB Depok Town Center (DTC)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJNSX4cRvpaS4Rd6ICY6RQCPE",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Pasir Putih, Sawangan, Depok City, West Java 16519, Indonesia",
+        "location": {
+            "latitude": -6.411226999999999,
+            "longitude": 106.77802199999999
+        },
+        "rating": 4,
+        "websiteUri": "https://shila.co.id/blog/kolam-renang-di-sawangan/",
+        "userRatingCount": 168,
+        "displayName": {
+            "text": "Kolam Renang Sawangan Permai",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJP5UnzdruaS4RgoPg9NpjCW8",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Lap. Bola Relis No.74, Grogol, Kec. Limo, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3707636,
+            "longitude": 106.78212819999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 157,
+        "displayName": {
+            "text": "Lapangan Relis",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJG_R9VxPvaS4Ra73LcYa2Unw",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-5888-9050",
+        "formattedAddress": "Jl. Pramuka Raya No.43, Grogol, Kec. Limo, Kota Depok, Jawa Barat 16514, Indonesia",
+        "location": {
+            "latitude": -6.3823164,
+            "longitude": 106.79028249999999
+        },
+        "rating": 4.9,
+        "websiteUri": "https://linktr.ee/PRABUGYM",
+        "userRatingCount": 95,
+        "displayName": {
+            "text": "PRABU GYM GROGOL",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJAavbm0rpaS4RuXMeocfjz4w",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0816-1622-009",
+        "formattedAddress": "Jl. Mampang Indah I, Mampang, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16433, Indonesia",
+        "location": {
+            "latitude": -6.3833912999999995,
+            "longitude": 106.79227259999999
+        },
+        "rating": 4.6,
+        "websiteUri": "https://gorazzikra.my.id/",
+        "userRatingCount": 124,
+        "displayName": {
+            "text": "GOR COMBET",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJndIWdLTpaS4Rnah_ns8Ec94",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1415-8918",
+        "formattedAddress": "Jl. H. Abdul Somad No.15, Mampang, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16436, Indonesia",
+        "location": {
+            "latitude": -6.394380399999999,
+            "longitude": 106.7969444
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.f18gymandstudio.com/",
+        "userRatingCount": 75,
+        "displayName": {
+            "text": "F18 Gym & Studio Outlet Mampang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJBwdZYADraS4RwHM7CJpL0JU",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JR4G+X94, Depok, Pancoran Mas, Depok City, West Java 16431, Indonesia",
+        "location": {
+            "latitude": -6.3926248,
+            "longitude": 106.8259447
+        },
+        "rating": 3.3,
+        "userRatingCount": 282,
+        "displayName": {
+            "text": "Tropikana Waterpark Depok",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ787G0lHpaS4RV5ermO28Ijw",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Gelatik Raya No.43, Depok Jaya, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16432, Indonesia",
+        "location": {
+            "latitude": -6.3896484,
+            "longitude": 106.8069886
+        },
+        "rating": 4.4,
+        "userRatingCount": 1266,
+        "displayName": {
+            "text": "Stadion Merpati",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJtXhXEk3raS4Rgz1W3Cr9j5U",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-687-858",
+        "formattedAddress": "Jl. Kartini No.14, Depok, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16431, Indonesia",
+        "location": {
+            "latitude": -6.4076808,
+            "longitude": 106.81787659999999
+        },
+        "rating": 4.6,
+        "websiteUri": "https://ftlgym.com/",
+        "userRatingCount": 345,
+        "displayName": {
+            "text": "FTL Gym Depok Lama",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ22DC4AbsaS4Rea8nUObt8Zo",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "park",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jalan Muhammad Ridwan Rais No.116, Beji Tim., Kecamatan Beji, Kota Depok, Jawa Barat 16422, Indonesia",
+        "location": {
+            "latitude": -6.3778928,
+            "longitude": 106.8254764
+        },
+        "rating": 4.6,
+        "userRatingCount": 1297,
+        "displayName": {
+            "text": "Lapangan HW Beji Timur",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJT-6NXwDtaS4RUKk1vL2DFV4",
+        "types": [
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-9000-6606",
+        "formattedAddress": "Jl. Margonda No.283, RT.1/RW.2, Kemiri Muka, Kecamatan Beji, Kota Depok, Jawa Barat 16423, Indonesia",
+        "location": {
+            "latitude": -6.3787721,
+            "longitude": 106.83114320000001
+        },
+        "rating": 4.6,
+        "websiteUri": "https://wa.me/6281390006606?text=%5BMRG-MAPS%5D%20Halo,%20Saya%20tertarik%20daftar%20free%20trial%20di%20Sparks%20Sports%20Academy",
+        "userRatingCount": 80,
+        "displayName": {
+            "text": "Sparks Sports Academy - MRG",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ82p8D5vpaS4RaiNIXV979M0",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-4175-7038",
+        "formattedAddress": "Jl. Dewi Sartika No.6, Depok, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16431, Indonesia",
+        "location": {
+            "latitude": -6.3993834,
+            "longitude": 106.81897909999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 246,
+        "displayName": {
+            "text": "Revo Billiard",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJn1L3UADtaS4RKmXWxBlrchU",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1012-1996",
+        "formattedAddress": "Jl. Margonda Raya, Kemiri Muka, Kecamatan Beji, Kota Depok, Jawa Barat 16423, Indonesia",
+        "location": {
+            "latitude": -6.3781411,
+            "longitude": 106.8308056
+        },
+        "rating": 4.9,
+        "userRatingCount": 32,
+        "displayName": {
+            "text": "Koci Soccer Field",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ6zu341PraS4RdJE0L_rJyTw",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0858-1101-0625",
+        "formattedAddress": "Jl. Raya Citayam No.15, RT.01/RW.02, Depok, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16431, Indonesia",
+        "location": {
+            "latitude": -6.4063009,
+            "longitude": 106.8189403
+        },
+        "rating": 4.6,
+        "websiteUri": "https://fithub.id/free-trial/v3/fit-hub-kartini-depok/?source=Google%20Maps",
+        "userRatingCount": 110,
+        "displayName": {
+            "text": "FIT HUB Kartini Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJAyElFtHtaS4RxFY01vQSDpU",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0858-1407-4206",
+        "formattedAddress": "Jl. H. Iming, Beji, Kecamatan Beji, Kota Depok, Jawa Barat 16421, Indonesia",
+        "location": {
+            "latitude": -6.3794875,
+            "longitude": 106.8191465
+        },
+        "rating": 4.5,
+        "userRatingCount": 350,
+        "displayName": {
+            "text": "GOR GLORIA",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJxR311F7raS4RIz2j-NYvNNM",
+        "types": [
+            "gym",
+            "fitness_center",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1994-9777",
+        "formattedAddress": "Jl. Margonda No.23, Depok, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16431, Indonesia",
+        "location": {
+            "latitude": -6.3910195,
+            "longitude": 106.8248649
+        },
+        "rating": 4.2,
+        "websiteUri": "https://willfitness.id/",
+        "userRatingCount": 77,
+        "displayName": {
+            "text": "Willfitness Margonda Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJWUSKbmjpaS4R_Az2wctFCk8",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0818-0810-9636",
+        "formattedAddress": "Jl. Wadas Raya No.8, Pancoran Mas, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16436, Indonesia",
+        "location": {
+            "latitude": -6.4039375,
+            "longitude": 106.8048381
+        },
+        "rating": 4.4,
+        "userRatingCount": 374,
+        "displayName": {
+            "text": "GOR Rama",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJx5NQ5fbraS4RKXZaetRdM14",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pesona Khayangan No.9, Mekar Jaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411, Indonesia",
+        "location": {
+            "latitude": -6.383921399999999,
+            "longitude": 106.833294
+        },
+        "rating": 4.5,
+        "userRatingCount": 529,
+        "displayName": {
+            "text": "Pesona Khayangan Swimming Pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJP7mXNJvraS4RsrdAdt7ZewA",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-9594-6870",
+        "formattedAddress": "Jl. Dewi Sartika No.6, Depok, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16431, Indonesia",
+        "location": {
+            "latitude": -6.3995997,
+            "longitude": 106.8188012
+        },
+        "rating": 4.7,
+        "websiteUri": "https://hyvoltfitness.com/",
+        "userRatingCount": 54,
+        "displayName": {
+            "text": "Hyvolt Fitness Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJn-MC0KXraS4RNKKRFD3SRws",
+        "types": [
+            "gym",
+            "yoga_studio",
+            "fitness_center",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 77204900",
+        "formattedAddress": "Jl. Kartini No.11N, Depok, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16431, Indonesia",
+        "location": {
+            "latitude": -6.4067352,
+            "longitude": 106.8187332
+        },
+        "rating": 4.8,
+        "websiteUri": "https://ikigaifitness.id/",
+        "userRatingCount": 314,
+        "displayName": {
+            "text": "IKIGAI Fitness Kartini Depok.",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJubOnXznraS4RxK7DXGFckz4",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Mahakam No.36, Bakti Jaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16418, Indonesia",
+        "location": {
+            "latitude": -6.3859652,
+            "longitude": 106.8467828
+        },
+        "rating": 4.6,
+        "userRatingCount": 143,
+        "displayName": {
+            "text": "Stadion Mahakam Pintu Utama",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJzUQKUrzraS4Rqkvtt9X8iKc",
+        "types": [
+            "swimming_pool",
+            "sports_complex",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 77831175",
+        "formattedAddress": "Jl. Bahagia Raya No.8, RT.03/RW.06, Abadijaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16417, Indonesia",
+        "location": {
+            "latitude": -6.4029343,
+            "longitude": 106.8493534
+        },
+        "rating": 4,
+        "userRatingCount": 1193,
+        "displayName": {
+            "text": "Kolam Renang Tirtasari Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJF4JfQP3raS4RD73P1RZgzhs",
+        "types": [
+            "athletic_field",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-9821-2726",
+        "formattedAddress": "Jl. H. Dimun Raya, Sukamaju, Kec. Cilodong, Kota Depok, Jawa Barat 16415, Indonesia",
+        "location": {
+            "latitude": -6.4083312,
+            "longitude": 106.8511666
+        },
+        "rating": 4.7,
+        "userRatingCount": 61,
+        "displayName": {
+            "text": "BSS Arena Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJzbl1qJfraS4RBJXHH9Ryqho",
+        "types": [
+            "swimming_pool",
+            "athletic_field",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 7708177",
+        "formattedAddress": "Jl. Bahagia Raya No.8, Abadijaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16417, Indonesia",
+        "location": {
+            "latitude": -6.4028551,
+            "longitude": 106.8490176
+        },
+        "rating": 4.5,
+        "userRatingCount": 672,
+        "displayName": {
+            "text": "Kolam Renang Dan Badminton Hall Tirtasari",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJpweMtP3taS4RbrjRxF4er1U",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1924-6486",
+        "formattedAddress": "Jl. Gg. Langgar, RT.003/RW.002, Kemiri Muka, Kecamatan Beji, Kota Depok, Jawa Barat 16423, Indonesia",
+        "location": {
+            "latitude": -6.376256,
+            "longitude": 106.8341385
+        },
+        "rating": 4.9,
+        "websiteUri": "https://wa.me/message/VLHFTJMLTLBIE1",
+        "userRatingCount": 52,
+        "displayName": {
+            "text": "GOR IBNU MANDIRI",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJtVKFkO3raS4RueifJBAjhoQ",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-2922-1090",
+        "formattedAddress": "Jl. Proklamasi No.2, Mekar Jaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411, Indonesia",
+        "location": {
+            "latitude": -6.3916067,
+            "longitude": 106.837712
+        },
+        "rating": 4.6,
+        "websiteUri": "https://duaduastudio.com/links?fbclid=PAZXh0bgNhZW0CMTEAAaYuAxX_vrLzcx6IIWhhnYlD6oy3Os1wj28kxzNG80p83fsaRdABxiz9Y3c_aem_CQKwaBt2ZdlY02d08g668Q",
+        "userRatingCount": 123,
+        "displayName": {
+            "text": "Studio DUADUA",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJxzKmauvraS4RoshsaH6lGKA",
+        "types": [
+            "playground",
+            "park",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Merdeka No.3, Mekar Jaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411, Indonesia",
+        "location": {
+            "latitude": -6.3970679,
+            "longitude": 106.8399506
+        },
+        "rating": 4.3,
+        "userRatingCount": 1497,
+        "displayName": {
+            "text": "Taman Merdeka (Depok Dua Tengah)",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJDQTggL3raS4RU21OuE6oaSg",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 77830879",
+        "formattedAddress": "Jalan Ampel No.22, Sukmajaya, Abadijaya, Depok, Kota Depok, Jawa Barat 16417, Indonesia",
+        "location": {
+            "latitude": -6.4006883,
+            "longitude": 106.84996459999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 345,
+        "displayName": {
+            "text": "Jaya Baru Badminton Arena",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJxzzHKwDraS4RDgi2evdIRJk",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JR5G+74J, Jl. Margonda, Depok, Kec. Pancoran Mas, Kota Depok, Jawa Barat, Indonesia",
+        "location": {
+            "latitude": -6.3917901,
+            "longitude": 106.8252581
+        },
+        "rating": 4.1,
+        "userRatingCount": 61,
+        "displayName": {
+            "text": "Milky Verse Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJzV1pzZvraS4R1rwAqfUCaYY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JV44+4GC, Jl. Pamoras Kp. Bojong Lio, Abadijaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16417, Indonesia",
+        "location": {
+            "latitude": -6.394696199999999,
+            "longitude": 106.85626069999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 186,
+        "displayName": {
+            "text": "Lapangan Gelora Bojong Lio",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJR0jI_4fraS4RrnN913JiD3c",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-8187-7185",
+        "formattedAddress": "Jl. Ir. H. Juanda No.43, Bakti Jaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16418, Indonesia",
+        "location": {
+            "latitude": -6.380130599999999,
+            "longitude": 106.8533355
+        },
+        "rating": 4.6,
+        "userRatingCount": 334,
+        "displayName": {
+            "text": "Juanda Family Pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJN1xIXt7raS4RpVTtW7xN3lI",
+        "types": [
+            "fitness_center",
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1415-8918",
+        "formattedAddress": "Jl. Tole Iskandar No.11-12-13, RT.04/RW.04, Sukmajaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16412, Indonesia",
+        "location": {
+            "latitude": -6.406459,
+            "longitude": 106.8440272
+        },
+        "rating": 4.7,
+        "websiteUri": "https://tigaeranetwork.com/",
+        "userRatingCount": 39,
+        "displayName": {
+            "text": "F18 Gym & Studio",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJD5Vi8n7raS4RKp0Rf2yw7ac",
+        "types": [
+            "gym",
+            "fitness_center",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 27612067",
+        "formattedAddress": "Jl. Kemakmuran Raya No.17, 2 tengah, Kec. Sukmajaya, Kota Depok, Jawa Barat 16411, Indonesia",
+        "location": {
+            "latitude": -6.402509500000001,
+            "longitude": 106.83674189999999
+        },
+        "rating": 4.9,
+        "websiteUri": "https://linktr.ee/flexcampfitnessstudio",
+        "userRatingCount": 655,
+        "displayName": {
+            "text": "FLEX CAMP Fitness & Studio",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJO_0yQxHraS4R75gpKsECjEE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HVVJ+XP3, Jl. Setu Golf, Sukamaju Baru, Kec. Tapos, Kota Depok, Jawa Barat 16455, Indonesia",
+        "location": {
+            "latitude": -6.405124,
+            "longitude": 106.88179140000001
+        },
+        "rating": 4.4,
+        "userRatingCount": 259,
+        "displayName": {
+            "text": "Gama Soccer Field",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJlx3oY77raS4R1dwiBX4JL1I",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl.Dongkal No.1, RT.04/RW.04, Sukatani, Kec. Tapos, Kota Depok, Jawa Barat 16454, Indonesia",
+        "location": {
+            "latitude": -6.3899865,
+            "longitude": 106.8844886
+        },
+        "rating": 4.5,
+        "userRatingCount": 144,
+        "displayName": {
+            "text": "Stadion Mini Sukatani Tapos Depok",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJS9qPUZvraS4RyzyyykD2UHo",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-3021-4096",
+        "formattedAddress": "Jl. Kemang kp Babakan No.200, RT.3/RW.10, Sukatani, Kec. Tapos, Kota Depok, Jawa Barat 16454, Indonesia",
+        "location": {
+            "latitude": -6.3910884,
+            "longitude": 106.88022799999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 78,
+        "displayName": {
+            "text": "GOR ASHRAF",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ93fDkHTraS4RkuFoc1nwumI",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jalan Haji Soleh Blok Piyan No.38, Sukamaju Baru, Kec. Tapos, Kota Depok, Jawa Barat 16455, Indonesia",
+        "location": {
+            "latitude": -6.3982738,
+            "longitude": 106.8700581
+        },
+        "rating": 4.8,
+        "userRatingCount": 130,
+        "displayName": {
+            "text": "MJ Fitness",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJdVrBJSztaS4Rda5P1OoNLmI",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8032-2669",
+        "formattedAddress": "Jl. Masjid Al-Istiqomah No.RT.02 RW.01 DEPAN RUMAH RW. YADIH, Cisalak Ps., Kec. Cimanggis, Kota Depok, Jawa Barat 16452, Indonesia",
+        "location": {
+            "latitude": -6.3770311,
+            "longitude": 106.8791651
+        },
+        "rating": 4.3,
+        "userRatingCount": 43,
+        "displayName": {
+            "text": "GOR BALABATU",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJb-iTcwDraS4RbP_0wCjNemk",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8300-4961",
+        "formattedAddress": "Jl. Kramat, Sukatani, Kec. Tapos, Kota Depok, Jawa Barat 16454, Indonesia",
+        "location": {
+            "latitude": -6.3967044,
+            "longitude": 106.891675
+        },
+        "rating": 4.7,
+        "userRatingCount": 45,
+        "displayName": {
+            "text": "Mar'ati Muslimah Swimming Pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJs0crZ1HraS4RYogMGHjiC4o",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-7785-4652",
+        "formattedAddress": "Jl. Gotong Royong kelurahan, RT.7/RW.9, Jatijajar, Kec. Cimanggis, Kota Depok, Jawa Barat 16455, Indonesia",
+        "location": {
+            "latitude": -6.405966599999999,
+            "longitude": 106.87108769999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 84,
+        "displayName": {
+            "text": "GOR GOTRO ( Badminton )",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJJ651-HPraS4RAr-jOhGg4qg",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0877-4014-2108",
+        "formattedAddress": "Harjamukti, Cimanggis, Depok City, West Java 16454, Indonesia",
+        "location": {
+            "latitude": -6.3826164,
+            "longitude": 106.8804881
+        },
+        "rating": 4.8,
+        "userRatingCount": 68,
+        "displayName": {
+            "text": "GOR PANGERSA",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ3SjY827raS4RVyf97ysZO1c",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 8741343",
+        "formattedAddress": "JV4J+R4V, Sukatani, Tapos, Depok City, West Java 16454, Indonesia",
+        "location": {
+            "latitude": -6.3928837,
+            "longitude": 106.880298
+        },
+        "rating": 4.4,
+        "userRatingCount": 311,
+        "displayName": {
+            "text": "GOR Ilomata",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJIyR6EnDraS4Rjh8pesMyUcg",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JV5G+W6P, Jl. Bumi Cimanggis Indah, Sukatani, Kec. Tapos, Kota Depok, Jawa Barat 16454, Indonesia",
+        "location": {
+            "latitude": -6.3901737999999995,
+            "longitude": 106.8755891
+        },
+        "rating": 4.4,
+        "userRatingCount": 18,
+        "displayName": {
+            "text": "BCI Tennis Court",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ0-He6oXsaS4RvDq2DuAekG0",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "JVHC+VWW, Mekarsari, Cimanggis, Depok City, West Java 16452, Indonesia",
+        "location": {
+            "latitude": -6.370266,
+            "longitude": 106.87234
+        },
+        "rating": 4.2,
+        "userRatingCount": 153,
+        "displayName": {
+            "text": "Futsal Tiparjaya",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJKR1Wn4DraS4R9bMmQL5X4xU",
+        "types": [
+            "cafe",
+            "sports_club",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-1921-2548",
+        "formattedAddress": "Jl. Mesjid No.23, RT.03/RW.07, Cisalak, Kec. Sukmajaya, Kota Depok, Jawa Barat 16416, Indonesia",
+        "location": {
+            "latitude": -6.380019,
+            "longitude": 106.8605697
+        },
+        "rating": 4.5,
+        "userRatingCount": 123,
+        "displayName": {
+            "text": "Pemancingan Darno Baru",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJAfFRsmXraS4Ri1KBhaYwzXg",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "05 /04 no, Jl. Kapitan Raya No.71, 16454, Sukatani, Kec. Tapos, Kota Depok, Jawa Barat 16454, Indonesia",
+        "location": {
+            "latitude": -6.3856117999999995,
+            "longitude": 106.8793194
+        },
+        "rating": 3.9,
+        "userRatingCount": 179,
+        "displayName": {
+            "text": "GOR Kapitan 2",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJY2vEiNztaS4RqN10HygKjMA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Delima Ⅲ No.E6, RW.4, Cisalak Ps., Kec. Cimanggis, Kota Depok, Jawa Barat 16452, Indonesia",
+        "location": {
+            "latitude": -6.3754518,
+            "longitude": 106.8707903
+        },
+        "rating": 4.4,
+        "userRatingCount": 66,
+        "displayName": {
+            "text": "GOR badminton Permata Puri 1",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJwY7G7WzraS4RR8uE-TTCMwo",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-2888-3155",
+        "formattedAddress": "JV2J+VC2, Sukatani, Tapos, Depok City, West Java 16454, Indonesia",
+        "location": {
+            "latitude": -6.397857999999999,
+            "longitude": 106.8810144
+        },
+        "rating": 4,
+        "userRatingCount": 86,
+        "displayName": {
+            "text": "Loumina Futsal",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJr--AmA_raS4RCqURHhL80WI",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Gg. Sirin, Sukamaju Baru, Kec. Tapos, Kota Depok, Jawa Barat 16455, Indonesia",
+        "location": {
+            "latitude": -6.4091615,
+            "longitude": 106.8745886
+        },
+        "rating": 4.5,
+        "userRatingCount": 43,
+        "displayName": {
+            "text": "Remaja Soccer Field",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJOf7gAajraS4RhoaQxuCsiUM",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HVXR+RMV, Sukatani, Tapos, Depok City, West Java 16454, Indonesia",
+        "location": {
+            "latitude": -6.400296399999999,
+            "longitude": 106.8915945
+        },
+        "rating": 4.5,
+        "userRatingCount": 13,
+        "displayName": {
+            "text": "Lumba-Lumba Sport Garden",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJuwiSGwDtaS4RAjaPY3u6CYc",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Raffles Hills Blok E9/9, Harjamukti, Kec. Cimanggis, Kota Depok, Jawa Barat 16454, Indonesia",
+        "location": {
+            "latitude": -6.3846979,
+            "longitude": 106.9002537
+        },
+        "rating": 4.5,
+        "userRatingCount": 13,
+        "displayName": {
+            "text": "Lely pilates (Blok E9/9)",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJbfYPAeXoaS4RTyh_j0tjyyA",
+        "types": [
+            "swimming_pool",
+            "yoga_studio",
+            "fitness_center",
+            "gym",
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-3566-2689",
+        "formattedAddress": "Jl. Bukit Rivaria, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4108333,
+            "longitude": 106.76188979999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 593,
+        "displayName": {
+            "text": "Bukit Rivaria Sport center",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJl6-QXprpaS4Ri-xYhM13tf0",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. H. Sulaiman No.RT. 01/02, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4165513999999995,
+            "longitude": 106.76743239999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 92,
+        "displayName": {
+            "text": "TAMAN BEDAHAN",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJcULvquXoaS4RQ_QWEYZqKVI",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-3566-2689",
+        "formattedAddress": "Jl. Raya Muhtar, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16511, Indonesia",
+        "location": {
+            "latitude": -6.410800399999999,
+            "longitude": 106.7617975
+        },
+        "rating": 4.2,
+        "userRatingCount": 568,
+        "displayName": {
+            "text": "Swimming Pool Rivaria Hill",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZ_RW5U7paS4R3WtlkmYFgW8",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. H. Suhaemi No.55, Duren Mekar, Kec. Bojongsari, Kota Depok, Jawa Barat, Indonesia",
+        "location": {
+            "latitude": -6.4159586,
+            "longitude": 106.7405684
+        },
+        "rating": 4.4,
+        "userRatingCount": 143,
+        "displayName": {
+            "text": "Taman Duren Mekar",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJXVk4z0fpaS4RLqz1OhU3sBo",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-9906-2020",
+        "formattedAddress": "Jl. Rivaria Dalam 1, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4137366,
+            "longitude": 106.7631347
+        },
+        "rating": 3.6,
+        "userRatingCount": 35,
+        "displayName": {
+            "text": "Villa dan Private Pool Ngaso disit",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJaSlo-zDpaS4RkUb7yq0YfWM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1410-7998",
+        "formattedAddress": "Jl. H. Sulaiman No.99, RT.05/RW.05, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.428432099999999,
+            "longitude": 106.7658839
+        },
+        "rating": 4.9,
+        "userRatingCount": 95,
+        "displayName": {
+            "text": "AFA Badminton Hall",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJl3VZEQDpaS4R-gdc0k5Hg24",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(0251) 8606552",
+        "formattedAddress": "HP9V+6CR, Duren Seribu, Bojongsari, Depok City, West Java, Indonesia",
+        "location": {
+            "latitude": -6.4318935,
+            "longitude": 106.7435282
+        },
+        "rating": 4.8,
+        "websiteUri": "http://wisataherbal.com/",
+        "userRatingCount": 19,
+        "displayName": {
+            "text": "Main gate, Taman Herbal Insani Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJsQylAjPpaS4RHog_FCIuR1A",
+        "types": [
+            "sports_complex",
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-9339-597",
+        "formattedAddress": "Jalan Delima Nomor 19, Kompleks Jl. Arco Raya No.Kel, Duren Seribu, Kec. Bojongsari, Kota Depok, Jawa Barat 16518, Indonesia",
+        "location": {
+            "latitude": -6.4360672,
+            "longitude": 106.7459662
+        },
+        "rating": 4.5,
+        "websiteUri": "https://abbc.my.id/",
+        "userRatingCount": 117,
+        "displayName": {
+            "text": "Arco Basketball Club Court",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJHfyfG__oaS4RgrODCZcavHw",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. H. Sulaiman No.16, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.422123,
+            "longitude": 106.76683190000001
+        },
+        "rating": 4.2,
+        "userRatingCount": 110,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Bedahan",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJw17vcUPpaS4R-Jm1D7V-JDI",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-1202-627",
+        "formattedAddress": "Jl. H. Sulaiman No.125, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4299808,
+            "longitude": 106.76668029999999
+        },
+        "rating": 4.8,
+        "websiteUri": "https://www.instagram.com/momong.kids",
+        "userRatingCount": 43,
+        "displayName": {
+            "text": "Momong Kids Mini Playground",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJb9Tn5anpaS4RDfIYvgd2PYc",
+        "types": [
+            "yoga_studio",
+            "fitness_center",
+            "gym",
+            "sports_complex",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0859-1065-26508",
+        "formattedAddress": "Perumahan Jl. Taman Melati No.3 Blok BC, RT.003/RW.013, Pengasinan, Kec. Sawangan, Kota Depok, Jawa Barat 16518, Indonesia",
+        "location": {
+            "latitude": -6.4153508,
+            "longitude": 106.7501989
+        },
+        "rating": 5,
+        "userRatingCount": 51,
+        "displayName": {
+            "text": "Sudut Yoga Studio Taman Melati",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ0b4r7L_paS4R5UNxSp4R5ZU",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0896-0375-2394",
+        "formattedAddress": "HQQ4+XPJ, Jl. Raya Pengasinan Gg. Kamboja, RT.01/RW.02, Sawangan, Kec. Sawangan, Kota Depok, Jawa Barat 16511, Indonesia",
+        "location": {
+            "latitude": -6.4100383999999995,
+            "longitude": 106.75675249999999
+        },
+        "rating": 4.6,
+        "userRatingCount": 35,
+        "displayName": {
+            "text": "GOR Mutiara",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJfWmXrGfoaS4RrnFcrAMK434",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HP8V+WM8, Duren Seribu, Bojongsari, Depok City, West Java 16518, Indonesia",
+        "location": {
+            "latitude": -6.4327217,
+            "longitude": 106.7442133
+        },
+        "rating": 3.9,
+        "userRatingCount": 12,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Duren 1000",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJddhTJhHpaS4Ri0JTRuvBW3Q",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Prigi No.6, RT.3/RW.5, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4297859,
+            "longitude": 106.7657737
+        },
+        "rating": 5,
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "KANAYA GARDEN",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ5xtxXYXpaS4RHdZT7Y1DAQ4",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-3410-17320",
+        "formattedAddress": "Jl. Raya Pasir Putih, Pasir Putih, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4213692,
+            "longitude": 106.78244319999999
+        },
+        "rating": 4.3,
+        "userRatingCount": 48,
+        "displayName": {
+            "text": "Silika Mini Soccer",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJI3BzFeDpaS4RBz976mN5B4Y",
+        "types": [
+            "coffee_shop",
+            "water_park",
+            "playground",
+            "amusement_park",
+            "cafe",
+            "swimming_pool",
+            "amusement_center",
+            "food_store",
+            "sports_activity_location",
+            "store",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8852-5833",
+        "formattedAddress": "Jl. Garuda Raya No.577, Pasir Putih, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.4330136,
+            "longitude": 106.7868798
+        },
+        "rating": 4.4,
+        "websiteUri": "http://www.makitacoffeegarden.com/",
+        "userRatingCount": 324,
+        "displayName": {
+            "text": "Makita Coffee Garden",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJzY3shLLpaS4R1cQtcTf8NYM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HQ8F+372, Jl. Jabon, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.434863699999999,
+            "longitude": 106.7731371
+        },
+        "rating": 4.5,
+        "userRatingCount": 356,
+        "displayName": {
+            "text": "Lapangan Bola Perigi",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJjXFrKTnpaS4R1qsw1PnA_e8",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1944-538",
+        "formattedAddress": "Cipayung Jaya, Cipayung, Depok City, West Java 16437, Indonesia",
+        "location": {
+            "latitude": -6.4401315,
+            "longitude": 106.7928513
+        },
+        "rating": 4.6,
+        "userRatingCount": 404,
+        "displayName": {
+            "text": "AJ Minisoccer",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJk6VJ0gzpaS4Rx4olHZtx70U",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Raya Keadilan Jl. Blk. Sawo Ⅶ, RT.3/RW.3, Rangkapan Jaya, Kec. Cipayung, Kota Depok, Jawa Barat 16435, Indonesia",
+        "location": {
+            "latitude": -6.4145769,
+            "longitude": 106.79552539999999
+        },
+        "rating": 4.5,
+        "userRatingCount": 191,
+        "displayName": {
+            "text": "GOR Banin",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJTY2LfpXpaS4RtJei-rYeFG0",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Pertanian F No.37, Cipayung Jaya, Kec. Cipayung, Kota Depok, Jawa Barat 16437, Indonesia",
+        "location": {
+            "latitude": -6.4412642,
+            "longitude": 106.79430909999999
+        },
+        "rating": 4.1,
+        "userRatingCount": 499,
+        "displayName": {
+            "text": "Kolam & Klub Renang Tirta Anugerah",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJhzIZ1KXpaS4RDBf4_23cLXc",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kp. Benda No.17, Cipayung, Kec. Cipayung, Kota Depok, Jawa Barat 16437, Indonesia",
+        "location": {
+            "latitude": -6.418649599999999,
+            "longitude": 106.7952776
+        },
+        "rating": 4.1,
+        "userRatingCount": 13,
+        "displayName": {
+            "text": "Lapangan cipayung depok",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJhTGDsHTpaS4RYfq1Pk9QUcs",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HQJW+F2R, Jl. Raya Jemb. Serong, Cipayung, Kec. Cipayung, Kota Depok, Jawa Barat 16437, Indonesia",
+        "location": {
+            "latitude": -6.4187645,
+            "longitude": 106.79500979999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 117,
+        "displayName": {
+            "text": "Lapangan Sepakbola Cipayung",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJCyi7oMDpaS4Rd6HGAzJEd9Q",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0817-7992-0536",
+        "formattedAddress": "Jl. Raya Cipayung No.1, Cipayung, Kec. Cipayung, Kota Depok, Jawa Barat 16437, Indonesia",
+        "location": {
+            "latitude": -6.4234234,
+            "longitude": 106.7965249
+        },
+        "rating": 4.5,
+        "userRatingCount": 30,
+        "displayName": {
+            "text": "GOR Al Muhtadin ( Almuhtadin Club )",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJf9BsoBPpaS4RKFjA2pmAEdk",
+        "types": [
+            "park",
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HQRR+7H4, Jl. M.Sainin, Rangkapan Jaya, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16435, Indonesia",
+        "location": {
+            "latitude": -6.409351699999999,
+            "longitude": 106.7914545
+        },
+        "rating": 4.2,
+        "userRatingCount": 105,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Gitet3 PLN",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJeR2LoBPpaS4RTurDOpwoiso",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0838-7164-9345",
+        "formattedAddress": "HQRR+FMG, Jl. M.Sainin, Rangkapan Jaya, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16435, Indonesia",
+        "location": {
+            "latitude": -6.408819,
+            "longitude": 106.7917162
+        },
+        "rating": 4,
+        "userRatingCount": 73,
+        "displayName": {
+            "text": "Lapangan Sepak Bola Atmajaya Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJSX-NhQLpaS4RVryCkVJ1LLE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1082-7139",
+        "formattedAddress": "Jl. H. Sulaiman No.6 RT06, RW.03, Bedahan, Kec. Sawangan, Kota Depok, Jawa Barat 16519, Indonesia",
+        "location": {
+            "latitude": -6.415781099999999,
+            "longitude": 106.7712978
+        },
+        "rating": 4.4,
+        "websiteUri": "https://www.instagram.com/gorashaba?igsh=MzZhcHdqaXF5OTR6",
+        "userRatingCount": 171,
+        "displayName": {
+            "text": "GOR Ashaba",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJa8PtiZHraS4R_CDdYD2kUd8",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 83728077",
+        "formattedAddress": "Jl. Boulevard Grand Depok City No.25, Jatimulya, Kec. Cilodong, Kota Depok, Jawa Barat 16412, Indonesia",
+        "location": {
+            "latitude": -6.438758699999999,
+            "longitude": 106.8275219
+        },
+        "rating": 4.5,
+        "userRatingCount": 8954,
+        "displayName": {
+            "text": "Alun-Alun Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJFdjOQHrpaS4R7qX16vERfhU",
+        "types": [
+            "sports_complex",
+            "wedding_venue",
+            "athletic_field",
+            "event_venue",
+            "sports_club",
+            "sports_activity_location",
+            "park",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-9034-011",
+        "formattedAddress": "Jl. Rw. Geni Raya No.99, RT.07/RW.08, Ratu Jaya, Kec. Cipayung, Kota Depok, Jawa Barat 16439, Indonesia",
+        "location": {
+            "latitude": -6.4159923,
+            "longitude": 106.80832529999999
+        },
+        "rating": 4.4,
+        "websiteUri": "http://www.instagram.com/tole.iskandar.park",
+        "userRatingCount": 123,
+        "displayName": {
+            "text": "TOLE ISKANDAR PARK",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJaWgQ2trraS4RTX6EvSlEeIo",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-1777-7159",
+        "formattedAddress": "Gg. Jawa No.62, Cilodong, Kec. Cilodong, Kota Depok, Jawa Barat 16414, Indonesia",
+        "location": {
+            "latitude": -6.4319,
+            "longitude": 106.835799
+        },
+        "rating": 4.7,
+        "userRatingCount": 435,
+        "displayName": {
+            "text": "Ocil Mini Soccer Arena",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJR3g6wpjraS4RxVRwdZtlDp8",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-8551-0069",
+        "formattedAddress": "Jl. Pedati No.68, Kalimulya, Kec. Cilodong, Kota Depok, Jawa Barat 16413, Indonesia",
+        "location": {
+            "latitude": -6.4321638,
+            "longitude": 106.8215615
+        },
+        "rating": 4.7,
+        "websiteUri": "https://instabio.cc/domsarena",
+        "userRatingCount": 415,
+        "displayName": {
+            "text": "Dom's Arena - Lapangan Mini Soccer Depok",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJbQrg-77raS4ROUf-1yIfppo",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-7859-6538",
+        "formattedAddress": "HRPG+FQJ, Jl. Tugu Jaya, Tirtajaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16412, Indonesia",
+        "location": {
+            "latitude": -6.4139146,
+            "longitude": 106.8270223
+        },
+        "rating": 4.7,
+        "userRatingCount": 111,
+        "displayName": {
+            "text": "GOR BADMINTON SUWANA",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJZ4CuQgDraS4R5Ptmba7hchg",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Boulevard Grand Depok City, Kalimulya, Kec. Cilodong, Kota Depok, Jawa Barat, Indonesia",
+        "location": {
+            "latitude": -6.431942800000001,
+            "longitude": 106.8257595
+        },
+        "rating": 4.8,
+        "userRatingCount": 143,
+        "displayName": {
+            "text": "BSplash Playground and Waterpark",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJC6biMwjraS4RSpWVhXM00Dk",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8529-5676",
+        "formattedAddress": "Gg. Bali No.146, RT.6/RW.05, Cilodong, Kec. Cilodong, Kota Depok, Jawa Barat 16414, Indonesia",
+        "location": {
+            "latitude": -6.4312515999999995,
+            "longitude": 106.8354268
+        },
+        "rating": 4.7,
+        "userRatingCount": 177,
+        "displayName": {
+            "text": "Ocil Basketball Arena",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJOyGqEXXraS4Rk92_7_bYLwk",
+        "types": [
+            "playground",
+            "library",
+            "swimming_pool",
+            "clothing_store",
+            "sports_activity_location",
+            "restaurant",
+            "store",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Boulevard Grand Depok City, Kalimulya, Kec. Cilodong, Kota Depok, Jawa Barat 16914, Indonesia",
+        "location": {
+            "latitude": -6.4321237,
+            "longitude": 106.8259708
+        },
+        "rating": 4.9,
+        "userRatingCount": 250,
+        "displayName": {
+            "text": "Bspace Waterplay",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJX1tX1W_raS4RA4Xz6sgrzCY",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-1904-564",
+        "formattedAddress": "Jl. Pertanian No.35, Tirtajaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16412, Indonesia",
+        "location": {
+            "latitude": -6.416811600000001,
+            "longitude": 106.8292445
+        },
+        "rating": 3.6,
+        "websiteUri": "https://link.ayo.co.id/l/pypXkEGXbH-Weedees-Tennis-Court",
+        "userRatingCount": 13,
+        "displayName": {
+            "text": "Weedees Tennis Court",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ5yWA0tTraS4RWxjDXNgo2Oo",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8457-5357",
+        "formattedAddress": "Jl. Gandaria I, Ratu Jaya, Kec. Cipayung, Kota Depok, Jawa Barat 16439, Indonesia",
+        "location": {
+            "latitude": -6.421714199999999,
+            "longitude": 106.8209288
+        },
+        "rating": 4.3,
+        "userRatingCount": 215,
+        "displayName": {
+            "text": "Kolam Renang Tirta Asri",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJC4OFS3bpaS4RuM2vHSZYoHY",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2976-0728",
+        "formattedAddress": "Jl. Masjid No.1, RT.4/RW.5, Ratu Jaya, Kec. Cipayung, Kota Depok, Jawa Barat 16431, Indonesia",
+        "location": {
+            "latitude": -6.416105399999999,
+            "longitude": 106.8155664
+        },
+        "rating": 4.5,
+        "userRatingCount": 177,
+        "displayName": {
+            "text": "GOR Bulutangkis MG (Mugeni Group)",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJse-56PDpaS4R6t0vQa8YvI0",
+        "types": [
+            "video_arcade",
+            "banquet_hall",
+            "meal_takeaway",
+            "athletic_field",
+            "event_venue",
+            "sports_club",
+            "sports_activity_location",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-7221-0410",
+        "formattedAddress": "Jl. Rw. Geni Raya, Ratu Jaya, Kec. Cipayung, Kota Depok, Jawa Barat 16439, Indonesia",
+        "location": {
+            "latitude": -6.4164211,
+            "longitude": 106.8087975
+        },
+        "rating": 4.7,
+        "userRatingCount": 51,
+        "displayName": {
+            "text": "GOR HASAN DJOJO",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ-xnZkg_paS4RUY0SHr4e5pI",
+        "types": [
+            "gym",
+            "fitness_center",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-5888-9050",
+        "formattedAddress": "Jl. Pitara No.89, Rangkapan Jaya, Kec. Pancoran Mas, Kota Depok, Jawa Barat 16436, Indonesia",
+        "location": {
+            "latitude": -6.4096182,
+            "longitude": 106.8006441
+        },
+        "rating": 4.8,
+        "websiteUri": "https://linktr.ee/PRABUGYM",
+        "userRatingCount": 158,
+        "displayName": {
+            "text": "Prabu Gym Pitara",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJqz3P6JLraS4RgK7LmmU8dyk",
+        "types": [
+            "tourist_attraction",
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0819-3136-8447",
+        "formattedAddress": "Jl. Studio Alam TVRI, Sukmajaya, Kec. Sukmajaya, Kota Depok, Jawa Barat 16412, Indonesia",
+        "location": {
+            "latitude": -6.4188144,
+            "longitude": 106.84380139999999
+        },
+        "rating": 4.3,
+        "websiteUri": "http://www.instagram.com/studioalamtvri",
+        "userRatingCount": 3975,
+        "displayName": {
+            "text": "Studio Alam TVRI",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJHysoEajraS4RrMMK8WkqvME",
+        "types": [
+            "playground",
+            "park",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Perumahan Jatijajar No.13, Jatijajar, Kec. Tapos, Kota Depok, Jawa Barat 16451, Indonesia",
+        "location": {
+            "latitude": -6.4117733,
+            "longitude": 106.8640235
+        },
+        "rating": 4.4,
+        "userRatingCount": 2485,
+        "displayName": {
+            "text": "Jatijajar Park",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJyT0Lkf3raS4RIzthBsyrkM0",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-1269-7827",
+        "formattedAddress": "Jl. H. Dimun Raya No.4, Sukamaju, Kec. Cilodong, Kota Depok, Jawa Barat 16415, Indonesia",
+        "location": {
+            "latitude": -6.4133073,
+            "longitude": 106.8511679
+        },
+        "rating": 4.4,
+        "userRatingCount": 940,
+        "displayName": {
+            "text": "Paragon Swimming Pool",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJrfL87kbqaS4RjjdCCRVkKqs",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kp. No.23, Cilodong, Kec. Cilodong, Kota Depok, Jawa Barat 16414, Indonesia",
+        "location": {
+            "latitude": -6.4347161,
+            "longitude": 106.8451896
+        },
+        "rating": 4.7,
+        "userRatingCount": 657,
+        "displayName": {
+            "text": "Lapangan Tembak 600M Divisi-1 Kostrad",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJBam5a4HraS4Rf78GPNkcWNE",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HVJ6+PRW, Jatijajar, Tapos, Depok City, West Java, Indonesia",
+        "location": {
+            "latitude": -6.4181452,
+            "longitude": 106.86208909999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 20,
+        "displayName": {
+            "text": "Jatijajar",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJE5QMoEfqaS4RhtBdIhkvVHM",
+        "types": [
+            "swimming_pool",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Asrama Cilodong Kawasan GOR Kartika, Cilodong, Kec. Cilodong, Kota Depok, Jawa Barat 16414, Indonesia",
+        "location": {
+            "latitude": -6.4342166999999995,
+            "longitude": 106.8429795
+        },
+        "rating": 4.4,
+        "userRatingCount": 754,
+        "displayName": {
+            "text": "Kolam Renang Tirta Gupti Divisi 1 Kostrad",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ--zFZj7qaS4R0lsNwzPT8NQ",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0857-7617-3788",
+        "formattedAddress": "HR6P+2PR, Jl. Raya Abdul Gani, RT.10/RW.04, Kalibaru, Kec. Cilodong, Kota Depok, Jawa Barat 16914, Indonesia",
+        "location": {
+            "latitude": -6.439887400000001,
+            "longitude": 106.8367617
+        },
+        "rating": 4.4,
+        "userRatingCount": 535,
+        "displayName": {
+            "text": "Fortuna Sport Center",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJs5OTUVTraS4RG-e4n8lFTcA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-9238-8765",
+        "formattedAddress": "Jl. Revolusi No.55, Sukamaju, Kec. Cilodong, Kota Depok, Jawa Barat 16415, Indonesia",
+        "location": {
+            "latitude": -6.4220749999999995,
+            "longitude": 106.85380060000001
+        },
+        "rating": 4.4,
+        "userRatingCount": 91,
+        "displayName": {
+            "text": "Hall Karya Insani",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJVVVV-TfqaS4RngQ8hsQkVr8",
+        "types": [
+            "stadium",
+            "sports_complex",
+            "event_venue",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HR9R+FC8, Cilodong, Depok City, West Java 16414, Indonesia",
+        "location": {
+            "latitude": -6.431347100000001,
+            "longitude": 106.84106860000001
+        },
+        "rating": 3.9,
+        "userRatingCount": 12,
+        "displayName": {
+            "text": "Stadion Kartika Kostrad",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJfzyEylzqaS4Rr1XRgtS9758",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Komp. Tni Au Dwikora, Cilangkap, Depok, Kota Depok, Jawa Barat 16458, Indonesia",
+        "location": {
+            "latitude": -6.4389107999999995,
+            "longitude": 106.85301179999999
+        },
+        "rating": 4.4,
+        "userRatingCount": 80,
+        "displayName": {
+            "text": "Lapangan Bola TNI AU Dwikora Cilangkap",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJhQ8K67braS4R2K2FmLf363Y",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0895-3515-69182",
+        "formattedAddress": "Jl. Setu Baru No.42, Sukamaju, Kec. Sukmajaya, Kota Depok, Jawa Barat 16412, Indonesia",
+        "location": {
+            "latitude": -6.4150681,
+            "longitude": 106.84661249999999
+        },
+        "rating": 4.2,
+        "websiteUri": "https://kans-badminton-depok.localo.site/?utm_source=google_profile&utm_campaign=localo&utm_medium=mainlink",
+        "userRatingCount": 230,
+        "displayName": {
+            "text": "Kan’s Badminton | Gor Badminton Depok",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ36NMtbXraS4RaNIYNhqR_YE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0811-909-399",
+        "formattedAddress": "Jl. Raya Abdul Gani, RT.004/RW.003, Kalibaru, Kec. Cilodong, Kota Depok, Jawa Barat 16414, Indonesia",
+        "location": {
+            "latitude": -6.4395256,
+            "longitude": 106.83671319999999
+        },
+        "rating": 4.7,
+        "websiteUri": "https://al-amindepok.com/gor-bulutangkis",
+        "userRatingCount": 29,
+        "displayName": {
+            "text": "GOR AL-AMIN",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJzcFBI9HraS4RXjeOrajaRHE",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0878-8288-1001",
+        "formattedAddress": "Gg. H. Salim, Kalibaru, Kec. Cilodong, Kota Depok, Jawa Barat 16414, Indonesia",
+        "location": {
+            "latitude": -6.440891,
+            "longitude": 106.8360826
+        },
+        "rating": 4.7,
+        "websiteUri": "https://wa.me/message/T5EJZR6HGQC5F1",
+        "userRatingCount": 108,
+        "displayName": {
+            "text": "GOR Bulutangkis HaFa NEw99",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ2VhvosyUaS4RIspAgw8hnbE",
+        "types": [
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 8759019",
+        "formattedAddress": "Jl. Cimanggis Boulevard, Kec. Tapos, Kota Depok, Jawa Barat 16953, Indonesia",
+        "location": {
+            "latitude": -6.4153652,
+            "longitude": 106.8854318
+        },
+        "rating": 4.5,
+        "websiteUri": "http://emeralda-golfclub.com/",
+        "userRatingCount": 2260,
+        "displayName": {
+            "text": "Emeralda Golf Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ8Rmk2QTraS4REGhu5IPswJw",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Bhakti Abri, Sukamaju Baru, Kec. Tapos, Kota Depok, Jawa Barat 16455, Indonesia",
+        "location": {
+            "latitude": -6.412556899999999,
+            "longitude": 106.8764118
+        },
+        "rating": 4.3,
+        "userRatingCount": 542,
+        "displayName": {
+            "text": "Lapangan Sanca",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJZ12AcAbraS4R66rdIXJq4ko",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8874-5266",
+        "formattedAddress": "Jl. Delima, RT.5/RW.8, Jatijajar, Kec. Tapos, Kota Depok, Jawa Barat 16455, Indonesia",
+        "location": {
+            "latitude": -6.412259199999999,
+            "longitude": 106.87013429999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 160,
+        "displayName": {
+            "text": "GOR 58",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ60_dghnraS4RKH7hKBcpvUM",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Setu Golf No.43, Cilangkap, Kec. Tapos, Kota Depok, Jawa Barat 16458, Indonesia",
+        "location": {
+            "latitude": -6.412624,
+            "longitude": 106.882036
+        },
+        "rating": 4.4,
+        "userRatingCount": 367,
+        "displayName": {
+            "text": "Lapangan Bola Porkas Jaya",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ5bIgDiHraS4RHnRTmGj8f44",
+        "types": [
+            "corporate_office",
+            "golf_course",
+            "athletic_field",
+            "sports_activity_location",
+            "general_contractor",
+            "restaurant",
+            "food",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 8759019",
+        "formattedAddress": "Jl. Cimanggis Boulevard, Tapos, Kec. Tapos, Kota Depok, Jawa Barat 16457, Indonesia",
+        "location": {
+            "latitude": -6.419712499999999,
+            "longitude": 106.89215080000001
+        },
+        "rating": 4.2,
+        "websiteUri": "http://www.ptkd.co.id/",
+        "userRatingCount": 84,
+        "displayName": {
+            "text": "PT. Karabha Digdaya",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJH8yglkXraS4Rs2DC3d7RDcg",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-5662-6369",
+        "formattedAddress": "Jl. Kelurahan Jatijajar No.Samping, Jatijajar, Kec. Tapos, Kota Depok, Jawa Barat 16451, Indonesia",
+        "location": {
+            "latitude": -6.4183164999999995,
+            "longitude": 106.8656413
+        },
+        "rating": 4.7,
+        "userRatingCount": 151,
+        "displayName": {
+            "text": "Gor bulutangkis gemilang",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJH4sBomDraS4R_hp-Kj7GRFI",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HVFC+RQ2, Cilangkap, Tapos, Depok City, West Java, Indonesia",
+        "location": {
+            "latitude": -6.4254771,
+            "longitude": 106.8718822
+        },
+        "rating": 3.9,
+        "userRatingCount": 12,
+        "displayName": {
+            "text": "Lapangan Sepak Bola BASKARA",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJjcLZsf7qaS4R8_9axoTQ3Bk",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0856-9752-5064",
+        "formattedAddress": "Jalan Makam Raya, RT.2/RW.5, Cilangkap, Kec. Tapos, Kota Depok, Jawa Barat 16458, Indonesia",
+        "location": {
+            "latitude": -6.4252612,
+            "longitude": 106.8700302
+        },
+        "rating": 4.5,
+        "userRatingCount": 146,
+        "displayName": {
+            "text": "Lapangan BFC (Banjaran Pucung)",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJ3c-X8YTraS4Ruh5cAdmk8Pc",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "Jl. Kp. Cilangkap No.121, RT.2/RW.8, Cilangkap, Kec. Tapos, Kota Depok, Jawa Barat 16458, Indonesia",
+        "location": {
+            "latitude": -6.429134299999999,
+            "longitude": 106.86075950000001
+        },
+        "rating": 4.7,
+        "userRatingCount": 40,
+        "displayName": {
+            "text": "GOR Jatijajar PB Sahabat",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJCUTi61jraS4R3krh2ySjBws",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HV9P+8C3, Tapos, Depok City, West Java 16457, Indonesia",
+        "location": {
+            "latitude": -6.4317473,
+            "longitude": 106.8860524
+        },
+        "rating": 4.6,
+        "userRatingCount": 198,
+        "displayName": {
+            "text": "Taman Tapos",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJN_VdgezraS4R-s_Ad6NqZkw",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HVVQ+66H, Jl. Raya Tapos, Tapos, Kec. Tapos, Kota Depok, Jawa Barat 16457, Indonesia",
+        "location": {
+            "latitude": -6.4069324,
+            "longitude": 106.8881088
+        },
+        "rating": 4.8,
+        "userRatingCount": 23,
+        "displayName": {
+            "text": "Club House - Cimanggis Golf Estate",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJ51T-v2HqaS4RT5jR_9y1-IM",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "(021) 8753340",
+        "formattedAddress": "Permata Cimanggis, Jl. Boulevard, Cimpaeun, Kec. Tapos, Kota Depok, Jawa Barat 16459, Indonesia",
+        "location": {
+            "latitude": -6.4430123,
+            "longitude": 106.867223
+        },
+        "rating": 4.3,
+        "websiteUri": "http://permatacimanggis.co.id/",
+        "userRatingCount": 129,
+        "displayName": {
+            "text": "Sport Club Permata Cimanggis",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJF7N_MMfpaS4RZ70ZvmwYNaU",
+        "types": [
+            "playground",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "indah, Jl. Perum Lembah Griya, Cipayung Jaya, Kec. Cipayung, Kota Depok, Jawa Barat 16437, Indonesia",
+        "location": {
+            "latitude": -6.445555799999999,
+            "longitude": 106.79500279999999
+        },
+        "rating": 4.7,
+        "userRatingCount": 24,
+        "displayName": {
+            "text": "Bunderan Lembah Griya Indah Citayam",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJdQcje3jpaS4RevdTHoAN0sc",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0813-8800-1328",
+        "formattedAddress": "sebelah bank BTN, Ruko citayam No.25, Bojong Pd. Terong, Kec. Cipayung, Kota Depok, Jawa Barat 16444, Indonesia",
+        "location": {
+            "latitude": -6.4502507,
+            "longitude": 106.8003437
+        },
+        "rating": 4.9,
+        "userRatingCount": 339,
+        "displayName": {
+            "text": "STEPHEN GYM/ FITNESS CENTER buka tiap hari walau hari libur",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJyXCBLyvpaS4R3w5HH0bh-N8",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0851-3300-7781",
+        "formattedAddress": "Ruko, Jl. Griya Nadhira Jl. Pabuaran No.1, Pabuaran, Kecamatan Bojonggede, Depok, Jawa Barat 16921, Indonesia",
+        "location": {
+            "latitude": -6.4577557,
+            "longitude": 106.7970946
+        },
+        "rating": 3.5,
+        "userRatingCount": 33,
+        "displayName": {
+            "text": "Billiard Nine Club",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJI6TItRvqaS4RmovTU-iOgiA",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HR2G+8G7, Jl. Raya Kp. Sawah, Jatimulya, Kec. Cilodong, Kota Depok, Jawa Barat 16413, Indonesia",
+        "location": {
+            "latitude": -6.4492102,
+            "longitude": 106.82629539999999
+        },
+        "rating": 4.2,
+        "websiteUri": "http://rajawali25soccerschool.blogspot.com/",
+        "userRatingCount": 159,
+        "displayName": {
+            "text": "Lapangan IREKAPS KP sawah",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJpzzqfwDraS4R3T4OoyxHhlE",
+        "types": [
+            "sports_club",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HR2M+XC3, Jl. Aridho, Jatimulya, Kec. Cilodong, Kota Depok, Jawa Barat 16413, Indonesia",
+        "location": {
+            "latitude": -6.4476241,
+            "longitude": 106.8335465
+        },
+        "rating": 4.7,
+        "userRatingCount": 28,
+        "displayName": {
+            "text": "Minisoccer jatimulya",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJh6dz2RrqaS4Rk7FmDGlx5Do",
+        "types": [
+            "gym",
+            "sports_activity_location",
+            "health",
+            "point_of_interest",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0812-1385-2622",
+        "formattedAddress": "Jl. Raya Kp. Sawah No.31, Jatimulya, Kec. Cilodong, Kota Depok, Jawa Barat 16413, Indonesia",
+        "location": {
+            "latitude": -6.451947700000001,
+            "longitude": 106.8271621
+        },
+        "rating": 4.8,
+        "userRatingCount": 42,
+        "displayName": {
+            "text": "Ratu Fitness",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJZU7EJQDraS4RngX6VvKmPlc",
+        "types": [
+            "athletic_field",
+            "sports_activity_location",
+            "point_of_interest",
+            "establishment"
+        ],
+        "formattedAddress": "HR3M+2H2, Jl. Aridho, Jatimulya, Kec. Cilodong, Kota Depok, Jawa Barat 16413, Indonesia",
+        "location": {
+            "latitude": -6.447493499999999,
+            "longitude": 106.83388269999999
+        },
+        "rating": 4.8,
+        "userRatingCount": 99,
+        "displayName": {
+            "text": "Jatimulya Soccer Arena",
+            "languageCode": "id"
+        }
+    },
+    {
+        "id": "ChIJBV0VroTqaS4R_fkTNpOobIY",
+        "types": [
+            "sports_coaching",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0821-2577-7365",
+        "formattedAddress": "Cimpaeun, Tapos, Depok City, West Java 16459, Indonesia",
+        "location": {
+            "latitude": -6.4555444,
+            "longitude": 106.8763827
+        },
+        "rating": 4.5,
+        "websiteUri": "http://jagorawi.com/golf-academy/?utm_source=google&utm_medium=gmb",
+        "userRatingCount": 24,
+        "displayName": {
+            "text": "Jagorawi Driving Range & Golf Academy",
+            "languageCode": "en"
+        }
+    },
+    {
+        "id": "ChIJIQ3vwevraS4RI80aqEmpQfM",
+        "types": [
+            "gym",
+            "sports_club",
+            "sports_activity_location",
+            "point_of_interest",
+            "health",
+            "establishment"
+        ],
+        "nationalPhoneNumber": "0822-2049-4424",
+        "formattedAddress": "Jl. Raya Tapos No.78, Cimpaeun, Kec. Tapos, Kota Depok, Jawa Barat 16459, Indonesia",
+        "location": {
+            "latitude": -6.4469271,
+            "longitude": 106.8666884
+        },
+        "rating": 5,
+        "userRatingCount": 72,
+        "displayName": {
+            "text": "ROCKGYM",
+            "languageCode": "en"
+        }
+    }
+]
