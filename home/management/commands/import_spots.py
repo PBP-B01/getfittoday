@@ -67,25 +67,3 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(
             f"Impor selesai! {created_count} tempat baru dibuat, {updated_count} tempat diperbarui."
         ))
-
-### Langkah-langkah Selanjutnya
-
-# 1.  **Perubahan Kode**: Satu-satunya perubahan yang saya buat di dalam Canvas adalah mengubah `from spots.models` menjadi `from home.models` agar cocok dengan nama aplikasi Anda (`home`).
-
-# 2.  **Buat Direktori**: Di dalam aplikasi `home` Anda, buat direktori baru seperti ini. Anda mungkin perlu membuat folder `management` dan `commands` secara manual.
-#     ```
-#     home/
-#     └── management/
-#         └── commands/
-#     ```
-
-# 3.  **Simpan File**: Simpan file `import_spots.py` dari Canvas ke dalam direktori `commands` yang baru saja Anda buat. Struktur akhir Anda akan terlihat seperti ini:
-#     ```
-#     home/
-#     ├── management/
-#     │   └── commands/
-#     │       └── import_spots.py
-#     ├── models.py
-#     └── ... (file lainnya)
-    
-
