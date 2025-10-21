@@ -52,4 +52,4 @@ EXPOSE 8000
 # Define the command to run the application using Gunicorn
 # Binds to all network interfaces on port 8000
 # Ensure 'getfittoday.wsgi:application' matches your project structure
-CMD ["gunicorn", "--bind", "0.0.0.0:8000", "getfittoday.wsgi:application"]
+CMD ["gunicorn", "--bind", "0.0.0.0:80", "getfittoday.wsgi:application"]
