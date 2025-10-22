@@ -13,16 +13,19 @@
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h2>Produk</h2>
     <div>
-      <a href="{% url 'store:view_cart' %}" class="btn btn-outline-secondary">Keranjang</a>
+      <a href="{% url 'store:view_cart' %}" class="btn btn-outline-secondary">
+        Keranjang 
+        <span id="cart-count" class="badge bg-danger ms-1">{{ cart_count|default:0 }}</span>
+      </a>
     </div>
   </div>
 
-  <form method="get" class="row g-2 mb-3">
+  <form method="get" class="row g-2 mb-3" id="filter-form">
     <div class="col-auto">
       <input type="text" name="q" value="{{ q }}" class="form-control" placeholder="Cari produk...">
     </div>
     <div class="col-auto">
-      <select name="sort" class="form-select">
+      <select name="sort" class="form-select" id="sort-select">
         <option value="">Terbaru</option>
         <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Harga: Termurah</option>
         <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Harga: Termahal</option>
@@ -31,35 +34,120 @@
       </select>
     </div>
     <div class="col-auto">
-      <button class="btn btn-primary">Filter</button>
+      <button type="submit" class="btn btn-primary">Filter</button>
     </div>
   </form>
 
-  <div class="d-flex flex-wrap">
-    {% for product in products %}
-      {% include 'card_product.html' with product=product %}
-    {% empty %}
-      <p>Tidak ada produk.</p>
-    {% endfor %}
+  <div id="product-list-container">
+    {% include 'product_list2.html' %}
   </div>
 
-  <nav class="mt-4">
-    <ul class="pagination">
-      {% if products.has_previous %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ products.previous_page_number }}&q={{ q }}&sort={{ sort }}">Prev</a>
-        </li>
-      {% endif %}
-      <li class="page-item disabled">
-        <span class="page-link">Halaman {{ products.number }} dari {{ products.paginator.num_pages }}</span>
-      </li>
-      {% if products.has_next %}
-        <li class="page-item">
-          <a class="page-link" href="?page={{ products.next_page_number }}&q={{ q }}&sort={{ sort }}">Next</a>
-        </li>
-      {% endif %}
-    </ul>
-  </nav>
 </div>
+
+<script>
+// Fungsi helper untuk mendapatkan CSRF token
+function getCookie(name) {
+  let cookieValue = null;
+  if (document.cookie && document.cookie !== '') {
+    const cookies = document.cookie.split(';');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].trim();
+      if (cookie.substring(0, name.length + 1) === (name + '=')) {
+        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+        break;
+      }
+    }
+  }
+  return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+// --- AJAX untuk FILTER dan PAGINASI ---
+const productContainer = document.getElementById('product-list-container');
+const filterForm = document.getElementById('filter-form');
+const sortSelect = document.getElementById('sort-select');
+
+// Fungsi untuk mengambil list produk baru
+async function fetchProductList(url) {
+  try {
+    const fullUrl = url.startsWith('http') ? url : window.location.pathname + url;
+    const ajaxUrl = new URL(fullUrl, window.location.origin);
+    ajaxUrl.searchParams.set('ajax', '1');
+
+    const response = await fetch(ajaxUrl);
+    const html = await response.text();
+
+    productContainer.innerHTML = html;
+
+    // Update URL di browser tanpa reload
+    ajaxUrl.searchParams.delete('ajax');
+    window.history.pushState({}, '', ajaxUrl.toString());
+
+    attachAddToCartListeners();
+  } catch (error) {
+    console.error('Gagal fetch produk:', error);
+  }
+}
+
+filterForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(this);
+  const params = new URLSearchParams(formData);
+  fetchProductList(`?${params.toString()}`);
+});
+
+
+sortSelect.addEventListener('change', function() {
+    filterForm.dispatchEvent(new Event('submit'));
+});
+
+productContainer.addEventListener('click', function(e) {
+  if (e.target.matches('.page-link')) {
+    e.preventDefault();
+    fetchProductList(e.target.href);
+  }
+});
+
+
+// --- AJAX untuk ADD TO CART ---
+const cartCountEl = document.getElementById('cart-count');
+
+function attachAddToCartListeners() {
+  document.querySelectorAll('.form-add-to-cart').forEach(form => {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      
+      const url = this.action;
+      const formData = new FormData(this);
+      
+      try {
+        const response = await fetch(url, {
+          method: 'POST',
+          body: formData,
+          headers: {
+            'X-CSRFToken': csrftoken,
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        });
+        const data = await response.json();
+        
+        if (data.success) {
+          alert(data.message);
+          cartCountEl.innerText = data.cart_count;
+        } else {
+          alert('Gagal menambahkan produk.');
+        }
+      } catch (error) {
+        console.error('Error add to cart:', error);
+      }
+    });
+  });
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  attachAddToCartListeners();
+});
+</script>
+
 </body>
 </html>

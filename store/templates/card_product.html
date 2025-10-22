@@ -18,7 +18,7 @@
       </span>
     </div>
 
-    <form method="post" action="{% url 'store:add_to_cart' product.pk %}" class="mt-auto">
+    <form method="post" action="{% url 'store:add_to_cart' product.pk %}" class="mt-auto form-add-to-cart">
       {% csrf_token %}
       <input type="hidden" name="quantity" value="1">
       <button type="submit" class="btn btn-sm btn-primary w-100">
