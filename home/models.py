@@ -17,9 +17,6 @@ class PlaceType(models.Model):
     def __str__(self):
         return self.name
 
-    # Metode delete kustom dihapus dari sini karena tidak dipanggil oleh admin.
-    # Kita akan menggunakan sinyal sebagai gantinya.
-
     class Meta:
         ordering = ['name']
         verbose_name = "Jenis Tempat"
@@ -42,7 +39,6 @@ class FitnessSpot(models.Model):
         help_text="Nama tampilan tempat"
     )
 
-    # Hubungan ManyToManyField tetap tidak berubah
     types = models.ManyToManyField(
         PlaceType,
         blank=True,
