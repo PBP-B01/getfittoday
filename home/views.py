@@ -79,7 +79,7 @@ def get_fitness_spots_data(request):
         spot['types'] = list(spot['types'])
 
     response_data = {'spots': final_spots_data}
-    cache.set(cache_key, response_data, 60 * 60 * 24) # Cache for 1 hour
+    cache.set(cache_key, response_data, 60 * 60 * 24) # Cache for 24 hour
 
     return JsonResponse(response_data)
 

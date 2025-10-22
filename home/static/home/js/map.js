@@ -4,7 +4,7 @@
 
 let map;
 let infoWindow;
-let userLocationMarker = null; // Holds the marker for the user's current location
+let userLocationMarker = null;
 
 // Data & State Management
 let markers = {}; // Caches marker objects by place_id for quick access
@@ -27,9 +27,8 @@ const GRID_CELL_SIZE_DEG = 0.09; // Approx. 10km per grid cell
 async function initMap() {
     try {
         let initialCoords = { lat: -6.370403, lng: 106.826946 };
-        let initialZoom = 17; // Default zoom (approx. 500m scale)
+        let initialZoom = 17;
 
-        // Fetch map boundaries and user's location simultaneously for faster loading
         const [boundaries, position] = await Promise.all([
             fetchMapBoundaries(),
             getUserLocation()
@@ -37,7 +36,7 @@ async function initMap() {
 
         let restrictionBounds = null;
         if (boundaries) {
-            const buffer = 0.018; // 2km buffer
+            const buffer = 0.018;
             restrictionBounds = {
                 north: boundaries.north + buffer, south: boundaries.south - buffer,
                 east: boundaries.east + buffer, west: boundaries.west - buffer,
@@ -48,7 +47,7 @@ async function initMap() {
                 const { latitude: userLat, longitude: userLng } = position.coords;
                 if (userLat < boundaries.north && userLat > boundaries.south && userLng < boundaries.east && userLng > boundaries.west) {
                     initialCoords = { lat: userLat, lng: userLng };
-                    initialZoom = 16; // A slightly wider zoom for context
+                    initialZoom = 16;
                 }
             }
         } else {
@@ -80,6 +79,7 @@ async function initializeMap(center, zoom, restriction) {
         fullscreenControl: false,
         zoomControl: true,
         myLocationControl: false,
+        clickableIcons: false,
         mapId: "7e0c35add3b17dafe20eac87",
     });
     
@@ -87,21 +87,17 @@ async function initializeMap(center, zoom, restriction) {
         pixelOffset: new google.maps.Size(0, -10), 
     });
 
-    // Listener to hide the default InfoWindow frame and close button
     google.maps.event.addListener(infoWindow, 'domready', () => {
         const iwOuter = document.querySelector('.gm-style-iw-c');
         if (!iwOuter) return;
 
-        // Hide the default close button
         const closeBtn = iwOuter.querySelector('button');
         if (closeBtn) closeBtn.style.display = 'none';
 
-        // Remove the background and shadow from the parent container
         const iwBackground = iwOuter.parentElement;
         iwBackground.style.boxShadow = 'none';
         iwBackground.style.background = 'transparent';
         
-        // Find and hide the "beak" or "tail" of the InfoWindow
         const tail = iwBackground.querySelector('.gm-style-iw-tc');
         if (tail) tail.style.display = 'none';
     });
@@ -165,7 +161,6 @@ async function fetchGridData(gridId) {
 }
 
 // Renders all markers and sidebar cards for the currently visible grid cells.
-
 async function renderSpots(visibleGridIds) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     
@@ -219,21 +214,50 @@ function showSpotDetails(spot, shouldZoom = false) {
     const marker = markers[spot.place_id];
     if (!marker) return;
 
-    if (document.body.classList.contains('full-screen-mode') && !document.body.classList.contains('sidebar-visible')) {
-        document.body.classList.add('sidebar-visible');
+    const isMobile = window.innerWidth < 768;
+    const isCardClick = shouldZoom;
+
+    // Pan the map and show the InfoWindow
+    const showMarkerInfo = () => {
+        programmaticPan = true;
+        map.panTo(marker.position);
+        if (isCardClick) map.setZoom(16);
+
+        infoWindow.setContent(createInfoContent(spot));
+        infoWindow.open({ anchor: marker, map });
+        highlightSpotCard(spot.place_id);
+    };
+
+    let sidebarVisibilityChanged = false; // Flag to track if we need a delay
+
+    // --- Logic for Marker Clicks ---
+    if (!isCardClick) {
+        // On desktop, if sidebar is hidden, show it. This is a change in visibility.
+        if (!isMobile && document.body.classList.contains('full-screen-mode') && !document.body.classList.contains('sidebar-visible')) {
+            document.body.classList.add('sidebar-visible');
+            sidebarVisibilityChanged = true;
+        }
     }
-
-    programmaticPan = true;
-    map.panTo(marker.position);
-    if (shouldZoom) map.setZoom(16);
-
-    infoWindow.setContent(createInfoContent(spot));
-    infoWindow.open({ anchor: marker, map });
-
-    highlightSpotCard(spot.place_id);
+    // --- Logic for Card Clicks ---
+    else {
+        // On mobile, hide the sidebar. This is a change in visibility.
+        if (isMobile) {
+            document.body.classList.remove('sidebar-visible');
+            sidebarVisibilityChanged = true;
+        }
+    }
+    
+    // --- Execute the Action ---
+    if (sidebarVisibilityChanged) {
+        // If the sidebar started an animation, wait for it to begin before showing the marker info
+        setTimeout(showMarkerInfo, 100);
+    } else {
+        // If the sidebar's state did not change, show the info immediately
+        showMarkerInfo();
+    }
 }
 
-// Blue dot marker representing the user's location.
+//Creates or updates a blue dot marker representing the user's location.
 async function updateUserLocationMarker(position) {
     const { Marker } = await google.maps.importLibrary("marker");
     const userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -254,7 +278,7 @@ async function updateUserLocationMarker(position) {
     }
 }
 
-/// Center on Me" button.
+// Creates the "Center on Me" button and adds it to the map controls.
 function createCenterOnMeButton() {
     const controlButton = document.createElement("button");
     controlButton.className = 'custom-map-control-button';
@@ -288,7 +312,10 @@ function highlightSpotCard(placeId) {
     const newCard = document.getElementById(`card-${placeId}`);
     if (newCard) {
         newCard.classList.add('active');
-        setTimeout(() => newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+        // Only scroll if the sidebar is visible
+        if (document.body.classList.contains('sidebar-visible')) {
+            setTimeout(() => newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
+        }
     }
     currentActiveCardId = placeId;
 }
