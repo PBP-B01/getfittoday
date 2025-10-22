@@ -4,6 +4,14 @@ from datetime import datetime, timedelta, time as dtime
 from django.utils import timezone
 from .models import Resource, Booking, BookingStatus
 from .serializers import BookingCreateSerializer
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import render
+from .models import Resource, Booking
+
+@login_required(login_url="/login/")
+def booking_page(request):
+    resources = Resource.objects.filter(is_active=True).order_by("name")
+    return render(request, "booking/booking_page.html", {"resources": resources})
 
 class AvailabilityView(views.APIView):
     permission_classes = [permissions.AllowAny]
@@ -25,18 +33,18 @@ class AvailabilityView(views.APIView):
         busy = [(b["start_time"], b["end_time"]) for b in existing]
 
         step = timedelta(minutes=res.slot_minutes)
-        slots, t = [], start_day
-        while t + step <= end_day:
-            s, e = t, t + step
-            if not any(s < be and e > bs for bs, be in busy):
-                slots.append({"start": s, "end": e})
-            t = e
+        slots, time = [], start_day
+        while time + step <= end_day:
+            start, end = time, time + step
+            if not any(start < busy_end and end > busy_start for busy_start, busy_end in busy):
+                slots.append({"start": start, "end": end})
+            time = end
         return Response(slots)
 
 class BookingCreateView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
     def post(self, request):
-        ser = BookingCreateSerializer(data=request.data, context={"request": request})
-        ser.is_valid(raise_exception=True)
-        b = ser.save()
-        return Response({"id": str(b.id), "status": b.status, "price": str(b.price)}, status=status.HTTP_201_CREATED)
+        serializer = BookingCreateSerializer(data=request.data, context={"request": request})
+        serializer.is_valid(raise_exception=True)
+        book = serializer.save()
+        return Response({"id": str(book.id), "status": book.status, "price": str(book.price)}, status=status.HTTP_201_CREATED)
