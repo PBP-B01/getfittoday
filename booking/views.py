@@ -7,28 +7,11 @@ from .serializers import BookingCreateSerializer
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Resource, Booking
-from home.utils.spots_loader import load_all_spots
 
-@login_required
+@login_required(login_url="/login/")
 def booking_page(request):
-    raw = load_all_spots()
-    spots = []
-    for s in raw:
-        if isinstance(s, dict):
-            spots.append({
-                "place_id": s.get("place_id"),
-                "name": s.get("name"),
-                "latitude": s.get("latitude"),
-                "longitude": s.get("longitude"),
-            })
-        else:
-            spots.append({
-                "place_id": getattr(s, "place_id"),
-                "name": getattr(s, "name"),
-                "latitude": getattr(s, "latitude"),
-                "longitude": getattr(s, "longitude"),
-            })
-    return render(request, "booking_form.html", {"spots": spots})
+    resources = Resource.objects.filter(is_active=True).order_by("name")
+    return render(request, "booking/booking_page.html", {"resources": resources})
 
 class AvailabilityView(views.APIView):
     permission_classes = [permissions.AllowAny]
