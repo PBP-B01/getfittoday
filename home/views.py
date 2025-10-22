@@ -1,9 +1,40 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import JsonResponse
 from django.core.cache import cache
 from django.db.models import Min, Max
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib import messages
+from django.urls import reverse
+from django.contrib.auth import login as auth_login, logout
 from .models import FitnessSpot
+from .forms import StyledUserCreationForm, StyledAuthenticationForm
+
+def register(request):
+    form = StyledUserCreationForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Akun berhasil dibuat. Silakan login.")
+            return redirect('home:login')
+        messages.error(request, "Registrasi gagal. Cek isianmu.")
+    return render(request, 'register.html', {'form': form})
+
+def login_user(request):
+    next_url = request.POST.get('next') or request.GET.get('next') or 'home:home'
+    if request.method == 'POST':
+        form = StyledAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect(next_url)
+        messages.error(request, "Username atau password salah.")
+    else:
+        form = StyledAuthenticationForm(request)
+    return render(request, 'login.html', {'form': form, 'next': next_url})
+
+def logout_user(request):
+    logout(request)
+    return redirect('home:login')
 
 # --- Grid Configuration ---
 GRID_ORIGIN_LAT = -6.8  # Bottom-left corner of our grid (latitude)

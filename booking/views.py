@@ -8,10 +8,9 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Resource, Booking
 
-@login_required(login_url="/login/")
+@login_required
 def booking_page(request):
-    resources = Resource.objects.filter(is_active=True).order_by("name")
-    return render(request, "booking/booking_page.html", {"resources": resources})
+    return render(request, "booking_form.html")
 
 class AvailabilityView(views.APIView):
     permission_classes = [permissions.AllowAny]

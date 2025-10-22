@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Booking{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Booking Lapangan</h1>
+
+<div class="bg-white/10 rounded-xl p-4 space-y-4">
+  <div class="grid md:grid-cols-3 gap-4">
+    <div>
+      <label class="block mb-1 text-sm text-white/80">Pilih Tempat</label>
+      <select id="resource" class="w-full text-blue-900 px-3 py-2 rounded" required>
+        {% for r in resources %}
+          <option value="{{ r.id }}">{{ r.location_name }}{% if r.location_name %} - {% endif %}{{ r.name }} ({{ r.sport_type }})</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label class="block mb-1 text-sm text-white/80">Tanggal</label>
+      <input id="date" type="date" class="w-full text-blue-900 px-3 py-2 rounded" required>
+    </div>
+
+    <div class="flex items-end">
+      <button id="checkBtn" class="bg-yellow-400 text-blue-900 font-bold px-4 py-2 rounded hover:bg-yellow-300 w-full">
+        Cek Ketersediaan
+      </button>
+    </div>
+  </div>
+
+  <div id="slots" class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"></div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function getCookie(name){
+    const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+  const csrftoken = getCookie('csrftoken');
+
+  const resourceEl = document.getElementById('resource');
+  const dateEl = document.getElementById('date');
+  const checkBtn = document.getElementById('checkBtn');
+  const slotsEl = document.getElementById('slots');
+
+  dateEl.value = new Date().toISOString().slice(0,10);
+  checkBtn.addEventListener('click', loadSlots);
+
+  async function loadSlots(){
+    slotsEl.innerHTML = '';
+    const resource = resourceEl.value;
+    const date = dateEl.value;
+    try {
+      const r = await fetch(`/booking/availability/?resource=${encodeURIComponent(resource)}&date=${encodeURIComponent(date)}`);
+      if (!r.ok) throw new Error('Gagal ambil data slot');
+      const data = await r.json();
+      if (!Array.isArray(data) || data.length === 0){
+        slotsEl.innerHTML = '<div class="text-white/80">Tidak ada slot kosong.</div>';
+        return;
+      }
+      renderSlots(resource, data);
+    } catch(e){
+      alert(e.message || 'Error mengambil slot');
+    }
+  }
+
+  function renderSlots(resourceId, slots){
+    slotsEl.innerHTML = '';
+    for (const s of slots){
+      const start = new Date(s.start);
+      const end = new Date(s.end);
+      const label = `${pad(start.getHours())}:${pad(start.getMinutes())} - ${pad(end.getHours())}:${pad(end.getMinutes())}`;
+
+      const btn = document.createElement('button');
+      btn.className = "w-full text-left bg-white/20 hover:bg-white/30 rounded p-3";
+      btn.textContent = label;
+      btn.addEventListener('click', () => book(resourceId, start, end));
+      slotsEl.appendChild(btn);
+    }
+  }
+
+  function pad(n){ return String(n).padStart(2,'0'); }
+
+  async function book(resourceId, start, end){
+    if (!confirm('Lanjut booking slot ini?')) return;
+
+    try {
+      const r = await fetch('/booking/book/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        credentials: 'same-origin',
+        body: JSON.stringify({
+          resource_id: resourceId,
+          start_time: start.toISOString(),
+          end_time: end.toISOString()
+        })
+      });
+      const data = await r.json();
+      if (!r.ok) throw new Error(data?.detail || 'Gagal booking');
+      alert(`Sukses. ID: ${data.id} | Status: ${data.status} | Harga: ${data.price}`);
+      loadSlots();
+    } catch(e){
+      alert(e.message || 'Error saat booking');
+    }
+  }
+</script>
+{% endblock %}

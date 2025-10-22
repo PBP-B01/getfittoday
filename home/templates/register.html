@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<div class="min-h-[70vh] flex items-center justify-center">
+  <div class="relative z-20 w-full max-w-xl bg-white/10 rounded-xl p-8 shadow-lg">
+    <h1 class="text-2xl font-extrabold text-center mb-8">Register</h1>
+
+    {% if messages %}
+      <div class="space-y-2 mb-4">
+        {% for message in messages %}
+          <div class="px-4 py-3 rounded
+                      {% if 'success' in message.tags %} bg-green-100 text-green-900
+                      {% elif 'error' in message.tags %} bg-red-100 text-red-900
+                      {% else %} bg-gray-100 text-gray-900 {% endif %}">
+            {{ message }}
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <form method="post" class="space-y-5">
+      {% csrf_token %}
+
+      <div>
+        <label class="block text-sm mb-1">Username</label>
+        {{ form.username }}
+        {% for e in form.username.errors %}<p class="text-sm text-red-300 mt-1">{{ e }}</p>{% endfor %}
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">Password</label>
+        {{ form.password1 }}
+        {% for e in form.password1.errors %}<p class="text-sm text-red-300 mt-1">{{ e }}</p>{% endfor %}
+      </div>
+
+      <div>
+        <label class="block text-sm mb-1">Confirm Password</label>
+        {{ form.password2 }}
+        {% for e in form.password2.errors %}<p class="text-sm text-red-300 mt-1">{{ e }}</p>{% endfor %}
+      </div>
+
+      <button type="submit"
+              class="w-full bg-yellow-400 text-blue-900 font-bold py-3 rounded hover:bg-yellow-300">
+        Daftar
+      </button>
+    </form>
+
+    <p class="mt-6 text-center text-white/80">
+      Sudah punya akun? <a href="{% url 'home:login' %}" class="underline">Login</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

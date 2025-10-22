@@ -20,6 +20,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('home.urls')), # Sertakan URL aplikasi home Anda
-    path("booking/", include("booking.urls")),
-    path("api/booking/", include("booking.urls")),
+    path("booking/", include(("booking.urls", "booking"), namespace="booking")),
 ]
