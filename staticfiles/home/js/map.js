@@ -24,11 +24,6 @@ const GRID_CELL_SIZE_DEG = 0.09; // Approx. 10km per grid cell
 // =================================================================================
 // Initialization
 // =================================================================================
-
-/**
- * The main entry point for the map application.
- * It determines the initial center, fetches boundaries, and creates the map.
- */
 async function initMap() {
     try {
         let initialCoords = { lat: -6.370403, lng: 106.826946 };
@@ -74,7 +69,6 @@ async function initMap() {
 }
 
 // Creates the core Google Map object and attaches UI elements and event listeners.
-
 async function initializeMap(center, zoom, restriction) {
     const { Map } = await google.maps.importLibrary("maps");
     map = new Map(document.getElementById("map"), {
@@ -85,30 +79,49 @@ async function initializeMap(center, zoom, restriction) {
         streetViewControl: false,
         fullscreenControl: false,
         zoomControl: true,
-        myLocationControl: false, // We use a custom button instead
+        myLocationControl: false,
         mapId: "7e0c35add3b17dafe20eac87",
     });
     
-    infoWindow = new google.maps.InfoWindow();
+    infoWindow = new google.maps.InfoWindow({
+        pixelOffset: new google.maps.Size(0, -10), 
+    });
+
+    // Listener to hide the default InfoWindow frame and close button
+    google.maps.event.addListener(infoWindow, 'domready', () => {
+        const iwOuter = document.querySelector('.gm-style-iw-c');
+        if (!iwOuter) return;
+
+        // Hide the default close button
+        const closeBtn = iwOuter.querySelector('button');
+        if (closeBtn) closeBtn.style.display = 'none';
+
+        // Remove the background and shadow from the parent container
+        const iwBackground = iwOuter.parentElement;
+        iwBackground.style.boxShadow = 'none';
+        iwBackground.style.background = 'transparent';
+        
+        // Find and hide the "beak" or "tail" of the InfoWindow
+        const tail = iwBackground.querySelector('.gm-style-iw-tc');
+        if (tail) tail.style.display = 'none';
+    });
+
 
     // Attach event listeners
     map.addListener('idle', () => updateSpotsForView(map));
     document.getElementById('fullscreen-toggle-btn').addEventListener('click', toggleFullScreen);
+    document.getElementById('sidebar-toggle-btn').addEventListener('click', () => {
+        document.body.classList.toggle('sidebar-visible');
+    });
     
     createCenterOnMeButton();
 }
 
-// Start the application
 initMap();
 
 // =================================================================================
 // Data Loading (Grid System)
 // =================================================================================
-
-/**
- * Main function triggered when the map stops moving. It determines which grid
- * cells are visible and fetches/renders the data for them.
- */
 async function updateSpotsForView(map) {
     if (programmaticPan) { programmaticPan = false; return; }
     if (isUpdatingSpots) return;
@@ -122,7 +135,6 @@ async function updateSpotsForView(map) {
         const newGridIdsToLoad = [...visibleGridIds].filter(id => !clientGridCache[id]);
 
         if (newGridIdsToLoad.length > 0) {
-            // Fetch data for all new grids in parallel for speed
             const promises = newGridIdsToLoad.map(id => fetchGridData(id));
             await Promise.all(promises);
         }
@@ -135,9 +147,7 @@ async function updateSpotsForView(map) {
     }
 }
 
-/**
- * Fetches spot data for a specific grid ID from the Django API.
- */
+// Fetches spot data for a specific grid ID from the Django API.
 async function fetchGridData(gridId) {
     console.log(`Fetching grid ${gridId} from server...`);
     const url = `/api/fitness-spots/?gridId=${gridId}`;
@@ -145,33 +155,34 @@ async function fetchGridData(gridId) {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
-        clientGridCache[gridId] = data; // Store in client-side cache
+        clientGridCache[gridId] = data;
         return data;
     } catch (error) {
         console.error(`Failed to fetch data for grid ${gridId}:`, error);
-        clientGridCache[gridId] = { spots: [] }; // Cache empty result on error
+        clientGridCache[gridId] = { spots: [] };
         return null;
     }
 }
 
-/**
- * Renders all markers and sidebar cards for the currently visible grid cells.
- */
+// Renders all markers and sidebar cards for the currently visible grid cells.
+
 async function renderSpots(visibleGridIds) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     
-    // Clear all existing markers and cards from the UI
     Object.values(markers).forEach(marker => marker.map = null);
     markers = {};
-    document.getElementById('spot-cards-container').innerHTML = '';
+    const cardsContainer = document.getElementById('spot-cards-container');
+    cardsContainer.innerHTML = '';
     
-    // Render spots from each visible grid
+    let totalSpotsRendered = 0;
+
     for (const gridId of visibleGridIds) {
         const data = clientGridCache[gridId];
         if (data && data.spots) {
             data.spots.forEach(spot => {
-                if (markers[spot.place_id]) return; // Avoid duplicates
+                if (markers[spot.place_id]) return;
 
+                totalSpotsRendered++;
                 const lat = parseFloat(spot.latitude);
                 const lng = parseFloat(spot.longitude);
                 if (isNaN(lat) || isNaN(lng)) return;
@@ -180,14 +191,21 @@ async function renderSpots(visibleGridIds) {
                 markers[spot.place_id] = marker;
                 
                 const card = createSpotCard(spot);
-                document.getElementById('spot-cards-container').appendChild(card);
+                cardsContainer.appendChild(card);
                 
                 marker.addListener("click", () => showSpotDetails(spot));
                 card.addEventListener('click', () => showSpotDetails(spot, true));
             });
         }
     }
-    // Re-highlight the active card if it's still in view
+
+    const emptyState = document.getElementById('sidebar-empty-state');
+    if (totalSpotsRendered === 0) {
+        emptyState.classList.remove('hidden');
+    } else {
+        emptyState.classList.add('hidden');
+    }
+
     if (currentActiveCardId && document.getElementById(`card-${currentActiveCardId}`)) {
         highlightSpotCard(currentActiveCardId);
     }
@@ -197,16 +215,15 @@ async function renderSpots(visibleGridIds) {
 // UI Interaction & User Location
 // =================================================================================
 
-/**
- * A unified function to handle all logic for displaying a spot's details.
- * @param {object} spot - The spot data object.
- * @param {boolean} shouldZoom - Whether to zoom in closer.
- */
 function showSpotDetails(spot, shouldZoom = false) {
     const marker = markers[spot.place_id];
     if (!marker) return;
 
-    programmaticPan = true; // Prevent the 'idle' listener from re-triggering an update
+    if (document.body.classList.contains('full-screen-mode') && !document.body.classList.contains('sidebar-visible')) {
+        document.body.classList.add('sidebar-visible');
+    }
+
+    programmaticPan = true;
     map.panTo(marker.position);
     if (shouldZoom) map.setZoom(16);
 
@@ -216,9 +233,7 @@ function showSpotDetails(spot, shouldZoom = false) {
     highlightSpotCard(spot.place_id);
 }
 
-/**
- * Creates or updates a blue dot marker representing the user's location.
- */
+// Blue dot marker representing the user's location.
 async function updateUserLocationMarker(position) {
     const { Marker } = await google.maps.importLibrary("marker");
     const userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -239,9 +254,7 @@ async function updateUserLocationMarker(position) {
     }
 }
 
-/**
- * Creates the "Center on Me" button and adds it to the map controls.
- */
+/// Center on Me" button.
 function createCenterOnMeButton() {
     const controlButton = document.createElement("button");
     controlButton.className = 'custom-map-control-button';
@@ -264,7 +277,7 @@ function createCenterOnMeButton() {
 }
 
 // =================================================================================
-// Helper Functions (Boilerplate)
+// Helper Functions
 // =================================================================================
 
 function highlightSpotCard(placeId) {
@@ -284,7 +297,22 @@ function createSpotCard(spot) {
     const card = document.createElement('div');
     card.id = `card-${spot.place_id}`;
     card.className = 'spot-card';
-    card.innerHTML = `<h3>${spot.name}</h3><p>${spot.address}</p>${spot.rating ? `<p>Rating: <strong>${spot.rating}</strong></p>` : ''}`;
+    
+    const starIcon = `<svg viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>`;
+
+    const ratingHTML = spot.rating 
+        ? `<div class="spot-card-rating">
+                ${starIcon}
+                <strong>${spot.rating}</strong> 
+                <span style="color: #4a4a4a; font-weight: 400; margin-left: 4px;">(${spot.rating_count} reviews)</span>
+           </div>` 
+        : '';
+
+    card.innerHTML = `
+        <h3>${spot.name}</h3>
+        <p>${spot.address}</p>
+        ${ratingHTML}
+    `;
     return card;
 }
 
@@ -296,7 +324,12 @@ function getUserLocation() {
 }
 
 function toggleFullScreen() {
-    document.body.classList.toggle('full-screen-mode');
+    const isFullScreen = document.body.classList.toggle('full-screen-mode');
+    
+    if (!isFullScreen) {
+        document.body.classList.remove('sidebar-visible');
+    }
+    
     const btn = document.getElementById('fullscreen-toggle-btn');
     const enterIcon = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5"></path></svg>`;
     const exitIcon = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5m0 0l-1-1m1 1l1 1m4-11h5m0 0l1 1m-1-1l-1-1M5 19v-4m0 0l-1 1m1-1l1-1m10 4v-4m0 0l1 1m-1-1l-1-1"></path></svg>`;
@@ -340,5 +373,29 @@ function getVisibleGridIds(bounds) {
 }
 
 function createInfoContent(spot) {
-    return `<div class="p-2 font-sans text-gray-800 max-w-xs"><h2 class="font-bold text-lg text-blue-800">${spot.name}</h2><p class="text-sm">${spot.address}</p>${spot.rating ? `<p class="text-sm">Rating: <strong>${spot.rating}</strong> (${spot.rating_count} ulasan)</p>` : ''}${spot.types && spot.types.length > 0 ? `<p class="text-sm">Jenis: ${spot.types.join(', ')}</p>` : ''}${spot.website ? `<p class="text-sm"><a href="${spot.website}" target="_blank" class="text-blue-500 hover:underline">Situs Web</a></p>` : ''}${spot.phone_number ? `<p class="text-sm">Telepon: ${spot.phone_number}</p>` : ''}</div>`;
+    const starIcon = `<svg width="16" height="16" viewBox="0 0 20 20" style="vertical-align: middle; fill: #233D8C;"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>`;
+    
+    let ratingHTML = '';
+    if (spot.rating) {
+        ratingHTML = `
+            <div style="display: flex; align-items: center; gap: 5px; font-size: 0.9rem; margin-top: 10px; color: #233D8C;">
+                ${starIcon}
+                <strong style="font-weight: 700;">${spot.rating}</strong>
+                <span style="color: #4a4a4a; font-weight: 400; margin-left: 4px;">(${spot.rating_count} reviews)</span>
+            </div>
+        `;
+    }
+
+    return `
+        <div style="font-family: sans-serif; max-width: 280px; border-radius: 12px; overflow: hidden;">
+            <div style="background-color: #233D8C; color: white; padding: 10px 15px; font-weight: bold; font-size: 1.1rem; position: relative;">
+                ${spot.name}
+                <button title="Close" onclick="infoWindow.close()" style="position: absolute; top: 0px; right: 8px; background: none; border: none; color: white; font-size: 24px; cursor: pointer; line-height: 1.5; font-weight: 300;">&times;</button>
+            </div>
+            <div style="background-color: #E8B400; color: #233D8C; padding: 15px;">
+                <p style="font-size: 0.85rem; color: #333; margin-bottom: 4px; margin-top: 0;">${spot.address}</p>
+                ${ratingHTML}
+            </div>
+        </div>
+    `;
 }
