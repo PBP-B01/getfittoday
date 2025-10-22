@@ -69,6 +69,8 @@ INSTALLED_APPS = [
     'booking',
     'rest_framework',
     'central',
+    'django.contrib.humanize',
+    'store',
 ]
 
 REST_FRAMEWORK = {
