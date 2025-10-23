@@ -9,6 +9,7 @@ from django.urls import reverse
 from django.contrib.auth import login as auth_login, logout
 from .models import FitnessSpot
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
+from .utils.spots_loader import build_index_and_bounds, load_all_spots
 
 def register(request):
     form = StyledUserCreationForm(request.POST or None)
@@ -135,3 +136,12 @@ def get_map_boundaries(request):
     }
     cache.set(cache_key, boundaries, 60 * 60 * 24 * 7)
     return JsonResponse(boundaries)
+
+def api_map_boundaries(request):
+    _, bounds = build_index_and_bounds()
+    return JsonResponse(bounds)
+
+def api_fitness_spots(request):
+    grid_id = request.GET.get("gridId", "")
+    index, _ = build_index_and_bounds()
+    return JsonResponse({"gridId": grid_id, "spots": index.get(grid_id, [])})

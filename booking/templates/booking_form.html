@@ -8,12 +8,21 @@
 <div class="bg-white/10 rounded-xl p-4 space-y-4">
   <div class="grid md:grid-cols-3 gap-4">
     <div>
-      <label class="block mb-1 text-sm text-white/80">Pilih Tempat</label>
-      <select id="resource" class="w-full text-blue-900 px-3 py-2 rounded" required>
-        {% for r in resources %}
-          <option value="{{ r.id }}">{{ r.location_name }}{% if r.location_name %} - {% endif %}{{ r.name }} ({{ r.sport_type }})</option>
+      <label class="block text-sm mb-1 text-white/90">Pilih Tempat</label>
+      <select id="placeSelect" name="place_id" class="w-full rounded-lg text-blue-900 px-3 py-2">
+        <option value="">Pilih tempat…</option>
+        {% for s in spots %}
+          <option value="{{ s.place_id }}"
+                  data-lat="{{ s.latitude }}" data-lng="{{ s.longitude }}">
+            {{ s.name }}
+          </option>
+        {% empty %}
+          <!-- Kalau kosong, kasih info biar ketahuan -->
+          <option value="" disabled>(Data tempat tidak tersedia)</option>
         {% endfor %}
       </select>
+      <input type="hidden" name="lat" id="placeLat">
+      <input type="hidden" name="lng" id="placeLng">
     </div>
 
     <div>
@@ -107,6 +116,53 @@
     } catch(e){
       alert(e.message || 'Error saat booking');
     }
+  }
+
+  (function () {
+    const sel = document.getElementById('placeSelect');
+    const latEl = document.getElementById('placeLat');
+    const lngEl = document.getElementById('placeLng');
+
+    if (!sel) return;
+    sel.addEventListener('change', () => {
+      const opt = sel.options[sel.selectedIndex];
+      if (!opt) return;
+      if (latEl) latEl.value = opt.dataset.lat || '';
+      if (lngEl) lngEl.value = opt.dataset.lng || '';
+    });
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(pos => {
+        const toRad = d => d * Math.PI / 180;
+        const R = 6371000;
+        const dist = (a,b,c,d)=> {
+          const dLat = toRad(c-a), dLng = toRad(d-b);
+          const s1 = Math.sin(dLat/2)**2;
+          const s2 = Math.cos(toRad(a))*Math.cos(toRad(c))*Math.sin(dLng/2)**2;
+          return 2*R*Math.asin(Math.sqrt(s1+s2));
+        };
+        const userLat = pos.coords.latitude, userLng = pos.coords.longitude;
+        const opts = Array.from(sel.querySelectorAll('option')).filter(o => o.value);
+        opts.sort((oa, ob) => dist(userLat, userLng, +oa.dataset.lat, +oa.dataset.lng) -
+                               dist(userLat, userLng, +ob.dataset.lat, +ob.dataset.lng));
+        const ph = sel.querySelector('option[value=""]');
+        sel.innerHTML = '';
+        if (ph) sel.appendChild(ph);
+        opts.forEach(o => sel.appendChild(o));
+      });
+    }
+  })();
+
+  const sel = document.getElementById('placeSelect');
+  const latEl = document.getElementById('placeLat');
+  const lngEl = document.getElementById('placeLng');
+  if (sel) {
+    sel.addEventListener('change', () => {
+      const opt = sel.options[sel.selectedIndex];
+      if (!opt) return;
+      if (latEl) latEl.value = opt.dataset.lat || '';
+      if (lngEl) lngEl.value = opt.dataset.lng || '';
+    });
   }
 </script>
 {% endblock %}

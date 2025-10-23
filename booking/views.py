@@ -7,10 +7,12 @@ from .serializers import BookingCreateSerializer
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Resource, Booking
+from home.utils.spots_loader import load_all_spots
 
 @login_required
 def booking_page(request):
-    return render(request, "booking_form.html")
+    spots = sorted(load_all_spots(), key=lambda s: (s["name"] or "").lower())
+    return render(request, "booking_form.html", {"spots": spots})
 
 class AvailabilityView(views.APIView):
     permission_classes = [permissions.AllowAny]
