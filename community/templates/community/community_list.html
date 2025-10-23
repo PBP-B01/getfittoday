@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Daftar Komunitas{% endblock %}
+{% block content %}
+<div class="max-w-4xl mx-auto py-10 text-blue-900 bg-yellow-400 rounded-2xl shadow-lg p-6">
+
+  <h1 class="text-3xl font-bold mb-6 text-center">Komunitas Olahraga</h1>
+
+  <div class="flex justify-end mb-4">
+    <a href="{% url 'add_community' %}" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition duration-200">
+      + Tambah Komunitas
+    </a>
+  </div>
+
+  {% if communities %}
+    <div class="grid md:grid-cols-2 gap-4">
+      {% for community in communities %}
+        <div class="bg-yellow-200 p-4 rounded-xl shadow-md hover:shadow-lg transition">
+          <h2 class="text-xl font-semibold">{{ community.name }}</h2>
+          <p class="text-sm mb-2">{{ community.description }}</p>
+          <p class="text-sm text-blue-800 font-medium">📍 {{ community.fitness_spot.name }}</p>
+          {% if community.contact_info %}
+            <p class="text-sm mt-1 text-blue-700">📞 Kontak: {{ community.contact_info }}</p>
+          {% endif %}
+          <p class="text-xs text-gray-700 mt-2">Dibuat pada: {{ community.created_at|date:"d M Y" }}</p>
+        </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-center text-blue-800">Belum ada komunitas yang terdaftar.</p>
+  {% endif %}
+</div>
+{% endblock %}
