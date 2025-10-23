@@ -19,6 +19,6 @@ from django.urls import path, include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('home.urls')), # Sertakan URL aplikasi home Anda
+    path('', include('home.urls', namespace="home")), # Sertakan URL aplikasi home Anda
     path("booking/", include(("booking.urls", "booking"), namespace="booking")),
 ]
