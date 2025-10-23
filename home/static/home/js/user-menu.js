@@ -21,7 +21,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
       menu.classList.remove('hidden');
       btn.setAttribute('aria-expanded', 'true');
-      // delay 1 tick biar click pertama nggak langsung nutup
       setTimeout(() => document.addEventListener('click', close), 0);
     }
   });

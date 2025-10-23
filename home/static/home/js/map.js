@@ -1,29 +1,18 @@
-// =================================================================================
-// Global Variables & Configuration
-// =================================================================================
-
 let map;
 let infoWindow;
 let userLocationMarker = null;
-
-// Data & State Management
-let markers = {}; // Caches marker objects by place_id for quick access
-let clientGridCache = {}; // Caches spot data for each grid cell on the client-side
-let loadedGridIds = new Set(); // Tracks which grid cells have been fetched
+let markers = {};
+let clientGridCache = {};
+let loadedGridIds = new Set();
 let currentActiveCardId = null;
 
-// State flags to prevent race conditions and feedback loops
 let isUpdatingSpots = false;
 let programmaticPan = false;
 
-// Grid System Configuration (for efficient data loading)
 const GRID_ORIGIN_LAT = -6.8;
 const GRID_ORIGIN_LNG = 106.5;
-const GRID_CELL_SIZE_DEG = 0.09; // Approx. 10km per grid cell
+const GRID_CELL_SIZE_DEG = 0.09;
 
-// =================================================================================
-// Initialization
-// =================================================================================
 async function initMap() {
     try {
         let initialCoords = { lat: -6.370403, lng: 106.826946 };
@@ -42,7 +31,6 @@ async function initMap() {
                 east: boundaries.east + buffer, west: boundaries.west - buffer,
             };
 
-            // If user grants location permission, override the default start point
             if (position) {
                 const { latitude: userLat, longitude: userLng } = position.coords;
                 if (userLat < boundaries.north && userLat > boundaries.south && userLng < boundaries.east && userLng > boundaries.west) {
@@ -54,10 +42,7 @@ async function initMap() {
             console.error("Could not fetch map boundaries. Restrictions disabled.");
         }
 
-        // Create the map with the calculated settings
         await initializeMap(initialCoords, initialZoom, restrictionBounds);
-
-        // If we have an initial position, show the user's location marker
         if (position) {
             updateUserLocationMarker(position);
         }
@@ -67,7 +52,6 @@ async function initMap() {
     }
 }
 
-// Creates the core Google Map object and attaches UI elements and event listeners.
 async function initializeMap(center, zoom, restriction) {
     const { Map } = await google.maps.importLibrary("maps");
     map = new Map(document.getElementById("map"), {
@@ -102,8 +86,6 @@ async function initializeMap(center, zoom, restriction) {
         if (tail) tail.style.display = 'none';
     });
 
-
-    // Attach event listeners
     map.addListener('idle', () => updateSpotsForView(map));
     document.getElementById('fullscreen-toggle-btn').addEventListener('click', toggleFullScreen);
     document.getElementById('sidebar-toggle-btn').addEventListener('click', () => {
@@ -115,9 +97,6 @@ async function initializeMap(center, zoom, restriction) {
 
 initMap();
 
-// =================================================================================
-// Data Loading (Grid System)
-// =================================================================================
 async function updateSpotsForView(map) {
     if (programmaticPan) { programmaticPan = false; return; }
     if (isUpdatingSpots) return;
@@ -143,7 +122,6 @@ async function updateSpotsForView(map) {
     }
 }
 
-// Fetches spot data for a specific grid ID from the Django API.
 async function fetchGridData(gridId) {
     console.log(`Fetching grid ${gridId} from server...`);
     const url = `/api/fitness-spots/?gridId=${gridId}`;
@@ -160,7 +138,6 @@ async function fetchGridData(gridId) {
     }
 }
 
-// Renders all markers and sidebar cards for the currently visible grid cells.
 async function renderSpots(visibleGridIds) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     
@@ -206,10 +183,6 @@ async function renderSpots(visibleGridIds) {
     }
 }
 
-// =================================================================================
-// UI Interaction & User Location
-// =================================================================================
-
 function showSpotDetails(spot, shouldZoom = false) {
     const marker = markers[spot.place_id];
     if (!marker) return;
@@ -217,7 +190,6 @@ function showSpotDetails(spot, shouldZoom = false) {
     const isMobile = window.innerWidth < 768;
     const isCardClick = shouldZoom;
 
-    // Pan the map and show the InfoWindow
     const showMarkerInfo = () => {
         programmaticPan = true;
         map.panTo(marker.position);
@@ -228,36 +200,27 @@ function showSpotDetails(spot, shouldZoom = false) {
         highlightSpotCard(spot.place_id);
     };
 
-    let sidebarVisibilityChanged = false; // Flag to track if we need a delay
-
-    // --- Logic for Marker Clicks ---
+    let sidebarVisibilityChanged = false;
     if (!isCardClick) {
-        // On desktop, if sidebar is hidden, show it. This is a change in visibility.
         if (!isMobile && document.body.classList.contains('full-screen-mode') && !document.body.classList.contains('sidebar-visible')) {
             document.body.classList.add('sidebar-visible');
             sidebarVisibilityChanged = true;
         }
     }
-    // --- Logic for Card Clicks ---
     else {
-        // On mobile, hide the sidebar. This is a change in visibility.
         if (isMobile) {
             document.body.classList.remove('sidebar-visible');
             sidebarVisibilityChanged = true;
         }
     }
-    
-    // --- Execute the Action ---
+
     if (sidebarVisibilityChanged) {
-        // If the sidebar started an animation, wait for it to begin before showing the marker info
         setTimeout(showMarkerInfo, 100);
     } else {
-        // If the sidebar's state did not change, show the info immediately
         showMarkerInfo();
     }
 }
 
-//Creates or updates a blue dot marker representing the user's location.
 async function updateUserLocationMarker(position) {
     const { Marker } = await google.maps.importLibrary("marker");
     const userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -278,7 +241,6 @@ async function updateUserLocationMarker(position) {
     }
 }
 
-// Creates the "Center on Me" button and adds it to the map controls.
 function createCenterOnMeButton() {
     const controlButton = document.createElement("button");
     controlButton.className = 'custom-map-control-button';
@@ -300,10 +262,6 @@ function createCenterOnMeButton() {
     map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlButton);
 }
 
-// =================================================================================
-// Helper Functions
-// =================================================================================
-
 function highlightSpotCard(placeId) {
     if (currentActiveCardId && currentActiveCardId !== placeId) {
         const oldCard = document.getElementById(`card-${currentActiveCardId}`);
@@ -312,7 +270,6 @@ function highlightSpotCard(placeId) {
     const newCard = document.getElementById(`card-${placeId}`);
     if (newCard) {
         newCard.classList.add('active');
-        // Only scroll if the sidebar is visible
         if (document.body.classList.contains('sidebar-visible')) {
             setTimeout(() => newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
         }
@@ -353,6 +310,7 @@ function getUserLocation() {
 function toggleFullScreen() {
     const isFullScreen = document.body.classList.toggle('full-screen-mode');
 
+
     if (!isFullScreen) {
         document.body.classList.remove('sidebar-visible');
     }
@@ -368,7 +326,7 @@ function toggleFullScreen() {
         exitIcon.classList.add('hidden');
     }
     
-    setTimeout(() => google.maps.event.trigger(map, 'resize'), 400);
+    setTimeout(() => google.maps.event.trigger(map, 'resize'), 400);
 }
 
 async function fetchMapBoundaries() {
