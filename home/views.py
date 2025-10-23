@@ -11,6 +11,9 @@ from .models import FitnessSpot
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
 from .utils.spots_loader import build_index_and_bounds, load_all_spots
 from django.shortcuts import render, redirect
+from django.http import JsonResponse
+from django.shortcuts import get_object_or_404
+
 
 # --- Grid Configuration ---
 GRID_ORIGIN_LAT = -6.8  # Bottom-left corner of our grid (latitude)

@@ -1,36 +1,60 @@
 {% load humanize %}
 
-<div class="d-flex flex-wrap">
+<div class="flex flex-wrap gap-4"> 
   {% for product in products %}
     {% include 'card_product.html' with product=product %}
   {% empty %}
-    <p class="w-100">Tidak ada produk yang cocok dengan pencarian Anda.</p>
+    <p class="w-full text-gray-600">Tidak ada produk yang cocok dengan pencarian Anda.</p>
   {% endfor %}
 </div>
 
-<nav class="mt-4" aria-label="Page navigation">
-  <ul class="pagination">
+<nav class="mt-8" aria-label="Page navigation">
+  <ul class="flex items-center -space-x-px h-10 text-sm">
     {% if products.has_previous %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ products.previous_page_number }}&q={{ q }}&sort={{ sort }}">Prev</a>
+      <li>
+        <a href="?page={{ products.previous_page_number }}&q={{ q }}&sort={{ sort }}" 
+           class="page-link flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700">
+          <span class="sr-only">Previous</span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+          </svg>
+        </a>
       </li>
     {% else %}
-      <li class="page-item disabled">
-        <span class="page-link">Prev</span>
+      <li>
+        <span class="flex items-center justify-center px-4 h-10 ml-0 leading-tight text-gray-400 bg-gray-100 border border-gray-300 rounded-l-lg cursor-not-allowed">
+          <span class="sr-only">Previous</span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 1 1 5l4 4"/>
+          </svg>
+        </span>
       </li>
     {% endif %}
     
-    <li class="page-item disabled">
-      <span class="page-link">Halaman {{ products.number }} dari {{ products.paginator.num_pages }}</span>
+    <li>
+      <span class="flex items-center justify-center px-4 h-10 leading-tight text-gray-700 bg-white border border-gray-300 z-10">
+        Halaman {{ products.number }} dari {{ products.paginator.num_pages }}
+      </span>
     </li>
     
     {% if products.has_next %}
-      <li class="page-item">
-        <a class="page-link" href="?page={{ products.next_page_number }}&q={{ q }}&sort={{ sort }}">Next</a>
+      <li>
+        <a href="?page={{ products.next_page_number }}&q={{ q }}&sort={{ sort }}" 
+           class="page-link flex items-center justify-center px-4 h-10 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700">
+          <span class="sr-only">Next</span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+        </a>
       </li>
     {% else %}
-      <li class="page-item disabled">
-        <span class="page-link">Next</span>
+      <li>
+        <span class="flex items-center justify-center px-4 h-10 leading-tight text-gray-400 bg-gray-100 border border-gray-300 rounded-r-lg cursor-not-allowed">
+          <span class="sr-only">Next</span>
+          <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 9 4-4-4-4"/>
+          </svg>
+        </span>
       </li>
     {% endif %}
   </ul>
