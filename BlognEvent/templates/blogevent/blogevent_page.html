@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blogs and Events</title>
+</head>
+<body>
+    <h1>Blogs and Events</h1>
+    
+    <div>
+        <a href="{% url 'BlogNEvent:event_form_page' %}">Create New Event</a>
+        <a href="{% url 'BlogNEvent:blog_form_page' %}">Create New Blog</a>
+    </div>
+    
+    <hr>
+    
+    <h2>Events</h2>
+    {% if events %}
+        {% for event in events %}
+        <div style="border: 1px solid black; padding: 10px; margin: 10px 0;">
+            <h3>{{ event.name }}</h3>
+            {% if event.image %}
+            <img src="{{ event.image }}" alt="{{ event.name }}" style="max-width: 200px;">
+            {% endif %}
+            <p>{{ event.description }}</p>
+            <p><strong>Start:</strong> {{ event.starting_date }}</p>
+            <p><strong>End:</strong> {{ event.ending_date }}</p>
+            <p><strong>Created by:</strong> {{ event.user.username }}</p>
+            {% if event.locations.all %}
+            <p><strong>Locations:</strong></p>
+            <ul>
+                {% for location in event.locations.all %}
+                <li>{{ location.name }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No events yet.</p>
+    {% endif %}
+    
+    <hr>
+    
+    <h2>Blogs</h2>
+    {% if blogs %}
+        {% for blog in blogs %}
+        <div style="border: 1px solid black; padding: 10px; margin: 10px 0;">
+            <h3>{{ blog.title }}</h3>
+            {% if blog.image %}
+            <img src="{{ blog.image }}" alt="{{ blog.title }}" style="max-width: 200px;">
+            {% endif %}
+            <p>{{ blog.body }}</p>
+            <p><strong>Author:</strong> {{ blog.author.username }}</p>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No blogs yet.</p>
+    {% endif %}
+</body>
+</html>

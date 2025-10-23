@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Event</title>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIG-OMzErXLto5j4iWW8NBn2Gtg0PAis"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        #map {
+            height: 400px;
+            width: 100%;
+            margin: 20px 0;
+        }
+        .location-item {
+            padding: 5px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <a href="{% url 'BlogNEvent:blogevent_page' %}" style="display: inline-block; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px; margin-bottom: 20px;">← Back</a>
+    
+    <h1>Create New Event</h1>
+    
+    <form method="POST" action="{% url 'BlogNEvent:create_event' %}" id="eventForm">
+        {% csrf_token %}
+        
+        <div>
+            <label>Name:</label>
+            {{ form.name }}
+        </div>
+        
+        <div>
+            <label>Image URL:</label>
+            {{ form.image }}
+        </div>
+        
+        <div>
+            <label>Description:</label>
+            {{ form.description }}
+        </div>
+        
+        <div>
+            <label>Starting Date:</label>
+            {{ form.starting_date }}
+        </div>
+        
+        <div>
+            <label>Ending Date:</label>
+            {{ form.ending_date }}
+        </div>
+        
+        <h3>Select Event Locations</h3>
+        <div id="map"></div>
+        
+        <div id="locationsList">
+            <h4>Available Locations:</h4>
+            {% for location in locations %}
+            <div class="location-item">
+                <input type="checkbox" 
+                       name="locations" 
+                       value="{{ location.id }}" 
+                       id="loc_{{ location.id }}">
+                <label for="loc_{{ location.id }}">{{ location.name }} - {{ location.address }}</label>
+            </div>
+            {% endfor %}
+        </div>
+        
+        <button type="submit">Create Event</button>
+        <a href="{% url 'BlogNEvent:blogevent_page' %}">Cancel</a>
+    </form>
+
+    <script>
+        let map;
+        let markers = [];
+        let geocoder;
+        const locations = JSON.parse('{{ locations_json|escapejs }}');
+
+        function initMap() {
+            // Initialize geocoder
+            geocoder = new google.maps.Geocoder();
+            
+            // Center map on Indonesia
+            const center = { lat: -6.2088, lng: 106.8456 };
+
+            map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: center
+            });
+
+            // Geocode and add markers for all locations
+            locations.forEach((location, index) => {
+                geocodeAddress(location, index);
+            });
+        }
+
+        function geocodeAddress(location, index) {
+            geocoder.geocode({ address: location.address }, (results, status) => {
+                if (status === 'OK') {
+                    const position = results[0].geometry.location;
+                    
+                    // If first location, center map on it
+                    if (index === 0) {
+                        map.setCenter(position);
+                    }
+                    
+                    const marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        title: location.name + ' - ' + location.address
+                    });
+
+                    // Add click listener to marker
+                    marker.addListener('click', () => {
+                        const checkbox = document.getElementById('loc_' + location.id);
+                        if (checkbox) {
+                            checkbox.checked = !checkbox.checked;
+                        }
+                    });
+
+                    markers.push(marker);
+                } else {
+                    console.error('Geocoding failed for ' + location.address + ': ' + status);
+                }
+            });
+        }
+
+        // Initialize map when page loads
+        window.onload = initMap;
+    </script>
+</body>
+</html>
