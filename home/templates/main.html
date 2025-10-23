@@ -3,13 +3,39 @@
 
 {% block title %}GetFit.Today - Home{% endblock %}
 
+{% block content %}
+<main class="container mx-auto px-4 py-8">
+    <section class="text-center py-8">
+        <h1 class="text-yellow-500 text-3xl md:text-5xl font-bold mb-8 hide-on-fullscreen">
+            "YOUR ONE-STOP SOLUTION TO GETTING FIT"
+        </h1>
+
+        <div id="map-wrapper">
+            <div id="sidebar">
+                <div class="sidebar-header">Fitness Spots</div>
+                <div id="sidebar-empty-state" class="hidden">
+                    <p>No fitness spots found in this area. Try panning or zooming the map.</p>
+                </div>
+                <div id="spot-cards-container"></div>
+            </div>
+            <div class="map-container-wrapper">
+                <div id="map"></div>
+                <div id="map-controls-container">
+                    <button id="fullscreen-toggle-btn" class="map-top-right-button" title="Toggle Fullscreen">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5"></path></svg>
+                    </button>
+                    <button id="sidebar-toggle-btn" class="map-top-right-button" title="Toggle Sidebar">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
+
 {% block extra_css %}
 <style>
-    :root {
-        --dark-blue: #233D8C;
-        --yellow: #E8B400;
-        --dark-yellow: #997010;
-    }
     html, body { background-color: var(--dark-blue); }
     main h1 { color: var(--yellow); }
 
@@ -26,14 +52,8 @@
     }
 
     body.full-screen-mode #map-wrapper {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        max-width: 100%;
-        border-radius: 0;
-        z-index: 50;
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+        max-width: 100%; border-radius: 0; z-index: 50;
     }
 
     #sidebar {
@@ -43,9 +63,12 @@
         overflow-y: auto;
         transition: width 0.4s ease-in-out;
         border-right: 2px solid var(--yellow);
+        display: flex;
+        flex-direction: column;
     }
+
     
-    body.full-screen-mode #sidebar { width: 320px; }
+    body.full-screen-mode.sidebar-visible #sidebar { width: 350px; }
 
     .sidebar-header {
         padding: 1rem;
@@ -54,6 +77,13 @@
         color: var(--yellow);
         text-align: center;
         border-bottom: 2px solid var(--yellow);
+        flex-shrink: 0;
+    }
+
+    #spot-cards-container {
+        padding: 8px;
+        overflow-y: auto;
+        flex-grow: 1;
     }
 
     .spot-card {
@@ -73,67 +103,63 @@
         border: 3px solid white;
         box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
     }
-    .spot-card h3 { font-weight: 700; color: #000; }
-    .spot-card p { font-size: 0.8rem; }
-
-    .map-container-wrapper {
-        flex-grow: 1;
-        position: relative;
+    .spot-card h3 { 
+        font-weight: 700; 
+        color: #000;
+        margin-bottom: 8px;
     }
-    #map { width: 100%; height: 100%; }
-    #fullscreen-toggle-btn {
-        position: absolute;
-        top: 10px;
-        right: 10px;
-        z-index: 100;
-        background-color: white;
+    .spot-card p { 
+        font-size: 0.85rem; 
+        color: #333;
+        margin-bottom: 4px;
+    }
+    .spot-card-rating {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        font-size: 0.9rem;
+        margin-top: 10px;
         color: var(--dark-blue);
-        padding: 8px;
-        border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        cursor: pointer;
-        border: 2px solid var(--dark-blue);
     }
+    .spot-card-rating svg {
+        fill: var(--dark-blue);
+        width: 16px;
+        height: 16px;
+    }
+
+    #sidebar-empty-state {
+        color: #a0aec0; text-align: center; padding: 40px 20px;
+        font-style: italic;
+    }
+    .hidden { display: none; }
+
+    .map-container-wrapper { flex-grow: 1; position: relative; }
+    #map { width: 100%; height: 100%; }
+
+    #map-controls-container {
+        position: absolute; top: 10px; right: 10px;
+        z-index: 100; display: flex; flex-direction: column; gap: 8px;
+    }
+    .map-top-right-button {
+        background-color: white; color: var(--dark-blue); padding: 8px;
+        border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+        cursor: pointer; border: 2px solid var(--dark-blue);
+        width: 40px; height: 40px;
+    }
+    #sidebar-toggle-btn { display: none; }
+    body.full-screen-mode #sidebar-toggle-btn { display: block; }
+
     body.full-screen-mode .hide-on-fullscreen { display: none; }
 
     .custom-map-control-button {
-    background-color: #fff;
-    border: 2px solid #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0,0,0,.3);
-    cursor: pointer;
-    margin: 10px;
-    padding: 8px;
-    text-align: center;
-    width: 40px;
-    height: 40px;
+        background-color: #fff; border: 2px solid #fff; border-radius: 8px;
+        box-shadow: 0 2px 6px rgba(0,0,0,.3); cursor: pointer; margin: 10px;
+        padding: 8px; text-align: center; width: 40px; height: 40px;
     }
-    .custom-map-control-button:hover {
-        background-color: #f4f4f4;
-    }
+    .custom-map-control-button:hover { background-color: #f4f4f4; }
 </style>
 {% endblock %}
 
-{% block content %}
-<section class="text-center py-8">
-    <h1 class="text-yellow-500 text-3xl md:text-5xl font-bold mb-8 hide-on-fullscreen">
-        "YOUR ONE-STOP SOLUTION TO GETTING FIT"
-    </h1>
-
-    <div id="map-wrapper">
-        <div id="sidebar">
-            <div class="sidebar-header">Fitness Spots</div>
-            <div id="spot-cards-container"></div>
-        </div>
-        <div class="map-container-wrapper">
-            <div id="map"></div>
-            <button id="fullscreen-toggle-btn" title="Toggle Fullscreen">
-                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5"></path></svg>
-            </button>
-        </div>
-    </div>
-</section>
-{% endblock %}
 {% block extra_js %}
   <script src="https://maps.googleapis.com/maps/api/js?key={{ google_api_key }}" defer></script>
   <script src="{% static 'home/js/map.js' %}" defer></script>
