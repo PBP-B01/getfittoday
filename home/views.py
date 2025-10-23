@@ -1,9 +1,16 @@
-from django.shortcuts import render
+import datetime
+from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import JsonResponse
 from django.core.cache import cache
 from django.db.models import Min, Max
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib import messages
+from django.urls import reverse
 from .models import FitnessSpot
+from .forms import StyledUserCreationForm, StyledAuthenticationForm
+from .utils.spots_loader import build_index_and_bounds, load_all_spots
+from django.shortcuts import render, redirect
 
 # --- Grid Configuration ---
 GRID_ORIGIN_LAT = -6.8  # Bottom-left corner of our grid (latitude)
@@ -104,3 +111,12 @@ def get_map_boundaries(request):
     }
     cache.set(cache_key, boundaries, 60 * 60 * 24 * 7)
     return JsonResponse(boundaries)
+
+def api_map_boundaries(request):
+    _, bounds = build_index_and_bounds()
+    return JsonResponse(bounds)
+
+def api_fitness_spots(request):
+    grid_id = request.GET.get("gridId", "")
+    index, _ = build_index_and_bounds()
+    return JsonResponse({"gridId": grid_id, "spots": index.get(grid_id, [])})

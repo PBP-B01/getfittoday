@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<section class="max-w-md mx-auto mt-10 bg-white/10 p-6 rounded-xl">
+  <h1 class="text-2xl font-bold mb-4 text-yellow-400 text-center">Login</h1>
+  <form id="loginForm" class="space-y-4">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.GET.next|default:'' }}">
+    <div>
+      <label class="block text-sm mb-1 text-white/90">Username</label>
+      <input name="username" class="w-full px-3 py-2 rounded text-blue-900" required autocomplete="username">
+    </div>
+
+    <div>
+      <label class="block text-sm mb-1 text-white/90">Password</label>
+      <input type="password" name="password" class="w-full px-3 py-2 rounded text-blue-900" required autocomplete="current-password">
+    </div>
+
+    <div id="loginMsg" class="hidden rounded-md bg-red-50 px-4 py-3 text-red-700 text-sm"></div>
+
+    <button id="loginBtn"
+            class="w-full bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-2 rounded disabled:opacity-60 disabled:cursor-not-allowed">
+      Login
+    </button>
+  </form>
+
+  <p class="mt-4 text-white/80 text-sm text-center">
+    Don't have an account?
+    <a href="{% url 'central:register' %}" class="text-yellow-300 underline">Register</a>
+  </p>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function getCookie(name){
+    const m = document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+
+  const form = document.getElementById('loginForm');
+  const btn  = document.getElementById('loginBtn');
+  const msg  = document.getElementById('loginMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.classList.add('hidden');
+    btn.disabled = true;
+
+    try {
+      const r = await fetch("{% url 'central:login_ajax' %}", {
+        method: "POST",
+        headers: { "X-CSRFToken": getCookie('csrftoken') },
+        body: new FormData(form),
+        credentials: "same-origin",
+      });
+
+      if (r.ok) {
+        const data = await r.json().catch(() => ({}));
+        const nextUrl = new URLSearchParams(new FormData(form)).get('next') || "";
+        window.location.href = data.redirect || nextUrl || "{% url 'home:home' %}";
+        return;
+      }
+
+      let txt = "Incorrect username or password";
+      try {
+        const data = await r.json();
+        if (data && data.errors) {
+          const firstKey = Object.keys(data.errors)[0];
+          const val = data.errors[firstKey];
+          txt = Array.isArray(val) ? val.join(', ') : (val || txt);
+        }
+      } catch (_) {}
+      msg.textContent = txt;
+      msg.classList.remove('hidden');
+
+    } catch (_) {
+      msg.textContent = "Fail to connect to server. Try again.";
+      msg.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
+{% endblock %}
