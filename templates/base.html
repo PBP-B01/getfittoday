@@ -15,18 +15,53 @@
 </head>
 <body class="bg-blue-900 min-h-screen font-sans text-white">
   <!-- Navbar -->
-  <nav class="bg-yellow-500 p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen">
+  <nav class="bg-yellow-500 p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate]">
     <div class="text-blue-900 font-bold text-2xl">GETFIT.TODAY</div>
 
-        <div class="hidden md:flex items-center space-x-6">
-            <a href="{% url 'home:home' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
-            <a href="#" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
-            <a href="#" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
-            <a href="{% url 'booking:booking_page' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">BOOKING</a>
-            <a href="#" class="text-blue-900 hover:text-blue-700 text-2xl">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-7 h-7"><path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" /></svg>
-            </a>
-        </div>
+    <!-- Desktop -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="{% url 'home:home' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
+      <a href="#" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
+      <a href="#" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
+
+      {% if request.user.is_authenticated %}
+        <a href="{% url 'booking:booking_page' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">BOOKING</a>
+      {% else %}
+        <a href="{% url 'central:login' %}?next={% url 'booking:booking_page' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">BOOKING</a>
+      {% endif %}
+
+      <!-- Desktop widget -->
+      <div class="relative" id="user-widget-desktop">
+        {% if request.user.is_authenticated %}
+          <button id="userMenuBtn" type="button"
+                  class="relative z-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-yellow-500 text-blue-900 border-2 border-blue-900 shadow"
+                  aria-haspopup="true" aria-expanded="false" aria-controls="userMenu" title="{{ request.user.username }}">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.239-8 5v1h16v-1c0-2.761-3.58-5-8-5Z"/>
+            </svg>
+          </button>
+          <div id="userMenu"
+               class="absolute right-0 z-50 mt-2 w-56 bg-white text-blue-900 rounded-xl shadow-2xl overflow-hidden hidden">
+            <div class="px-4 py-3 border-b border-gray-200">
+              <p class="text-xs text-gray-500">Signed in as</p>
+              <p class="font-semibold truncate">{{ request.user.username }}</p>
+            </div>
+            <form method="post" action="{% url 'central:logout' %}" class="p-1">
+              {% csrf_token %}
+              <button type="submit" class="w-full text-left px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">
+                Logout
+              </button>
+            </form>
+          </div>
+        {% else %}
+          <a href="{% url 'central:login' %}?next={{ request.get_full_path|urlencode }}"
+             class="inline-flex items-center px-4 py-2 rounded-lg border-2 border-blue-900 text-blue-900 font-semibold hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-300">
+            Login
+          </a>
+        {% endif %}
+      </div>
+    </div>
+  </nav>
 
     <!-- Mobile -->
     <div class="md:hidden flex items-center space-x-4">
@@ -80,7 +115,6 @@
     {% else %}
       <a href="{% url 'central:login' %}?next={% url 'booking:booking_page' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">BOOKING</a>
     {% endif %}
-        <a href="{% url 'booking:booking_page' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">BOOKING</a>
   </div>
 
   <main class="container mx-auto px-4 py-8 pt-6 relative z-0">
