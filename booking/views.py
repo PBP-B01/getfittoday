@@ -11,7 +11,23 @@ from home.utils.spots_loader import load_all_spots
 
 @login_required
 def booking_page(request):
-    spots = sorted(load_all_spots(), key=lambda s: (s["name"] or "").lower())
+    raw = load_all_spots()
+    spots = []
+    for s in raw:
+        if isinstance(s, dict):
+            spots.append({
+                "place_id": s.get("place_id"),
+                "name": s.get("name"),
+                "latitude": s.get("latitude"),
+                "longitude": s.get("longitude"),
+            })
+        else:
+            spots.append({
+                "place_id": getattr(s, "place_id"),
+                "name": getattr(s, "name"),
+                "latitude": getattr(s, "latitude"),
+                "longitude": getattr(s, "longitude"),
+            })
     return render(request, "booking_form.html", {"spots": spots})
 
 class AvailabilityView(views.APIView):

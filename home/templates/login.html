@@ -1,65 +1,87 @@
 {% extends "base.html" %}
+{% load static %}
 {% block title %}Login{% endblock %}
 
 {% block content %}
-<div class="min-h-[70vh] flex items-center justify-center">
-  <div class="w-full max-w-lg bg-white/10 rounded-xl p-8 shadow-lg">
-    <h1 class="text-2xl font-extrabold text-center mb-6">Login</h1>
-
-    {# pesan sukses/gagal #}
-    {% if messages %}
-    <div class="space-y-2 mb-4">
-        {% for message in messages %}
-        {% if 'success' in message.tags %}
-            <div class="px-4 py-3 rounded bg-green-100 text-green-900">
-            {{ message }}
-            </div>
-        {% elif 'error' in message.tags %}
-            <div class="px-4 py-3 rounded bg-red-100 text-red-900">
-            {{ message }}
-            </div>
-        {% else %}
-            <div class="px-4 py-3 rounded bg-gray-100 text-gray-900">
-            {{ message }}
-            </div>
-        {% endif %}
-        {% endfor %}
+<section class="max-w-md mx-auto mt-10 bg-white/10 p-6 rounded-xl">
+  <h1 class="text-2xl font-bold mb-4 text-yellow-400 text-center">Login</h1>
+  <form id="loginForm" class="space-y-4">
+    {% csrf_token %}
+    <input type="hidden" name="next" value="{{ request.GET.next|default:'' }}">
+    <div>
+      <label class="block text-sm mb-1 text-white/90">Username</label>
+      <input name="username" class="w-full px-3 py-2 rounded text-blue-900" required autocomplete="username">
     </div>
-    {% endif %}
-    {% if form.non_field_errors %}
-      <div class="px-4 py-3 rounded bg-red-100 text-red-900 mb-4">
-        {% for err in form.non_field_errors %}{{ err }}{% endfor %}
-      </div>
-    {% endif %}
 
-    <form method="post" class="space-y-4">
-      {% csrf_token %}
-      <input type="hidden" name="next" value="{{ next }}">
+    <div>
+      <label class="block text-sm mb-1 text-white/90">Password</label>
+      <input type="password" name="password" class="w-full px-3 py-2 rounded text-blue-900" required autocomplete="current-password">
+    </div>
 
-      <div>
-        <label class="block text-sm text-white/80 mb-1">Username</label>
-        <input name="username" type="text" required
-               class="w-full text-blue-900 px-3 py-2 rounded"
-               placeholder="Username" />
-      </div>
+    <div id="loginMsg" class="hidden rounded-md bg-red-50 px-4 py-3 text-red-700 text-sm"></div>
 
-      <div>
-        <label class="block text-sm text-white/80 mb-1">Password</label>
-        <input name="password" type="password" required
-               class="w-full text-blue-900 px-3 py-2 rounded"
-               placeholder="Password" />
-      </div>
+    <button id="loginBtn"
+            class="w-full bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-2 rounded disabled:opacity-60 disabled:cursor-not-allowed">
+      Login
+    </button>
+  </form>
 
-      <button type="submit"
-              class="w-full bg-yellow-400 text-blue-900 font-bold py-2 rounded hover:bg-yellow-300">
-        Masuk
-      </button>
-    </form>
+  <p class="mt-4 text-white/80 text-sm text-center">
+    Don't have an account?
+    <a href="{% url 'home:register' %}" class="text-yellow-300 underline">Register</a>
+  </p>
+</section>
+{% endblock %}
 
-    <p class="mt-4 text-center text-white/80 text-sm">
-      Don't have an account yet?
-      <a href="{% url 'home:register' %}" class="underline">Register</a>
-    </p>
-  </div>
-</div>
+{% block extra_js %}
+<script>
+  function getCookie(name){
+    const m = document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
+
+  const form = document.getElementById('loginForm');
+  const btn  = document.getElementById('loginBtn');
+  const msg  = document.getElementById('loginMsg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    msg.classList.add('hidden');
+    btn.disabled = true;
+
+    try {
+      const r = await fetch("{% url 'home:login_ajax' %}", {
+        method: "POST",
+        headers: { "X-CSRFToken": getCookie('csrftoken') },
+        body: new FormData(form),
+        credentials: "same-origin",
+      });
+
+      if (r.ok) {
+        const data = await r.json().catch(() => ({}));
+        const nextUrl = new URLSearchParams(new FormData(form)).get('next') || "";
+        window.location.href = data.redirect || nextUrl || "{% url 'home:home' %}";
+        return;
+      }
+
+      let txt = "Incorrect username or password";
+      try {
+        const data = await r.json();
+        if (data && data.errors) {
+          const firstKey = Object.keys(data.errors)[0];
+          const val = data.errors[firstKey];
+          txt = Array.isArray(val) ? val.join(', ') : (val || txt);
+        }
+      } catch (_) {}
+      msg.textContent = txt;
+      msg.classList.remove('hidden');
+
+    } catch (_) {
+      msg.textContent = "Fail to connect to server. Try again.";
+      msg.classList.remove('hidden');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>
 {% endblock %}

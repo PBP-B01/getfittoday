@@ -17,9 +17,8 @@
     {% block extra_css %}{% endblock %}
 </head>
 <body class="bg-blue-900 min-h-screen font-sans text-white">
-
     <!-- Navbar -->
-    <nav class="bg-yellow-500 p-4 flex items-center justify-between shadow-md rounded-b-lg relative z-20">
+    <nav class="bg-yellow-500 p-4 flex items-center justify-between shadow-md rounded-b-lg relative z-30">
         <div class="text-blue-900 font-bold text-2xl">
             GETFIT.TODAY 
         </div>
@@ -132,9 +131,38 @@
             mobileMenu.classList.toggle('hidden');
         });
     </script>
-    
-    {% block extra_js %}{% endblock %}
+    <script src="{% static 'home/js/user-menu.js' %}"></script>
+    {% block extra_js %}
+    {% endblock %}
+    <script>
+    (() => {
+    const btn  = document.getElementById('userMenuBtn');
+    const menu = document.getElementById('userMenu');
+    if (!btn || !menu) return;
 
+    const close = (e) => {
+        if (!menu.contains(e.target) && !btn.contains(e.target)) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        document.removeEventListener('click', close);
+        }
+    };
+
+    btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const open = !menu.classList.contains('hidden');
+        if (open) {
+        menu.classList.add('hidden');
+        btn.setAttribute('aria-expanded', 'false');
+        document.removeEventListener('click', close);
+        } else {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+        setTimeout(() => document.addEventListener('click', close), 0);
+        }
+    });
+    })();
+    </script>
 </body>
 </html>
 

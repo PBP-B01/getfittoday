@@ -1,3 +1,4 @@
+import datetime
 from django.shortcuts import render, redirect
 from django.conf import settings
 from django.http import JsonResponse
@@ -6,36 +7,53 @@ from django.db.models import Min, Max
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib import messages
 from django.urls import reverse
-from django.contrib.auth import login as auth_login, logout
+from django.contrib.auth import login, logout
 from .models import FitnessSpot
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
 from .utils.spots_loader import build_index_and_bounds, load_all_spots
-
-def register(request):
-    form = StyledUserCreationForm(request.POST or None)
-    if request.method == "POST":
-        if form.is_valid():
-            form.save()
-            messages.success(request, "Akun berhasil dibuat. Silakan login.")
-            return redirect('home:login')
-        messages.error(request, "Registrasi gagal. Cek isianmu.")
-    return render(request, 'register.html', {'form': form})
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.views.decorators.http import require_POST
 
 def login_user(request):
-    next_url = request.POST.get('next') or request.GET.get('next') or 'home:home'
-    if request.method == 'POST':
-        form = StyledAuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            auth_login(request, form.get_user())
-            return redirect(next_url)
-        messages.error(request, "Username atau password salah.")
-    else:
-        form = StyledAuthenticationForm(request)
-    return render(request, 'login.html', {'form': form, 'next': next_url})
+    return render(request, "login.html")
+
+def register(request):
+    return render(request, "register.html")
 
 def logout_user(request):
     logout(request)
-    return redirect('home:login')
+    return redirect("home:home")
+
+@require_POST
+def login_ajax(request):
+    form = AuthenticationForm(request, data=request.POST)
+    if form.is_valid():
+        user = form.get_user()
+        login(request, user)
+        next_url = request.POST.get("next") or request.GET.get("next") or reverse("home:home")
+
+        resp = JsonResponse({
+            "ok": True,
+            "redirect": next_url,
+            "username": user.username,
+        })
+        resp.set_cookie("last_login", str(datetime.datetime.now()))
+        return resp
+    return JsonResponse({"ok": False, "errors": form.errors}, status=400)
+
+@require_POST
+def register_ajax(request):
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+        form.save()
+        return JsonResponse({"ok": True, "redirect": reverse("home:login")})
+    return JsonResponse({"ok": False, "errors": form.errors}, status=400)
+
+@require_POST
+def logout_ajax(request):
+    logout(request)
+    return JsonResponse({"ok": True, "redirect": reverse("home:home")})
 
 # --- Grid Configuration ---
 GRID_ORIGIN_LAT = -6.8  # Bottom-left corner of our grid (latitude)

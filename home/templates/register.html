@@ -1,54 +1,83 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}Register{% endblock %}
 
 {% block content %}
-<div class="min-h-[70vh] flex items-center justify-center">
-  <div class="relative z-20 w-full max-w-xl bg-white/10 rounded-xl p-8 shadow-lg">
-    <h1 class="text-2xl font-extrabold text-center mb-8">Register</h1>
+<section class="max-w-md mx-auto mt-10 bg-white/10 p-6 rounded-xl">
+  <h1 class="text-2xl font-bold mb-4 text-yellow-400">Register</h1>
 
-    {% if messages %}
-      <div class="space-y-2 mb-4">
-        {% for message in messages %}
-          <div class="px-4 py-3 rounded
-                      {% if 'success' in message.tags %} bg-green-100 text-green-900
-                      {% elif 'error' in message.tags %} bg-red-100 text-red-900
-                      {% else %} bg-gray-100 text-gray-900 {% endif %}">
-            {{ message }}
-          </div>
-        {% endfor %}
-      </div>
-    {% endif %}
+  <form id="regForm" class="space-y-4">
+    {% csrf_token %}
+    <div>
+      <label class="block text-sm mb-1 text-white/90">Username</label>
+      <input name="username" class="w-full px-3 py-2 rounded text-blue-900" required>
+    </div>
+    <div>
+      <label class="block text-sm mb-1 text-white/90">Password</label>
+      <input type="password" name="password1" class="w-full px-3 py-2 rounded text-blue-900" required>
+    </div>
+    <div>
+      <label class="block text-sm mb-1 text-white/90">Confirm Password</label>
+      <input type="password" name="password2" class="w-full px-3 py-2 rounded text-blue-900" required>
+    </div>
 
-    <form method="post" class="space-y-5">
-      {% csrf_token %}
+    <div id="regErrors" class="text-red-300 text-sm"></div>
 
-      <div>
-        <label class="block text-sm mb-1">Username</label>
-        {{ form.username }}
-        {% for e in form.username.errors %}<p class="text-sm text-red-300 mt-1">{{ e }}</p>{% endfor %}
-      </div>
+    <button id="regBtn"
+            class="w-full bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-2 rounded">
+      Register
+    </button>
+  </form>
 
-      <div>
-        <label class="block text-sm mb-1">Password</label>
-        {{ form.password1 }}
-        {% for e in form.password1.errors %}<p class="text-sm text-red-300 mt-1">{{ e }}</p>{% endfor %}
-      </div>
+  <p class="mt-4 text-white/80 text-sm">
+    Already have an account? <a href="{% url 'home:login' %}" class="text-yellow-300 underline">Login</a>
+  </p>
+</section>
+{% endblock %}
 
-      <div>
-        <label class="block text-sm mb-1">Confirm Password</label>
-        {{ form.password2 }}
-        {% for e in form.password2.errors %}<p class="text-sm text-red-300 mt-1">{{ e }}</p>{% endfor %}
-      </div>
+{% block extra_js %}
+<script>
+  function getCookie(n){
+    const m = document.cookie.match('(^|;)\\s*'+n+'\\s*=\\s*([^;]+)');
+    return m ? m.pop() : '';
+  }
 
-      <button type="submit"
-              class="w-full bg-yellow-400 text-blue-900 font-bold py-3 rounded hover:bg-yellow-300">
-        Daftar
-      </button>
-    </form>
+  const form = document.getElementById('regForm');
+  const out  = document.getElementById('regErrors');
+  const btn  = document.getElementById('regBtn');
 
-    <p class="mt-6 text-center text-white/80">
-      Sudah punya akun? <a href="{% url 'home:login' %}" class="underline">Login</a>
-    </p>
-  </div>
-</div>
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    out.textContent = '';
+    btn.disabled = true;
+
+    const fd = new FormData(form);
+    try {
+      const r = await fetch("{% url 'home:register_ajax' %}", {
+        method: "POST",
+        headers: {"X-CSRFToken": getCookie('csrftoken')},
+        body: fd,
+        credentials: "same-origin",
+      });
+
+      const data = await r.json();
+      if (!r.ok || !data.ok) {
+        if (data.errors) {
+          out.innerHTML = Object.entries(data.errors)
+            .map(([field, msgs]) => `<div>${field}: ${(Array.isArray(msgs)?msgs.join(', '):msgs)}</div>`)
+            .join('');
+        } else {
+          out.textContent = "Registrasi gagal.";
+        }
+        btn.disabled = false;
+        return;
+      }
+      window.location.href = data.redirect || "{% url 'home:login' %}";
+    } catch (err) {
+      out.textContent = "Terjadi kesalahan jaringan. Cobalah lagi.";
+      btn.disabled = false;
+    }
+  });
+</script>
 {% endblock %}
