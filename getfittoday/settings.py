@@ -68,6 +68,7 @@ INSTALLED_APPS = [
     'home',
     'booking',
     'rest_framework',
+    'central',
 ]
 
 REST_FRAMEWORK = {
@@ -95,7 +96,7 @@ ROOT_URLCONF = 'getfittoday.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -144,6 +145,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'},
 ]
 
+LOGIN_URL = "central:login"
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/" 
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

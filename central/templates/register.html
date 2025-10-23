@@ -31,7 +31,7 @@
   </form>
 
   <p class="mt-4 text-white/80 text-sm">
-    Already have an account? <a href="{% url 'home:login' %}" class="text-yellow-300 underline">Login</a>
+    Already have an account? <a href="{% url 'central:login_ajax' %}" class="text-yellow-300 underline">Login</a>
   </p>
 </section>
 {% endblock %}
@@ -54,7 +54,7 @@
 
     const fd = new FormData(form);
     try {
-      const r = await fetch("{% url 'home:register_ajax' %}", {
+      const r = await fetch("{% url 'central:register_ajax' %}", {
         method: "POST",
         headers: {"X-CSRFToken": getCookie('csrftoken')},
         body: fd,
@@ -73,7 +73,7 @@
         btn.disabled = false;
         return;
       }
-      window.location.href = data.redirect || "{% url 'home:login' %}";
+      window.location.href = data.redirect || "{% url 'central:login' %}";
     } catch (err) {
       out.textContent = "Terjadi kesalahan jaringan. Cobalah lagi.";
       btn.disabled = false;
