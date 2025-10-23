@@ -10,7 +10,32 @@ from django.urls import reverse
 from .models import FitnessSpot
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
 from .utils.spots_loader import build_index_and_bounds, load_all_spots
-from django.shortcuts import render, redirect
+
+def register(request):
+    form = StyledUserCreationForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Akun berhasil dibuat. Silakan login.")
+            return redirect('home:login')
+        messages.error(request, "Registrasi gagal. Cek isianmu.")
+    return render(request, 'register.html', {'form': form})
+
+def login_user(request):
+    next_url = request.POST.get('next') or request.GET.get('next') or 'home:home'
+    if request.method == 'POST':
+        form = StyledAuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            auth_login(request, form.get_user())
+            return redirect(next_url)
+        messages.error(request, "Username atau password salah.")
+    else:
+        form = StyledAuthenticationForm(request)
+    return render(request, 'login.html', {'form': form, 'next': next_url})
+
+def logout_user(request):
+    logout(request)
+    return redirect('home:login')
 
 # --- Grid Configuration ---
 GRID_ORIGIN_LAT = -6.8  # Bottom-left corner of our grid (latitude)
