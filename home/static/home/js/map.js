@@ -352,15 +352,22 @@ function getUserLocation() {
 
 function toggleFullScreen() {
     const isFullScreen = document.body.classList.toggle('full-screen-mode');
-    
+
     if (!isFullScreen) {
         document.body.classList.remove('sidebar-visible');
     }
+
+    const enterIcon = document.getElementById('fullscreen-enter-icon');
+    const exitIcon = document.getElementById('fullscreen-exit-icon');
+
+    if (isFullScreen) {
+        enterIcon.classList.add('hidden');
+        exitIcon.classList.remove('hidden');
+    } else {
+        enterIcon.classList.remove('hidden');
+        exitIcon.classList.add('hidden');
+    }
     
-    const btn = document.getElementById('fullscreen-toggle-btn');
-    const enterIcon = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5"></path></svg>`;
-    const exitIcon = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5m0 0l-1-1m1 1l1 1m4-11h5m0 0l1 1m-1-1l-1-1M5 19v-4m0 0l-1 1m1-1l1-1m10 4v-4m0 0l1 1m-1-1l-1-1"></path></svg>`;
-    btn.innerHTML = document.body.classList.contains('full-screen-mode') ? exitIcon : enterIcon;
     setTimeout(() => google.maps.event.trigger(map, 'resize'), 400);
 }
 
