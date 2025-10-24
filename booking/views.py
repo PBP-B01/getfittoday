@@ -10,8 +10,9 @@ from .models import Resource, Booking
 from home.utils.spots_loader import load_all_spots
 from django.db import transaction, IntegrityError
 from decimal import Decimal
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Case, When, Value, IntegerField, BooleanField
+from django.db.models.functions import Coalesce
 from uuid import UUID
 
 @login_required(login_url="/login/")
@@ -34,6 +35,46 @@ def booking_page(request):
                 "longitude": getattr(s, "longitude"),
             })
     return render(request, "booking_form.html", {"spots": spots})
+
+@login_required(login_url="/login/")
+def my_bookings_page(request):
+    has_created = any(getattr(f, "name", None) == "created_at" for f in Booking._meta.get_fields())
+
+    base = (Booking.objects
+            .filter(user=request.user)
+            .select_related("resource")
+            .annotate(
+                status_prio=Case(
+                    When(status=BookingStatus.PENDING, then=Value(0)),
+                    default=Value(1),
+                    output_field=IntegerField(),
+                )
+            ))
+
+    if has_created:
+        qs = base.order_by("status_prio", "-created_at", "-start_time")
+    else:
+        qs = base.order_by("status_prio", "-start_time")
+
+    tz = timezone.get_current_timezone()
+    now = timezone.now()
+
+    items = []
+    for b in qs:
+        place = (getattr(b.resource, "name", None)
+                 or getattr(b.resource, "location_name", None)
+                 or getattr(b.resource, "place_id", ""))
+
+        items.append({
+            "id": str(b.id),
+            "place_name": place,
+            "start": timezone.localtime(b.start_time, tz),
+            "end": timezone.localtime(b.end_time, tz),
+            "status": b.status,
+            "can_cancel": b.start_time > now and b.status in [BookingStatus.PENDING, BookingStatus.CONFIRMED],
+        })
+
+    return render(request, "my_bookings.html", {"items": items})
 
 def _resolve_resource(rid: str | None, label: str | None):
     qs = Resource.objects.all()
@@ -217,14 +258,6 @@ class MyBookingAPI(views.APIView):
             })
         return Response(out, status=200)
 
-@login_required(login_url="/login/")
-def my_bookings_page(request):
-    qs = (Booking.objects
-          .filter(user=request.user)
-          .select_related("resource")
-          .order_by("-start_time"))
-    return render(request, "my_bookings.html", {"bookings": qs})
-
 class BookingCancelView(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
 
@@ -233,4 +266,8 @@ class BookingCancelView(views.APIView):
         if b.start_time > timezone.now() and b.status in [BookingStatus.PENDING, BookingStatus.CONFIRMED]:
             b.status = BookingStatus.CANCELLED
             b.save(update_fields=["status"])
+
+        if "text/html" in request.META.get("HTTP_ACCEPT", ""):
+            return redirect("booking:mine_page")
+
         return Response({"status": b.status}, status=200)
