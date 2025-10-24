@@ -9,5 +9,5 @@ urlpatterns = [
     path("book/", views.BookingCreateView.as_view(), name="book"),
     path("mine/", views.my_bookings_page, name="mine_page"),
     path("api/mine/", views.MyBookingAPI.as_view(), name="mine_api"),
-    path("cancel/<uuid:pk>/", views.BookingCancelView.as_view(), name="booking-cancel"),
+    path("cancel/<str:pk>/", views.BookingCancelView.as_view(), name="booking-cancel"),
 ]

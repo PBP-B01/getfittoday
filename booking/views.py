@@ -38,7 +38,8 @@ def booking_page(request):
 
 @login_required(login_url="/login/")
 def my_bookings_page(request):
-    has_created = any(getattr(f, "name", None) == "created_at" for f in Booking._meta.get_fields())
+    tz = timezone.get_current_timezone()
+    now = timezone.now()
 
     base = (Booking.objects
             .filter(user=request.user)
@@ -46,35 +47,30 @@ def my_bookings_page(request):
             .annotate(
                 status_prio=Case(
                     When(status=BookingStatus.PENDING, then=Value(0)),
-                    default=Value(1),
-                    output_field=IntegerField(),
+                    default=Value(1), output_field=IntegerField(),
                 )
-            ))
-
-    if has_created:
-        qs = base.order_by("status_prio", "-created_at", "-start_time")
-    else:
-        qs = base.order_by("status_prio", "-start_time")
-
-    tz = timezone.get_current_timezone()
-    now = timezone.now()
+            )
+            .order_by("status_prio", "-start_time"))
 
     items = []
-    for b in qs:
+    for b in base:
         place = (getattr(b.resource, "name", None)
                  or getattr(b.resource, "location_name", None)
                  or getattr(b.resource, "place_id", ""))
-
         items.append({
             "id": str(b.id),
             "place_name": place,
-            "start": timezone.localtime(b.start_time, tz),
-            "end": timezone.localtime(b.end_time, tz),
+            "start": to_local(b.start_time, tz),
+            "end":   to_local(b.end_time, tz),
             "status": b.status,
             "can_cancel": b.start_time > now and b.status in [BookingStatus.PENDING, BookingStatus.CONFIRMED],
         })
-
     return render(request, "my_bookings.html", {"items": items})
+
+def to_local(dt, tz):
+    if not dt:
+        return dt
+    return timezone.localtime(dt, tz) if timezone.is_aware(dt) else timezone.make_aware(dt, tz)
 
 def _resolve_resource(rid: str | None, label: str | None):
     qs = Resource.objects.all()
