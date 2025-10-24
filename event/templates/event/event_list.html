@@ -7,12 +7,10 @@
 <div class="max-w-4xl mx-auto text-white">
   <h1 class="text-3xl font-bold mb-6 text-yellow-400 text-center">Community Events</h1>
 
-  <!-- Jika belum ada event -->
   {% if not events %}
     <p class="text-center text-gray-300">Belum ada event untuk ditampilkan.</p>
   {% endif %}
 
-  <!-- Daftar event -->
   <div id="eventList" class="space-y-6">
     {% for event in events %}
       <div id="event-{{ event.id }}" class="bg-blue-800 rounded-2xl p-6 shadow-md border border-blue-700">
@@ -21,19 +19,34 @@
         <p class="mt-1 text-sm text-gray-400">
           📅 {{ event.date }} &nbsp;&nbsp;📍 {{ event.location }}
         </p>
+        <p class="mt-1 text-sm text-gray-500">
+          Komunitas: {{ event.community_name }}
+        </p>
 
-        <!-- Tombol aksi -->
         <div class="mt-4 flex space-x-3">
           {% if user.is_authenticated %}
-            {% if event.created_by == user %}
-              <button class="edit-btn bg-yellow-400 text-blue-900 font-semibold px-4 py-1 rounded hover:bg-yellow-300" data-id="{{ event.id }}">
+            {% if event.can_edit %}
+              <button class="edit-btn bg-yellow-400 text-blue-900 font-semibold px-4 py-1 rounded hover:bg-yellow-300"
+                data-id="{{ event.id }}"
+                data-name="{{ event.name }}"
+                data-desc="{{ event.description }}"
+                data-date="{{ event.date }}"
+                data-loc="{{ event.location }}">
                 Edit
               </button>
-              <button class="delete-btn bg-red-500 text-white font-semibold px-4 py-1 rounded hover:bg-red-400" data-id="{{ event.id }}">
+            {% endif %}
+            
+            {% if event.can_delete %}
+              <button class="delete-btn bg-red-500 text-white font-semibold px-4 py-1 rounded hover:bg-red-400"
+                data-id="{{ event.id }}"
+                data-name="{{ event.name }}">
                 Delete
               </button>
-            {% else %}
-              <button class="join-btn bg-green-500 text-white font-semibold px-4 py-1 rounded hover:bg-green-400" data-id="{{ event.id }}">
+            {% endif %}
+            
+            {% if not event.can_edit %}
+              <button class="join-btn bg-green-500 text-white font-semibold px-4 py-1 rounded hover:bg-green-400"
+                data-id="{{ event.id }}">
                 Join
               </button>
             {% endif %}
@@ -45,32 +58,34 @@
     {% endfor %}
   </div>
 
-  <!-- Tombol buat event (hanya admin / komunitas admin) -->
   {% if user.is_authenticated %}
     <div class="text-center mt-8">
       <button id="createBtn" class="bg-yellow-400 text-blue-900 font-bold px-6 py-2 rounded-full hover:bg-yellow-300 shadow-md">
         + Buat Event Baru
       </button>
+      <p class="text-sm text-gray-400 mt-2">Sementara event akan dibuat untuk komunitas default</p>
     </div>
   {% endif %}
 </div>
 
-<!-- Modal Form -->
 <div id="eventModal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
   <div class="bg-blue-900 rounded-2xl p-6 w-full max-w-md">
-    <h2 class="text-2xl font-bold text-yellow-300 mb-4">Buat Event</h2>
+    <h2 id="modalTitle" class="text-2xl font-bold text-yellow-300 mb-4">Buat Event</h2>
     <form id="eventForm" class="space-y-3">
-      <input type="text" name="name" placeholder="Nama event" required class="w-full px-3 py-2 rounded-lg text-black">
-      <input type="datetime-local" name="date" required class="w-full px-3 py-2 rounded-lg text-black">
-      <input type="text" name="location" placeholder="Lokasi" required class="w-full px-3 py-2 rounded-lg text-black">
-      <textarea name="description" placeholder="Deskripsi" required class="w-full px-3 py-2 rounded-lg text-black"></textarea>
+      <input type="hidden" id="event_id" name="event_id" value="">
+      <input type="text" id="event_name" name="name" placeholder="Nama event" required class="w-full px-3 py-2 rounded-lg text-black">
+      <input type="datetime-local" id="event_date" name="date" required class="w-full px-3 py-2 rounded-lg text-black">
+      <input type="text" id="event_location" name="location" placeholder="Lokasi" required class="w-full px-3 py-2 rounded-lg text-black">
+      <textarea id="event_description" name="description" placeholder="Deskripsi" required class="w-full px-3 py-2 rounded-lg text-black" rows="4"></textarea>
       <div class="flex justify-end space-x-3 pt-2">
         <button type="button" id="closeModal" class="px-4 py-2 bg-gray-600 rounded-lg hover:bg-gray-500">Batal</button>
-        <button type="submit" class="px-4 py-2 bg-yellow-400 text-blue-900 font-semibold rounded-lg hover:bg-yellow-300">Simpan</button>
+        <button type="submit" id="saveBtn" class="px-4 py-2 bg-yellow-400 text-blue-900 font-semibold rounded-lg hover:bg-yellow-300">Simpan</button>
       </div>
     </form>
   </div>
 </div>
+
+<div id="toastContainer" class="fixed bottom-8 right-8 z-50 space-y-3"></div>
 {% endblock %}
 
 {% block extra_js %}
@@ -78,56 +93,200 @@
   const createBtn = document.getElementById('createBtn');
   const eventModal = document.getElementById('eventModal');
   const closeModal = document.getElementById('closeModal');
+  const eventForm = document.getElementById('eventForm');
+  const modalTitle = document.getElementById('modalTitle');
+  const saveBtn = document.getElementById('saveBtn');
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+
+  function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toastContainer');
+
+    const toast = document.createElement('div');
+    toast.className = `transform transition-all duration-300 ease-in-out max-w-sm`;
+
+    let icon, bgColor, borderColor;
+    if (type === 'success') {
+      icon = '✓';
+      bgColor = 'bg-green-500';
+      borderColor = 'border-green-600';
+    } else {
+      icon = '';
+      bgColor = 'bg-red-500';
+      borderColor = 'border-red-600';
+    }
+    
+    toast.innerHTML = `
+      <div class="${bgColor} ${borderColor} border-l-4 text-white px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3">
+        <span class="text-2xl font-bold">${icon}</span>
+        <span class="flex-1">${message}</span>
+        <button class="text-white hover:text-gray-200 font-bold text-xl" onclick="this.parentElement.parentElement.remove()">×</button>
+      </div>
+    `;
+
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+      toast.style.opacity = '1';
+      toast.style.transform = 'translateX(0)';
+    }, 10);
+
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      toast.style.transform = 'translateX(100%)';
+      setTimeout(() => toast.remove(), 300);
+    }, 5000);
+  }
 
   if (createBtn) {
     createBtn.addEventListener('click', () => {
+      modalTitle.textContent = 'Buat Event';
+      eventForm.reset();
+      document.getElementById('event_id').value = '';
+      saveBtn.textContent = 'Simpan';
       eventModal.classList.remove('hidden');
     });
   }
 
-  if (closeModal) {
-    closeModal.addEventListener('click', () => {
-      eventModal.classList.add('hidden');
-    });
-  }
+  closeModal.addEventListener('click', () => {
+    eventModal.classList.add('hidden');
+  });
 
-  // Create event (AJAX)
-  const eventForm = document.getElementById('eventForm');
-  if (eventForm) {
-    eventForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      const formData = {
-        name: e.target.name.value,
-        description: e.target.description.value,
-        date: e.target.date.value,
-        location: e.target.location.value
-      };
-      const response = await fetch('/event/create/', {
+  eventModal.addEventListener('click', (e) => {
+    if (e.target === eventModal) {
+      eventModal.classList.add('hidden');
+    }
+  });
+
+  eventForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const eventId = document.getElementById('event_id').value;
+    const isEdit = !!eventId;
+    const url = isEdit ? `/event/edit/${eventId}/` : `/event/create/`;
+
+    const formData = {
+      name: document.getElementById('event_name').value,
+      description: document.getElementById('event_description').value,
+      date: document.getElementById('event_date').value,
+      location: document.getElementById('event_location').value,
+      community: 1, // ini hardcode
+    };
+
+    try {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'X-CSRFToken': '{{ csrf_token }}'
+          'X-CSRFToken': csrftoken,
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(formData),
       });
-      const result = await response.json();
-      alert(result.message || result.status);
-      if (result.status === 'success') location.reload();
-    });
-  }
 
-  // Delete event (AJAX)
+      const result = await response.json();
+      
+      if (response.ok && result.status === 'success') {
+        showToast(result.message, 'success');
+        eventModal.classList.add('hidden');
+        setTimeout(() => location.reload(), 1000);
+      } else {
+        showToast(result.message || 'Terjadi kesalahan', 'error');
+      }
+    } catch (error) {
+      showToast('Gagal menghubungi server', 'error');
+      console.error('Error:', error);
+    }
+  });
+
+  document.querySelectorAll('.edit-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      modalTitle.textContent = 'Edit Event';
+      saveBtn.textContent = 'Update';
+      
+      document.getElementById('event_id').value = btn.dataset.id;
+      document.getElementById('event_name').value = btn.dataset.name;
+      document.getElementById('event_description').value = btn.dataset.desc;
+      document.getElementById('event_location').value = btn.dataset.loc;
+
+      const dateStr = btn.dataset.date.replace(' ', 'T');
+      document.getElementById('event_date').value = dateStr;
+      
+      eventModal.classList.remove('hidden');
+    });
+  });
+
   document.querySelectorAll('.delete-btn').forEach(btn => {
     btn.addEventListener('click', async () => {
-      const id = btn.dataset.id;
-      if (!confirm('Hapus event ini?')) return;
-      const response = await fetch(`/event/delete/${id}/`, {
-        method: 'POST',
-        headers: { 'X-CSRFToken': '{{ csrf_token }}' }
-      });
-      const result = await response.json();
-      alert(result.message);
-      if (result.status === 'success') location.reload();
+      const eventName = btn.dataset.name;
+      if (!confirm(`Yakin ingin menghapus event "${eventName}"?`)) return;
+
+      try {
+        const response = await fetch(`/event/delete/${btn.dataset.id}/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': csrftoken,
+          },
+        });
+
+        const result = await response.json();
+        
+        if (response.ok && result.status === 'success') {
+          showToast(result.message, 'success');
+          const eventElement = document.getElementById(`event-${btn.dataset.id}`);
+          if (eventElement) {
+            eventElement.style.transition = 'opacity 0.3s';
+            eventElement.style.opacity = '0';
+            setTimeout(() => eventElement.remove(), 300);
+          }
+        } else {
+          showToast(result.message || 'Gagal menghapus event', 'error');
+        }
+      } catch (error) {
+        showToast('Gagal menghubungi server', 'error');
+        console.error('Error:', error);
+      }
+    });
+  });
+
+  document.querySelectorAll('.join-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      try {
+        const response = await fetch(`/event/join/${btn.dataset.id}/`, {
+          method: 'POST',
+          headers: {
+            'X-CSRFToken': csrftoken,
+          },
+        });
+
+        const result = await response.json();
+        
+        if (response.ok && result.status === 'success') {
+          showToast(result.message, 'success');
+          btn.textContent = 'Joined ✓';
+          btn.disabled = true;
+          btn.classList.remove('hover:bg-green-400');
+          btn.classList.add('bg-gray-500', 'cursor-not-allowed');
+        } else {
+          showToast(result.message || 'Gagal bergabung ke event', 'error');
+        }
+      } catch (error) {
+        showToast('Gagal menghubungi server', 'error');
+        console.error('Error:', error);
+      }
     });
   });
 </script>

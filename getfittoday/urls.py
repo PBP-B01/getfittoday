@@ -22,4 +22,6 @@ urlpatterns = [
     path("", include(("home.urls", "home"), namespace="home")),
     path("booking/", include(("booking.urls", "booking"), namespace="booking")),
     path("central/", include(("central.urls", "central"), namespace="central")),
+    path("event/", include(("event.urls", "event"), namespace="event")),
+
 ]

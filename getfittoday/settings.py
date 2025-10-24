@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'booking',
     'rest_framework',
     'central',
+    'event',
 ]
 
 REST_FRAMEWORK = {
