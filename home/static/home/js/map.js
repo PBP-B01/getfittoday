@@ -75,15 +75,23 @@ async function initializeMap(center, zoom, restriction) {
         const iwOuter = document.querySelector('.gm-style-iw-c');
         if (!iwOuter) return;
 
-        const closeBtn = iwOuter.querySelector('button');
-        if (closeBtn) closeBtn.style.display = 'none';
+        const gClose = iwOuter.querySelector('.gm-ui-hover-effect');
+        if (gClose) {
+            gClose.style.display  = 'block';
+            gClose.style.position = 'absolute';
+            gClose.style.top      = '8px';
+            gClose.style.right    = '8px';
+            gClose.style.left     = 'auto';
+            gClose.style.margin   = '0';
+            gClose.style.transform= 'none';
+        }
 
-        const iwBackground = iwOuter.parentElement;
-        iwBackground.style.boxShadow = 'none';
-        iwBackground.style.background = 'transparent';
-        
-        const tail = iwBackground.querySelector('.gm-style-iw-tc');
-        if (tail) tail.style.display = 'none';
+        const header = iwOuter.querySelector('.iw-header');
+        if (header) {
+            header.querySelectorAll('button, [data-close], .close').forEach(el => el.remove());
+            header.style.paddingRight = '38px';
+            header.style.textAlign = 'left';
+        }
     });
 
     map.addListener('idle', () => updateSpotsForView(map));
@@ -385,21 +393,15 @@ function createInfoContent(spot) {
         `
         : '';
 
-    return `
+        return `
         <div class="iw-header">
             <div style="font-weight:600;line-height:1.3;">
-                ${spot.name || 'Detail lokasi'}
+            ${spot.name || 'Detail lokasi'}
             </div>
-            <button
-                title="Close"
-                onclick="infoWindow.close()"
-                style="background:none;border:0;color:#fff;font-size:20px;line-height:1;cursor:pointer;font-weight:300;">
-                &times;
-            </button>
         </div>
-        <div class="iw-body">
-            <div class="text-sm">${addr}</div>
-            ${ratingHtml}
-        </div>
-    `;
+            <div class="iw-body">
+                <div class="text-sm">${addr}</div>
+                ${ratingHtml}
+            </div>
+        `;
 }

@@ -1,36 +1,137 @@
 {% extends "base.html" %}
 {% load static %}
+
 {% block title %}Login{% endblock %}
+{% block body_class %}auth-theme{% endblock %}
 
 {% block content %}
-<section class="max-w-md mx-auto mt-10 bg-white/10 p-6 rounded-xl">
-  <h1 class="text-2xl font-bold mb-4 text-yellow-400 text-center">Login</h1>
-  <form id="loginForm" class="space-y-4">
-    {% csrf_token %}
-    <input type="hidden" name="next" value="{{ request.GET.next|default:'' }}">
-    <div>
-      <label class="block text-sm mb-1 text-white/90">Username</label>
-      <input name="username" class="w-full px-3 py-2 rounded text-blue-900" required autocomplete="username">
-    </div>
+<section class="max-w-md mx-auto mt-10">
+  <div class="auth-card">
+    <h1 class="auth-title">Login</h1>
 
-    <div>
-      <label class="block text-sm mb-1 text-white/90">Password</label>
-      <input type="password" name="password" class="w-full px-3 py-2 rounded text-blue-900" required autocomplete="current-password">
-    </div>
+    <form id="loginForm" class="space-y-4">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.GET.next|default:'' }}">
 
-    <div id="loginMsg" class="hidden rounded-md bg-red-50 px-4 py-3 text-red-700 text-sm"></div>
+      <div>
+        <label class="auth-label">Username</label>
+        <input name="username" class="auth-input" required autocomplete="username">
+      </div>
 
-    <button id="loginBtn"
-            class="w-full bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-2 rounded disabled:opacity-60 disabled:cursor-not-allowed">
-      Login
-    </button>
-  </form>
+      <div>
+        <label class="auth-label">Password</label>
+        <input type="password" name="password" class="auth-input" required autocomplete="current-password">
+      </div>
 
-  <p class="mt-4 text-white/80 text-sm text-center">
-    Don't have an account?
-    <a href="{% url 'central:register' %}" class="text-yellow-300 underline">Register</a>
-  </p>
+      <div id="loginMsg" class="auth-error hidden"></div>
+
+      <button id="loginBtn" class="auth-button w-full">Login</button>
+    </form>
+
+    <p class="mt-4 text-center text-[var(--ink-weak)] text-sm">
+      Don't have an account?
+      <a href="{% url 'central:register' %}" class="auth-link">Register</a>
+    </p>
+  </div>
 </section>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  :root{
+    --nav-bg:#0E5A64;
+    --nav-bg-darker:#07434B;
+    --nav-text:#FFFFFF;
+    --title:#1B2B5A;
+    --bg-1:#EAF2FF;
+    --bg-2:#BFD6F2;
+    --card-bg:#FFFFFF;
+    --card-brd:#C8DDF6;
+    --card-brd-strong:#DDE7FF;
+    --ink-weak:#6B7A99;
+    --accent:#FFC107;
+    --accent-dark:#E0A106;
+    --input-bg:#F8FBFF;
+    --input-text:#0B2E55;
+    --idle-glow: rgba(78,115,181,.12);
+    --focus:#9EC5FF80;
+  }
+
+  body.auth-theme{
+    background:
+      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    color: var(--nav-text);
+  }
+  body.auth-theme nav{
+    background-color: var(--nav-bg) !important;
+    color: var(--nav-text) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  }
+  body.auth-theme nav a{ color: var(--nav-text) !important; }
+  body.auth-theme nav a:hover{ opacity:.92; }
+
+  .auth-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-brd);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow:
+      0 40px 80px rgba(13,43,63,.18),
+      0 12px 24px rgba(13,43,63,.12),
+      inset 0 1px 0 rgba(255,255,255,.65);
+  }
+  .auth-title{
+    color: var(--title);
+    font-weight: 800;
+    font-size: clamp(24px, 3vw, 32px);
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing:.2px;
+  }
+
+  .auth-label{
+    display:block; margin-bottom:.35rem; font-size:.9rem; color: var(--input-text);
+  }
+  .auth-input{
+    width:100%;
+    padding:.7rem .85rem;
+    border-radius:12px;
+    background: var(--input-bg);
+    color: var(--input-text);
+    border:1px solid var(--card-brd);
+    outline:none;
+    transition: box-shadow .18s ease, border-color .18s ease;
+    box-shadow: 0 0 0 2px var(--idle-glow);
+  }
+  .auth-input:focus{
+    border-color: var(--card-brd-strong);
+    box-shadow:
+      0 0 0 3px var(--focus),
+      0 10px 22px rgba(13,43,63,.12);
+  }
+
+  .auth-button{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.8rem 1rem; border-radius:12px;
+    font-weight:800; color:#0B2E55;
+    background: var(--accent);
+    border:1px solid color-mix(in srgb, var(--accent) 90%, #000 0%);
+    box-shadow: 0 16px 36px rgba(224,161,6,.30);
+    transition: background .15s ease, transform .05s ease, box-shadow .15s ease;
+  }
+  .auth-button:hover{ background: var(--accent-dark); }
+  .auth-button:active{ transform: translateY(1px); }
+  .auth-button:disabled{ opacity:.6; cursor:not-allowed; }
+
+  .auth-link{ color: var(--accent-dark); text-decoration: underline; }
+
+  .auth-error{
+    background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;
+    border-radius:12px; padding:.65rem .85rem; font-size:.9rem;
+  }
+</style>
 {% endblock %}
 
 {% block extra_js %}
@@ -46,7 +147,7 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    msg.classList.add('hidden');
+    msg.classList.add('hidden'); msg.textContent='';
     btn.disabled = true;
 
     try {
@@ -67,12 +168,12 @@
       let txt = "Incorrect username or password";
       try {
         const data = await r.json();
-        if (data && data.errors) {
+        if (data?.errors) {
           const firstKey = Object.keys(data.errors)[0];
           const val = data.errors[firstKey];
           txt = Array.isArray(val) ? val.join(', ') : (val || txt);
         }
-      } catch (_) {}
+      } catch(_) {}
       msg.textContent = txt;
       msg.classList.remove('hidden');
 
