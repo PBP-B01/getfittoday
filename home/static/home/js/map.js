@@ -406,7 +406,14 @@ function createInfoContent(spot) {
             ${ratingHtml}
             
             <div class="mt-3 text-center">
-                <button class="lihat-komunitas-btn" style="background-color: var(--accent-yellow); color: var(--ink-strong); font-weight: 600; border-radius: 6px; padding: 6px 12px; font-size: 0.85rem; transition: background 0.2s;">
+                <button class="lihat-komunitas-btn" 
+                        style="background-color: var(--teal-1); 
+                               color: #fff; 
+                               font-weight: 600; 
+                               border-radius: 6px; 
+                               padding: 6px 12px; 
+                               font-size: 0.85rem; 
+                               transition: background 0.2s;">
                     🔗 Lihat Komunitas di Sini
                 </button>
             </div>
@@ -415,6 +422,9 @@ function createInfoContent(spot) {
 
     const button = div.querySelector('.lihat-komunitas-btn');
     if (button) {
+        button.onmouseover = function() { this.style.backgroundColor = 'var(--teal-2)'; };
+        button.onmouseout = function() { this.style.backgroundColor = 'var(--teal-1)'; };
+
         button.addEventListener('click', () => {
             const modal = document.getElementById('community-modal');
             const modalContent = document.getElementById('community-modal-content');

@@ -8,5 +8,4 @@ urlpatterns = [
     path("central/", include(("central.urls", "central"), namespace="central")),
     path('store/', include('store.urls')),
     path('community/', include('community.urls')),
-    path("central/", include(("central.urls", "central"), namespace="central")),
 ]
