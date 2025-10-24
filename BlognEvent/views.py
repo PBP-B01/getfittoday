@@ -12,7 +12,7 @@ from django.contrib.auth.decorators import login_required
 import datetime
 import json
 
-# Display page for both blogs and events
+# blogevent page
 def blogevent_page(request):
     events = Event.objects.all().order_by('-starting_date')
     blogs = Blogs.objects.all().order_by('-id')
@@ -23,19 +23,21 @@ def blogevent_page(request):
     }
     return render(request, 'blogevent/blogevent_page.html', context)
 
-# Event form page with Google Maps
+# event form page 
 @login_required
 def event_form_page(request):
     form = EventForm()
     fitness_spots = FitnessSpot.objects.all()
     
-    # Prepare location data for Google Maps
+    # Prepare location data with coordinates for the map
     locations_for_map = []
     for spot in fitness_spots:
         locations_for_map.append({
             'id': str(spot.place_id),
             'name': spot.name,
             'address': spot.address,
+            'latitude': str(spot.latitude),   # Add this
+            'longitude': str(spot.longitude), # Add this
         })
     
     context = {
@@ -45,7 +47,7 @@ def event_form_page(request):
     }
     return render(request, 'blogevent/event_form.html', context)
 
-# Create event
+# create event
 @login_required
 def create_event(request):
     if request.method == "POST":
@@ -60,11 +62,11 @@ def create_event(request):
             if location_ids:
                 event_entry.locations.set(location_ids)
             
-            return redirect('BlognEvent:blogevent_page')
+            return redirect('BlogNEvent:blogevent_page')
     
-    return redirect('BlognEvent:event_form_page')
+    return redirect('BlogNEvent:event_form_page')
 
-# Blog form page
+# blog form 
 @login_required
 def blog_form_page(request):
     form = BlogsForm()
@@ -73,7 +75,7 @@ def blog_form_page(request):
     }
     return render(request, 'blogevent/blog_form.html', context)
 
-# Create blog
+# Cceate blog
 @login_required
 def create_blog(request):
     if request.method == "POST":
@@ -82,6 +84,6 @@ def create_blog(request):
             blog_entry = form.save(commit=False)
             blog_entry.author = request.user
             blog_entry.save()
-            return redirect('BlognEvent:blogevent_page')
+            return redirect('BlogNEvent:blogevent_page')
     
-    return redirect('BlognEvent:blog_form_page')
+    return redirect('BlogNEvent:blog_form_page')

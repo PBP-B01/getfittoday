@@ -4,11 +4,13 @@
     <title>Blogs and Events</title>
 </head>
 <body>
+    <a href="{% url 'home:home' %}" style="display: inline-block; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px; margin-bottom: 20px;">← Back</a>
+    
     <h1>Blogs and Events</h1>
     
     <div>
-        <a href="{% url 'BlogNEvent:event_form_page' %}">Create New Event</a>
-        <a href="{% url 'BlogNEvent:blog_form_page' %}">Create New Blog</a>
+        <a href="{% url 'BlogNEvent:event_form_page' %}" style="display: inline-block; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px; margin-right: 10px;">Create New Event</a>
+        <a href="{% url 'BlogNEvent:blog_form_page' %}" style="display: inline-block; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px;">Create New Blog</a>
     </div>
     
     <hr>

@@ -1,0 +1,491 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Booking{% endblock %}
+
+{% block content %}
+<section class="max-w-5xl mx-auto py-8">
+  <h1 class="text-3xl font-bold text-yellow-400 mb-6 text-center">Book Location</h1>
+  <!-- Search box -->
+  <div class="flex justify-center mb-6">
+    <div class="w-full md:w-2/3">
+      <label class="block text-sm mb-2 text-white/90">Choose Location</label>
+      <div class="relative">
+        <input id="spotCombo" type="text" placeholder="Search location.,."
+               autocomplete="off"
+               class="w-full rounded-lg text-blue-900 px-3 py-2 placeholder:text-blue-800/70">
+        <ul id="spotList"
+            class="absolute left-0 right-0 bg-white text-blue-900 rounded-lg shadow-2xl mt-1
+                   max-h-72 overflow-auto hidden z-[70]"></ul>
+      </div>
+      <input type="hidden" name="place_id" id="placeId">
+      <input type="hidden" name="lat"      id="placeLat">
+      <input type="hidden" name="lng"      id="placeLng">
+      {{ spots|json_script:"spots-json" }}
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+    <!-- Kalender besar -->
+    <div class="lg:col-span-2 bg-white/10 rounded-xl p-4">
+      <div class="flex items-center justify-between mb-4">
+        <button id="prevMonth" class="px-3 py-1 rounded bg-white/20 hover:bg-white/30">‹</button>
+        <h2 id="calTitle" class="font-semibold text-lg"></h2>
+        <button id="nextMonth" class="px-3 py-1 rounded bg-white/20 hover:bg-white/30">›</button>
+      </div>
+
+      <div class="grid grid-cols-7 gap-2 text-center text-white/80 text-sm mb-2">
+        <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
+      </div>
+      <div id="calGrid" class="grid grid-cols-7 gap-2"></div>
+
+      <p id="calHint" class="mt-4 text-white/70 text-sm">
+        Pick a location, then choose a date to check available hours.
+      </p>
+    </div>
+
+    <!-- Slot ketersediaan -->
+    <div class="bg-white/10 rounded-xl p-4">
+      <!-- Durasi booking (1–5 jam) -->
+      <div class="mb-4">
+        <label for="durationHours" class="block text-sm text-white/90 mb-1">Durasi</label>
+        <select id="durationHours"
+                class="w-40 rounded-lg bg-white/90 text-blue-900 px-2 py-1">
+          <option value="1">1 jam</option>
+          <option value="2">2 jam</option>
+          <option value="3">3 jam</option>
+          <option value="4">4 jam</option>
+          <option value="5">5 jam</option>
+        </select>
+      </div>
+      <h3 class="font-semibold mb-3">Available hours</h3>
+      <div id="slots" class="space-y-2 text-sm"></div>
+    </div>
+
+  </div>
+  <!-- Toast -->
+  <div id="toast"
+    class="hidden fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm rounded-xl px-4 py-3 text-sm"></div>
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+function getCookie(name){
+  const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
+  return m ? m.pop() : '';
+}
+const csrftoken = getCookie('csrftoken');
+const TZ = 'Asia/Jakarta';
+function isoDateInTZ(date, tz = TZ) {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: tz, year:'numeric', month:'2-digit', day:'2-digit'
+  }).formatToParts(date);
+  const y = parts.find(p => p.type === 'year').value;
+  const m = parts.find(p => p.type === 'month').value;
+  const d = parts.find(p => p.type === 'day').value;
+  return `${y}-${m}-${d}`;
+}
+
+function ymInTZ(date, tz = TZ) {
+  const parts = new Intl.DateTimeFormat('en-CA', {
+    timeZone: tz, year:'numeric', month:'2-digit'
+  }).formatToParts(date);
+  const y = +parts.find(p => p.type === 'year').value;
+  const mIndex = +parts.find(p => p.type === 'month').value - 1;
+  return { y, mIndex };
+}
+
+const TODAY_ISO = isoDateInTZ(new Date(), TZ);
+const { y: TODAY_Y, mIndex: TODAY_M } = ymInTZ(new Date(), TZ);
+
+// DOM
+const placeIdEl = document.getElementById('placeId');
+const slotsEl = document.getElementById('slots');
+const calTitle = document.getElementById('calTitle');
+const calGrid = document.getElementById('calGrid');
+const prevBtn = document.getElementById('prevMonth');
+const nextBtn = document.getElementById('nextMonth');
+const calHint = document.getElementById('calHint');
+const durationEl = document.getElementById('durationHours');
+
+const SPOTS = (JSON.parse(document.getElementById('spots-json')?.textContent || '[]') || [])
+  .map(s => ({ id: s.place_id, name: s.name || '(Tanpa nama)', lat: +s.latitude, lng: +s.longitude, dist: Infinity }));
+
+(function () {
+  const input  = document.getElementById('spotCombo');
+  const listEl = document.getElementById('spotList');
+  const latEl  = document.getElementById('placeLat');
+  const lngEl  = document.getElementById('placeLng');
+
+  function distKm(aLat, aLng, bLat, bLng) {
+    const toRad = d => d * Math.PI/180, R = 6371;
+    const dLat = toRad(bLat - aLat), dLng = toRad(bLng - aLng);
+    const la1 = toRad(aLat), la2 = toRad(bLat);
+    const h = Math.sin(dLat/2)**2 + Math.cos(la1)*Math.cos(la2)*Math.sin(dLng/2)**2;
+    return 2*R*Math.asin(Math.sqrt(h));
+  }
+  function nearestN(n) {
+    const anyDist = SPOTS.some(s => Number.isFinite(s.dist) && s.dist !== Infinity);
+    const arr = SPOTS.slice().sort((a,b) => anyDist ? (a.dist ?? Infinity) - (b.dist ?? Infinity): a.name.localeCompare(b.name));
+    return arr.slice(0, n);
+  }
+
+  let activeIdx = -1;
+  function render(items) {
+    listEl.innerHTML = items.map((s, i) => `
+      <li class="px-3 py-2 cursor-pointer hover:bg-blue-50 ${i===activeIdx?'bg-blue-100':''}"
+          data-id="${s.id}" data-lat="${s.lat}" data-lng="${s.lng}" data-name="${s.name}">
+        ${s.name} ${Number.isFinite(s.dist) ? `<span class="text-xs text-gray-500"> • ${s.dist.toFixed(1)} km</span>` : ''}
+      </li>
+    `).join('');
+    listEl.classList.toggle('hidden', items.length === 0);
+  }
+  function choose(li) {
+    if (!li) return;
+    input.value     = li.dataset.name || '';
+    placeIdEl.value = li.dataset.id   || '';
+    latEl.value     = li.dataset.lat  || '';
+    lngEl.value     = li.dataset.lng  || '';
+    listEl.classList.add('hidden');
+    slotsEl.innerHTML = '';
+    calHint.textContent = placeIdEl.value
+      ? 'Click a date to show available hours'
+      : 'Pick a location, then choose a date to check available hours.';
+  }
+
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(pos => {
+      const { latitude, longitude } = pos.coords;
+      SPOTS.forEach(s => {
+        if (Number.isFinite(s.lat) && Number.isFinite(s.lng)) {
+          s.dist = distKm(latitude, longitude, s.lat, s.lng);
+        }
+      });
+      if (!input.value.trim()) render(nearestN(15));
+    }, () => { if (!input.value.trim()) render(nearestN(15)); }, { timeout: 5000 });
+  } else {
+    render(nearestN(15));
+  }
+
+  const deb = (fn, ms) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; };
+  const onType = deb(() => {
+    const q = input.value.trim().toLowerCase();
+    if (q.length < 2) { activeIdx = -1; render(nearestN(15)); return; }
+    const out = SPOTS.filter(s => s.name.toLowerCase().includes(q)).slice(0, 200);
+    activeIdx = -1; render(out);
+  }, 100);
+
+  input.addEventListener('input', onType);
+  input.addEventListener('focus', () => { if (!input.value.trim()) render(nearestN(15)); });
+  listEl.addEventListener('mousedown', (e) => { const li = e.target.closest('li'); if (li) choose(li); });
+  input.addEventListener('blur', () => setTimeout(()=>listEl.classList.add('hidden'), 150));
+  input.addEventListener('keydown', (e) => {
+    const items = Array.from(listEl.querySelectorAll('li'));
+    if (e.key === 'ArrowDown') {
+      e.preventDefault(); activeIdx = Math.min(items.length-1, activeIdx+1);
+      render(items.map(li => ({ id: li.dataset.id, name: li.dataset.name, lat: +li.dataset.lat, lng: +li.dataset.lng })));
+      listEl.querySelectorAll('li')[activeIdx]?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault(); activeIdx = Math.max(0, activeIdx-1);
+      render(items.map(li => ({ id: li.dataset.id, name: li.dataset.name, lat: +li.dataset.lat, lng: +li.dataset.lng })));
+      listEl.querySelectorAll('li')[activeIdx]?.scrollIntoView({ block: 'nearest' });
+    } else if (e.key === 'Enter') {
+      if (!listEl.classList.contains('hidden')) {
+        e.preventDefault(); choose(listEl.querySelectorAll('li')[activeIdx] || listEl.querySelector('li'));
+      }
+    } else if (e.key === 'Escape') {
+      listEl.classList.add('hidden');
+    }
+  });
+})();
+
+// Kalender
+let view = new Date();
+view.setDate(1);
+
+function pad(n){ return String(n).padStart(2,'0'); }
+function dateAtJakarta(dateISO, h=0, m=0) {
+  return new Date(`${dateISO}T${pad(h)}:${pad(m)}:00+07:00`);
+}
+
+function renderCalendar() {
+  const { y:vy, mIndex:vm } = ymInTZ(view, TZ);
+
+  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  calTitle.textContent = `${bulan[vm]} ${vy}`;
+
+  calGrid.innerHTML = '';
+  const firstDay = new Date(view.getFullYear(), view.getMonth(), 1);
+  const startIdx = firstDay.getDay();
+  let d = new Date(view.getFullYear(), view.getMonth(), 1 - startIdx);
+
+  for (let i = 0; i < 42; i++) {
+    const cellISO = isoDateInTZ(d, TZ);
+    const isCurrentMonth = d.getMonth() === view.getMonth();
+    const isPastDate = cellISO < TODAY_ISO;
+
+    const cell = document.createElement('button');
+    cell.type = 'button';
+    cell.dataset.date = cellISO;
+    cell.innerHTML = `<div class="text-xs text-right">${d.getDate()}</div>`;
+
+    let klass = 'aspect-square w-full rounded-lg px-1 text-left ';
+    klass += isCurrentMonth ? 'bg-white/10 hover:bg-white/20 ' : 'bg-white/5 text-white/50 ';
+    if (isPastDate) klass += 'opacity-40 cursor-not-allowed ';
+
+    cell.className = klass.trim();
+
+    if (isCurrentMonth && !isPastDate) {
+      cell.addEventListener('click', async () => {
+        if (!placeIdEl.value) { alert('Pilih tempat dulu.'); return; }
+        await loadSlots(placeIdEl.value, cellISO);
+        Array.from(calGrid.children).forEach(n => n.classList.remove('ring-2','ring-yellow-300'));
+        cell.classList.add('ring-2','ring-yellow-300');
+      });
+    } else {
+      cell.disabled = true;
+    }
+
+    calGrid.appendChild(cell);
+    d.setDate(d.getDate() + 1);
+  }
+
+  const atMinMonth = (view.getFullYear() === new Date(TODAY_Y, TODAY_M, 1).getFullYear()
+                   && view.getMonth()     === new Date(TODAY_Y, TODAY_M, 1).getMonth());
+  prevBtn.disabled = atMinMonth;
+  prevBtn.classList.toggle('opacity-40', atMinMonth);
+}
+
+prevBtn.addEventListener('click', () => {
+  if (view.getFullYear() === new Date(TODAY_Y, TODAY_M, 1).getFullYear()
+   && view.getMonth()     === new Date(TODAY_Y, TODAY_M, 1).getMonth()) return;
+  view.setMonth(view.getMonth() - 1);
+  renderCalendar();
+});
+
+nextBtn.addEventListener('click', () => {
+  view.setMonth(view.getMonth() + 1);
+  renderCalendar();
+});
+
+function mergeIntervals(slots) {
+  const arr = slots.map(s => ({ start: +new Date(s.start), end: +new Date(s.end) }))
+                   .sort((a,b)=>a.start-b.start);
+  const merged = [];
+  const EPS = 1000;
+  for (const it of arr) {
+    if (!merged.length) merged.push({...it});
+    else {
+      const last = merged[merged.length-1];
+      if (it.start <= last.end + EPS) last.end = Math.max(last.end, it.end);
+      else merged.push({...it});
+    }
+  }
+  return merged;
+}
+
+function windowCovered(startMs, endMs, merged) {
+  return merged.some(iv => iv.start <= startMs && iv.end >= endMs);
+}
+
+function buildCandidateWindows(dateISO, hours) {
+  const maxStart = 20 - hours;
+  const isToday = dateISO === TODAY_ISO;
+  const now = Date.now();
+
+  const out = [];
+  for (let h = 10; h <= maxStart; h++) {
+    const s = dateAtJakarta(dateISO, h, 0);
+    const e = dateAtJakarta(dateISO, h + hours, 0);
+    if (isToday && e.getTime() <= now) continue;
+
+    out.push({ start: s, end: e });
+  }
+  return out;
+}
+
+function fmtRangeLabel(start, end) {
+  const sh = pad(start.getHours()), sm = pad(start.getMinutes());
+  const eh = pad(end.getHours()),   em = pad(end.getMinutes());
+  return `${sh}:${sm} — ${eh}:${em}`;
+}
+
+let lastAvail = null, lastDate = null, lastPlace = null;
+async function loadSlots(placeId, dateISO){
+  slotsEl.innerHTML = '<div class="text-white/80">Memuat…</div>';
+  const label = (document.getElementById('spotCombo').value || '').trim();
+  let data;
+  if (lastAvail && lastDate === dateISO && lastPlace === placeId && lastLabel === label) {
+    data = lastAvail;
+  } else {
+    const label = document.getElementById('spotCombo').value || '';
+    const r = await fetch(`/booking/availability/?resource=${encodeURIComponent(placeId)}&label=${encodeURIComponent(label)}&date=${encodeURIComponent(dateISO)}`);
+    if (!r.ok) {
+      slotsEl.innerHTML = '<div class="text-red-300">Gagal memuat slot.</div>';
+      toast('Gagal memuat slot', false);
+      return;
+    }
+    data = await r.json();
+    lastAvail = data; lastDate = dateISO; lastPlace = placeId; lastLabel = label;
+  }
+
+  const durationHours = Math.min(5, Math.max(1, parseInt(durationEl.value || '1', 10)));
+  const merged = mergeIntervals(Array.isArray(data) ? data : []);
+  const candidates = buildCandidateWindows(dateISO, durationHours);
+  const valid = merged.length ? candidates.filter(w => windowCovered(+w.start, +w.end, merged)) : [];
+
+  if (valid.length === 0) {
+    slotsEl.innerHTML = `<div class="text-white/70">Tidak ada slot untuk ${dateISO}.</div>`;
+    return;
+  }
+
+  slotsEl.innerHTML = '';
+  for (const w of valid) {
+    const row = document.createElement('div');
+    row.className = "flex items-center justify-between bg-white/15 rounded-lg px-3 py-2 gap-3";
+    row.innerHTML = `
+      <div class="text-white">${fmtRangeLabel(w.start, w.end)}</div>
+      <button class="pick-btn text-blue-900 bg-yellow-400 hover:bg-yellow-300 px-3 py-1 rounded">Pilih</button>
+    `;
+    const btn = row.querySelector('.pick-btn');
+    btn.addEventListener('click', async () => {
+      if (btn.dataset.bookingId) {
+        const id = btn.dataset.bookingId;
+        btn.disabled = true; btn.textContent = 'Mencabut…';
+        try {
+          const r = await fetch(`/booking/cancel/${encodeURIComponent(id)}/`, {
+            method: 'POST',
+            headers: { 'X-CSRFToken': csrftoken },
+            credentials: 'same-origin',
+          });
+          if (!r.ok) {
+            const t = await r.text();
+            toast(`Gagal cancel [${r.status}]`, false);
+            btn.disabled = false; btn.textContent = '✓ Booked';
+            return;
+          }
+          delete btn.dataset.bookingId;
+          btn.disabled = false;
+          btn.textContent = 'Pilih';
+          btn.className = 'pick-btn text-blue-900 bg-yellow-400 hover:bg-yellow-300 px-3 py-1 rounded';
+          toast('Booking removed');
+        } catch(e) {
+          toast('Gagal cancel (network)', false);
+          btn.disabled = false; btn.textContent = '✓ Booked';
+        }
+        return;
+      }
+
+      const payload = {
+        resource_id: placeId,
+        resource_label: document.getElementById('spotCombo').value || '',
+        start_time: w.start.toISOString(),
+        end_time:   w.end.toISOString()
+      };
+
+      btn.disabled = true; btn.textContent = 'Memesan…';
+      try {
+        const resp = await fetch('/booking/book/', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-CSRFToken': csrftoken },
+          credentials: 'same-origin',
+          body: JSON.stringify(payload)
+        });
+
+        let bodyTxt = '';
+        try { bodyTxt = await resp.text(); } catch {}
+
+        if (!resp.ok) {
+          toast(`Gagal booking [${resp.status}]`, false);
+          btn.disabled = false; btn.textContent = 'Pilih';
+          return;
+        }
+
+        let bookingId = '';
+        try {
+          const j = JSON.parse(bodyTxt || '{}');
+          bookingId = j.id || '';
+        } catch {}
+        if (bookingId) btn.dataset.bookingId = bookingId;
+        btn.disabled = false;
+        btn.textContent = '✓ Booked';
+        btn.className = 'pick-btn bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded';
+        toast(`Booked ${fmtRangeLabel(w.start, w.end)} • ${dateISO}`);
+      } catch (err) {
+        toast('Gagal booking (network)', false);
+        btn.disabled = false; btn.textContent = 'Pilih';
+      }
+    });
+
+    slotsEl.appendChild(row);
+  }
+}
+
+
+function showToast(msg, kind = 'success') {
+  const wrap = document.getElementById('toastWrap');
+  const el = document.createElement('div');
+  const base = "px-3 py-2 rounded-lg shadow-lg text-sm text-blue-900 transition-all duration-300 pointer-events-auto";
+  const color = kind === 'error' ? 'bg-red-300' : (kind === 'info' ? 'bg-blue-300' : 'bg-green-300');
+  el.className = `${base} ${color} opacity-0 translate-y-2`;
+  el.textContent = msg;
+  wrap.appendChild(el);
+  requestAnimationFrame(() => {
+    el.classList.remove('opacity-0','translate-y-2');
+  });
+  setTimeout(() => {
+    el.classList.add('opacity-0','translate-y-2');
+    setTimeout(() => el.remove(), 300);
+  }, 2800);
+}
+
+const BOOKED = new Map();
+function slotKey(placeId, w) { return `${placeId}|${w.start.toISOString()}|${w.end.toISOString()}`; }
+
+function markRowBooked(row, bookingId) {
+  const btn = row.querySelector('button');
+  row.dataset.bookingId = bookingId;
+  row.dataset.state = 'booked';
+  btn.textContent = '✓ Booked';
+  btn.className = "px-3 py-1 rounded bg-green-300 hover:bg-green-200 text-blue-900";
+}
+
+function markRowUnbooked(row) {
+  const btn = row.querySelector('button');
+  delete row.dataset.bookingId;
+  row.dataset.state = 'idle';
+  btn.textContent = 'Pilih';
+  btn.className = "px-3 py-1 rounded bg-yellow-400 hover:bg-yellow-300 text-blue-900";
+}
+
+function toast(msg, ok = true) {
+  const el = document.getElementById('toast');
+  const base =
+    "fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm rounded-xl px-4 py-3 text-sm " +
+    "transition-all duration-300 shadow-[0_8px_30px_rgba(0,0,0,.25)]";
+  const kind = ok
+    ? "bg-emerald-500 text-white shadow-[0_8px_30px_rgba(16,185,129,.35)]"
+    : "bg-rose-500 text-white shadow-[0_8px_30px_rgba(244,63,94,.35)]";
+
+  el.textContent = msg;
+  el.className = base + " " + kind + " translate-y-2 opacity-0";
+  el.classList.remove("hidden");
+
+  void el.offsetWidth;
+  el.classList.remove("translate-y-2","opacity-0");
+
+  clearTimeout(el._t);
+  el._t = setTimeout(() => {
+    el.classList.add("translate-y-2","opacity-0");
+    setTimeout(() => el.classList.add("hidden"), 300);
+  }, 2200);
+}
+
+
+durationEl.addEventListener('change', () => {
+  if (lastPlace && lastDate) loadSlots(lastPlace, lastDate);
+});
+
+renderCalendar();
+</script>
+{% endblock %}
