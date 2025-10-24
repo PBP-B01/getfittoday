@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Community Events | GetFit.Today{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto text-white">
+  <h1 class="text-3xl font-bold mb-6 text-yellow-400 text-center">Community Events</h1>
+
+  <!-- Jika belum ada event -->
+  {% if not events %}
+    <p class="text-center text-gray-300">Belum ada event untuk ditampilkan.</p>
+  {% endif %}
+
+  <!-- Daftar event -->
+  <div id="eventList" class="space-y-6">
+    {% for event in events %}
+      <div id="event-{{ event.id }}" class="bg-blue-800 rounded-2xl p-6 shadow-md border border-blue-700">
+        <h3 class="text-xl font-semibold text-yellow-300">{{ event.name }}</h3>
+        <p class="mt-2 text-gray-200">{{ event.description }}</p>
+        <p class="mt-1 text-sm text-gray-400">
+          📅 {{ event.date }} &nbsp;&nbsp;📍 {{ event.location }}
+        </p>
+
+        <!-- Tombol aksi -->
+        <div class="mt-4 flex space-x-3">
+          {% if user.is_authenticated %}
+            {% if event.created_by == user %}
+              <button class="edit-btn bg-yellow-400 text-blue-900 font-semibold px-4 py-1 rounded hover:bg-yellow-300" data-id="{{ event.id }}">
+                Edit
+              </button>
+              <button class="delete-btn bg-red-500 text-white font-semibold px-4 py-1 rounded hover:bg-red-400" data-id="{{ event.id }}">
+                Delete
+              </button>
+            {% else %}
+              <button class="join-btn bg-green-500 text-white font-semibold px-4 py-1 rounded hover:bg-green-400" data-id="{{ event.id }}">
+                Join
+              </button>
+            {% endif %}
+          {% else %}
+            <p class="text-sm text-gray-300 mt-2 italic">Login untuk bergabung dengan event ini.</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+  <!-- Tombol buat event (hanya admin / komunitas admin) -->
+  {% if user.is_authenticated %}
+    <div class="text-center mt-8">
+      <button id="createBtn" class="bg-yellow-400 text-blue-900 font-bold px-6 py-2 rounded-full hover:bg-yellow-300 shadow-md">
+        + Buat Event Baru
+      </button>
+    </div>
+  {% endif %}
+</div>
+
+<!-- Modal Form -->
+<div id="eventModal" class="hidden fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center z-50">
+  <div class="bg-blue-900 rounded-2xl p-6 w-full max-w-md">
+    <h2 class="text-2xl font-bold text-yellow-300 mb-4">Buat Event</h2>
+    <form id="eventForm" class="space-y-3">
+      <input type="text" name="name" placeholder="Nama event" required class="w-full px-3 py-2 rounded-lg text-black">
+      <input type="datetime-local" name="date" required class="w-full px-3 py-2 rounded-lg text-black">
+      <input type="text" name="location" placeholder="Lokasi" required class="w-full px-3 py-2 rounded-lg text-black">
+      <textarea name="description" placeholder="Deskripsi" required class="w-full px-3 py-2 rounded-lg text-black"></textarea>
+      <div class="flex justify-end space-x-3 pt-2">
+        <button type="button" id="closeModal" class="px-4 py-2 bg-gray-600 rounded-lg hover:bg-gray-500">Batal</button>
+        <button type="submit" class="px-4 py-2 bg-yellow-400 text-blue-900 font-semibold rounded-lg hover:bg-yellow-300">Simpan</button>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const createBtn = document.getElementById('createBtn');
+  const eventModal = document.getElementById('eventModal');
+  const closeModal = document.getElementById('closeModal');
+
+  if (createBtn) {
+    createBtn.addEventListener('click', () => {
+      eventModal.classList.remove('hidden');
+    });
+  }
+
+  if (closeModal) {
+    closeModal.addEventListener('click', () => {
+      eventModal.classList.add('hidden');
+    });
+  }
+
+  // Create event (AJAX)
+  const eventForm = document.getElementById('eventForm');
+  if (eventForm) {
+    eventForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const formData = {
+        name: e.target.name.value,
+        description: e.target.description.value,
+        date: e.target.date.value,
+        location: e.target.location.value
+      };
+      const response = await fetch('/event/create/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': '{{ csrf_token }}'
+        },
+        body: JSON.stringify(formData)
+      });
+      const result = await response.json();
+      alert(result.message || result.status);
+      if (result.status === 'success') location.reload();
+    });
+  }
+
+  // Delete event (AJAX)
+  document.querySelectorAll('.delete-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.id;
+      if (!confirm('Hapus event ini?')) return;
+      const response = await fetch(`/event/delete/${id}/`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': '{{ csrf_token }}' }
+      });
+      const result = await response.json();
+      alert(result.message);
+      if (result.status === 'success') location.reload();
+    });
+  });
+</script>
+{% endblock %}
