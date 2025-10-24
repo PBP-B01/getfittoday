@@ -6,269 +6,443 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Store — Produk</title>
   <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --nav-bg: #0E5A64;
+      --nav-text: #FFFFFF;
+      --title: #1B2B5A;
+      --bg-1: #EAF2FF;
+      --bg-2: #BFD6F2;
+      --card-bg: #FFFFFF;
+      --card-brd: #C8DDF6;
+      --ink-weak: #6B7A99;
+      --accent-yellow: #FFC107;
+      --accent-yellow-dark: #E0A106;
+      --nav-bg-darker: #07434B;
+    }
+
+    body.home-theme {
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      min-height: 100vh;
+    }
+  </style>
 </head>
-<body class="bg-gray-50">
-<div class="container mx-auto px-4 py-8">
 
-  <div class="flex justify-between items-center mb-6">
-    <a href="{% url 'home:home' %}" class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-indigo-600 mr-4 whitespace-nowrap">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-      </svg>
-      Kembali ke Home
-    </a>
-    <h2 class="text-3xl font-bold text-gray-800 flex-grow text-center">Store</h2>
-    <div class="ml-4 whitespace-nowrap">
-      <a href="{% url 'store:view_cart' %}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-        Keranjang
-        <span id="cart-count" class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-600 text-white">
-          {{ cart_count|default:0 }}
-        </span>
+<body class="home-theme">
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+      <a href="{% url 'home:home' %}"
+         class="inline-flex items-center text-sm font-medium text-[var(--ink-weak)] hover:text-[var(--title)] mr-4 whitespace-nowrap">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 mr-1"
+             viewBox="0 0 20 20"
+             fill="currentColor">
+          <path fill-rule="evenodd"
+                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0
+                   011.414 1.414L5.414 9H17a1 1 0 110
+                   2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                clip-rule="evenodd" />
+        </svg>
+        Kembali ke Home
       </a>
+
+      <h2 class="text-3xl font-bold text-[var(--title)] flex-grow text-center">Store</h2>
+
+      <div class="ml-4 whitespace-nowrap">
+        {% if not request.session.is_admin %}
+        <a href="{% url 'store:view_cart' %}"
+           class="inline-flex items-center px-4 py-2 border border-[var(--card-brd)] shadow-sm text-sm font-medium rounded-md text-[var(--ink-weak)] bg-[var(--card-bg)] hover:bg-gray-50">
+          Keranjang
+          <span id="cart-count"
+                class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-600 text-white">
+            {{ cart_count|default:0 }}
+          </span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Filter form -->
+    <form method="get" id="filter-form" class="flex flex-wrap items-center gap-3 mb-6">
+      <div>
+        <input type="text" name="q" value="{{ q }}"
+               class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3"
+               placeholder="Cari produk...">
+      </div>
+
+      <div>
+        <select name="sort" id="sort-select"
+                class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3">
+          <option value="">Terbaru</option>
+          <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Harga: Termurah</option>
+          <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Harga: Termahal</option>
+          <option value="rating_desc" {% if sort == 'rating_desc' %}selected{% endif %}>Rating: Tertinggi</option>
+          <option value="rating_asc" {% if sort == 'rating_asc' %}selected{% endif %}>Rating: Terendah</option>
+        </select>
+      </div>
+
+      <div>
+        <button type="submit"
+                class="inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-[var(--title)] bg-[var(--accent-yellow)] hover:bg-[var(--accent-yellow-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-yellow)]">
+          Filter
+        </button>
+      </div>
+    </form>
+
+    <!-- Product list -->
+    <div id="product-list-container">
+      {% include 'product_list2.html' %}
     </div>
   </div>
-  <form method="get" class="flex flex-wrap items-center gap-3 mb-6" id="filter-form">
-    <div>
-      <input type="text" name="q" value="{{ q }}"
-             class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3"
-             placeholder="Cari produk...">
-    </div>
-    <div>
-      <select name="sort"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3"
-              id="sort-select">
-        <option value="">Terbaru</option>
-        <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Harga: Termurah</option>
-        <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Harga: Termahal</option>
-        <option value="rating_desc" {% if sort == 'rating_desc' %}selected{% endif %}>Rating: Tertinggi</option>
-        <option value="rating_asc" {% if sort == 'rating_asc' %}selected{% endif %}>Rating: Terendah</option>
-      </select>
-    </div>
-    <div>
-      <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Filter
-      </button>
-    </div>
-  </form>
 
-  <div id="product-list-container">
-    {% include 'product_list2.html' %}
-  </div>
+  <!-- Add to Cart Modal -->
+  <div id="addToCartModal"
+       class="hidden fixed z-50 inset-0 overflow-y-auto"
+       aria-labelledby="modal-title"
+       role="dialog"
+       aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+           aria-hidden="true"
+           data-modal-hide="addToCartModal"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
 
-</div>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg"
+                   fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                   aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
 
-<div id="addToCartModal" class="hidden fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" data-modal-hide="addToCartModal"></div>
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
-      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-        <div class="sm:flex sm:items-start">
-          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-              Berhasil Ditambahkan!
-            </h3>
-            <div class="mt-2">
-              <p class="text-sm text-gray-500" id="addToCartModalMessage"></p>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="addToCartModalTitle">
+                Berhasil Ditambahkan!
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500" id="addToCartModalMessage"></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button type="button" data-modal-hide="addToCartModal" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-          Tutup
-        </button>
+
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button type="button"
+                  data-modal-hide="addToCartModal"
+                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+            Tutup
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
+
+  <!-- Delete Confirmation Modal -->
+  <div id="deleteConfirmModal"
+       class="hidden fixed z-50 inset-0 overflow-y-auto"
+       aria-labelledby="modal-title"
+       role="dialog"
+       aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+           aria-hidden="true"
+           data-modal-hide="deleteConfirmModal"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg"
+                   fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                   aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0
+                         2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464
+                         0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                Konfirmasi Hapus
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500" id="deleteModalMessage">
+                  Apakah Anda yakin untuk menghapus produk ini? Aksi ini tidak bisa dibatalkan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button type="button" id="confirmDeleteYes"
+                  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm">
+            Ya, hapus
+          </button>
+          <button type="button"
+                  data-modal-hide="deleteConfirmModal"
+                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
+            Batal
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
 <script>
-// === Fungsi CSRF ===
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
+  // === Fungsi CSRF ===
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
       }
     }
+    return cookieValue;
   }
-  return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
 
-// === Modal Add to Cart ===
-const addToCartModalEl = document.getElementById('addToCartModal');
-const addToCartModalMessageEl = document.getElementById('addToCartModalMessage');
-function showAddToCartModal(message) {
-  addToCartModalMessageEl.textContent = message;
-  addToCartModalEl.classList.remove('hidden');
-}
-function hideAddToCartModal() {
-  addToCartModalEl.classList.add('hidden');
-}
-addToCartModalEl.querySelectorAll('[data-modal-hide]').forEach(btn => {
+  const csrftoken = getCookie('csrftoken');
+
+  // === Modal Add to Cart ===
+  const addToCartModalEl = document.getElementById('addToCartModal');
+  const addToCartModalMessageEl = document.getElementById('addToCartModalMessage');
+  const addToCartModalTitleEl = document.getElementById('addToCartModalTitle');
+
+  function showAddToCartModal(message, title = "Berhasil Ditambahkan!") {
+    if (addToCartModalTitleEl) {
+      addToCartModalTitleEl.textContent = title;
+    }
+    addToCartModalMessageEl.textContent = message;
+    addToCartModalEl.classList.remove('hidden');
+  }
+
+  function hideAddToCartModal() {
+    addToCartModalEl.classList.add('hidden');
+  }
+
+  addToCartModalEl.querySelectorAll('[data-modal-hide]').forEach(btn => {
     btn.addEventListener('click', hideAddToCartModal);
-});
-addToCartModalEl.addEventListener('click', (e) => {
-    if (e.target === addToCartModalEl.querySelector('.fixed.inset-0')) {
-        hideAddToCartModal();
-    }
-});
-
-// === AJAX Filter dan Paginasi ===
-const productContainer = document.getElementById('product-list-container');
-const filterForm = document.getElementById('filter-form');
-const sortSelect = document.getElementById('sort-select');
-
-async function fetchProductList(url) {
-  try {
-    const isAbsolute = url.startsWith('http');
-    let relativeUrl = url;
-    if (!isAbsolute && !url.startsWith('/')) {
-        relativeUrl = (window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname + '/') + url;
-    } else if (!isAbsolute) {
-         relativeUrl = url;
-    }
-
-    const fullUrl = isAbsolute ? url : window.location.origin + relativeUrl;
-    const ajaxUrl = new URL(fullUrl);
-    ajaxUrl.searchParams.set('ajax', '1');
-
-    const response = await fetch(ajaxUrl);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const html = await response.text();
-
-    productContainer.innerHTML = html;
-
-    ajaxUrl.searchParams.delete('ajax');
-    window.history.pushState({}, '', ajaxUrl.pathname + ajaxUrl.search);
-
-    attachAddToCartListeners();
-    attachAdminButtonListeners();
-  } catch (error) {
-    console.error('Gagal fetch produk:', error);
-    productContainer.innerHTML = '<p class="text-red-600">Gagal memuat produk. Silakan coba lagi.</p>';
-  }
-}
-
-filterForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-  const params = new URLSearchParams(formData);
-  fetchProductList(`?${params.toString()}`);
-});
-
-productContainer.addEventListener('click', function(e) {
-  const linkElement = e.target.closest('.page-link');
-  if (linkElement) {
-    e.preventDefault();
-    const url = linkElement.getAttribute('href');
-    if (url) {
-        fetchProductList(url);
-    }
-  }
-});
-
-// === AJAX ADD TO CART ===
-const cartCountEl = document.getElementById('cart-count');
-
-function attachAddToCartListeners() {
-  document.querySelectorAll('.form-add-to-cart').forEach(form => {
-    if (form._submitListener) {
-        form.removeEventListener('submit', form._submitListener);
-    }
-    form._submitListener = async function(e) {
-      e.preventDefault();
-      const url = this.action;
-      const formData = new FormData(this);
-      try {
-        const response = await fetch(url, {
-          method: 'POST',
-          body: formData,
-          headers: { 'X-CSRFToken': csrftoken, 'X-Requested-With': 'XMLHttpRequest' }
-        });
-        const data = await response.json();
-        if (data.success) {
-          showAddToCartModal(data.message);
-          cartCountEl.innerText = data.cart_count;
-        } else {
-          alert(data.error || 'Gagal menambahkan produk.');
-        }
-      } catch (error) {
-        console.error('Error add to cart:', error);
-        alert('Terjadi masalah koneksi.');
-      }
-    };
-    form.addEventListener('submit', form._submitListener);
   });
-}
 
+  addToCartModalEl.addEventListener('click', (e) => {
+    if (e.target === addToCartModalEl.querySelector('.fixed.inset-0')) {
+      hideAddToCartModal();
+    }
+  });
 
-function attachAdminButtonListeners() {
-    document.querySelectorAll('.btn-delete').forEach(button => {
-        if (button._deleteListener) {
-            button.removeEventListener('click', button._deleteListener);
+  // === AJAX Filter dan Paginasi ===
+  const productContainer = document.getElementById('product-list-container');
+  const filterForm = document.getElementById('filter-form');
+  const sortSelect = document.getElementById('sort-select');
+
+  async function fetchProductList(url) {
+    try {
+      const isAbsolute = url.startsWith('http');
+      let relativeUrl = url;
+
+      if (!isAbsolute && !url.startsWith('/')) {
+        relativeUrl = (window.location.pathname.endsWith('/')
+          ? window.location.pathname
+          : window.location.pathname + '/') + url;
+      } else if (!isAbsolute) {
+        relativeUrl = url;
+      }
+
+      const fullUrl = isAbsolute ? url : window.location.origin + relativeUrl;
+      const ajaxUrl = new URL(fullUrl);
+      ajaxUrl.searchParams.set('ajax', '1');
+
+      const response = await fetch(ajaxUrl);
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const html = await response.text();
+
+      productContainer.innerHTML = html;
+
+      ajaxUrl.searchParams.delete('ajax');
+      window.history.pushState({}, '', ajaxUrl.pathname + ajaxUrl.search);
+
+      attachAddToCartListeners();
+      attachAdminButtonListeners();
+    } catch (error) {
+      console.error('Gagal fetch produk:', error);
+      productContainer.innerHTML = '<p class="text-red-600">Gagal memuat produk. Silakan coba lagi.</p>';
+    }
+  }
+
+  filterForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    const formData = new FormData(this);
+    const params = new URLSearchParams(formData);
+    fetchProductList(`?${params.toString()}`);
+  });
+
+  productContainer.addEventListener('click', function (e) {
+    const linkElement = e.target.closest('.page-link');
+    if (linkElement) {
+      e.preventDefault();
+      const url = linkElement.getAttribute('href');
+      if (url) fetchProductList(url);
+    }
+  });
+
+  // === AJAX ADD TO CART ===
+  const cartCountEl = document.getElementById('cart-count');
+
+  function attachAddToCartListeners() {
+    document.querySelectorAll('.form-add-to-cart').forEach(form => {
+      if (form._submitListener) {
+        form.removeEventListener('submit', form._submitListener);
+      }
+
+      form._submitListener = async function (e) {
+        e.preventDefault();
+        const url = this.action;
+        const formData = new FormData(this);
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'X-CSRFToken': csrftoken,
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          });
+
+          const data = await response.json();
+          if (data.success) {
+            showAddToCartModal(data.message);
+            cartCountEl.innerText = data.cart_count;
+          } else {
+            alert(data.error || 'Gagal menambahkan produk.');
+          }
+        } catch (error) {
+          console.error('Error add to cart:', error);
+          alert('Terjadi masalah koneksi.');
         }
-        button._deleteListener = async function() {
-            const productId = this.dataset.productId;
+      };
 
-            if (!confirm(`Yakin ingin menghapus produk ini (ID: ${productId})? Aksi ini tidak bisa dibatalkan.`)) {
-                 return;
-            }
-
-            try {
-                const response = await fetch(`/store/product/${productId}/delete/`, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': csrftoken,
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
-                });
-                const data = await response.json();
-
-                if (response.ok && data.success) {
-                    showAddToCartModal(data.message);
-                    this.closest('.w-64').remove();
-                } else {
-                    alert(data.error || 'Gagal menghapus produk. Cek console server.');
-                }
-            } catch (error) {
-                console.error('Error deleting product:', error);
-                alert('Terjadi masalah koneksi saat mencoba menghapus produk.');
-            }
-        };
-
-        button.addEventListener('click', button._deleteListener);
+      form.addEventListener('submit', form._submitListener);
     });
+  }
 
+  // === Modal Hapus Produk (Admin) ===
+  const deleteConfirmModalEl = document.getElementById('deleteConfirmModal');
+  const confirmDeleteYesBtn = document.getElementById('confirmDeleteYes');
+  const deleteModalMessageEl = document.getElementById('deleteModalMessage');
+
+  function showDeleteConfirmModal(productId, cardElement) {
+    confirmDeleteYesBtn.dataset.productId = productId;
+    const cardId = 'card-to-delete-' + Math.random().toString(36).substr(2, 9);
+    cardElement.id = cardId;
+    confirmDeleteYesBtn.dataset.cardId = cardId;
+    deleteConfirmModalEl.classList.remove('hidden');
+  }
+
+  function hideDeleteConfirmModal() {
+    delete confirmDeleteYesBtn.dataset.productId;
+    delete confirmDeleteYesBtn.dataset.cardId;
+    deleteConfirmModalEl.classList.add('hidden');
+  }
+
+  deleteConfirmModalEl.querySelectorAll('[data-modal-hide]').forEach(btn => {
+    btn.addEventListener('click', hideDeleteConfirmModal);
+  });
+
+  deleteConfirmModalEl.addEventListener('click', (e) => {
+    if (e.target === deleteConfirmModalEl.querySelector('.fixed.inset-0')) {
+      hideDeleteConfirmModal();
+    }
+  });
+
+  confirmDeleteYesBtn.addEventListener('click', async function () {
+    const productId = this.dataset.productId;
+    const cardId = this.dataset.cardId;
+    const cardElement = document.getElementById(cardId);
+
+    if (!productId || !cardElement) {
+      console.error('Error: Missing product ID or card element for deletion.');
+      hideDeleteConfirmModal();
+      return;
+    }
+
+    hideDeleteConfirmModal();
+
+    try {
+      const response = await fetch(`/store/product/${productId}/delete/`, {
+        method: 'POST',
+        headers: {
+          'X-CSRFToken': csrftoken,
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        showAddToCartModal(data.message, "Berhasil Dihapus!");
+        cardElement.remove();
+      } else {
+        alert(data.error || 'Gagal menghapus produk. Cek console server.');
+      }
+    } catch (error) {
+      console.error('Error deleting product:', error);
+      alert('Terjadi masalah koneksi saat mencoba menghapus produk.');
+    }
+  });
+
+  // === Tombol Admin (Edit / Delete) ===
+  function attachAdminButtonListeners() {
+    document.querySelectorAll('.btn-delete').forEach(button => {
+      if (button._deleteListener) {
+        button.removeEventListener('click', button._deleteListener);
+      }
+
+      button._deleteListener = function () {
+        const productId = this.dataset.productId;
+        const cardElement = this.closest('.w-64');
+        if (cardElement) {
+          showDeleteConfirmModal(productId, cardElement);
+        } else {
+          console.error('Tidak bisa menemukan elemen card.');
+        }
+      };
+
+      button.addEventListener('click', button._deleteListener);
+    });
 
     document.querySelectorAll('.btn-edit').forEach(button => {
-        if (button._editListener) {
-            button.removeEventListener('click', button._editListener);
-        }
-        button._editListener = function() {
-            const productId = this.dataset.productId;
-            window.location.href = `/store/product/${productId}/edit/`;
-        };
+      if (button._editListener) {
+        button.removeEventListener('click', button._editListener);
+      }
 
-        button.addEventListener('click', button._editListener);
+      button._editListener = function () {
+        const productId = this.dataset.productId;
+        window.location.href = `/store/product/${productId}/edit/`;
+      };
+
+      button.addEventListener('click', button._editListener);
     });
-}
+  }
 
-document.addEventListener('DOMContentLoaded', () => {
-  attachAddToCartListeners();
-  attachAdminButtonListeners();
-});
+  // === Init ===
+  document.addEventListener('DOMContentLoaded', () => {
+    attachAddToCartListeners();
+    attachAdminButtonListeners();
+  });
 </script>
 
 </body>

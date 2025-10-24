@@ -8,6 +8,30 @@
   <script src="https://cdn.tailwindcss.com"></script>
 
   <style>
+    :root {
+      --nav-bg: #0E5A64;
+      --nav-text: #FFFFFF;
+      --title: #1B2B5A;
+      --bg-1: #EAF2FF;
+      --bg-2: #BFD6F2;
+      --card-bg: #FFFFFF;
+      --card-brd: #C8DDF6;
+      --ink-weak: #6B7A99;
+      --accent-yellow: #FFC107;
+      --accent-yellow-dark: #E0A106;
+      --nav-bg-darker: #07434B;
+    }
+    body.home-theme {
+      background:
+        radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-size: cover;
+      min-height: 100vh;
+    }
+
+
     /* CSS Kustom untuk Toast */
     #toast-placement .toast-item {
       opacity: 0;
@@ -19,138 +43,237 @@
       transform: translateY(0);
     }
   </style>
-  </head>
-<body class="bg-gray-50">
+</head>
 
-<div id="toast-placement" class="fixed top-5 right-5 z-50 space-y-3 w-full max-w-xs"></div>
+<body class="home-theme">
+  <div id="toast-placement" class="fixed top-5 right-5 z-50 space-y-3 w-full max-w-xs"></div>
 
-<div class="container mx-auto px-4 py-8">
-  <h2 class="text-3xl font-bold mb-6 text-gray-800">Keranjang</h2>
+  <div class="container mx-auto px-4 py-8">
+    <h2 class="text-3xl font-bold mb-6 text-[var(--title)]">Keranjang</h2>
 
-  <div id="cart-container" class="bg-white shadow rounded-lg overflow-hidden">
-    {% if items %}
-      <div class="overflow-x-auto">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-100">
-            <tr>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Produk</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Harga</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider" style="width: 120px;">Kuantitas</th>
-              <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            {% for item in items %}
-              <tr id="cart-item-{{ item.product.pk }}" class="align-middle">
-                <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ item.product.name }}</td>
-                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">Rp{{ item.product.price|intcomma }}</td>
-                <td class="px-6 py-4">
-                  <input type="number"
-                         class="input-quantity block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3"
-                         value="{{ item.quantity }}"
-                         min="1"
-                         data-pk="{{ item.product.pk }}">
-                </td>
-                <td class="px-6 py-4">
-                  <button class="btn-remove-item inline-flex items-center justify-center p-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500" data-pk="{{ item.product.pk }}"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" /></svg></button>
-                </td>
+    <div id="cart-container" class="w-full bg-[var(--card-bg)] shadow rounded-lg overflow-hidden">
+      {% if items %}
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-[var(--card-brd)]">
+            <thead class="bg-[var(--bg-1)]">
+              <tr>
+                <th class="px-6 py-3 text-left text-xs font-medium text-[var(--ink-weak)] uppercase tracking-wider">Produk</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-[var(--ink-weak)] uppercase tracking-wider">Harga</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-[var(--ink-weak)] uppercase tracking-wider" style="width: 120px;">Kuantitas</th>
+                <th class="px-6 py-3 text-left text-xs font-medium text-[var(--ink-weak)] uppercase tracking-wider">Aksi</th>
               </tr>
-            {% endfor %}
-          </tbody>
-        </table>
+            </thead>
+            <tbody class="bg-[var(--card-bg)] divide-y divide-[var(--card-brd)]">
+              {% for item in items %}
+                <tr id="cart-item-{{ item.product.pk }}" class="align-middle">
+                  <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-[var(--title)]">
+                    {{ item.product.name }}
+                  </td>
+                  <td class="px-6 py-4 whitespace-nowrap text-sm text-[var(--ink-weak)]">
+                    Rp{{ item.product.price|intcomma }}
+                  </td>
+                  <td class="px-6 py-4">
+                    <input
+                      type="number"
+                      class="input-quantity block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3"
+                      value="{{ item.quantity }}"
+                      min="1"
+                      data-pk="{{ item.product.pk }}"
+                    >
+                  </td>
+                  <td class="px-6 py-4">
+                    <button
+                      class="btn-remove-item inline-flex items-center justify-center p-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500"
+                      data-pk="{{ item.product.pk }}"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                      </svg>
+                    </button>
+                  </td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
-      <div class="p-4 bg-gray-50 border-t border-gray-200 text-right space-x-3">
-        <h3 class="text-xl font-bold text-gray-800 mb-4">Total: <span id="grand-total">Rp{{ total|intcomma }}</span></h3>
-        <a href="{% url 'store:product_list' %}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-          Kembali Belanja
-        </a>
-        <button type="button" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500" id="btn-checkout">
-          Checkout
-        </button>
-        </div>
-    {% else %}
-      <div id="empty-cart-message" class="p-6 text-center">
-         <p class="text-gray-600 mb-4">Keranjang kosong.</p>
-         <a href="{% url 'store:product_list' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-           Mulai Belanja
-         </a>
-      </div>
-      {% endif %}
-  </div>
-</div>
 
-<div id="checkoutConfirmModal" class="hidden fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" data-modal-hide="checkoutConfirmModal"></div>
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-        <div class="sm:flex sm:items-start">
-          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10">
-            <svg class="h-6 w-6 text-yellow-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.79 4 4s-1.79 4-4 4c-1.742 0-3.223-.835-3.772-2M9 12l-1-1v4" />
-            </svg>
-          </div>
-          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-              Konfirmasi Checkout
-            </h3>
-            <div class="mt-2">
-              <p class="text-sm text-gray-500">
-                Anda yakin ingin checkout semua item di keranjang?
-              </p>
+        <div class="p-4 bg-[var(--bg-1)] border-t border-[var(--card-brd)] text-right space-x-3">
+          <h3 class="text-xl font-bold text-[var(--title)] mb-4">
+            Total: <span id="grand-total">Rp{{ total|intcomma }}</span>
+          </h3>
+          <a href="{% url 'store:product_list' %}" class="inline-flex items-center px-4 py-2 border border-[var(--card-brd)] shadow-sm text-sm font-medium rounded-md text-[var(--ink-weak)] bg-[var(--card-bg)] hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--title)]">
+            Kembali Belanja
+          </a>
+          <button
+            type="button"
+            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-[var(--title)] bg-[var(--accent-yellow)] hover:bg-[var(--accent-yellow-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-yellow)]"
+            id="btn-checkout"
+          >
+            Checkout
+          </button>
+        </div>
+      {% else %}
+        <div id="empty-cart-message" class="p-6 text-center">
+          <p class="text-[var(--ink-weak)] mb-4">Keranjang kosong.</p>
+          <a href="{% url 'store:product_list' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-[var(--title)] bg-[var(--accent-yellow)] hover:bg-[var(--accent-yellow-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-yellow)]">
+            Mulai Belanja
+          </a>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <!-- Modal Konfirmasi Checkout -->
+  <div id="checkoutConfirmModal" 
+      class="hidden fixed z-50 inset-0 overflow-y-auto" 
+      aria-labelledby="modal-title" 
+      role="dialog" 
+      aria-modal="true">
+
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+          aria-hidden="true" 
+          data-modal-hide="checkoutConfirmModal">
+      </div>
+
+
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all 
+                  sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center 
+                        h-12 w-12 rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-yellow-600" 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  aria-hidden="true">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
             </div>
+
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
+                Konfirmasi Checkout
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">
+                  Apakah Anda yakin untuk checkout?
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button type="button" id="confirmCheckoutYes" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 sm:ml-3 sm:w-auto sm:text-sm">
-          Ya, Checkout
-        </button>
-        <button type="button" data-modal-hide="checkoutConfirmModal" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:w-auto sm:text-sm">
-          Batal
-        </button>
+
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+
+          <button type="button" 
+                  id="confirmCheckoutYes" 
+                  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 
+                        bg-[var(--accent-yellow)] text-base font-medium text-[var(--title)] 
+                        hover:bg-[var(--accent-yellow-dark)] sm:ml-3 sm:w-auto sm:text-sm">
+            Ya, Checkout
+          </button>
+
+          <button type="button" 
+                  data-modal-hide="checkoutConfirmModal" 
+                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 
+                        bg-white text-base font-medium text-gray-700 hover:bg-gray-50 
+                        sm:mt-0 sm:w-auto sm:text-sm">
+            Batal
+          </button>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
-<div id="checkoutModal" class="hidden fixed z-50 inset-0 overflow-y-auto" aria-labelledby="checkoutModalLabel" role="dialog" aria-modal="true">
-  <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" data-modal-hide="checkoutModal"></div>
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
-      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-        <div class="sm:flex sm:items-start">
-          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <h3 class="text-lg leading-6 font-medium text-gray-900" id="checkoutModalLabel">
-              Checkout Berhasil
-            </h3>
-            <div class="mt-2">
-              <p class="text-sm text-gray-500">
-                Selamat! Anda berhasil checkout.
-              </p>
+
+
+  <div id="checkoutModal" 
+      class="hidden fixed z-50 inset-0 overflow-y-auto" 
+      aria-labelledby="checkoutModalLabel" 
+      role="dialog" 
+      aria-modal="true">
+
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+          aria-hidden="true" 
+          data-modal-hide="checkoutModal">
+      </div>
+
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all 
+                  sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center 
+                        h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-green-600" 
+                  xmlns="http://www.w3.org/2000/svg" 
+                  fill="none" 
+                  viewBox="0 0 24 24" 
+                  stroke="currentColor" 
+                  aria-hidden="true">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M5 13l4 4L19 7" />
+              </svg>
             </div>
+
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="checkoutModalLabel">
+                Checkout Berhasil
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">
+                  Selamat! Anda berhasil checkout.
+                </p>
+              </div>
+            </div>
+
           </div>
         </div>
-      </div>
-      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <a href="{% url 'store:product_list' %}" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
-          Kembali Belanja
-        </a>
-        <button type="button" data-modal-hide="checkoutModal" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
-          Tutup
-        </button>
+
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+
+          <a href="{% url 'store:product_list' %}"
+            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 
+                    bg-[var(--accent-yellow)] text-base font-medium text-[var(--title)] 
+                    hover:bg-[var(--accent-yellow-dark)] focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
+            Kembali Belanja
+          </a>
+
+          <button type="button" 
+                  data-modal-hide="checkoutModal" 
+                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 
+                        bg-white text-base font-medium text-gray-700 hover:bg-gray-50 
+                        focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
+            Tutup
+          </button>
+
+        </div>
       </div>
     </div>
   </div>
-</div>
+
 <script>
-// === Fungsi CSRF) ===
+// === Fungsi CSRF ===
 function getCookie(name) {
   let cookieValue = null;
   if (document.cookie && document.cookie !== '') {
@@ -199,7 +322,7 @@ function showToast(message, type = 'success') {
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // === Logika Modal Checkout ===
+  // === Checkout ===
   const checkoutSuccessModalEl = document.getElementById('checkoutModal');
   function showCheckoutSuccessModal() { checkoutSuccessModalEl.classList.remove('hidden'); }
   function hideCheckoutSuccessModal() { checkoutSuccessModalEl.classList.add('hidden'); }
@@ -210,7 +333,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
    });
 
-  // === Logika Modal Konfirmasi Checkout ===
+  // === Konfirmasi Checkout ===
   const checkoutConfirmModalEl = document.getElementById('checkoutConfirmModal');
   const confirmCheckoutYesBtn = document.getElementById('confirmCheckoutYes');
   function showCheckoutConfirmModal() { checkoutConfirmModalEl.classList.remove('hidden'); }

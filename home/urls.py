@@ -8,4 +8,5 @@ urlpatterns = [
     path('api/map-boundaries/', views.api_map_boundaries, name='api_map_boundaries'),
     path('api/fitness-spots/', views.api_fitness_spots, name='api_fitness_spots'),
     path("central/", include(("central.urls", "central"), namespace="central")),
+    path('store/', include('store.urls'))
 ]
