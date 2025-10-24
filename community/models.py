@@ -1,7 +1,7 @@
 # community/models.py
 from django.db import models
 from django.conf import settings
-# from django.utils import timezone # Only needed if using default=timezone.now
+
 
 class CommunityCategory(models.Model):
     name = models.CharField(max_length=100)
@@ -18,8 +18,6 @@ class Community(models.Model):
     name = models.CharField(max_length=200, help_text='Nama komunitas olahraga')
     description = models.TextField(help_text='Deskripsi singkat komunitas')
     contact_info = models.CharField(max_length=255, blank=True, help_text='Kontak admin komunitas (bisa berupa Instagram, nomor WA, dll)')
-    # auto_now_add handles creation time automatically via ORM
-    # Fixtures need this field explicitly defined (see loaddata fix)
     created_at = models.DateTimeField(auto_now_add=True)
     fitness_spot = models.ForeignKey(
         'home.FitnessSpot',
@@ -49,7 +47,7 @@ class Community(models.Model):
     class Meta:
         verbose_name = 'Komunitas'
         verbose_name_plural = 'Komunitas'
-        ordering = ['-created_at'] # Order by newest first
+        ordering = ['-created_at'] 
 
     def __str__(self):
         return self.name

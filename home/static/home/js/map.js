@@ -365,48 +365,71 @@ function getVisibleGridIds(bounds) {
 }
 
 function createInfoContent(spot) {
+    const addr = spot.address || spot.formatted_address || spot.vicinity || '';
+    const rating = spot.rating ?? '—';
+    const total = spot.rating_count ?? spot.user_ratings_total ?? 0;
+
+    const starSvg = `
+        <svg viewBox="0 0 24 24">
+            <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        </svg>
+    `;
+
+    const ratingHtml = spot.rating
+        ? `
+            <div class="iw-rating">
+                ${starSvg}
+                <strong>${rating}</strong>
+                <span class="text-xs">(${total} reviews)</span>
+            </div>
+        `
+        : '';
+
     const div = document.createElement('div');
-    div.className = "iw-body p-2 font-sans text-gray-800 max-w-xs"; 
 
     div.innerHTML = `
-        <h2 class="font-bold text-lg text-blue-800">${spot.name || 'Unnamed Spot'}</h2>
-        <p class="text-sm">${spot.address || 'No address provided'}</p>
-        <div class="mt-2 text-center">
-            <button class="lihat-komunitas-btn inline-block bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold py-1 px-3 rounded-lg transition">
-                🔗 Lihat Komunitas di Sini
-            </button>
+        <div class="iw-header">
+            <div style="font-weight:600;line-height:1.3;">
+            ${spot.name || 'Detail lokasi'}
+            </div>
         </div>
+        <div class="iw-body">
+            <div class="text-sm">${addr}</div>
+            ${ratingHtml}
+            
+            <div class="mt-3 text-center">
+                <button class="lihat-komunitas-btn" style="background-color: var(--accent-yellow); color: var(--ink-strong); font-weight: 600; border-radius: 6px; padding: 6px 12px; font-size: 0.85rem; transition: background 0.2s;">
+                    🔗 Lihat Komunitas di Sini
+                </button>
+            </div>
+            </div>
     `;
 
     const button = div.querySelector('.lihat-komunitas-btn');
     if (button) {
         button.addEventListener('click', () => {
-            // Get modal elements
             const modal = document.getElementById('community-modal');
             const modalContent = document.getElementById('community-modal-content');
 
-            // Basic checks for modal elements
             if (!modal || !modalContent) {
-                console.error("Community modal elements not found in DOM!");
+                console.error("Community modal elements not found!");
                 alert("Error: Cannot open community list modal.");
                 return;
             }
 
-            // Show the modal
             modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('flex');
             modal.style.display = 'flex'; 
 
-            // Set loading state
             modalContent.innerHTML = "<p class='text-gray-500 italic'>Memuat komunitas...</p>";
 
-            // Fetch communities for the clicked spot
             fetch(`/community/by-place-json/${spot.place_id}/`) 
                 .then(res => {
                     if (!res.ok) { throw new Error(`HTTP error! Status: ${res.status}`); }
                     return res.json();
                 })
                 .then(data => {
-                    modalContent.innerHTML = ""; // Clear loading
+                    modalContent.innerHTML = ""; 
 
                     if (data.error) {
                         modalContent.innerHTML = `<p class='text-red-500 italic'>Error: ${data.error}</p>`;
@@ -421,16 +444,17 @@ function createInfoContent(spot) {
                             const li = document.createElement('li');
                             const link = document.createElement('a');
 
-                            // Construct the detail page URL
-                            link.href = `/community/detail/${c.id}/`; 
-                            link.textContent = '▶ ' + c.name; 
-                            link.className = "text-blue-600 hover:text-blue-800 hover:underline"; 
+                            link.href = `/community/detail/${c.id}/`;
+                            link.textContent = '▶ ' + c.name;
+                            link.style.color = 'var(--teal-1)'; 
+                            link.style.textDecoration = 'none';
+                            link.onmouseover = () => link.style.textDecoration = 'underline';
+                            link.onmouseout = () => link.style.textDecoration = 'none';
 
                             li.appendChild(link);
                             ul.appendChild(li);
                         });
-
-                        modalContent.appendChild(ul); 
+                        modalContent.appendChild(ul);
                     }
                     else {
                         modalContent.innerHTML = "<p class='text-gray-500 italic'>Belum ada komunitas di lokasi ini.</p>";
@@ -441,33 +465,6 @@ function createInfoContent(spot) {
                     console.error("Fetch error for communities:", err);
                 });
         });
-    } else {
-        console.error("Button .lihat-komunitas-btn not found in info window content.");
     }
-
     return div; 
 }
-
-document.addEventListener('DOMContentLoaded', () => {
-    const modal = document.getElementById('community-modal');
-    const closeBtn = document.getElementById('close-community-modal');
-
-    function closeModal() {
-        if (modal) {
-            modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.style.display = 'none'; 
-        }
-    }
-
-    if (closeBtn) {
-        closeBtn.addEventListener('click', closeModal);
-    }
-
-    if (modal) {
-        modal.addEventListener('click', (event) => {
-            if (event.target === modal) {
-                closeModal();
-            }
-        });
-    }
-});
