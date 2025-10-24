@@ -1,8 +1,8 @@
+# community/models.py
 from django.db import models
 from django.conf import settings
+# from django.utils import timezone # Only needed if using default=timezone.now
 
-# Note: This model is implied by your migration files 0002 and 0004.
-# It had to exist for the other migrations to make sense.
 class CommunityCategory(models.Model):
     name = models.CharField(max_length=100)
     slug = models.SlugField(unique=True, blank=True)
@@ -18,27 +18,25 @@ class Community(models.Model):
     name = models.CharField(max_length=200, help_text='Nama komunitas olahraga')
     description = models.TextField(help_text='Deskripsi singkat komunitas')
     contact_info = models.CharField(max_length=255, blank=True, help_text='Kontak admin komunitas (bisa berupa Instagram, nomor WA, dll)')
+    # auto_now_add handles creation time automatically via ORM
+    # Fixtures need this field explicitly defined (see loaddata fix)
     created_at = models.DateTimeField(auto_now_add=True)
     fitness_spot = models.ForeignKey(
-        'home.FitnessSpot', 
-        on_delete=models.deletion.CASCADE, 
+        'home.FitnessSpot',
+        on_delete=models.deletion.CASCADE,
         related_name='communities',
         help_text='Tempat kebugaran tempat komunitas ini sering berlatih'
     )
-    
     category = models.ForeignKey(
         CommunityCategory,
         on_delete=models.deletion.CASCADE,
         related_name='communities',
-        null=True, 
+        null=True,
         blank=True,
         help_text='Kategori komunitas (misalnya: gym, futsal, yoga)'
     )
-    
-    admin = models.ForeignKey(
+    admins = models.ManyToManyField(
         settings.AUTH_USER_MODEL,
-        on_delete=models.deletion.SET_NULL,
-        null=True,
         blank=True,
         related_name='managed_communities'
     )
@@ -51,7 +49,7 @@ class Community(models.Model):
     class Meta:
         verbose_name = 'Komunitas'
         verbose_name_plural = 'Komunitas'
-        ordering = ['-created_at']
+        ordering = ['-created_at'] # Order by newest first
 
     def __str__(self):
         return self.name
