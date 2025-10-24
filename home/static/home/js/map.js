@@ -326,7 +326,7 @@ function toggleFullScreen() {
         exitIcon.classList.add('hidden');
     }
     
-    setTimeout(() => google.maps.event.trigger(map, 'resize'), 400);
+    setTimeout(() => google.maps.event.trigger(map, 'resize'), 400);
 }
 
 async function fetchMapBoundaries() {
@@ -365,29 +365,41 @@ function getVisibleGridIds(bounds) {
 }
 
 function createInfoContent(spot) {
-    const starIcon = `<svg width="16" height="16" viewBox="0 0 20 20" style="vertical-align: middle; fill: #233D8C;"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>`;
-    
-    let ratingHTML = '';
-    if (spot.rating) {
-        ratingHTML = `
-            <div style="display: flex; align-items: center; gap: 5px; font-size: 0.9rem; margin-top: 10px; color: #233D8C;">
-                ${starIcon}
-                <strong style="font-weight: 700;">${spot.rating}</strong>
-                <span style="color: #4a4a4a; font-weight: 400; margin-left: 4px;">(${spot.rating_count} reviews)</span>
+    const addr = spot.address || spot.formatted_address || spot.vicinity || '';
+    const rating = spot.rating ?? '—';
+    const total = spot.rating_count ?? spot.user_ratings_total ?? 0;
+
+    const starSvg = `
+        <svg viewBox="0 0 24 24">
+            <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        </svg>
+    `;
+
+    const ratingHtml = spot.rating
+        ? `
+            <div class="iw-rating">
+                ${starSvg}
+                <strong>${rating}</strong>
+                <span class="text-xs">(${total} reviews)</span>
             </div>
-        `;
-    }
+        `
+        : '';
 
     return `
-        <div style="font-family: sans-serif; max-width: 280px; border-radius: 12px; overflow: hidden;">
-            <div style="background-color: #233D8C; color: white; padding: 10px 15px; font-weight: bold; font-size: 1.1rem; position: relative;">
-                ${spot.name}
-                <button title="Close" onclick="infoWindow.close()" style="position: absolute; top: 0px; right: 8px; background: none; border: none; color: white; font-size: 24px; cursor: pointer; line-height: 1.5; font-weight: 300;">&times;</button>
+        <div class="iw-header">
+            <div style="font-weight:600;line-height:1.3;">
+                ${spot.name || 'Detail lokasi'}
             </div>
-            <div style="background-color: #E8B400; color: #233D8C; padding: 15px;">
-                <p style="font-size: 0.85rem; color: #333; margin-bottom: 4px; margin-top: 0;">${spot.address}</p>
-                ${ratingHTML}
-            </div>
+            <button
+                title="Close"
+                onclick="infoWindow.close()"
+                style="background:none;border:0;color:#fff;font-size:20px;line-height:1;cursor:pointer;font-weight:300;">
+                &times;
+            </button>
+        </div>
+        <div class="iw-body">
+            <div class="text-sm">${addr}</div>
+            ${ratingHtml}
         </div>
     `;
 }
