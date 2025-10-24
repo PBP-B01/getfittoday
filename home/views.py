@@ -1,18 +1,20 @@
 import datetime
-from django.shortcuts import render, redirect
+import json
+from pathlib import Path
+
 from django.conf import settings
-from django.http import JsonResponse
+from django.contrib import messages
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.core.cache import cache
 from django.db.models import Min, Max
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib import messages
-from django.urls import reverse
-from .models import FitnessSpot
-from .forms import StyledUserCreationForm, StyledAuthenticationForm
-from .utils.spots_loader import build_index_and_bounds, load_all_spots
-from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.shortcuts import get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
+
+from community.models import Community 
+from .forms import StyledUserCreationForm, StyledAuthenticationForm
+from .models import FitnessSpot
+from .utils.spots_loader import build_index_and_bounds, load_all_spots
 
 
 # --- Grid Configuration ---
@@ -123,3 +125,32 @@ def api_fitness_spots(request):
     grid_id = request.GET.get("gridId", "")
     index, _ = build_index_and_bounds()
     return JsonResponse({"gridId": grid_id, "spots": index.get(grid_id, [])})
+
+def communities_by_place(request, place_id):
+    """Mengembalikan list komunitas yang ada di FitnessSpot tertentu."""
+    spot = get_object_or_404(FitnessSpot, place_id=place_id)
+    communities = Community.objects.filter(fitness_spot=spot).values('id', 'name', 'description')
+    return JsonResponse({'communities': list(communities)})
+
+
+def communities_by_place_json(request, place_id):
+    """Mengambil list komunitas dari file JSON lokal di static berdasarkan place_id."""
+    json_path = Path(settings.BASE_DIR) / "static" / "home" / "data" / "community_data.json"
+    try:
+        with open(json_path, encoding="utf-8") as f:
+            all_data = json.load(f)
+    except FileNotFoundError:
+        print("JSON file not found!")
+        return JsonResponse({"communities": []})
+
+    communities = [
+        {
+            "id": c["pk"],
+            "name": c["fields"]["name"],
+            "description": c["fields"]["description"],
+            "contact_info": c["fields"].get("contact_info", "")
+        }
+        for c in all_data if c["fields"]["fitness_spot"] == place_id
+    ]
+
+    return JsonResponse({"communities": communities})
