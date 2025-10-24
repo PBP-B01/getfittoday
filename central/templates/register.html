@@ -37,6 +37,12 @@
     </p>
   </div>
 </section>
+<!-- Toast -->
+<div id="toast"
+     class="hidden fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm
+            rounded-xl px-4 py-3 text-sm shadow-[0_12px_30px_rgba(0,0,0,.25)]
+            transition-all duration-300 translate-y-2 opacity-0"
+     role="status" aria-live="polite"></div>
 {% endblock %}
 
 {% block extra_css %}
@@ -112,6 +118,25 @@
     background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;
     border-radius:12px; padding:.65rem .85rem; font-size:.9rem;
   }
+
+  :root{
+    --toast-ok-bg: var(--nav-bg);
+    --toast-ok-shadow: rgba(14,90,100,.35);
+    --toast-err-bg: #E5484D;
+    --toast-err-shadow: rgba(229,72,77,.35);
+    --toast-text: #FFFFFF;
+  }
+
+  #toast.toast--ok{
+    background: var(--toast-ok-bg);
+    color: var(--toast-text);
+    box-shadow: 0 16px 38px var(--toast-ok-shadow);
+  }
+  #toast.toast--err{
+    background: var(--toast-err-bg);
+    color: var(--toast-text);
+    box-shadow: 0 16px 38px var(--toast-err-shadow);
+  }
 </style>
 {% endblock %}
 
@@ -140,6 +165,13 @@
       });
 
       const data = await r.json().catch(() => ({}));
+      if (r.ok && data.ok) {
+        toast("Register successful ✓", true, 1000);
+        setTimeout(() => {
+          window.location.href = data.redirect || "{% url 'central:login' %}";
+        }, 900);
+        return;
+      }
       if (!r.ok || !data.ok) {
         const html = data?.errors
           ? Object.entries(data.errors)
@@ -158,5 +190,24 @@
       btn.disabled = false;
     }
   });
+
+  function toast(message, ok = true, delay = 1800) {
+      const el = document.getElementById('toast');
+      const base =
+        "fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm rounded-xl px-4 py-3 text-sm transition-all duration-300";
+
+      el.textContent = message;
+      el.className = base + " " + (ok ? "toast--ok" : "toast--err") + " opacity-0 translate-y-2";
+      el.classList.remove("hidden");
+
+      void el.offsetWidth;
+      el.classList.remove("opacity-0","translate-y-2");
+
+      clearTimeout(el._t);
+      el._t = setTimeout(() => {
+        el.classList.add("opacity-0","translate-y-2");
+        setTimeout(() => el.classList.add("hidden"), 300);
+      }, delay);
+    }
 </script>
 {% endblock %}
