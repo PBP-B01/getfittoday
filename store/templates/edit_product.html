@@ -1,0 +1,94 @@
+{% extends 'base.html' %}
+{% block title %}Edit Produk: {{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-[#1d3697] flex flex-col items-center justify-center px-4 py-12">
+  <div class="w-full max-w-2xl bg-white rounded-2xl shadow-xl p-8">
+    <h1 class="text-3xl font-bold text-center text-gray-800 mb-2">Edit Produk</h1>
+    <p class="text-center text-gray-500 mb-6">{{ product.name }} (ID: {{ product.pk }})</p>
+
+    <form id="editForm" method="post" class="space-y-5">
+      {% csrf_token %}
+
+      {% for field in form %}
+      <div>
+        <label for="{{ field.id_for_label }}" class="block text-sm font-semibold text-gray-700 mb-1">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+        <div class="mt-1 text-sm text-red-600">
+          {% for error in field.errors %}
+          <p>{{ error }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+      {% endfor %}
+
+      <div class="flex justify-end space-x-3 pt-4">
+        <a href="{% url 'store:product_list' %}" 
+           class="px-5 py-2 rounded-lg border border-gray-300 text-gray-700 bg-white hover:bg-gray-100 transition">
+          Batal
+        </a>
+        <button type="submit" id="saveButton"
+                class="px-5 py-2 rounded-lg text-white font-semibold bg-indigo-600 hover:bg-indigo-700 shadow transition">
+          Simpan Perubahan
+        </button>
+      </div>
+    </form>
+
+    <!-- Notifikasi AJAX -->
+    <div id="messageBox" class="hidden mt-4 text-center p-3 rounded-lg font-semibold"></div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const form = document.getElementById('editForm');
+  const messageBox = document.getElementById('messageBox');
+  const saveButton = document.getElementById('saveButton');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    saveButton.disabled = true;
+    saveButton.textContent = "Menyimpan...";
+
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch("", {
+        method: "POST",
+        body: formData,
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+        }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+
+        messageBox.classList.remove("hidden", "bg-red-100", "text-red-700");
+        messageBox.classList.add("bg-green-100", "text-green-700");
+        messageBox.textContent = data.message || "Perubahan berhasil disimpan!";
+
+        setTimeout(() => {
+            window.location.href = "{% url 'store:product_list' %}";
+        }, 1500);
+        
+    } else {
+        messageBox.classList.remove("hidden", "bg-green-100", "text-green-700");
+        messageBox.classList.add("bg-red-100", "text-red-700");
+        messageBox.textContent = "Gagal menyimpan perubahan. Coba lagi.";
+      }
+    } catch (error) {
+      messageBox.classList.remove("hidden", "bg-green-100", "text-green-700");
+      messageBox.classList.add("bg-red-100", "text-red-700");
+      messageBox.textContent = "Terjadi kesalahan jaringan.";
+    }
+
+    saveButton.disabled = false;
+    saveButton.textContent = "Simpan Perubahan";
+  });
+});
+</script>
+{% endblock %}

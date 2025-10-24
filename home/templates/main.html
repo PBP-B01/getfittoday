@@ -2,167 +2,223 @@
 {% load static %}
 
 {% block title %}GetFit.Today - Home{% endblock %}
+{% block body_class %}home-theme{% endblock %}
 
 {% block content %}
 <main class="container mx-auto px-4 py-8">
-    <section class="text-center py-8">
-        <h1 class="text-yellow-500 text-3xl md:text-5xl font-bold mb-8 hide-on-fullscreen">
-            "YOUR ONE-STOP SOLUTION TO GETTING FIT"
-        </h1>
+  <section class="home-hero text-center pt-5 pb-6">
+    <h1 class="home-hero-title text-[var(--title)] text-2xl md:text-4xl font-extrabold mb-6">
+        "YOUR ONE-STOP SOLUTION TO GET FIT"
+    </h1>
 
-        <div id="map-wrapper">
-            <div id="sidebar">
-                <div class="sidebar-header">Fitness Spots</div>
-                <div id="sidebar-empty-state" class="hidden">
-                    <p>No fitness spots found in this area. Try panning or zooming the map.</p>
-                </div>
-                <div id="spot-cards-container"></div>
-            </div>
-            <div class="map-container-wrapper">
-                <div id="map"></div>
-                <div id="map-controls-container">
-                    <button id="fullscreen-toggle-btn" class="map-top-right-button" title="Toggle Fullscreen">
-                        <svg id="fullscreen-enter-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5"></path></svg>
-                        <svg id="fullscreen-exit-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5m0 0l-1-1m1 1l1 1m4-11h5m0 0l1 1m-1-1l-1-1M5 19v-4m0 0l-1 1m1-1l1-1m10 4v-4m0 0l1 1m-1-1l-1-1"></path></svg>
-                    </button>
-                    <button id="sidebar-toggle-btn" class="map-top-right-button" title="Toggle Sidebar">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
-                    </button>
-                </div>
-            </div>
+    <div id="map-wrapper">
+      <div id="sidebar">
+        <div class="sidebar-header">Sport Centers</div>
+        <div id="sidebar-empty-state" class="hidden">
+          <p>No Sport Centers spots found in this area. Try panning or zooming the map.</p>
         </div>
-    </section>
+        <div id="spot-cards-container"></div>
+      </div>
+
+      <div class="map-container-wrapper">
+        <div id="map"></div>
+
+        <div id="map-controls-container">
+          <button id="fullscreen-toggle-btn" class="map-top-right-button" title="Toggle Fullscreen">
+            <svg id="fullscreen-enter-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5" />
+            </svg>
+            <svg id="fullscreen-exit-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 14H5m0 0l-1-1m1 1l1 1m4-11h5m0 0l1 1m-1-1l-1-1M5 19v-4m0 0l-1 1m1-1l1-1m10 4v-4m0 0l1 1m-1-1l-1-1" />
+            </svg>
+          </button>
+
+          <button id="sidebar-toggle-btn" class="map-top-right-button" title="Toggle Sidebar">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
 </main>
 {% endblock %}
 
 {% block extra_css %}
 <style>
-    :root {
-      --dark-blue: #0D2A4C;
-      --yellow: #FFC107;
+    html, body { margin: 0; padding: 0; }
+
+    :root{
+        --nav-bg: #0E5A64;
+        --nav-text: #FFFFFF;
+        --title: #1B2B5A;
+        --bg-1: #EAF2FF;
+        --bg-2: #BFD6F2;
+        --card-bg: #FFFFFF;
+        --card-brd: #C8DDF6;
+        --ink-weak: #6B7A99;
+        --accent-yellow: #FFC107;
+        --accent-yellow-dark: #E0A106;
+        --nav-bg-darker: #07434B;
     }
 
-    html, body { background-color: var(--dark-blue); }
-    main h1 { color: var(--yellow); }
+    body.home-theme{
+        background:
+            radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+            linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        color: var(--nav-text);
+    }
 
-    #map-wrapper {
+    body.home-theme nav{
+        background-color: var(--nav-bg) !important;
+        color: var(--nav-text) !important;
+        position: sticky; top: 0; left: 0; right: 0;
+        width: 100%;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: 0 1px 0 rgba(0,0,0,.06);
+        z-index: 50;
+    }
+
+    body.home-theme nav a{ color: var(--nav-text) !important; }
+    body.home-theme nav a:hover{ opacity: .92; }
+    body.home-theme nav > div:first-child{ color: #fff !important; }
+    body.home-theme .hide-on-fullscreen{ color: var(--title) !important; }
+
+    #map-wrapper{
         height: 500px;
         width: 100%;
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
         display: flex;
         position: relative;
-        border-radius: 0.5rem;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        transition: all 0.4s ease-in-out;
+        background: var(--card-bg);
+        border: 3px solid #DDE7FF;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow:
+            0 40px 80px rgba(13,43,63,.25),
+            0 12px 24px rgba(13,43,63,.12),
+            inset 0 1px 0 rgba(255,255,255,.65);
+        transition: all .4s ease-in-out;
     }
 
-    body.full-screen-mode #map-wrapper {
+    body.full-screen-mode #map-wrapper{
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        max-width: 100%; border-radius: 0; z-index: 50;
+        max-width: 100%; border-radius: 0; z-index: 50; margin: 0; box-shadow: none; border: none;
     }
 
-    #sidebar {
+    #sidebar{
         width: 0;
         flex-shrink: 0;
-        background-color: var(--dark-blue);
+        background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
         overflow-y: auto;
-        transition: width 0.4s ease-in-out;
-        border-right: 2px solid var(--yellow);
-        display: flex;
-        flex-direction: column;
+        transition: width .4s ease-in-out;
+        border-right: 1px solid var(--card-brd);
+        display: flex; flex-direction: column;
+    }
+    body.full-screen-mode.sidebar-visible #sidebar{ width: 340px; }
+
+    .sidebar-header{
+        position: sticky; top: 0; z-index: 1;
+        padding: 1rem; font-size: 1.1rem; font-weight: 700; text-align: center;
+        background: linear-gradient(135deg, var(--nav-bg) 0%, var(--nav-bg-darker) 100%);
+        color: #fff; letter-spacing: .2px; border-bottom: none; box-shadow: 0 2px 10px rgba(0,0,0,.06);
     }
 
-    
-    body.full-screen-mode.sidebar-visible #sidebar { width: 350px; }
+    #spot-cards-container{ padding: 8px; overflow-y: auto; flex-grow: 1; }
 
-    .sidebar-header {
-        padding: 1rem;
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: var(--yellow);
-        text-align: center;
-        border-bottom: 2px solid var(--yellow);
-        flex-shrink: 0;
-    }
-
-    #spot-cards-container {
-        padding: 8px;
-        overflow-y: auto;
-        flex-grow: 1;
-    }
-
-    .spot-card {
-        background-color: var(--yellow);
-        color: var(--dark-blue);
-        margin: 10px;
-        padding: 15px;
-        border-radius: 12px;
+    .spot-card{
+        position: relative;
+        background: linear-gradient(180deg, rgba(234,242,255,.95) 0%, rgba(191,214,242,.92) 100%);
+        color: #193A63;
+        border: 1px solid var(--card-brd);
+        border-radius: 14px;
+        margin: 10px; padding: 14px;
         cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        box-shadow: 0 2px 10px rgba(7,67,75,.06); /* subtle drop shadow */
     }
-    .spot-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    .spot-card.active {
-        border: 3px solid white;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-    }
-    .spot-card h3 { 
-        font-weight: 700; 
-        color: #000;
-        margin-bottom: 8px;
-    }
-    .spot-card p { 
-        font-size: 0.85rem; 
-        color: #333;
-        margin-bottom: 4px;
-    }
-    .spot-card-rating {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 0.9rem;
-        margin-top: 10px;
-        color: var(--dark-blue);
-    }
-    .spot-card-rating svg {
-        fill: var(--dark-blue);
-        width: 16px;
-        height: 16px;
+    .spot-card:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(7,67,75,.14);
     }
 
-    #sidebar-empty-state {
-        color: #a0aec0; text-align: center; padding: 40px 20px;
-        font-style: italic;
-    }
-    .hidden { display: none; }
+    .spot-card.active{ border: 2px solid #9EC5FF; box-shadow: 0 0 0 4px rgba(158,197,255,.25); }
+    .spot-card h3{ font-weight: 700; color: #0F2C58; margin-bottom: 6px; }
+    .spot-card p{ font-size: .85rem; color: var(--ink-weak); margin-bottom: 4px; }
+    .spot-card .spot-card-rating{ display:flex; align-items:center; gap:6px; margin-top:8px; color:#0D3B4F; }
+    .spot-card .spot-card-rating svg{ width:16px; height:16px; fill:#0D3B4F; flex:0 0 16px; }
+    #spot-cards-container .spot-card > svg:first-child{ display:none; }
 
-    .map-container-wrapper { flex-grow: 1; position: relative; }
-    #map { width: 100%; height: 100%; }
+    .map-container-wrapper{ flex-grow: 1; position: relative; }
+    #map{ width: 100%; height: 100%; }
 
-    #map-controls-container {
-        position: absolute; top: 10px; right: 10px;
-        z-index: 100; display: flex; flex-direction: column; gap: 8px;
+    #map-controls-container{
+        position: absolute; top: 12px; right: 12px; z-index: 100;
+        display: flex; flex-direction: column; gap: 8px;
     }
-    .map-top-right-button {
-        background-color: white; color: var(--dark-blue); padding: 8px;
-        border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        cursor: pointer; border: 2px solid var(--dark-blue);
-        width: 40px; height: 40px;
+    .map-top-right-button{
+        background: #fff; color: #0D3B4F; padding: 8px;
+        border-radius: 10px; border: 1px solid var(--card-brd);
+        box-shadow: 0 2px 8px rgba(0,0,0,.15); width: 42px; height: 42px; cursor: pointer;
     }
-    #sidebar-toggle-btn { display: none; }
-    body.full-screen-mode #sidebar-toggle-btn { display: block; }
+    .map-top-right-button:hover{ background: #F6FAFF; }
+    #sidebar-toggle-btn{ display: none; }
+    body.full-screen-mode #sidebar-toggle-btn{ display: block; }
+    body.full-screen-mode .hide-on-fullscreen{ display: none; }
 
-    body.full-screen-mode .hide-on-fullscreen { display: none; }
+    #sidebar-empty-state{ color: #98A6C2; text-align: center; padding: 40px 20px; font-style: italic; }
 
-    .custom-map-control-button {
-        background-color: #fff; border: 2px solid #fff; border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,.3); cursor: pointer; margin: 10px;
-        padding: 8px; text-align: center; width: 40px; height: 40px;
+    main.container{ padding-top: .75rem !important; }
+    .home-hero{ padding-top: 6px; }
+    @media (min-width: 768px){ .home-hero{ padding-top: 2px; } }
+
+    .home-hero-title{
+        font-size: clamp(28px, 4vw, 44px);
+        letter-spacing: .3px;
+        margin-top: -6px;
+        margin-bottom: 10px;
     }
-    .custom-map-control-button:hover { background-color: #f4f4f4; }
+
+    #userMenu a, #mUserMenu a{ color: #0f2a6d !important; }
+    #userMenu a:hover, #mUserMenu a:hover{ background: #eff6ff; }
+
+    :root{
+        --teal-1:#0E5A64;
+        --teal-2:#0A4A52;
+        --gold-soft-1:#FFF5CC;
+        --gold-soft-2:#FFE08A;
+        --ink-strong:#0B3440;
+    }
+
+    .gm-style .gm-style-iw-c{
+        padding:0 !important;
+        background:transparent !important;
+        border-radius:14px !important;
+        box-shadow:0 10px 22px rgba(7,67,75,.22) !important;
+    }
+    .gm-style .gm-style-iw-d{ overflow:hidden !important; }
+    .gm-style .gm-style-iw-t::after{ display:none !important; }
+
+    .iw-header{
+        background:linear-gradient(135deg,var(--teal-1),var(--teal-2)) !important;
+        color:#fff !important;
+        padding:10px 14px !important;
+        border-radius:14px 14px 0 0 !important;
+    }
+    .iw-body{
+        background:linear-gradient(180deg,var(--gold-soft-1),var(--gold-soft-2)) !important;
+        color:var(--ink-strong) !important;
+        padding:12px 14px !important;
+        border-radius:0 0 14px 14px !important;
+    }
+    .iw-rating{ display:flex; align-items:center; gap:6px; margin-top:6px; }
+    .iw-rating svg{ width:14px; height:14px; fill:var(--teal-1) !important; }
 </style>
 {% endblock %}
 

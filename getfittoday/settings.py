@@ -70,6 +70,9 @@ INSTALLED_APPS = [
     'BlognEvent',
     'rest_framework',
     'central',
+    'django.contrib.humanize',
+    'store',
+    'central',
 ]
 
 REST_FRAMEWORK = {

@@ -22,5 +22,6 @@ urlpatterns = [
     path("", include(("home.urls", "home"), namespace="home")),
     path("booking/", include(("booking.urls", "booking"), namespace="booking")),
     path("central/", include(("central.urls", "central"), namespace="central")),
-    path("blognevent/", include("BlognEvent.urls", namespace="BlogNEvent"))
+    path('store/', include('store.urls')), # app store
+    path("blognevent/", include("BlogNEvent.urls", namespace="BlogNEvent"))
 ]
