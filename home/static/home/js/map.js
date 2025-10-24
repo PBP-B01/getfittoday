@@ -366,10 +366,8 @@ function getVisibleGridIds(bounds) {
 
 function createInfoContent(spot) {
     const div = document.createElement('div');
-    // Added text-gray-800 for better default text color if needed
-    div.className = "p-2 font-sans text-gray-800 max-w-xs";
+    div.className = "iw-body p-2 font-sans text-gray-800 max-w-xs"; 
 
-    // Basic spot info
     div.innerHTML = `
         <h2 class="font-bold text-lg text-blue-800">${spot.name || 'Unnamed Spot'}</h2>
         <p class="text-sm">${spot.address || 'No address provided'}</p>
@@ -386,73 +384,59 @@ function createInfoContent(spot) {
             // Get modal elements
             const modal = document.getElementById('community-modal');
             const modalContent = document.getElementById('community-modal-content');
-            const modalCloseBtn = document.getElementById('close-community-modal'); // Assuming you have a close button
 
             // Basic checks for modal elements
-            if (!modal || !modalContent || !modalCloseBtn) {
-                console.error("Community modal elements not found!");
+            if (!modal || !modalContent) {
+                console.error("Community modal elements not found in DOM!");
                 alert("Error: Cannot open community list modal.");
                 return;
             }
 
             // Show the modal
             modal.classList.remove('opacity-0', 'pointer-events-none');
-            modal.style.display = 'flex'; // Use flex or block as per your modal CSS
+            modal.style.display = 'flex'; 
 
             // Set loading state
             modalContent.innerHTML = "<p class='text-gray-500 italic'>Memuat komunitas...</p>";
 
             // Fetch communities for the clicked spot
-            fetch(`/community/by-place-json/${spot.place_id}/`) // Ensure this URL matches your urls.py
+            fetch(`/community/by-place-json/${spot.place_id}/`) 
                 .then(res => {
-                    if (!res.ok) {
-                        throw new Error(`HTTP error! Status: ${res.status}`);
-                    }
-                    return res.json(); // Parse the JSON response
+                    if (!res.ok) { throw new Error(`HTTP error! Status: ${res.status}`); }
+                    return res.json();
                 })
                 .then(data => {
-                    modalContent.innerHTML = ""; // Clear loading message
+                    modalContent.innerHTML = ""; // Clear loading
 
-                    // Handle potential errors from the API
                     if (data.error) {
-                        console.error("API Error fetching communities:", data.error);
                         modalContent.innerHTML = `<p class='text-red-500 italic'>Error: ${data.error}</p>`;
                     }
-                    // Check if communities data is valid and not empty
                     else if (data.communities && Array.isArray(data.communities) && data.communities.length > 0) {
                         const ul = document.createElement('ul');
-                        ul.className = "list-disc list-inside space-y-1"; // Basic list styling
+                        ul.className = "list-none space-y-2 text-left";
 
-                        // --- 👇 Loop through communities and create links ---
                         data.communities.forEach(c => {
-                            // Skip if essential data (id or name) is missing
-                            if (!c.id || !c.name) {
-                                console.warn("Skipping community with missing id or name:", c);
-                                return;
-                            }
+                            if (!c.id || !c.name) { return; }
 
                             const li = document.createElement('li');
                             const link = document.createElement('a');
 
                             // Construct the detail page URL
-                            link.href = `/community/detail/${c.id}/`; // <<< Generates the link URL
-                            link.textContent = c.name;               // <<< Sets link text to community name
-                            link.className = "text-blue-600 hover:text-blue-800 hover:underline"; // Basic link styles
+                            link.href = `/community/detail/${c.id}/`; 
+                            link.textContent = '▶ ' + c.name; 
+                            link.className = "text-blue-600 hover:text-blue-800 hover:underline"; 
 
-                            li.appendChild(link); // Add the link to the list item
-                            ul.appendChild(li);   // Add the list item to the list
+                            li.appendChild(link);
+                            ul.appendChild(li);
                         });
-                        // --- 👆 End of community loop ---
 
-                        modalContent.appendChild(ul); // Add the list to the modal
+                        modalContent.appendChild(ul); 
                     }
-                    // Handle case where no communities are found
                     else {
                         modalContent.innerHTML = "<p class='text-gray-500 italic'>Belum ada komunitas di lokasi ini.</p>";
                     }
                 })
                 .catch(err => {
-                    // Handle network errors or JSON parsing errors
                     modalContent.innerHTML = "<p class='text-red-500 italic'>Gagal memuat komunitas. Periksa koneksi atau coba lagi nanti.</p>";
                     console.error("Fetch error for communities:", err);
                 });
@@ -461,14 +445,9 @@ function createInfoContent(spot) {
         console.error("Button .lihat-komunitas-btn not found in info window content.");
     }
 
-    return div; // Return the created info window content
+    return div; 
 }
 
-<<<<<<< HEAD
-=======
-// Separate listener for the modal close button(s) and backdrop click
-// Make sure this part is also in your map.js or equivalent file
->>>>>>> 8f4c325 (Community almost DONE !)
 document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('community-modal');
     const closeBtn = document.getElementById('close-community-modal');
@@ -476,7 +455,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function closeModal() {
         if (modal) {
             modal.classList.add('opacity-0', 'pointer-events-none');
-            modal.style.display = 'none'; // Ensure it's hidden
+            modal.style.display = 'none'; 
         }
     }
 
@@ -484,10 +463,8 @@ document.addEventListener('DOMContentLoaded', () => {
         closeBtn.addEventListener('click', closeModal);
     }
 
-    // Optional: Close modal if clicking outside the content area
     if (modal) {
         modal.addEventListener('click', (event) => {
-            // Check if the click target is the modal backdrop itself
             if (event.target === modal) {
                 closeModal();
             }
