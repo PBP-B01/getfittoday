@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Blog</title>
+</head>
+<body>
+    <a href="{% url 'BlogNEvent:blogevent_page' %}" style="display: inline-block; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px; margin-bottom: 20px;">← Back</a>
+    
+    <h1>Create New Blog</h1>
+    
+    <form method="POST" action="{% url 'BlogNEvent:create_blog' %}">
+        {% csrf_token %}
+        
+        <div>
+            <label>Title:</label>
+            {{ form.title }}
+        </div>
+        
+        <div>
+            <label>Image URL:</label>
+            {{ form.image }}
+        </div>
+        
+        <div>
+            <label>Body:</label>
+            {{ form.body }}
+        </div>
+        
+        <button type="submit">Create Blog</button>
+        <a href="{% url 'BlogNEvent:blogevent_page' %}">Cancel</a>
+    </form>
+</body>
+</html>
