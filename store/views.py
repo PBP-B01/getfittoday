@@ -1,11 +1,14 @@
 import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden
 from django.db.models import F
 from django.core.paginator import Paginator
 from django.contrib.humanize.templatetags.humanize import intcomma
 from .models import Product, Cart, CartItem
+from django.contrib.auth.decorators import user_passes_test
+from .forms import ProductForm
+
 
 def _get_or_create_cart(request):
     if request.user.is_authenticated:
@@ -156,5 +159,54 @@ def checkout(request):
 
         return JsonResponse({'success': True, 'message': 'Checkout berhasil.'})
 
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+    
+def is_admin(user):
+    return user.is_authenticated and user.is_staff
+
+@user_passes_test(is_admin)
+def edit_product(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        if request.method == 'POST':
+            form = ProductForm(request.POST, request.FILES, instance=product)
+            if form.is_valid():
+                form.save()
+                return JsonResponse({
+                    'success': True,
+                    'message': 'Produk berhasil diperbarui!'
+                })
+            else:
+                return JsonResponse({
+                    'success': False,
+                    'errors': form.errors
+                }, status=400)
+
+        return JsonResponse({
+            'success': False,
+            'message': 'Metode request tidak valid.'
+        }, status=405)
+
+    else:
+        form = ProductForm(instance=product)
+        return render(request, 'edit_product.html', {
+            'form': form,
+            'product': product
+        })
+
+
+@require_POST
+@user_passes_test(is_admin)
+def delete_product(request, pk):
+    if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        return JsonResponse({'success': False, 'error': 'Bad request'}, status=400)
+
+    try:
+        product = get_object_or_404(Product, pk=pk)
+        product_name = product.name
+        product.delete()
+        return JsonResponse({'success': True, 'message': f'Produk "{product_name}" berhasil dihapus.'})
     except Exception as e:
         return JsonResponse({'success': False, 'error': str(e)}, status=500)

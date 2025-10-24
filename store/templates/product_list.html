@@ -106,7 +106,7 @@ function getCookie(name) {
 }
 const csrftoken = getCookie('csrftoken');
 
-// === Logika Modal Add to Cart ===
+// === Modal Add to Cart ===
 const addToCartModalEl = document.getElementById('addToCartModal');
 const addToCartModalMessageEl = document.getElementById('addToCartModalMessage');
 function showAddToCartModal(message) {
@@ -133,16 +133,15 @@ const sortSelect = document.getElementById('sort-select');
 async function fetchProductList(url) {
   try {
     const isAbsolute = url.startsWith('http');
-    // Perbaikan: Pastikan URL relatif selalu diawali / jika belum
     let relativeUrl = url;
     if (!isAbsolute && !url.startsWith('/')) {
         relativeUrl = (window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname + '/') + url;
     } else if (!isAbsolute) {
-         relativeUrl = url; // Jika sudah ada '/' di awal atau '?'
+         relativeUrl = url;
     }
 
     const fullUrl = isAbsolute ? url : window.location.origin + relativeUrl;
-    const ajaxUrl = new URL(fullUrl); // Tidak perlu base URL lagi
+    const ajaxUrl = new URL(fullUrl);
     ajaxUrl.searchParams.set('ajax', '1');
 
     const response = await fetch(ajaxUrl);
@@ -152,9 +151,10 @@ async function fetchProductList(url) {
     productContainer.innerHTML = html;
 
     ajaxUrl.searchParams.delete('ajax');
-    window.history.pushState({}, '', ajaxUrl.pathname + ajaxUrl.search); // Gabungkan path dan search params
+    window.history.pushState({}, '', ajaxUrl.pathname + ajaxUrl.search);
 
     attachAddToCartListeners();
+    attachAdminButtonListeners();
   } catch (error) {
     console.error('Gagal fetch produk:', error);
     productContainer.innerHTML = '<p class="text-red-600">Gagal memuat produk. Silakan coba lagi.</p>';
@@ -165,12 +165,10 @@ filterForm.addEventListener('submit', function(e) {
   e.preventDefault();
   const formData = new FormData(this);
   const params = new URLSearchParams(formData);
-  // Pastikan URL dimulai dengan '?'
   fetchProductList(`?${params.toString()}`);
 });
 
 productContainer.addEventListener('click', function(e) {
-  // Target link yang punya class page-link ATAU parentnya punya class page-link (jika klik SVG)
   const linkElement = e.target.closest('.page-link');
   if (linkElement) {
     e.preventDefault();
@@ -215,9 +213,61 @@ function attachAddToCartListeners() {
   });
 }
 
-// Panggil saat DOM siap
+
+function attachAdminButtonListeners() {
+    document.querySelectorAll('.btn-delete').forEach(button => {
+        if (button._deleteListener) {
+            button.removeEventListener('click', button._deleteListener);
+        }
+        button._deleteListener = async function() {
+            const productId = this.dataset.productId;
+
+            if (!confirm(`Yakin ingin menghapus produk ini (ID: ${productId})? Aksi ini tidak bisa dibatalkan.`)) {
+                 return;
+            }
+
+            try {
+                const response = await fetch(`/store/product/${productId}/delete/`, {
+                    method: 'POST',
+                    headers: {
+                        'X-CSRFToken': csrftoken,
+                        'X-Requested-With': 'XMLHttpRequest'
+                    }
+                });
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    showAddToCartModal(data.message);
+                    this.closest('.w-64').remove();
+                } else {
+                    alert(data.error || 'Gagal menghapus produk. Cek console server.');
+                }
+            } catch (error) {
+                console.error('Error deleting product:', error);
+                alert('Terjadi masalah koneksi saat mencoba menghapus produk.');
+            }
+        };
+
+        button.addEventListener('click', button._deleteListener);
+    });
+
+
+    document.querySelectorAll('.btn-edit').forEach(button => {
+        if (button._editListener) {
+            button.removeEventListener('click', button._editListener);
+        }
+        button._editListener = function() {
+            const productId = this.dataset.productId;
+            window.location.href = `/store/product/${productId}/edit/`;
+        };
+
+        button.addEventListener('click', button._editListener);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   attachAddToCartListeners();
+  attachAdminButtonListeners();
 });
 </script>
 
