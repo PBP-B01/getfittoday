@@ -116,19 +116,17 @@ class AvailabilityView(views.APIView):
         busy = []
         if res:
             qs = (Booking.objects
-                  .filter(resource=res,
-                          status__in=[BookingStatus.PENDING, BookingStatus.CONFIRMED],
-                          start_time__lt=open_end,
-                          end_time__gt=open_start)
-                  .values("start_time", "end_time"))
+                .filter(resource=res,
+                        status__in=[BookingStatus.PENDING, BookingStatus.CONFIRMED],
+                        start_time__lt=open_end,
+                        end_time__gt=open_start)
+                .values("start_time", "end_time"))
 
             for b in qs:
-                s = b["start_time"]; e = b["end_time"]
-                s = timezone.localtime(s, tz) if not timezone.is_naive(s) else timezone.make_aware(s, tz)
-                e = timezone.localtime(e, tz) if not timezone.is_naive(e) else timezone.make_aware(e, tz)
+                s = to_tz(b["start_time"], tz)
+                e = to_tz(b["end_time"], tz)
                 if e > open_start and s < open_end:
                     busy.append({"start": max(s, open_start), "end": min(e, open_end)})
-
         free = [(open_start, open_end)]
         for b in sorted(busy, key=lambda x: x["start"]):
             new_free = []
@@ -152,7 +150,11 @@ class AvailabilityView(views.APIView):
 
         return Response(slots, status=200)
 
-    
+def to_tz(dt, tz):
+    if dt is None:
+        return None
+    return timezone.localtime(dt, tz) if timezone.is_aware(dt) else timezone.make_aware(dt, tz)
+
 def _parse_iso(s: str):
     try:
         dt = datetime.fromisoformat((s or '').replace('Z', '+00:00'))
