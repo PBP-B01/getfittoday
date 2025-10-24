@@ -1,10 +1,13 @@
 from django.urls import path
-from .views import AvailabilityView, BookingCreateView, booking_page
+from . import views
 
 app_name = "booking"
 
 urlpatterns = [
-    path("availability/", AvailabilityView.as_view(), name="availability"),
-    path("book/", BookingCreateView.as_view(), name="book"),
-    path("page/", booking_page, name="booking_page"),
+    path("page/", views.booking_page, name="page"),
+    path("availability/", views.AvailabilityView.as_view(), name="availability"),
+    path("book/", views.BookingCreateView.as_view(), name="book"),
+    path("mine/", views.my_bookings_page, name="mine_page"),
+    path("api/mine/", views.MyBookingAPI.as_view(), name="mine_api"),
+    path("cancel/<uuid:pk>/", views.BookingCancelView.as_view(), name="booking-cancel"),
 ]
