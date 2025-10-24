@@ -49,6 +49,7 @@
 {% endblock %}
 
 {% block extra_css %}
+{{ block.super }}
 <style>
     html, body { margin: 0; padding: 0; }
 
@@ -141,7 +142,7 @@
         margin: 10px; padding: 14px;
         cursor: pointer;
         transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-        box-shadow: 0 2px 10px rgba(7,67,75,.06); /* subtle drop shadow */
+        box-shadow: 0 2px 10px rgba(7,67,75,.06);
     }
     .spot-card:hover{
         transform: translateY(-2px);
@@ -191,9 +192,9 @@
     :root{
         --teal-1:#0E5A64;
         --teal-2:#0A4A52;
-        --gold-soft-1:#FFF5CC;
-        --gold-soft-2:#FFE08A;
         --ink-strong:#0B3440;
+        --gold-soft-1: rgba(234,242,255,.95); 
+        --gold-soft-2: rgba(191,214,242,.92); 
     }
 
     .gm-style .gm-style-iw-c{
@@ -219,6 +220,18 @@
     }
     .iw-rating{ display:flex; align-items:center; gap:6px; margin-top:6px; }
     .iw-rating svg{ width:14px; height:14px; fill:var(--teal-1) !important; }
+
+    :root{
+        --teal-600:#137A86;
+        --teal-700:#0E5A64;
+    }
+
+    @media (min-width: 768px){
+        body.home-theme nav{
+        background-color: var(--nav-bg) !important;
+        color: var(--nav-text) !important;
+        }
+    }
 </style>
 {% endblock %}
 

@@ -1,97 +1,137 @@
 {% extends "base.html" %}
 {% block title %}My bookings{% endblock %}
+{% block body_class %}mybookings-theme{% endblock %}
 
 {% block content %}
 <section class="max-w-4xl mx-auto py-10">
-  <h1 class="text-3xl font-bold text-yellow-400 mb-6">My bookings</h1>
-
-  <div class="space-y-3">
+  <h1 class="page-title text-center">My bookings</h1>
+  <div class="space-y-4">
     {% for it in items %}
-    <div class="flex items-center justify-between bg-white/10 rounded-xl px-4 py-3">
-        <div>
-        <div class="font-semibold text-white">{{ it.place_name }}</div>
-        <div class="text-white/80 text-sm">
-            {{ it.start|date:"Y-m-d H:i" }} — {{ it.end|date:"Y-m-d H:i" }}
+    <div class="booking-card">
+      <div>
+        <div class="place">{{ it.place_name }}</div>
+        <div class="when">
+          {{ it.start|date:"Y-m-d H:i" }} — {{ it.end|date:"Y-m-d H:i" }}
         </div>
-        <div class="mt-1">
-            {% if it.status == "pending" %}
-            <span class="inline-block text-xs px-2 py-0.5 rounded bg-amber-400 text-blue-900 font-semibold">Pending</span>
-            {% elif it.status == "confirmed" %}
-            <span class="inline-block text-xs px-2 py-0.5 rounded bg-emerald-500 text-white font-semibold">Confirmed</span>
-            {% else %}
-            <span class="inline-block text-xs px-2 py-0.5 rounded bg-slate-500 text-white font-semibold">Cancelled</span>
-            {% endif %}
+        <div class="mt-2">
+          {% if it.status == "pending" %}
+            <span class="chip chip--pending">Pending</span>
+          {% elif it.status == "confirmed" %}
+            <span class="chip chip--confirmed">Confirmed</span>
+          {% else %}
+            <span class="chip chip--cancelled">Cancelled</span>
+          {% endif %}
         </div>
-        </div>
+      </div>
 
-        {% if it.can_cancel %}
-        <form method="post" action="{% url 'booking:booking-cancel' it.id %}">
-            {% csrf_token %}
-            <button class="px-3 py-1 rounded bg-rose-500 hover:bg-rose-600 text-white text-sm">Cancel</button>
-        </form>
-        {% else %}
-        <span class="text-white/50 text-sm">Cannot cancel</span>
-        {% endif %}
+      {% if it.can_cancel %}
+      <form method="post" action="{% url 'booking:booking-cancel' it.id %}">
+        {% csrf_token %}
+        <button class="btn-cancel">Cancel</button>
+      </form>
+      {% else %}
+      <span class="cant-cancel">Cannot cancel</span>
+      {% endif %}
     </div>
     {% empty %}
-    <div class="text-white/70">Belum ada booking.</div>
+    <div class="empty">Belum ada booking.</div>
     {% endfor %}
-
   </div>
 </section>
 {% endblock %}
 
-{% block extra_js %}
-<script>
-function getCookie(name){
-  const m = document.cookie.match('(^|;)\\s*' + name + '\\s*=\\s*([^;]+)');
-  return m ? m.pop() : '';
-}
-const csrftoken = getCookie('csrftoken');
-
-function toast(msg, ok = true) {
-  const el = document.getElementById('toast');
-  const base =
-    "fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm rounded-xl px-4 py-3 text-sm " +
-    "transition-all duration-300 shadow-[0_8px_30px_rgba(0,0,0,.25)]";
-  const kind = ok
-    ? "bg-emerald-500 text-white shadow-[0_8px_30px_rgba(16,185,129,.35)]"
-    : "bg-rose-500 text-white shadow-[0_8px_30px_rgba(244,63,94,.35)]";
-
-  el.textContent = msg;
-  el.className = base + " " + kind + " translate-y-2 opacity-0";
-  el.classList.remove("hidden");
-  void el.offsetWidth;
-  el.classList.remove("translate-y-2","opacity-0");
-  clearTimeout(el._t);
-  el._t = setTimeout(() => {
-    el.classList.add("translate-y-2","opacity-0");
-    setTimeout(() => el.classList.add("hidden"), 300);
-  }, 2200);
-}
-
-document.addEventListener('click', async (e) => {
-  const btn = e.target.closest('.cancel-btn');
-  if (!btn) return;
-
-  const id = btn.dataset.id;
-  btn.disabled = true; const old = btn.textContent; btn.textContent = 'Cancelling…';
-  try {
-    const r = await fetch(`/booking/cancel/${encodeURIComponent(id)}/`, {
-      method: 'POST',
-      headers: { 'X-CSRFToken': csrftoken },
-      credentials: 'same-origin',
-    });
-    if (!r.ok) {
-      toast(`Gagal cancel [${r.status}]`, false);
-      btn.disabled = false; btn.textContent = old;
-      return;
-    }
-    location.reload();
-  } catch (err) {
-    toast('Gagal cancel (network)', false);
-    btn.disabled = false; btn.textContent = old;
+{% block extra_css %}
+<style>
+  :root{
+    --primary: #0E5A64;
+    --primary-dark: #07434B;
+    --on-primary: #FFFFFF;
+    --headline: #1B2B5A;
+    --bg-top: #EAF2FF;
+    --bg-bottom: #BFD6F2;
+    --card-bg: #FFFFFF;
+    --card-border: #C8DDF6;
+    --card-border-strong: #DDE7FF;
+    --ink-weak: #6B7A99;
+    --accent-yellow: #FFC107;
+    --accent-yellow-dark: #E0A106;
   }
-});
-</script>
+
+  body.mybookings-theme{
+    background:
+      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+      linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  }
+  body.mybookings-theme nav{
+    background-color: var(--primary) !important;
+    color: var(--on-primary) !important;
+  }
+  body.mybookings-theme nav a{ color: var(--on-primary) !important; }
+
+  .page-title{
+    color: var(--headline);
+    font-weight: 800;
+    font-size: clamp(24px, 4vw, 32px);
+    margin-bottom: 1.25rem;
+  }
+  .booking-card{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:.75rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow:
+      0 14px 32px rgba(13,43,63,.14),
+      inset 0 1px 0 rgba(255,255,255,.65);
+  }
+  .place{ font-weight: 700; color: #0F2C58; }
+  .when{ color: var(--ink-weak); font-size: .9rem; }
+
+  .cant-cancel{ color: var(--ink-weak); font-size: .9rem; white-space: nowrap; }
+  .empty{ color: #0B2E55; opacity:.7; }
+
+  .chip{
+    display:inline-block;
+    font-weight:700; font-size:.72rem;
+    padding:.22rem .5rem; border-radius:.5rem;
+  }
+  .chip--pending{
+    background: var(--accent-yellow);
+    color:#0B2E55;
+  }
+  .chip--confirmed{
+    background: var(--primary);
+    color: #fff;
+  }
+  .chip--cancelled{
+    background:#8DA4C2;
+    color:#fff;
+  }
+
+  .btn-cancel{
+    background:#e11d48; color:#fff; font-weight:600;
+    padding:.4rem .7rem; border-radius:.55rem;
+    box-shadow: 0 6px 16px rgba(225,29,72,.25);
+  }
+  .btn-cancel:hover{ background:#be123c; }
+
+  @media (max-width: 480px){
+    .booking-card{ padding: 12px; }
+  }
+
+  nav #userMenu, nav #mUserMenu{
+    background:#fff !important;
+  }
+  nav #userMenu a, nav #mUserMenu a{
+    color:#0F2C58 !important;          /* biru gelap, jangan nyaru */
+    opacity:1 !important;
+  }
+  nav #userMenu a:hover, nav #mUserMenu a:hover{
+    background:#EFF6FF !important;     /* hover biru muda */
+  }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
 {% endblock %}
