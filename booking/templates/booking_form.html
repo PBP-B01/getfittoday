@@ -1,21 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
 {% block title %}Booking{% endblock %}
+{% block body_class %}home-theme{% endblock %}
 
 {% block content %}
 <section class="max-w-5xl mx-auto py-8">
-  <h1 class="text-3xl font-bold text-yellow-400 mb-6 text-center">Book Location</h1>
+  <h1 class="text-3xl md:text-4xl font-extrabold text-[var(--title)] mb-6 text-center">
+    BOOK LOCATION
+  </h1>
   <!-- Search box -->
   <div class="flex justify-center mb-6">
     <div class="w-full md:w-2/3">
       <label class="block text-sm mb-2 text-white/90">Choose Location</label>
-      <div class="relative">
-        <input id="spotCombo" type="text" placeholder="Search location.,."
-               autocomplete="off"
-               class="w-full rounded-lg text-blue-900 px-3 py-2 placeholder:text-blue-800/70">
+      <div class="search-wrap">
+        <input id="spotCombo" type="text" placeholder="Search location..."
+              autocomplete="off"
+              class="search-ring w-full rounded-xl text-blue-900 px-3 py-2 placeholder:text-blue-800/70 bg-white">
         <ul id="spotList"
             class="absolute left-0 right-0 bg-white text-blue-900 rounded-lg shadow-2xl mt-1
-                   max-h-72 overflow-auto hidden z-[70]"></ul>
+                  max-h-72 overflow-auto hidden z-[70]"></ul>
       </div>
       <input type="hidden" name="place_id" id="placeId">
       <input type="hidden" name="lat"      id="placeLat">
@@ -34,7 +37,7 @@
       </div>
 
       <div class="grid grid-cols-7 gap-2 text-center text-white/80 text-sm mb-2">
-        <div>Min</div><div>Sen</div><div>Sel</div><div>Rab</div><div>Kam</div><div>Jum</div><div>Sab</div>
+        <div>Sun</div><div>Mon</div><div>Tue</div><div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
       </div>
       <div id="calGrid" class="grid grid-cols-7 gap-2"></div>
 
@@ -47,7 +50,7 @@
     <div class="bg-white/10 rounded-xl p-4">
       <!-- Durasi booking (1–5 jam) -->
       <div class="mb-4">
-        <label for="durationHours" class="block text-sm text-white/90 mb-1">Durasi</label>
+        <label for="durationHours" class="block text-sm text-white/90 mb-1">Duration</label>
         <select id="durationHours"
                 class="w-40 rounded-lg bg-white/90 text-blue-900 px-2 py-1">
           <option value="1">1 jam</option>
@@ -211,7 +214,7 @@ function dateAtJakarta(dateISO, h=0, m=0) {
 function renderCalendar() {
   const { y:vy, mIndex:vm } = ymInTZ(view, TZ);
 
-  const bulan = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+  const bulan = ['January','February','March','April','May','June','July','August','September','October','November','December'];
   calTitle.textContent = `${bulan[vm]} ${vy}`;
 
   calGrid.innerHTML = '';
@@ -421,24 +424,6 @@ async function loadSlots(placeId, dateISO){
   }
 }
 
-
-function showToast(msg, kind = 'success') {
-  const wrap = document.getElementById('toastWrap');
-  const el = document.createElement('div');
-  const base = "px-3 py-2 rounded-lg shadow-lg text-sm text-blue-900 transition-all duration-300 pointer-events-auto";
-  const color = kind === 'error' ? 'bg-red-300' : (kind === 'info' ? 'bg-blue-300' : 'bg-green-300');
-  el.className = `${base} ${color} opacity-0 translate-y-2`;
-  el.textContent = msg;
-  wrap.appendChild(el);
-  requestAnimationFrame(() => {
-    el.classList.remove('opacity-0','translate-y-2');
-  });
-  setTimeout(() => {
-    el.classList.add('opacity-0','translate-y-2');
-    setTimeout(() => el.remove(), 300);
-  }, 2800);
-}
-
 const BOOKED = new Map();
 function slotKey(placeId, w) { return `${placeId}|${w.start.toISOString()}|${w.end.toISOString()}`; }
 
@@ -488,4 +473,96 @@ durationEl.addEventListener('change', () => {
 
 renderCalendar();
 </script>
+{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+  :root{
+    --nav-bg:#0E5A64;
+    --nav-text:#FFFFFF;
+    --title:#1B2B5A;
+
+    --cal-panel:#3A5F9E;
+    --cal-text:#EAF2FF;
+    --cal-tile:#4E73B5;
+    --cal-tile-hover:#5E82C2;
+    --cal-tile-out:#4168A9;
+    --cal-ring:#9EC5FF80;
+  }
+
+  body.home-theme{
+    background:
+      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+      linear-gradient(180deg, #EAF2FF 0%, #BFD6F2 100%);
+    color:var(--nav-text);
+  }
+  body.home-theme nav{ background-color:var(--nav-bg)!important; color:var(--nav-text)!important; }
+  body.home-theme nav > .md\:flex > a {
+    color: var(--nav-text) !important;
+  }
+  body.home-theme nav a:hover{ opacity:.92; }
+  body.home-theme nav > div:first-child{ color:#fff!important; }
+
+  h1.text-center{ color:var(--title)!important; }
+
+  .home-theme .lg\:col-span-2,
+  .home-theme .bg-white\/10{
+    background:var(--cal-panel)!important;
+    color:var(--cal-text)!important;
+    border:1px solid rgba(255,255,255,.08);
+    box-shadow:0 8px 28px rgba(0,0,0,.18), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+
+
+  .home-theme label, .home-theme h3, .home-theme #calTitle,
+  .home-theme #calHint{ color:var(--cal-text)!important; }
+
+  #calGrid button{
+    background:var(--cal-tile)!important;
+    color:var(--cal-text)!important;
+    border:1px solid rgba(255,255,255,.10)!important;
+    border-radius:12px;
+    box-shadow:0 1px 0 rgba(0,0,0,.12), inset 0 1px 0 rgba(255,255,255,.06);
+    transition:background .15s ease, transform .05s ease;
+  }
+
+  #calGrid button > div{ color:var(--cal-text)!important; opacity:.95; }
+  #calGrid button:hover{ background:var(--cal-tile-hover)!important; }
+  #calGrid button.ring-2{
+    background:var(--cal-tile-hover)!important;
+    outline:none!important;
+    box-shadow:0 0 0 3px var(--cal-ring), 0 1px 0 rgba(0,0,0,.12)!important;
+  }
+
+  #calGrid button[disabled]{
+    background:var(--cal-tile-out)!important;
+    color:rgba(234,242,255,.60)!important;
+    opacity:1!important;
+    cursor:not-allowed!important;
+  }
+
+  #durationHours{
+    background:#F8FBFF!important; color:#0B2E55!important; border:0;
+  }
+
+  .search-wrap{ position:relative; }
+
+  .search-ring{
+    box-shadow:
+      0 0 0 6px var(--cal-tile), /* outline biru */
+      0 8px 20px rgba(13,43,63,.12),
+      inset 0 1px 0 rgba(255,255,255,.85);
+    border: 1px solid rgba(0,0,0,.04);
+    background:#fff;
+  }
+
+  .search-ring:focus{
+    outline: none;
+    box-shadow:
+      0 0 0 6px var(--cal-ring),
+      0 10px 24px rgba(13,43,63,.16),
+      inset 0 1px 0 rgba(255,255,255,.92);
+  }
+</style>
 {% endblock %}
