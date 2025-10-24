@@ -1,32 +1,182 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block title %}Daftar Komunitas{% endblock %}
+
 {% block content %}
-<div class="max-w-4xl mx-auto py-10 text-blue-900 bg-yellow-400 rounded-2xl shadow-lg p-6">
-
-  <h1 class="text-3xl font-bold mb-6 text-center">Komunitas Olahraga</h1>
-
-  <div class="flex justify-end mb-4">
-    <a href="{% url 'add_community' %}" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition duration-200">
-      + Tambah Komunitas
-    </a>
+<!-- Banner -->
+<div class="relative h-[40rem] w-full mb-16"> <!-- tinggi diperbesar lagi -->
+  <img src="{% static 'community/image/community-hero.jpg' %}" 
+       alt="Community Banner" 
+       class="w-full h-full object-cover rounded-b-3xl shadow-lg">
+  <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+    <h1 class="text-6xl md:text-7xl font-extrabold text-yellow-400 tracking-wide drop-shadow-2xl">
+      Community
+    </h1>
   </div>
+</div>
 
-  {% if communities %}
-    <div class="grid md:grid-cols-2 gap-4">
-      {% for community in communities %}
-        <div class="bg-yellow-200 p-4 rounded-xl shadow-md hover:shadow-lg transition">
-          <h2 class="text-xl font-semibold">{{ community.name }}</h2>
-          <p class="text-sm mb-2">{{ community.description }}</p>
-          <p class="text-sm text-blue-800 font-medium">📍 {{ community.fitness_spot.name }}</p>
-          {% if community.contact_info %}
-            <p class="text-sm mt-1 text-blue-700">📞 Kontak: {{ community.contact_info }}</p>
-          {% endif %}
-          <p class="text-xs text-gray-700 mt-2">Dibuat pada: {{ community.created_at|date:"d M Y" }}</p>
-        </div>
-      {% endfor %}
-    </div>
-  {% else %}
-    <p class="text-center text-blue-800">Belum ada komunitas yang terdaftar.</p>
+
+<div class="max-w-6xl mx-auto px-4">
+  <!-- Tombol tambah komunitas untuk admin -->
+  {% if request.user.is_staff %}
+  <div class="mb-6 text-right">
+    <button id="add-community-btn" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg transition shadow-md">
+      ➕ Tambah Komunitas
+    </button>
+  </div>
   {% endif %}
+
+  <!-- Grid komunitas -->
+  <div id="community-cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for community in communities_json %}
+        <div class="bg-yellow-400 text-black rounded-2xl shadow-md transform transition duration-300 hover:-translate-y-2 hover:shadow-xl relative p-5 border border-yellow-800 cursor-pointer flex flex-col" data-id="{{ community.pk }}" onclick="location.href='{% url 'community_detail' community.pk %}'">
+
+        <h3 class="text-xl font-semibold mb-2 text-center">{{ community.fields.name }}</h3>
+        <p class="text-black-100 mb-2">{{ community.fields.description }}</p>
+        <p class="text-sm font-medium mb-1">📍 {{ community.fields.fitness_spot_name }}</p>
+        {% if community.fields.contact_info %}
+          <p class="text-sm">📞 {{ community.fields.contact_info }}</p>
+        {% endif %}
+
+        {% if request.user.is_staff %}
+        <div class="absolute top-3 right-3 flex space-x-2">
+          <button class="edit-btn bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 shadow-sm">Edit</button>
+          <button class="delete-btn bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 shadow-sm">Delete</button>
+        </div>
+        {% endif %}
+      </div>
+    {% empty %}
+      <p class="text-center text-gray-700 col-span-2">Belum ada komunitas yang terdaftar.</p>
+    {% endfor %}
+  </div>
+</div>
+
+
+<!-- Modal Lihat Komunitas -->
+<div id="community-modal" class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-300">
+  <div class="bg-white rounded-xl p-6 max-w-md w-full relative">
+    <button id="close-community-modal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">&times;</button>
+    <h3 class="font-bold text-lg mb-2">Komunitas di Lokasi Ini</h3>
+    <div id="community-modal-content"></div>
+  </div>
+</div>
+
+<!-- Modal Add / Edit tetap sama -->
+<div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity">
+  <div class="bg-white p-6 rounded-xl max-w-md w-full relative">
+    <h3 class="text-lg font-bold mb-4" id="edit-modal-title">Edit Komunitas</h3>
+    <form id="edit-form">
+      {% csrf_token %}
+      <input type="hidden" name="community_id" id="edit-id">
+      <div class="mb-2">
+        <label class="block text-sm font-medium">Nama</label>
+        <input type="text" name="name" id="edit-name" class="w-full border px-2 py-1 rounded">
+      </div>
+      <div class="mb-2">
+        <label class="block text-sm font-medium">Deskripsi</label>
+        <textarea name="description" id="edit-description" class="w-full border px-2 py-1 rounded"></textarea>
+      </div>
+      <div class="mb-2">
+        <label class="block text-sm font-medium">Kontak</label>
+        <input type="text" name="contact_info" id="edit-contact" class="w-full border px-2 py-1 rounded">
+      </div>
+      <div class="flex justify-end space-x-2">
+        <button type="button" id="close-edit-modal" class="px-3 py-1 rounded bg-gray-400 hover:bg-gray-500 text-white">Batal</button>
+        <button type="submit" class="px-3 py-1 rounded bg-blue-600 hover:bg-blue-700 text-white">Simpan</button>
+      </div>
+    </form>
+  </div>
 </div>
 {% endblock %}
+
+<!-- Script AJAX tetap sama -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const editModal = document.getElementById('edit-modal');
+  const editForm = document.getElementById('edit-form');
+  const closeBtn = document.getElementById('close-edit-modal');
+  const cardsContainer = document.getElementById('community-cards');
+  const addBtn = document.getElementById('add-community-btn');
+
+  closeBtn.addEventListener('click', () => {
+    editModal.classList.add('opacity-0', 'pointer-events-none');
+  });
+
+  if(addBtn){
+    addBtn.addEventListener('click', () => {
+      document.getElementById('edit-modal-title').innerText = "Tambah Komunitas";
+      editForm.reset();
+      document.getElementById('edit-id').value = "";
+      editModal.classList.remove('opacity-0', 'pointer-events-none');
+    });
+  }
+
+  cardsContainer.addEventListener('click', e => {
+    const card = e.target.closest('[data-id]');
+    if(!card) return;
+    const id = card.dataset.id;
+
+    if(e.target.classList.contains('delete-btn')){
+      if(confirm("Yakin ingin menghapus komunitas ini?")){
+        fetch(`/community/ajax/delete/${id}/`, {
+          method:'POST',
+          headers:{
+            'X-Requested-With':'XMLHttpRequest',
+            'X-CSRFToken':'{{ csrf_token }}'
+          }
+        }).then(res=>res.json()).then(json=>{
+          if(json.success) card.remove();
+          else alert("Gagal hapus komunitas");
+        });
+      }
+    }
+
+    if(e.target.classList.contains('edit-btn')){
+      document.getElementById('edit-modal-title').innerText = "Edit Komunitas";
+      document.getElementById('edit-id').value = id;
+      document.getElementById('edit-name').value = card.querySelector('h3').innerText;
+      document.getElementById('edit-description').value = card.querySelector('p').innerText;
+      const contact = card.querySelector('p.text-blue-700')?.innerText.replace('📞 Kontak: ', '') || '';
+      document.getElementById('edit-contact').value = contact;
+      editModal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+  });
+
+  editForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const formData = new FormData(editForm);
+    const id = document.getElementById('edit-id').value;
+    const url = id ? `/community/ajax/edit/${id}/` : `/community/ajax/add/`;
+
+    fetch(url, {
+      method:'POST',
+      body: formData,
+      headers:{ 'X-Requested-With':'XMLHttpRequest' }
+    }).then(res=>res.json()).then(json=>{
+      if(json.success){
+        if(id){
+          const card = cardsContainer.querySelector(`[data-id='${id}']`);
+          card.querySelector('h3').innerText = json.name;
+          card.querySelector('p').innerText = json.description;
+          if(json.contact_info){
+            let p = card.querySelector('p.text-blue-700');
+            if(!p){
+              p = document.createElement('p');
+              p.className = "text-sm mt-1 text-blue-700";
+              card.appendChild(p);
+            }
+            p.innerText = "📞 Kontak: "+json.contact_info;
+          }
+        } else {
+          const div = document.createElement('div');
+          div.className = "bg-blue-900 text-white rounded-2xl shadow-md transform transition duration-300 hover:-translate-y-2 hover:shadow-xl relative p-5 border border-blue-800";
+          div.dataset.id = json.id;
+          div.innerHTML = `
+            <h3 class="text-xl font-semibold mb-2 text-center">${json.name}</h3>
+            <p class="text-gray-100 mb-2">${json.description}</p>
+            ${json.contact_info? `<p class="text-sm mt-1 text-blue-100">📞 ${json.contact_info}</p>`: ''}
+            <div class="absolute top-3 right-3 flex space-x-2">
+              <button class="edit-btn bg-yellow-500 text-white px-2 py-1 rounded
+            }\
+            }
+            }

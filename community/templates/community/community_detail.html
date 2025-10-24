@@ -1,70 +1,20 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block title %}{{ community.name }} | GetFit.Today{% endblock %}
+{% block title %}Detail Komunitas{% endblock %}
 
 {% block content %}
-<section class="bg-white text-blue-900 rounded-2xl shadow-lg overflow-hidden">
-  {% if community.image %}
-    <img src="{{ community.image.url }}" alt="{{ community.name }}" class="w-full h-80 object-cover">
-  {% else %}
-    <img src="{% static 'community/images/default-community.jpg' %}" alt="default" class="w-full h-80 object-cover">
-  {% endif %}
-
-  <div class="p-8">
-    <h1 class="text-4xl font-bold mb-3 text-blue-900">{{ community.name }}</h1>
-    <p class="text-gray-700 mb-4 italic">{{ community.greeting }}</p>
-
-    <div class="mb-6">
-      <p><strong>Tempat Latihan:</strong> {{ community.fitness_spot.name }}</p>
-      <p><strong>Alamat:</strong> {{ community.fitness_spot.address }}</p>
-      <p><strong>Jadwal:</strong> {{ community.schedule }}</p>
-      <p><strong>Kontak:</strong> {{ community.contact_info }}</p>
+<div class="max-w-4xl mx-auto px-4 mt-10">
+    <div class="bg-yellow-400 text-black rounded-2xl shadow-md p-6 border border-yellow-800">
+        <h2 class="text-2xl font-bold mb-4 text-center">{{ community.name }}</h2>
+        <p class="mb-4">{{ community.description }}</p>
+        <p class="mb-1 font-medium">📍 {{ community.fitness_spot_name }}</p>
+        {% if community.contact_info %}
+        <p>📞 {{ community.contact_info }}</p>
+        {% endif %}
     </div>
 
-    {% if user.is_authenticated %}
-      {% if user == community.admin or user.is_staff %}
-        <!-- Tombol Edit & Delete untuk Admin / Admin Komunitas -->
-        <a href="{% url 'community:edit_community' community.pk %}" 
-           class="bg-yellow-400 text-blue-900 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition mb-4 inline-block">
-          Edit Komunitas
-        </a>
-        <a href="{% url 'community:delete_community' community.pk %}" 
-           class="bg-red-500 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-400 transition mb-4 inline-block">
-          Hapus Komunitas
-        </a>
-      {% elif user in community.members.all %}
-        <!-- Tombol Leave untuk Signed-in User yang sudah join -->
-        <a href="{% url 'community:leave_community' community.pk %}" 
-           class="bg-gray-400 text-white px-6 py-2 rounded-lg font-semibold hover:bg-gray-500 transition mb-6 inline-block">
-          Sudah Bergabung (Klik untuk Keluar)
-        </a>
-      {% else %}
-        <!-- Tombol Join untuk Signed-in User yang belum join -->
-        <a href="{% url 'community:join_community' community.pk %}" 
-           class="bg-yellow-400 text-blue-900 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition mb-6 inline-block">
-          Gabung Komunitas
-        </a>
-      {% endif %}
-    {% else %}
-      <!-- Guest -->
-      <span class="bg-gray-200 text-gray-600 px-6 py-2 rounded-lg font-semibold mb-6 inline-block">
-        Login untuk bergabung
-      </span>
-    {% endif %}
-
-    <hr class="my-6 border-blue-200">
-
-    <h2 class="text-2xl font-bold mb-4">Ulasan Anggota</h2>
-    {% for review in community.reviews.all %}
-      <div class="bg-blue-100 rounded-lg p-4 mb-4">
-        <p class="font-semibold">{{ review.reviewer_name }} ⭐{{ review.rating }}/5</p>
-        <p class="text-gray-700">{{ review.comment }}</p>
-        <p class="text-sm text-gray-500">{{ review.created_at|date:"d M Y" }}</p>
-      </div>
-    {% empty %}
-      <p class="text-gray-600">Belum ada review untuk komunitas ini.</p>
-    {% endfor %}
-  </div>
-</section>
+    <div class="mt-6 text-center">
+        <a href="{% url 'community_list' %}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Kembali ke Daftar Komunitas</a>
+    </div>
+</div>
 {% endblock %}
