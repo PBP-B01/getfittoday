@@ -72,7 +72,6 @@ INSTALLED_APPS = [
     'central',
     'django.contrib.humanize',
     'store',
-    'central',
 ]
 
 REST_FRAMEWORK = {

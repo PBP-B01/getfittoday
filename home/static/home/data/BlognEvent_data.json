@@ -1,0 +1,223 @@
+[
+    {
+      "model": "BlognEvent.event",
+      "pk": "1",
+      "fields": {
+        "user": 1,
+        "name": "Morning Yoga",
+        "description": "Start your day with a peaceful yoga session focusing on breathing and flexibility.",
+        "starting_date": "2025-10-25T07:00:00Z",
+        "ending_date": "2025-10-25T09:00:00Z",
+        "image": "https://picsum.photos/seed/event1/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "2",
+      "fields": {
+        "user": 1,
+        "name": "Marathon Training Camp",
+        "description": "Train with experts and get ready for your next marathon challenge.",
+        "starting_date": "2025-11-01T08:00:00Z",
+        "ending_date": "2025-11-15T08:00:00Z",
+        "image": "https://picsum.photos/seed/event2/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "3",
+      "fields": {
+        "user": 1,
+        "name": "CrossFit Challenge",
+        "description": "Test your endurance and strength with a fun and tough CrossFit competition.",
+        "starting_date": "2025-11-20T07:00:00Z",
+        "ending_date": "2025-11-22T09:00:00Z",
+        "image": "https://picsum.photos/seed/event3/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "4",
+      "fields": {
+        "user": 1,
+        "name": "Nutrition Seminar",
+        "description": "Discover how to fuel your body properly for optimal fitness performance.",
+        "starting_date": "2025-12-01T09:00:00Z",
+        "ending_date": "2025-12-01T11:00:00Z",
+        "image": "https://picsum.photos/seed/event4/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "5",
+      "fields": {
+        "user": 1,
+        "name": "Beach Bootcamp",
+        "description": "Get fit outdoors with our exciting and fun bootcamp on the beach.",
+        "starting_date": "2025-12-10T08:00:00Z",
+        "ending_date": "2025-12-12T10:00:00Z",
+        "image": "https://picsum.photos/seed/event5/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "6",
+      "fields": {
+        "user": 1,
+        "name": "Spin Class Marathon",
+        "description": "Pedal your heart out in our 3-hour charity spin class marathon.",
+        "starting_date": "2025-12-20T07:30:00Z",
+        "ending_date": "2025-12-20T10:30:00Z",
+        "image": "https://picsum.photos/seed/event6/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "7",
+      "fields": {
+        "user": 1,
+        "name": "Strength Training 101",
+        "description": "Learn the fundamentals of weight training in a safe and effective way.",
+        "starting_date": "2026-01-05T08:00:00Z",
+        "ending_date": "2026-01-05T10:00:00Z",
+        "image": "https://picsum.photos/seed/event7/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "8",
+      "fields": {
+        "user": 1,
+        "name": "Zumba Party Night",
+        "description": "Dance, sweat, and have fun in our high-energy Zumba party session.",
+        "starting_date": "2026-01-12T17:00:00Z",
+        "ending_date": "2026-01-12T19:00:00Z",
+        "image": "https://picsum.photos/seed/event8/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "9",
+      "fields": {
+        "user": 1,
+        "name": "Winter Wellness Fair",
+        "description": "Explore holistic health booths, fitness workshops, and healthy food vendors.",
+        "starting_date": "2026-01-20T09:00:00Z",
+        "ending_date": "2026-01-22T17:00:00Z",
+        "image": "https://picsum.photos/seed/event9/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.event",
+      "pk": "10",
+      "fields": {
+        "user": 1,
+        "name": "Community Hike",
+        "description": "Join a guided nature trail with local hikers to stay fit and meet new friends.",
+        "starting_date": "2026-02-02T06:00:00Z",
+        "ending_date": "2026-02-02T10:00:00Z",
+        "image": "https://picsum.photos/seed/event10/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "1",
+      "fields": {
+        "author": 1,
+        "title": "Top 10 Fitness Tips for Beginners",
+        "body": "Starting your fitness journey can be overwhelming, but these tips will help you stay consistent and motivated.",
+        "image": "https://picsum.photos/seed/blog1/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "2",
+      "fields": {
+        "author": 1,
+        "title": "Healthy Meal Prep Ideas",
+        "body": "Save time and eat healthy with these simple meal prep hacks that make clean eating easy.",
+        "image": "https://picsum.photos/seed/blog2/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "3",
+      "fields": {
+        "author": 1,
+        "title": "Why Sleep Matters in Fitness",
+        "body": "Your body recovers during sleep—discover how proper rest can boost your workouts and performance.",
+        "image": "https://picsum.photos/seed/blog3/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "4",
+      "fields": {
+        "author": 1,
+        "title": "Hydration and Performance",
+        "body": "Learn why staying hydrated is key to energy, endurance, and muscle recovery.",
+        "image": "https://picsum.photos/seed/blog4/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "5",
+      "fields": {
+        "author": 1,
+        "title": "Stretching Before and After Workouts",
+        "body": "Understand the importance of warming up and cooling down to prevent injury and improve flexibility.",
+        "image": "https://picsum.photos/seed/blog5/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "6",
+      "fields": {
+        "author": 1,
+        "title": "Mental Health and Exercise",
+        "body": "Discover how regular workouts can help reduce stress and boost your mood.",
+        "image": "https://picsum.photos/seed/blog6/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "7",
+      "fields": {
+        "author": 1,
+        "title": "Cardio vs Strength Training",
+        "body": "Should you focus more on lifting or running? Here’s how to balance both for maximum results.",
+        "image": "https://picsum.photos/seed/blog7/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "8",
+      "fields": {
+        "author": 1,
+        "title": "Building a Home Gym on a Budget",
+        "body": "No need for expensive memberships—create a home gym using minimal equipment.",
+        "image": "https://picsum.photos/seed/blog8/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "9",
+      "fields": {
+        "author": 1,
+        "title": "Eating Clean While Traveling",
+        "body": "Stay on track with your nutrition goals even when you're on the go with these smart snack ideas.",
+        "image": "https://picsum.photos/seed/blog9/400/200"
+      }
+    },
+    {
+      "model": "BlognEvent.blogs",
+      "pk": "10",
+      "fields": {
+        "author": 1,
+        "title": "How to Stay Motivated Long-Term",
+        "body": "Consistency is key—learn how to stay driven when motivation fades over time.",
+        "image": "https://picsum.photos/seed/blog10/400/200"
+      }
+    }
+  ]
+  

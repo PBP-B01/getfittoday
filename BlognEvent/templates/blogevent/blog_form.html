@@ -4,164 +4,156 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Blog - GetFit.Today</title>
-    
+    <title>{% if blog %}Edit{% else %}Create{% endif %} Blog - GetFit.Today</title>
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <script>
-        tailwind = {config: {theme: {extend: {fontFamily: {sans: ['Poppins','ui-sans-serif','system-ui','sans-serif']}}}}}
-    </script>
     <script src="https://cdn.tailwindcss.com"></script>
-    
+
     <style>
-        body {
-            background-color: #1e3a8a;
-            min-height: 100vh;
-            font-family: 'Poppins', sans-serif;
+        :root {
+            --primary: #0E5A64;
+            --primary-dark: #07434B;
+            --on-primary: #FFFFFF;
+            --headline: #1B2B5A;
+            --gradient-top: #EAF2FF;
+            --gradient-bottom: #BFD6F2;
+            --card-bg: #FFFFFF;
+            --card-border: #C8DDF6;
+            --muted-text: #6B7A99;
+            --accent-yellow: #FFC107;
+            --accent-yellow-dark: #E0A106;
         }
-        
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(ellipse 1200px 600px at 15% 6%, rgba(255,255,255,0.6), transparent 70%),
+                        linear-gradient(180deg, var(--gradient-top), var(--gradient-bottom));
+            min-height: 100vh;
+        }
+
         .form-container {
             max-width: 900px;
             margin: 0 auto;
             padding: 40px 20px;
         }
-        
+
         .back-btn {
             display: inline-block;
             padding: 10px 20px;
-            background: #fbbf24;
-            color: #1e3a8a;
-            text-decoration: none;
+            background: var(--primary);
+            color: var(--on-primary);
             border-radius: 8px;
-            margin-bottom: 30px;
             font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 30px;
             transition: all 0.2s;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         .back-btn:hover {
-            background-color: #f59e0b;
+            background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
-        
+
         .page-title {
-            color: #fbbf24;
             font-size: 2.5rem;
+            color: var(--headline);
             font-weight: 600;
             margin-bottom: 30px;
         }
-        
+
         .form-card {
-            background: white;
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
             border-radius: 12px;
             padding: 30px;
-            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
         }
-        
+
         .form-group {
             margin-bottom: 20px;
         }
-        
+
         .form-group label {
-            display: block;
             font-weight: 600;
+            color: var(--headline);
             margin-bottom: 8px;
-            color: #1f2937;
+            display: block;
         }
-        
-        .form-group input, .form-group textarea {
+
+        .form-group input,
+        .form-group textarea {
             width: 100%;
             padding: 12px;
-            border: 2px solid #e5e7eb;
+            border: 2px solid var(--card-border);
             border-radius: 8px;
-            font-size: 14px;
-            font-family: 'Poppins', sans-serif;
-            transition: border-color 0.2s;
+            background-color: #F8FBFF;
+            color: #0B2E55;
+            transition: border-color 0.2s, box-shadow 0.2s;
         }
-        
-        .form-group textarea {
-            min-height: 200px;
-            resize: vertical;
-        }
-        
-        .form-group input:focus, .form-group textarea:focus {
+
+        .form-group input:focus,
+        .form-group textarea:focus {
             outline: none;
-            border-color: #fbbf24;
+            border-color: var(--accent-yellow);
+            box-shadow: 0 0 0 3px #9EC5FF80;
         }
-        
+
         .button-group {
             margin-top: 30px;
             display: flex;
             gap: 10px;
             flex-wrap: wrap;
         }
-        
+
         button[type="submit"] {
-            background-color: #10b981;
-            color: white;
+            background: var(--accent-yellow);
+            color: #1B2B5A;
             padding: 12px 32px;
-            border: none;
             border-radius: 8px;
-            font-size: 16px;
+            border: none;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         button[type="submit"]:hover {
-            background-color: #059669;
+            background: var(--accent-yellow-dark);
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
-        
+
         .cancel-btn {
-            display: inline-block;
-            padding: 12px 32px;
-            background: #ef4444;
+            background: #E74C3C;
             color: white;
-            text-decoration: none;
+            padding: 12px 32px;
             border-radius: 8px;
             font-weight: 600;
+            text-decoration: none;
             transition: all 0.2s;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        
+
         .cancel-btn:hover {
-            background-color: #dc2626;
+            background: #C0392B;
             transform: translateY(-2px);
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
 <body>
     <div class="form-container">
-        <a href="{% url 'BlogNEvent:blogevent_page' %}" class="back-btn">← Back</a>
-        
-        <h1 class="page-title">Create New Blog</h1>
-        
+        <a href="{% url 'BlognEvent:blogevent_page' %}" class="back-btn">← Back</a>
+
+        <h1 class="page-title">{% if blog %}Edit Blog{% else %}Create New Blog{% endif %}</h1>
+
         <div class="form-card">
-            <form method="POST" action="{% url 'BlogNEvent:create_blog' %}">
+            <form method="POST" action="{% if blog %}{% url 'BlognEvent:edit_blog' blog.id %}{% else %}{% url 'BlognEvent:create_blog' %}{% endif %}">
                 {% csrf_token %}
-                
-                <div class="form-group">
-                    <label>Title:</label>
-                    {{ form.title }}
-                </div>
-                
-                <div class="form-group">
-                    <label>Image URL:</label>
-                    {{ form.image }}
-                </div>
-                
-                <div class="form-group">
-                    <label>Body:</label>
-                    {{ form.body }}
-                </div>
-                
+                <div class="form-group"><label>Title:</label>{{ form.title }}</div>
+                <div class="form-group"><label>Image URL:</label>{{ form.image }}</div>
+                <div class="form-group"><label>Body:</label>{{ form.body }}</div>
+
                 <div class="button-group">
-                    <button type="submit">Create Blog</button>
-                    <a href="{% url 'BlogNEvent:blogevent_page' %}" class="cancel-btn">Cancel</a>
+                    <button type="submit">{% if blog %}Update Blog{% else %}Create Blog{% endif %}</button>
+                    <a href="{% url 'BlognEvent:blogevent_page' %}" class="cancel-btn">Cancel</a>
                 </div>
             </form>
         </div>
