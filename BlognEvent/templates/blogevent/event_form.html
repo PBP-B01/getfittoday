@@ -1,58 +1,238 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Create Event</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Event - GetFit.Today</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind = {config: {theme: {extend: {fontFamily: {sans: ['Poppins','ui-sans-serif','system-ui','sans-serif']}}}}}
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIG-OMzErXLto5j4iWW8NBn2Gtg0PAis"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <style>
         body {
-            font-family: Arial, sans-serif;
+            background-color: #1e3a8a;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .form-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 40px 20px;
+        }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #fbbf24;
+            color: #1e3a8a;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .back-btn:hover {
+            background-color: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .page-title {
+            color: #fbbf24;
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+        
+        .form-card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
         }
         
         #map {
-            height: 300px;
+            height: 400px;
             width: 100%;
             margin: 20px 0;
             border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Custom Google Maps Info Window Styling */
+        .gm-style .gm-style-iw-c {
+            padding: 0 !important;
+            border-radius: 12px !important;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+            max-width: 350px !important;
+        }
+        
+        .gm-style .gm-style-iw-d {
+            overflow: auto !important;
+            max-height: 300px !important;
+        }
+        
+        .custom-info-window {
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .info-header {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 15px;
+            border-radius: 12px 12px 0 0;
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .info-body {
+            padding: 15px;
+            background: white;
+        }
+        
+        .info-address {
+            color: #6b7280;
+            font-size: 13px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+        
+        .info-rating {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 14px;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+        
+        .info-rating .star {
+            color: #fbbf24;
+        }
+        
+        .info-select-btn {
+            background-color: #10b981;
+            color: white;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .info-select-btn:hover {
+            background-color: #059669;
+        }
+        
+        .info-select-btn.selected {
+            background-color: #fbbf24;
+            color: #1e3a8a;
+        }
+        
+        /* Hide default close button */
+        .gm-style .gm-style-iw-t::after {
+            display: none !important;
+        }
+        
+        .gm-ui-hover-effect {
+            top: 8px !important;
+            right: 8px !important;
+            width: 28px !important;
+            height: 28px !important;
+            background-color: rgba(255, 255, 255, 0.9) !important;
+            border-radius: 50% !important;
+        }
+        
+        .gm-ui-hover-effect span {
+            background-color: #1e3a8a !important;
+            width: 16px !important;
+            height: 16px !important;
         }
         
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
         }
         
         .form-group label {
             display: block;
-            font-weight: bold;
-            margin-bottom: 5px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #1f2937;
         }
         
         .form-group input, .form-group textarea {
             width: 100%;
-            padding: 8px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
+            padding: 12px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: #fbbf24;
+        }
+        
+        .section-title {
+            color: #1e3a8a;
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
         }
         
         #locationsList {
             margin-top: 20px;
         }
         
-        .locations-header {
-            margin-bottom: 10px;
+        .locations-header h4 {
+            color: #1f2937;
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .locations-header p {
+            color: #6b7280;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        #searchInput {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s;
+        }
+        
+        #searchInput:focus {
+            outline: none;
+            border-color: #fbbf24;
         }
         
         .locations-scroll {
             max-height: 350px;
             overflow-y: auto;
-            border: 1px solid #ddd;
+            border: 2px solid #e5e7eb;
             border-radius: 8px;
             padding: 15px;
-            background-color: #f9f9f9;
+            background-color: #f9fafb;
+            margin-top: 15px;
         }
         
         .locations-scroll::-webkit-scrollbar {
@@ -65,12 +245,12 @@
         }
         
         .locations-scroll::-webkit-scrollbar-thumb {
-            background: #888;
+            background: #fbbf24;
             border-radius: 8px;
         }
         
         .locations-scroll::-webkit-scrollbar-thumb:hover {
-            background: #555;
+            background: #f59e0b;
         }
         
         .location-item {
@@ -78,7 +258,7 @@
             margin: 8px 0;
             background-color: white;
             border-radius: 6px;
-            border: 2px solid #e0e0e0;
+            border: 2px solid #e5e7eb;
             cursor: pointer;
             transition: all 0.2s;
             display: flex;
@@ -86,8 +266,8 @@
         }
         
         .location-item:hover {
-            background-color: #f0f7ff;
-            border-color: #3b82f6;
+            background-color: #fef3c7;
+            border-color: #fbbf24;
         }
         
         .location-item input[type="checkbox"] {
@@ -97,6 +277,7 @@
             height: 18px;
             margin-top: 2px;
             flex-shrink: 0;
+            accent-color: #fbbf24;
         }
         
         .location-item-content {
@@ -114,21 +295,30 @@
             color: #6b7280;
         }
         
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
         button[type="submit"] {
             background-color: #10b981;
             color: white;
             padding: 12px 32px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
             font-weight: 600;
             cursor: pointer;
-            margin-right: 10px;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         button[type="submit"]:hover {
             background-color: #059669;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
         
         .cancel-btn {
@@ -137,98 +327,90 @@
             background: #ef4444;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-weight: 600;
-            transition: background-color 0.2s;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
         
         .cancel-btn:hover {
             background-color: #dc2626;
-        }
-        
-        h3 {
-            color: #1f2937;
-            margin-top: 30px;
-        }
-        
-        h4 {
-            color: #374151;
-            margin: 0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
         }
     </style>
 </head>
 <body>
-    <a href="{% url 'BlogNEvent:blogevent_page' %}" style="display: inline-block; padding: 10px 20px; background: #3b82f6; color: white; text-decoration: none; border-radius: 5px; margin-bottom: 20px;">← Back</a>
-    
-    <h1>Create New Event</h1>
-    
-    <form method="POST" action="{% url 'BlogNEvent:create_event' %}" id="eventForm">
-        {% csrf_token %}
+    <div class="form-container">
+        <a href="{% url 'BlogNEvent:blogevent_page' %}" class="back-btn">← Back</a>
         
-        <div class="form-group">
-            <label>Name:</label>
-            {{ form.name }}
-        </div>
+        <h1 class="page-title">Create New Event</h1>
         
-        <div class="form-group">
-            <label>Image URL:</label>
-            {{ form.image }}
-        </div>
-        
-        <div class="form-group">
-            <label>Description:</label>
-            {{ form.description }}
-        </div>
-        
-        <div class="form-group">
-            <label>Starting Date:</label>
-            {{ form.starting_date }}
-        </div>
-        
-        <div class="form-group">
-            <label>Ending Date:</label>
-            {{ form.ending_date }}
-        </div>
-        
-        <h3>Select Event Locations</h3>
-        <div id="map"></div>
-        
-        <div id="locationsList">
-            <div class="locations-header">
-                <h4>Available Fitness Locations:</h4>
-                <p style="color: #6b7280; font-size: 0.9em; margin-top: 5px;">Select one or more locations for your event (gyms, sports facilities, stadiums, parks)</p>
+        <div class="form-card">
+            <form method="POST" action="{% url 'BlogNEvent:create_event' %}" id="eventForm">
+                {% csrf_token %}
                 
-                <div style="margin-top: 15px;">
-                    <input type="text" 
-                           id="searchInput" 
-                           placeholder="Search locations by name or address..."
-                           style="width: 100%; padding: 10px 15px; border: 2px solid #d1d5db; border-radius: 8px; font-size: 14px; transition: border-color 0.2s;"
-                           onfocus="this.style.borderColor='#3b82f6'"
-                           onblur="this.style.borderColor='#d1d5db'">
+                <div class="form-group">
+                    <label>Name:</label>
+                    {{ form.name }}
                 </div>
-            </div>
-            
-            <div class="locations-scroll">
-                {% for location in locations %}
-                <div class="location-item">
-                    <input type="checkbox" 
-                           name="locations" 
-                           value="{{ location.place_id }}" 
-                           id="loc_{{ location.place_id }}">
-                    <label for="loc_{{ location.place_id }}" class="location-item-content">
-                        <div class="location-name">{{ location.name }}</div>
-                        <div class="location-address">{{ location.address }}</div>
-                    </label>
+                
+                <div class="form-group">
+                    <label>Image URL:</label>
+                    {{ form.image }}
                 </div>
-                {% endfor %}
-            </div>
+                
+                <div class="form-group">
+                    <label>Description:</label>
+                    {{ form.description }}
+                </div>
+                
+                <div class="form-group">
+                    <label>Starting Date:</label>
+                    {{ form.starting_date }}
+                </div>
+                
+                <div class="form-group">
+                    <label>Ending Date:</label>
+                    {{ form.ending_date }}
+                </div>
+                
+                <h3 class="section-title">Select Event Locations</h3>
+                <div id="map"></div>
+                
+                <div id="locationsList">
+                    <div class="locations-header">
+                        <h4>Available Fitness Locations:</h4>
+                        <p>Select one or more locations for your event (gyms, sports facilities, stadiums, parks)</p>
+                        
+                        <input type="text" 
+                               id="searchInput" 
+                               placeholder="Search locations by name or address...">
+                    </div>
+                    
+                    <div class="locations-scroll">
+                        {% for location in locations %}
+                        <div class="location-item">
+                            <input type="checkbox" 
+                                   name="locations" 
+                                   value="{{ location.place_id }}" 
+                                   id="loc_{{ location.place_id }}">
+                            <label for="loc_{{ location.place_id }}" class="location-item-content">
+                                <div class="location-name">{{ location.name }}</div>
+                                <div class="location-address">{{ location.address }}</div>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button type="submit">Create Event</button>
+                    <a href="{% url 'BlogNEvent:blogevent_page' %}" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
         </div>
-        
-        <div style="margin-top: 25px;">
-            <button type="submit">Create Event</button>
-            <a href="{% url 'BlogNEvent:blogevent_page' %}" class="cancel-btn">Cancel</a>
-        </div>
-    </form>
+    </div>
 
     <script>
         let map;
@@ -277,8 +459,7 @@
                     const checkbox = document.getElementById('loc_' + location.id);
                     if (checkbox) {
                         checkbox.checked = !checkbox.checked;
-                        // Visual feedback
-                        checkbox.parentElement.style.backgroundColor = checkbox.checked ? '#dbeafe' : '';
+                        checkbox.parentElement.style.backgroundColor = checkbox.checked ? '#fef3c7' : '';
                     }
                 });
 
@@ -286,20 +467,19 @@
             });
         }
 
-        // Make location items clickable (click anywhere to toggle)
+        // Make location items clickable
         document.querySelectorAll('.location-item').forEach(item => {
             item.addEventListener('click', function(e) {
                 if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
                     const checkbox = this.querySelector('input[type="checkbox"]');
                     checkbox.checked = !checkbox.checked;
-                    this.style.backgroundColor = checkbox.checked ? '#dbeafe' : '';
+                    this.style.backgroundColor = checkbox.checked ? '#fef3c7' : '';
                 }
             });
             
-            // Also add listener to checkbox for visual feedback
             const checkbox = item.querySelector('input[type="checkbox"]');
             checkbox.addEventListener('change', function() {
-                item.style.backgroundColor = this.checked ? '#dbeafe' : '';
+                item.style.backgroundColor = this.checked ? '#fef3c7' : '';
             });
         });
 
@@ -321,7 +501,6 @@
                 }
             });
             
-            // Show a "no results" message if all items are hidden
             const visibleItems = Array.from(locationItems).filter(item => item.style.display !== 'none');
             const scrollContainer = document.querySelector('.locations-scroll');
             let noResultsMsg = document.getElementById('no-results-msg');

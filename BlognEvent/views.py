@@ -9,8 +9,10 @@ from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 import datetime
 import json
+import uuid
 
 # blogevent page
 def blogevent_page(request):
@@ -23,21 +25,21 @@ def blogevent_page(request):
     }
     return render(request, 'blogevent/blogevent_page.html', context)
 
-# event form page 
+# event form 
 @login_required
 def event_form_page(request):
     form = EventForm()
     fitness_spots = FitnessSpot.objects.all()
     
-    # Prepare location data with coordinates for the map
+    #lokasi + info
     locations_for_map = []
     for spot in fitness_spots:
         locations_for_map.append({
             'id': str(spot.place_id),
             'name': spot.name,
             'address': spot.address,
-            'latitude': str(spot.latitude),   # Add this
-            'longitude': str(spot.longitude), # Add this
+            'latitude': str(spot.latitude),   #
+            'longitude': str(spot.longitude), 
         })
     
     context = {
@@ -87,3 +89,29 @@ def create_blog(request):
             return redirect('BlogNEvent:blogevent_page')
     
     return redirect('BlogNEvent:blog_form_page')
+
+
+def event_detail_api(request, event_id):
+    event = get_object_or_404(Event, id=event_id)
+    locations = [loc.name for loc in event.locations.all()]
+    
+    return JsonResponse({
+        'name': event.name,
+        'image': event.image,
+        'description': event.description,
+        'starting_date': event.starting_date.strftime('%B %d, %Y'),
+        'ending_date': event.ending_date.strftime('%B %d, %Y'),
+        'user': event.user.username,
+        'locations': locations,
+    })
+
+
+def blog_detail_api(request, blog_id):
+    blog = get_object_or_404(Blogs, id=blog_id)
+    
+    return JsonResponse({
+        'title': blog.title,
+        'image': blog.image,
+        'body': blog.body,
+        'author': blog.author.username,
+    })
