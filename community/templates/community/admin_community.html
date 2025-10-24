@@ -3,7 +3,6 @@
 <div class="max-w-4xl mx-auto py-10">
   <h1 class="text-3xl font-bold mb-6 text-center">Kelola Komunitas</h1>
 
-  <!-- Form Tambah -->
   <div class="mb-6 bg-gray-100 p-4 rounded-lg">
     <h2 class="font-semibold mb-2">Tambah Komunitas Baru</h2>
     <form id="add-community-form">
@@ -13,7 +12,6 @@
     </form>
   </div>
 
-  <!-- List komunitas -->
   <div id="community-list" class="space-y-2">
     {% for c in communities %}
     <div class="p-3 border rounded flex justify-between items-center" data-id="{{ c.id }}">
@@ -34,7 +32,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const addForm = document.getElementById('add-community-form');
   const listDiv = document.getElementById('community-list');
 
-  // Tambah komunitas
   addForm.addEventListener('submit', (e) => {
     e.preventDefault();
     const data = new FormData(addForm);
@@ -63,13 +60,11 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   });
 
-  // Edit & Hapus menggunakan event delegation
   listDiv.addEventListener('click', (e) => {
     const target = e.target;
     const parent = target.closest('[data-id]');
     const id = parent.dataset.id;
 
-    // Hapus
     if(target.classList.contains('delete-btn')){
       if(confirm("Yakin ingin menghapus komunitas ini?")){
         fetch(`/community/ajax/delete/${id}/`, {
@@ -83,7 +78,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
 
-    // Edit
     if(target.classList.contains('edit-btn')){
       const newName = prompt("Nama baru:", parent.querySelector('strong').innerText);
       const newDesc = prompt("Deskripsi baru:", parent.querySelector('div').innerText.replace(parent.querySelector('strong').innerText+" - ",""));

@@ -68,7 +68,7 @@ async function initializeMap(center, zoom, restriction) {
     });
     
     infoWindow = new google.maps.InfoWindow({
-        pixelOffset: new google.maps.Size(0, -10), 
+        pixelOffset: new google.maps.Size(0, +160), 
     });
 
     google.maps.event.addListener(infoWindow, 'domready', () => {

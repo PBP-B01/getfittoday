@@ -26,7 +26,6 @@
 
         {% if user.is_authenticated %}
           {% if user == community.admin or user.is_staff %}
-            <!-- Tombol Edit / Delete untuk Admin / Admin Komunitas -->
             <div class="mt-2 space-x-2">
               <a href="{% url 'community:edit_community' community.pk %}" 
                  class="bg-yellow-500 text-blue-900 px-3 py-1 rounded-lg font-semibold hover:bg-yellow-400 transition text-sm inline-block">

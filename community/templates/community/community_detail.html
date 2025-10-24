@@ -75,9 +75,8 @@
 
 {% block extra_js %}
 <script>
-// === SCRIPT FOR JOIN/LEAVE ===
 document.addEventListener('DOMContentLoaded', () => {
-    function getCookie(name) { /* ... getCookie function ... */ }
+    function getCookie(name) { }
     const csrfToken = getCookie('csrftoken');
     const joinBtn = document.getElementById('join-btn');
     const leaveBtn = document.getElementById('leave-btn');
@@ -87,7 +86,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (!buttonWrapper || !joinBtn || !leaveBtn) {
         console.log("Join/Leave buttons not found or user is admin.");
-        return; // Exit if buttons aren't relevant
+        return; 
     }
 
     const communityId = buttonWrapper.dataset.communityId;

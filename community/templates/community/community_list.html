@@ -5,23 +5,20 @@
 {% block head %}
   {{ block.super }}
   <style>
-    /* Style for the custom dropdown list */
     #fitnessSpotList {
-      max-height: 18rem; /* Adjust max height */
+      max-height: 18rem; 
       overflow-y: auto;
-      border: 1px solid #e5e7eb; /* Optional border */
-      /* Increased z-index */
-      z-index: 9999 !important; /* Ensure dropdown is above everything */
-      background-color: #ffffff; /* White background */
-      color: #1f2937; /* Dark text */
+      border: 1px solid #e5e7eb;
+      z-index: 9999 !important; 
+      background-color: #ffffff;
+      color: #1f2937;
     }
     #fitnessSpotList li:hover {
-      background-color: #eff6ff; /* blue-50 */
+      background-color: #eff6ff;
     }
     #fitnessSpotList li.active-suggestion {
-      background-color: #dbeafe; /* blue-100 */
+      background-color: #dbeafe; 
     }
-    /* Ensure modal itself has high z-index */
     #edit-modal {
         z-index: 50 !important;
     }
@@ -136,7 +133,6 @@
 
 {% block extra_js %}
 <script>
-// === SCRIPT BERSIH & DIPERBARUI ===
 document.addEventListener('DOMContentLoaded', () => {
   const editModal = document.getElementById('edit-modal');
   const editForm = document.getElementById('edit-form');
@@ -145,7 +141,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const cardsContainer = document.getElementById('community-cards');
   const addBtn = document.getElementById('add-community-btn');
 
-  // --- CSRF Token ---
   function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -162,13 +157,11 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   const csrfToken = getCookie('csrftoken');
 
-  // --- Fitness Spot Search Component Logic ---
   const fitnessSpotSearchInput = document.getElementById('fitnessSpotSearchInput');
   const fitnessSpotList = document.getElementById('fitnessSpotList');
-  const realFitnessSpotInput = document.getElementById('id_fitness_spot'); // The hidden input
+  const realFitnessSpotInput = document.getElementById('id_fitness_spot');
 
-  // --- Robust Data Loading ---
-  let ALL_SPOTS_DATA = []; // Default to empty array
+  let ALL_SPOTS_DATA = []; 
   const ALL_SPOTS_DATA_EL = document.getElementById('fitness-spots-data');
   if (ALL_SPOTS_DATA_EL) {
       try {
@@ -180,7 +173,6 @@ document.addEventListener('DOMContentLoaded', () => {
           } else { console.error("Parsed fitness spots data is not an array:", jsonData); }
       } catch (e) { console.error("Failed to parse fitness spots JSON:", e); }
   } else { console.error("Fitness spots data script tag (#fitness-spots-data) not found!"); }
-  // --- End Data Loading ---
 
   let fitnessSpotActiveIdx = -1;
 
@@ -217,7 +209,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (fitnessSpotSearchInput && fitnessSpotList && realFitnessSpotInput) {
       fitnessSpotSearchInput.addEventListener('input', onFitnessSpotType);
-      fitnessSpotSearchInput.addEventListener('focus', () => { /* Optional: maybe show recent/all if empty? */ onFitnessSpotType(); }); // Show list on focus
+      fitnessSpotSearchInput.addEventListener('focus', () => {  onFitnessSpotType(); });
       fitnessSpotList.addEventListener('mousedown', (e) => { const li = e.target.closest('li'); if (li) chooseFitnessSpot(li); });
       fitnessSpotSearchInput.addEventListener('blur', () => { setTimeout(() => { if (!fitnessSpotList.matches(':hover')) { fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; } }, 150); });
       fitnessSpotSearchInput.addEventListener('keydown', (e) => {
@@ -227,7 +219,7 @@ document.addEventListener('DOMContentLoaded', () => {
           else if (e.key === 'Enter') {
               e.preventDefault();
               if (fitnessSpotActiveIdx >= 0 && fitnessSpotActiveIdx < items.length) { chooseFitnessSpot(items[fitnessSpotActiveIdx]); }
-              else if (items.length > 0) { chooseFitnessSpot(items[0]); } // Choose first if none selected
+              else if (items.length > 0) { chooseFitnessSpot(items[0]); } 
               return;
           }
           else if (e.key === 'Escape') { fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; return; }
@@ -235,15 +227,13 @@ document.addEventListener('DOMContentLoaded', () => {
               fitnessSpotActiveIdx = newIndex;
               const currentQuery = fitnessSpotSearchInput.value.trim().toLowerCase();
               const currentResults = (Array.isArray(ALL_SPOTS_DATA) ? ALL_SPOTS_DATA : []).filter(spot => spot.name && spot.name.toLowerCase().includes(currentQuery)).slice(0, 15);
-              renderFitnessSpotList(currentResults); // Re-render to update highlight
+              renderFitnessSpotList(currentResults); 
               const highlightedItem = fitnessSpotList.querySelector('li.active-suggestion');
               highlightedItem?.scrollIntoView({ block: 'nearest' });
           }
       });
   } else { console.error("Fitness spot search elements (#fitnessSpotSearchInput, #fitnessSpotList, #id_fitness_spot) not found!"); }
-  // --- End Fitness Spot Search ---
 
-  // --- Modal Open/Close ---
   function closeModal() { if(editModal) editModal.classList.add('opacity-0', 'pointer-events-none'); }
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (closeBtnAlt) closeBtnAlt.addEventListener('click', closeModal);
@@ -253,18 +243,16 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!editForm || !fitnessSpotSearchInput || !realFitnessSpotInput || !fitnessSpotList || !editModal) return;
       document.getElementById('edit-modal-title').innerText = "Tambah Komunitas";
       editForm.reset();
-      fitnessSpotSearchInput.value = ''; realFitnessSpotInput.value = ''; // Clear search fields
-      fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; // Hide & reset search list
+      fitnessSpotSearchInput.value = ''; realFitnessSpotInput.value = '';
+      fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; 
       document.getElementById('edit-id').value = "";
       editModal.classList.remove('opacity-0', 'pointer-events-none');
     });
   }
 
-  // --- Card Click Listeners ---
   if (cardsContainer) {
       cardsContainer.addEventListener('click', e => {
           const card = e.target.closest('[data-id]'); if (!card) return; const id = card.dataset.id;
-          // Add Admin Button
           if (e.target.classList.contains('add-admin-btn')) {
                e.stopPropagation();
                const username = prompt("Enter username to add as admin:"); if (!username) return;
@@ -273,7 +261,6 @@ document.addEventListener('DOMContentLoaded', () => {
                .then(res => res.json()).then(json => { alert(json.success ? json.message : `Error: ${json.error}`); });
                return;
            }
-          // Delete Button
           if (e.target.classList.contains('delete-btn')) {
                e.stopPropagation();
                if (confirm("Yakin hapus?")) {
@@ -281,7 +268,6 @@ document.addEventListener('DOMContentLoaded', () => {
                    .then(res => res.json()).then(json => { if (json.success) card.remove(); else alert(`Error: ${json.error || 'Gagal hapus'}`); });
                } return;
            }
-          // Edit Button
           if (e.target.classList.contains('edit-btn')) {
               e.stopPropagation();
               if (!editForm || !fitnessSpotSearchInput || !realFitnessSpotInput || !editModal || !fitnessSpotList) return;
@@ -291,19 +277,17 @@ document.addEventListener('DOMContentLoaded', () => {
               document.getElementById('id_description').value = card.querySelector('p:nth-of-type(1)')?.innerText || '';
               const spotId = card.dataset.spotId || '';
               const spotName = card.querySelector('p:nth-of-type(2)')?.innerText.replace('📍 ', '') || '';
-              realFitnessSpotInput.value = spotId; // Set hidden
-              fitnessSpotSearchInput.value = spotName; // Set visual
-              fitnessSpotList.classList.add('hidden'); // Hide list
+              realFitnessSpotInput.value = spotId;
+              fitnessSpotSearchInput.value = spotName;
+              fitnessSpotList.classList.add('hidden'); 
               const contactEl = card.querySelector('p:last-of-type'); let contact = ''; if (contactEl && contactEl.innerText.includes('📞')) { contact = contactEl.innerText.replace('📞 ', ''); }
               const contactInput = document.getElementById('id_contact_info'); if (contactInput) contactInput.value = contact;
               editModal.classList.remove('opacity-0', 'pointer-events-none'); return;
           }
-          // Navigate
           if (card.dataset.url) { location.href = card.dataset.url; }
       });
   }
 
-  // --- Form Submit Handler ---
   if (editForm) {
       editForm.addEventListener('submit', e => {
           e.preventDefault();
@@ -316,10 +300,10 @@ document.addEventListener('DOMContentLoaded', () => {
           const url = id ? `/community/ajax/edit/${id}/` : `/community/ajax/add/`;
 
           fetch(url, { method:'POST', body: formData, headers:{'X-Requested-With':'XMLHttpRequest','X-CSRFToken': csrfToken }})
-              .then(res => { if (!res.ok) { return res.text().then(text => {throw new Error(`HTTP error! status: ${res.status}, body: ${text}`)}) } return res.json(); }) // Include body on error
+              .then(res => { if (!res.ok) { return res.text().then(text => {throw new Error(`HTTP error! status: ${res.status}, body: ${text}`)}) } return res.json(); }) 
               .then(json => {
                   if (json.success) {
-                      if (id) { // Edit logic
+                      if (id) {
                           const card = cardsContainer?.querySelector(`[data-id='${id}']`);
                           if (card) {
                                 card.dataset.spotId = json.fitness_spot_id;
@@ -332,7 +316,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     contactP.innerText = "📞 " + json.contact_info;
                                 } else if (contactP) { contactP.remove(); }
                            }
-                      } else { // Add logic
+                      } else {
                           if (!cardsContainer) return;
                           const newCard = document.createElement('div');
                           newCard.className = "bg-yellow-400 text-black rounded-2xl shadow-md transform transition duration-300 hover:-translate-y-2 hover:shadow-xl relative p-5 border border-yellow-800 cursor-pointer flex flex-col";
@@ -357,16 +341,15 @@ document.addEventListener('DOMContentLoaded', () => {
                           cardsContainer.appendChild(newCard);
                       }
                       closeModal();
-                  } else { // Handle failure
+                  } else { 
                       if (json.errors) {
                            let errorMsg = "Operasi gagal:\n";
-                           for (const field in json.errors) { errorMsg += `\n- ${field}: ${json.errors[field][0].message}`; } // Extract message
-                           alert(errorMsg);
+                           for (const field in json.errors) { errorMsg += `\n- ${field}: ${json.errors[field][0].message}`; } 
                       }
                       else { alert(`Operasi gagal: ${json.error || 'Terjadi kesalahan.'}`); }
                   }
               })
-              .catch(error => { console.error("Fetch error:", error); alert(`Terjadi error di server: ${error.message}`); }); // Show error message
+              .catch(error => { console.error("Fetch error:", error); alert(`Terjadi error di server: ${error.message}`); }); 
       });
   }
 });
