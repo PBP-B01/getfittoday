@@ -13,6 +13,27 @@ const GRID_ORIGIN_LAT = -6.8;
 const GRID_ORIGIN_LNG = 106.5;
 const GRID_CELL_SIZE_DEG = 0.09;
 
+function setupCommunityModalClosing() {
+    const modal = document.getElementById('community-modal');
+    const closeBtn = document.getElementById('close-community-modal');
+
+    if (modal && closeBtn) {
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('flex'); 
+            modal.style.display = ''; 
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+}
+
 async function initMap() {
     try {
         let initialCoords = { lat: -6.370403, lng: 106.826946 };
@@ -43,6 +64,9 @@ async function initMap() {
         }
 
         await initializeMap(initialCoords, initialZoom, restrictionBounds);
+        
+        setupCommunityModalClosing();
+        
         if (position) {
             updateUserLocationMarker(position);
         }
@@ -429,6 +453,7 @@ function createInfoContent(spot) {
             modal.classList.add('flex');
             modal.style.display = 'flex'; 
 
+
             modalContent.innerHTML = "<p class='text-gray-500 italic'>Memuat komunitas...</p>";
 
             fetch(`/community/by-place-json/${spot.place_id}/`) 
@@ -462,6 +487,7 @@ function createInfoContent(spot) {
                             li.appendChild(link);
                             ul.appendChild(li);
                         });
+
                         modalContent.appendChild(ul);
                     }
                     else {
