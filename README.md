@@ -33,9 +33,9 @@ Modul yang fungsinya sebagai pusat informasi dan artikel seputar olahraga ataupu
 
 Modul ini membangun social network di dalam platform. User dapat melihat informasi komunitas dan bisa bergabung dalam komunitas olahraga tersebut. Informasi komunitas terdiri dari deskripsi komunitas, jadwal bermain rutin komunitas (jika ada), dan nama-nama dari setiap anggota komunitas.
   
-- Online Shop --> Aaron Nathanael Suhaendi
+- Online Shop / Store --> Aaron Nathanael Suhaendi
 
-Modul yang bertindak sebagai catalog shop di setiap tempat olahraga di mana user bisa melakukan pembelian perlengkapan olahraga seperti bola, pakaian, alat gym, dll.
+Modul yang bertindak sebagai store di mana user yang sudah login bisa melakukan pembelian perlengkapan olahraga seperti bola, pakaian, alat gym, dll.
 
 
 Sumber Inisial Dataset :
@@ -45,15 +45,15 @@ Sumber Inisial Dataset :
 Role beserta Deskripsi :
 - Guest
 
-Hanya dapat melihat peta, informasi komunitas, blog, dan online shop. User tidak punya wewenang untuk melakukan modifikasi blog, bergabung dalam komunitas, mendaftar untuk partisipasi dalam acara komunitas, melakukan reservasi tempat olahraga, dan berbelanja di online shop.
+Hanya dapat melihat peta, informasi komunitas, blog, dan online shop/store. User tidak punya wewenang untuk melakukan modifikasi blog, bergabung dalam komunitas, mendaftar untuk partisipasi dalam acara komunitas, melakukan reservasi tempat olahraga, dan berbelanja di online shop/store.
 
 - Signed In User
 
-User bisa berinteraksi dengan peta dan punya wewenang untuk melakukan modifikasi entry blog, bergabung dalam komunitas, berpartisipasi dalam acara komunitas, melakukan reservasi tempat olahraga, dan dapat berbelanja di online shop.
+User bisa berinteraksi dengan peta dan punya wewenang untuk melakukan modifikasi entry blog, bergabung dalam komunitas, berpartisipasi dalam acara komunitas, melakukan reservasi tempat olahraga, dan dapat berbelanja di online shop/store.
 
 - Admin
 
-Admin aplikasi memiliki wewenang untuk menghapus dan memodifikasi informasi setiap komunitas, blog, dan produk yang tersedia di online shop.
+Admin aplikasi memiliki wewenang untuk menghapus dan memodifikasi informasi setiap komunitas, blog, dan produk yang tersedia di online shop/store.
 
 - Admin komunitas
 

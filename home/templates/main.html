@@ -44,6 +44,16 @@
         </div>
       </div>
     </div>
+
+    <div id="community-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none items-center justify-center z-[9999] transition-opacity duration-300">
+    <div class="bg-white text-blue-900 rounded-2xl shadow-2xl w-11/12 sm:w-3/4 md:w-1/2 max-h-[80vh] overflow-y-auto p-6 relative">
+        <button id="close-community-modal"
+        class="absolute top-3 right-4 text-gray-500 hover:text-red-600 text-2xl font-bold">&times;</button>
+        <h3 class="text-2xl font-bold text-blue-800 mb-4 text-center">Komunitas di Lokasi Ini</h3>
+        <div id="community-modal-content" class="space-y-3 text-center"></div>
+    </div>
+    </div>
   </section>
 </main>
 {% endblock %}
