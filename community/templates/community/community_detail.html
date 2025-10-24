@@ -5,82 +5,78 @@
 
 {% block content %}
 <div class="max-w-4xl mx-auto px-4 mt-10">
-  <!-- Header / Deskripsi -->
   <div class="community-card mb-6">
-    <h2 class="community-title text-center">{{ community.name }}</h2>
-    {% if community.description %}
-      <p class="muted mt-2 text-center">{{ community.description }}</p>
-    {% endif %}
-    <div class="mt-4 text-center">
-      <p class="spot-line">📍 {{ community.fitness_spot.name }}</p>
-      {% if community.contact_info %}
-        <p class="muted mt-1">📞 {{ community.contact_info }}</p>
-      {% endif %}
-    </div>
+  <h2 class="community-title text-center">{{ community.name }}</h2>
+  {% if community.description %}
+   <p class="muted mt-2 text-center">{{ community.description }}</p>
+  {% endif %}
+  <div class="mt-4 text-center">
+   <p class="spot-line">📍 {{ community.fitness_spot.name }}</p>
+   {% if community.contact_info %}
+    <p class="muted mt-1">📞 {{ community.contact_info }}</p>
+   {% endif %}
   </div>
+ </div>
 
-  <!-- Admin & Anggota -->
   <div class="community-card">
-    <h3 class="section-title">Admin & Anggota (<span id="member-count">{{ community.members.count }}</span> anggota)</h3>
+  <h3 class="section-title">Admin & Anggota (<span id="member-count">{{ community.members.count }}</span> anggota)</h3>
 
-    <div class="mt-3">
-      <h4 class="subheading">Admin</h4>
-      <ul class="list-none pl-2 mb-4 text-sm space-y-1">
-        {% for admin in community.admins.all %}
-          <li>👤 {{ admin.username }}</li>
-        {% empty %}
-          <li class="italic muted">Tidak ada admin yang terdaftar.</li>
-        {% endfor %}
-      </ul>
-    </div>
-
-    <hr class="divider my-4">
-
-    <div>
-      <h4 class="subheading">Anggota</h4>
-      <ul id="member-list" class="list-disc pl-5 space-y-1 text-sm">
-        {% for member in community.members.all %}
-          <li data-username="{{ member.username }}">{{ member.username }}</li>
-        {% empty %}
-          <li id="empty-member-msg" class="list-none italic muted">Belum ada anggota yang bergabung.</li>
-        {% endfor %}
-      </ul>
-    </div>
+  <div class="mt-3">
+   <h4 class="subheading">Admin</h4>
+   <ul id="admin-list" class="list-none pl-2 mb-4 text-sm space-y-1">
+    {% for admin in community.admins.all %}
+     <li>👤 {{ admin.username }}</li>
+    {% empty %}
+     <li class="italic muted">Tidak ada admin yang terdaftar.</li>
+    {% endfor %}
+   </ul>
   </div>
 
-  <!-- Actions -->
+  <hr class="divider my-4">
+
+  <div>
+   <h4 class="subheading">Anggota</h4>
+   <ul id="member-list" class="list-disc pl-5 space-y-1 text-sm">
+    {% for member in community.members.all %}
+     <li data-username="{{ member.username }}">{{ member.username }}</li>
+    {% empty %}
+     <li id="empty-member-msg" class="list-none italic muted">Belum ada anggota yang bergabung.</li>
+    {% endfor %}
+   </ul>
+  </div>
+ </div>
+
   <div class="mt-6 text-center"
-       data-community-id="{{ community.id }}"
-       data-username="{{ request.user.username }}">
+    data-community-id="{{ community.id }}"
+    data-username="{{ request.user.username }}">
 
-    {% if request.user.is_authenticated and request.user not in community.admins.all %}
-      {% if request.user in community.members.all %}
-        <button id="leave-btn" class="btn-danger">Keluar Komunitas</button>
-        <button id="join-btn" class="btn-accent hidden">Join Komunitas</button>
-      {% else %}
-        <button id="leave-btn" class="btn-danger hidden">Keluar Komunitas</button>
-        <button id="join-btn" class="btn-accent">Join Komunitas</button>
-      {% endif %}
-    {% endif %}
-  </div>
+  {% if request.user.is_authenticated and request.user not in community.admins.all %}
+   {% if request.user in community.members.all %}
+    <button id="leave-btn" class="btn-danger">Keluar Komunitas</button>
+    <button id="join-btn" class="btn-accent hidden">Join Komunitas</button>
+   {% else %}
+    <button id="leave-btn" class="btn-danger hidden">Keluar Komunitas</button>
+    <button id="join-btn" class="btn-accent">Join Komunitas</button>
+   {% endif %}
+  {% endif %}
+ </div>
 
-  <div class="mt-6 text-center">
-    <a href="{% url 'community_list' %}" class="btn-teal">Kembali ke Daftar Komunitas</a>
-  </div>
+ <div class="mt-6 text-center">
+  <a href="{% url 'community_list' %}" class="btn-teal">Kembali ke Daftar Komunitas</a>
+ </div>
 </div>
 
-<!-- Toast -->
 <div id="toast"
-     class="hidden fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm
-            rounded-xl px-4 py-3 text-sm shadow-[0_12px_30px_rgba(0,0,0,.25)]
-            transition-all duration-300 translate-y-2 opacity-0"
-     role="status" aria-live="polite"></div>
+   class="hidden fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm
+      rounded-xl px-4 py-3 text-sm shadow-[0_12px_30px_rgba(0,0,0,.25)]
+      transition-all duration-300 translate-y-2 opacity-0"
+   role="status" aria-live="polite"></div>
 {% endblock %}
 
 {% block extra_css %}
 {{ block.super }}
 <style>
-  :root{
+    :root{
     --nav-bg:#0E5A64; --nav-bg-darker:#07434B; --nav-text:#FFFFFF;
     --title:#1B2B5A; --bg-1:#EAF2FF; --bg-2:#BFD6F2;
     --card-bg:#FFFFFF; --card-brd:#C8DDF6; --card-brd-strong:#DDE7FF;
@@ -91,114 +87,118 @@
     --toast-err-bg: #E5484D;
     --toast-err-shadow: rgba(229,72,77,.35);
     --toast-text: #FFFFFF;
-  }
+    }
 
-  .community-card ul.list-none li {
-    color: #0B2E55; 
-}
+    .community-card ul li {
+    color: #0B2E55 !important; 
+    }
 
-  body.community-theme{
+    .community-card ul li.muted {
+    color: var(--ink-weak) !important;
+    }
+
+    body.community-theme{
     background:
-      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
-      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+    linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
     color: var(--nav-text);
-  }
-  body.community-theme nav{
+    }
+    body.community-theme nav{
     background-color: var(--nav-bg) !important;
     color: var(--nav-text) !important;
     border-radius: 0 !important;
     box-shadow: 0 1px 0 rgba(0,0,0,.06);
-  }
-  body.community-theme nav a{ color: var(--nav-text) !important; }
-  body.community-theme nav a:hover{ opacity:.92; }
+    }
+    body.community-theme nav a{ color: var(--nav-text) !important; }
+    body.community-theme nav a:hover{ opacity:.92; }
 
-  .community-card{
+    .community-card{
     background: var(--card-bg);
     border: 1px solid var(--card-brd);
     border-radius: 16px;
     padding: 22px;
     box-shadow:
-      0 40px 80px rgba(13,43,63,.12),
-      0 12px 24px rgba(13,43,63,.10),
-      inset 0 1px 0 rgba(255,255,255,.65);
-  }
-  .community-title{
+    0 40px 80px rgba(13,43,63,.12),
+    0 12px 24px rgba(13,43,63,.10),
+    inset 0 1px 0 rgba(255,255,255,.65);
+    }
+    .community-title{
     color: var(--title);
     font-weight: 800;
     font-size: clamp(24px, 3vw, 32px);
     letter-spacing:.2px;
-  }
-  .section-title{
+    }
+    .section-title{
     color: var(--title);
     font-weight: 700;
     font-size: clamp(18px, 2.4vw, 22px);
-  }
-  .subheading{
+    }
+    .subheading{
     font-weight: 600;
     color: #0B2E55;
     margin-bottom:.25rem;
-  }
-  .muted{ color: var(--ink-weak); }
-  .spot-line{ color:#0B2E55; font-weight:600; }
+    }
+    .muted{ color: var(--ink-weak); }
+    .spot-line{ color:#0B2E55; font-weight:600; }
 
-  .divider{ border-color: var(--card-brd); }
+    .divider{ border-color: var(--card-brd); }
 
-  /* Buttons */
-  .btn-accent{
+    /* Buttons */
+    .btn-accent{
     display:inline-flex; align-items:center; justify-content:center;
     padding:.6rem 1rem; border-radius:12px; font-weight:800;
     color:#0B2E55; background: var(--accent);
     border:1px solid color-mix(in srgb, var(--accent) 90%, #000 0%);
     box-shadow: 0 12px 28px rgba(224,161,6,.25);
     transition: background .15s ease, transform .05s ease, box-shadow .15s ease;
-  }
-  .btn-accent:hover{ background: var(--accent-dark); }
-  .btn-accent:active{ transform: translateY(1px); }
+    }
+    .btn-accent:hover{ background: var(--accent-dark); }
+    .btn-accent:active{ transform: translateY(1px); }
 
-  .btn-danger{
+    .btn-danger{
     display:inline-flex; align-items:center; justify-content:center;
     padding:.6rem 1rem; border-radius:12px; font-weight:700;
     color:#fff; background:#DC2626; border:1px solid #B91C1C;
     box-shadow: 0 12px 28px rgba(220,38,38,.25);
     transition: background .15s ease, transform .05s ease;
-  }
-  .btn-danger:hover{ background:#B91C1C; }
-  .btn-danger:active{ transform: translateY(1px); }
+    }
+    .btn-danger:hover{ background:#B91C1C; }
+    .btn-danger:active{ transform: translateY(1px); }
 
-  .btn-teal{
+    .btn-teal{
     display:inline-flex; align-items:center; justify-content:center;
     padding:.55rem 1rem; border-radius:12px; font-weight:700;
     background: var(--nav-bg); color:#fff; border:1px solid var(--nav-bg-darker);
     box-shadow: 0 10px 24px rgba(14,90,100,.25);
     transition: filter .15s ease, transform .05s ease;
-  }
-  .btn-teal:hover{ filter: brightness(1.05); }
-  .btn-teal:active{ transform: translateY(1px); }
+    }
+    .btn-teal:hover{ filter: brightness(1.05); }
+    .btn-teal:active{ transform: translateY(1px); }
 
-  /* Toast theme */
-  #toast.toast--ok{
+    /* Toast theme */
+    #toast.toast--ok{
     background: var(--toast-ok-bg);
     color: var(--toast-text);
     box-shadow: 0 16px 38px var(--toast-ok-shadow);
-  }
-  #toast.toast--err{
+    }
+    #toast.toast--err{
     background: var(--toast-err-bg);
     color: var(--toast-text);
     box-shadow: 0 16px 38px var(--toast-err-shadow);
-  }
-</style>
-{% endblock %}
+    }
+    </style>
+    {% endblock %}
 
-{% block extra_js %}
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  function getCookie(name){
+    {% block extra_js %}
+    <script>
+    document.addEventListener('DOMContentLoaded', () => {
+    function getCookie(name){
     const m = document.cookie.match('(^|;)\\s*'+name+'\\s*=\\s*([^;]+)');
     return m ? decodeURIComponent(m.pop()) : '';
-  }
-  const csrfToken = getCookie('csrftoken');
+    }
+    const csrfToken = getCookie('csrftoken');
 
-  function toast(message, ok = true, delay = 1800) {
+    function toast(message, ok = true, delay = 1800) {
     const el = document.getElementById('toast');
     const base = "fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm rounded-xl px-4 py-3 text-sm transition-all duration-300";
     el.textContent = message;
@@ -208,94 +208,93 @@ document.addEventListener('DOMContentLoaded', () => {
     el.classList.remove("opacity-0","translate-y-2");
     clearTimeout(el._t);
     el._t = setTimeout(() => {
-      el.classList.add("opacity-0","translate-y-2");
-      setTimeout(() => el.classList.add("hidden"), 300);
+    el.classList.add("opacity-0","translate-y-2");
+    setTimeout(() => el.classList.add("hidden"), 300);
     }, delay);
-  }
+    }
 
-  const joinBtn = document.getElementById('join-btn');
-  const leaveBtn = document.getElementById('leave-btn');
-  const memberCountEl = document.getElementById('member-count');
-  const memberListEl = document.getElementById('member-list');
-  const buttonWrapper = document.querySelector('[data-community-id]');
+    const joinBtn = document.getElementById('join-btn');
+    const leaveBtn = document.getElementById('leave-btn');
+    const memberCountEl = document.getElementById('member-count');
+    const memberListEl = document.getElementById('member-list');
+    const buttonWrapper = document.querySelector('[data-community-id]');
 
-  if (!buttonWrapper || !joinBtn || !leaveBtn) return;
+    if (!buttonWrapper || !joinBtn || !leaveBtn) return;
 
-  const communityId = buttonWrapper.dataset.communityId;
-  const currentUsername = buttonWrapper.dataset.username;
-  const joinUrl = `/community/ajax/join/${communityId}/`;
-  const leaveUrl = `/community/ajax/leave/${communityId}/`;
+    const communityId = buttonWrapper.dataset.communityId;
+    const currentUsername = buttonWrapper.dataset.username;
+    const joinUrl = `/community/ajax/join/${communityId}/`;
+    const leaveUrl = `/community/ajax/leave/${communityId}/`;
 
-  function setLoading(btn, loading){
+    function setLoading(btn, loading){
     if (!btn) return;
     btn.disabled = loading;
     btn.dataset._oldText = loading ? (btn.dataset._oldText || btn.textContent) : btn.dataset._oldText;
     if (loading) btn.textContent = 'Processing…';
     else if (btn.dataset._oldText) btn.textContent = btn.dataset._oldText;
-  }
+    }
 
-  const updateUI = (action, count) => {
+    const updateUI = (action, count) => {
     if (memberCountEl) memberCountEl.innerText = count;
     if (action === "joined") {
-      joinBtn.classList.add('hidden');
-      leaveBtn.classList.remove('hidden');
-      const emptyMsg = document.getElementById('empty-member-msg');
-      if (emptyMsg) emptyMsg.remove();
-      if (memberListEl && !memberListEl.querySelector(`li[data-username="${currentUsername}"]`)) {
-        const newLi = document.createElement('li');
-        newLi.dataset.username = currentUsername;
-        newLi.innerText = currentUsername;
-        memberListEl.appendChild(newLi);
-      }
-      toast('Berhasil bergabung ke komunitas');
+    joinBtn.classList.add('hidden');
+    leaveBtn.classList.remove('hidden');
+    const emptyMsg = document.getElementById('empty-member-msg');
+    if (emptyMsg) emptyMsg.remove();
+    if (memberListEl && !memberListEl.querySelector(`li[data-username="${currentUsername}"]`)) {
+    const newLi = document.createElement('li');
+    newLi.dataset.username = currentUsername;
+    newLi.innerText = currentUsername;
+    memberListEl.appendChild(newLi);
+    }
+    toast('Berhasil bergabung ke komunitas');
     } else if (action === "left") {
-      joinBtn.classList.remove('hidden');
-      leaveBtn.classList.add('hidden');
-      if (memberListEl) {
-        const userLi = memberListEl.querySelector(`li[data-username="${currentUsername}"]`);
-        if (userLi) userLi.remove();
-        if (count === 0 && !document.getElementById('empty-member-msg')) {
-          const emptyLi = document.createElement('li');
-          emptyLi.id = 'empty-member-msg';
-          emptyLi.className = 'list-none italic muted';
-          emptyLi.innerText = 'Belum ada anggota yang bergabung.';
-          memberListEl.appendChild(emptyLi);
-        }
-      }
-      toast('Kamu keluar dari komunitas', true);
+    joinBtn.classList.remove('hidden');
+    leaveBtn.classList.add('hidden');
+    if (memberListEl) {
+    const userLi = memberListEl.querySelector(`li[data-username="${currentUsername}"]`);
+    if (userLi) userLi.remove();
+    if (count === 0 && !document.getElementById('empty-member-msg')) {
+        const emptyLi = document.createElement('li');
+        emptyLi.id = 'empty-member-msg';
+        emptyLi.className = 'list-none italic muted';
+        memberListEl.appendChild(emptyLi);
     }
-  };
+    }
+    toast('Kamu keluar dari komunitas', true);
+    }
+    };
 
-  const handleCommunityAction = async (url, action, btn) => {
+    const handleCommunityAction = async (url, action, btn) => {
     try {
-      setLoading(btn, true);
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-          'X-CSRFToken': csrfToken
-        }
-      });
-      if (!res.ok) {
-        const body = await res.text();
-        throw new Error(`HTTP ${res.status}: ${body}`);
-      }
-      const json = await res.json();
-      if (json.success) {
-        updateUI(action, json.member_count);
-      } else {
-        toast(json.error || 'Terjadi kesalahan', false);
-      }
-    } catch (err) {
-      console.error(err);
-      toast('Gagal memproses permintaan', false);
-    } finally {
-      setLoading(btn, false);
+    setLoading(btn, true);
+    const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+        'X-CSRFToken': csrfToken
     }
-  };
+    });
+    if (!res.ok) {
+    const body = await res.text();
+    throw new Error(`HTTP ${res.status}: ${body}`);
+    }
+    const json = await res.json();
+    if (json.success) {
+    updateUI(action, json.member_count);
+    } else {
+    toast(json.error || 'Terjadi kesalahan', false);
+    }
+    } catch (err) {
+    console.error(err);
+    toast('Gagal memproses permintaan', false);
+    } finally {
+    setLoading(btn, false);
+    }
+    };
 
-  joinBtn.addEventListener('click', () => handleCommunityAction(joinUrl, "joined", joinBtn));
-  leaveBtn.addEventListener('click', () => handleCommunityAction(leaveUrl, "left", leaveBtn));
+    joinBtn.addEventListener('click', () => handleCommunityAction(joinUrl, "joined", joinBtn));
+    leaveBtn.addEventListener('click', () => handleCommunityAction(leaveUrl, "left", leaveBtn));
 });
 </script>
 {% endblock %}
