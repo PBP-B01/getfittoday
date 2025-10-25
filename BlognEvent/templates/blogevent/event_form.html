@@ -11,11 +11,9 @@
         tailwind = {config: {theme: {extend: {fontFamily: {sans: ['Poppins','ui-sans-serif','system-ui','sans-serif']}}}}}
     </script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIG-OMzErXLto5j4iWW8NBn2Gtg0PAis"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <style>
-        /* === GLOBAL COLORS === */
         :root {
             --primary: #0E5A64;
             --primary-dark: #07434B;
@@ -78,15 +76,6 @@
             border-radius: 12px;
             padding: 30px;
             box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
-        }
-
-        #map {
-            height: 400px;
-            width: 100%;
-            margin: 20px 0;
-            border-radius: 8px;
-            border: 3px solid var(--card-border-thick);
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         }
 
         .form-group {
@@ -158,7 +147,7 @@
         }
 
         .locations-scroll {
-            max-height: 350px;
+            max-height: 350px; 
             overflow-y: auto;
             border: 2px solid var(--card-border);
             border-radius: 8px;
@@ -167,14 +156,21 @@
             margin-top: 15px;
         }
 
+        /* Scrollbar styles */
+        .locations-scroll::-webkit-scrollbar { width: 8px; }
+        .locations-scroll::-webkit-scrollbar-track { background: #F0F4F8; border-radius: 8px; }
         .locations-scroll::-webkit-scrollbar-thumb {
             background: var(--accent-yellow);
             border-radius: 8px;
         }
-
         .locations-scroll::-webkit-scrollbar-thumb:hover {
             background: var(--accent-yellow-dark);
         }
+        .locations-scroll { /* Firefox */
+             scrollbar-width: thin;
+             scrollbar-color: var(--accent-yellow) #F0F4F8;
+        }
+
 
         .location-item {
             padding: 12px;
@@ -275,7 +271,6 @@
                 <div class="form-group"><label>Ending Date:</label>{{ form.ending_date }}</div>
 
                 <h3 class="section-title">Select Event Locations</h3>
-                <div id="map"></div>
 
                 <div id="locationsList">
                     <div class="locations-header">
@@ -306,66 +301,29 @@
     </div>
 
     <script>
-        let map;
-        let markers = {};
         const locations = JSON.parse('{{ locations_json|escapejs }}');
         const selectedLocations = JSON.parse('{{ selected_locations|escapejs }}');
-
-        async function initMap() {
-            const { Map } = await google.maps.importLibrary("maps");
-            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
-
-            let centerLat = -6.2088;
-            let centerLng = 106.8456;
-
-            if (locations.length > 0) {
-                const valid = locations.filter(loc => loc.latitude && loc.longitude);
-                if (valid.length > 0) {
-                    centerLat = valid.reduce((s, l) => s + parseFloat(l.latitude), 0) / valid.length;
-                    centerLng = valid.reduce((s, l) => s + parseFloat(l.longitude), 0) / valid.length;
-                }
-            }
-
-            map = new Map(document.getElementById('map'), {
-                zoom: 13,
-                center: { lat: centerLat, lng: centerLng },
-                mapId: "event_map",
-            });
-
-            locations.forEach((loc) => {
-                const lat = parseFloat(loc.latitude);
-                const lng = parseFloat(loc.longitude);
-                if (isNaN(lat) || isNaN(lng)) return;
-
-                const marker = new AdvancedMarkerElement({ position: { lat, lng }, map, title: loc.name });
-                marker.addListener('click', () => {
-                    const box = document.getElementById('loc_' + loc.id);
-                    if (box) {
-                        box.checked = !box.checked;
-                        box.parentElement.style.backgroundColor = box.checked ? '#FFF9E6' : '';
-                    }
-                });
-                markers[loc.id] = marker;
-            });
-        }
 
         document.querySelectorAll('.location-item').forEach(item => {
             const box = item.querySelector('input[type="checkbox"]');
             if (selectedLocations.includes(box.value)) {
                 box.checked = true;
-                item.style.backgroundColor = '#FFF9E6';
+                item.style.backgroundColor = '#FFF9E6'; 
             }
             item.addEventListener('click', e => {
                 if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
                     box.checked = !box.checked;
-                    item.style.backgroundColor = box.checked ? '#FFF9E6' : '';
+                    box.dispatchEvent(new Event('change'));
                 }
             });
-            box.addEventListener('change', () => item.style.backgroundColor = box.checked ? '#FFF9E6' : '');
+            box.addEventListener('change', () => {
+                item.style.backgroundColor = box.checked ? '#FFF9E6' : '';
+            });
         });
 
         const searchInput = document.getElementById('searchInput');
         const locationItems = document.querySelectorAll('.location-item');
+
         searchInput.addEventListener('input', function() {
             const term = this.value.toLowerCase().trim();
             locationItems.forEach(item => {
@@ -375,7 +333,45 @@
             });
         });
 
-        window.onload = initMap;
+        document.addEventListener('DOMContentLoaded', () => {
+             document.querySelectorAll('.location-item input[type="checkbox"]').forEach(box => {
+                 if (selectedLocations.includes(box.value)) {
+                     box.checked = true;
+                     box.closest('.location-item').style.backgroundColor = '#FFF9E6';
+                 }
+             });
+        });
+
+        function setupDatePickerTrigger(inputId) {
+        const inputElement = document.getElementById(inputId);
+        if (inputElement) {
+            if (typeof inputElement.showPicker === 'function') {
+                inputElement.addEventListener('click', function(event) {
+                    try {
+                        inputElement.showPicker();
+                    } catch (error) {
+                        console.error(`Could not show picker for ${inputId}:`, error);
+                    }
+                });
+            } else {
+                console.warn(`Browser does not support showPicker() for element with id "${inputId}"`);
+            }
+        } else {
+            console.warn(`Element with id "${inputId}" not found.`);
+        }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.location-item input[type="checkbox"]').forEach(box => {
+            if (selectedLocations.includes(box.value)) {
+                box.checked = true;
+                box.closest('.location-item').style.backgroundColor = '#FFF9E6';
+            }
+        });
+        setupDatePickerTrigger('id_starting_date'); 
+        setupDatePickerTrigger('id_ending_date');   
+    });
+
     </script>
 </body>
 </html>
