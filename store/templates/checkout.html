@@ -123,23 +123,20 @@
     </div>
   </div>
 
-  <!-- Modal Konfirmasi Checkout -->
   <div id="checkoutConfirmModal" 
-      class="hidden fixed z-50 inset-0 overflow-y-auto" 
-      aria-labelledby="modal-title" 
-      role="dialog" 
-      aria-modal="true">
+       class="hidden fixed z-50 inset-0 overflow-y-auto" 
+       aria-labelledby="modal-title" 
+       role="dialog" 
+       aria-modal="true">
 
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
       <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
-          aria-hidden="true" 
-          data-modal-hide="checkoutConfirmModal">
+           aria-hidden="true" 
+           data-modal-hide="checkoutConfirmModal">
       </div>
 
-
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-
 
       <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all 
                   sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
@@ -150,11 +147,11 @@
             <div class="mx-auto flex-shrink-0 flex items-center justify-center 
                         h-12 w-12 rounded-full bg-yellow-100 sm:mx-0 sm:h-10 sm:w-10">
               <svg class="h-6 w-6 text-yellow-600" 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor" 
-                  aria-hidden="true">
+                   xmlns="http://www.w3.org/2000/svg" 
+                   fill="none" 
+                   viewBox="0 0 24 24" 
+                   stroke="currentColor" 
+                   aria-hidden="true">
                 <path stroke-linecap="round" 
                       stroke-linejoin="round" 
                       stroke-width="2" 
@@ -181,16 +178,16 @@
           <button type="button" 
                   id="confirmCheckoutYes" 
                   class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 
-                        bg-[var(--accent-yellow)] text-base font-medium text-[var(--title)] 
-                        hover:bg-[var(--accent-yellow-dark)] sm:ml-3 sm:w-auto sm:text-sm">
+                         bg-[var(--accent-yellow)] text-base font-medium text-[var(--title)] 
+                         hover:bg-[var(--accent-yellow-dark)] sm:ml-3 sm:w-auto sm:text-sm">
             Ya, Checkout
           </button>
 
           <button type="button" 
                   data-modal-hide="checkoutConfirmModal" 
                   class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 
-                        bg-white text-base font-medium text-gray-700 hover:bg-gray-50 
-                        sm:mt-0 sm:w-auto sm:text-sm">
+                         bg-white text-base font-medium text-gray-700 hover:bg-gray-50 
+                         sm:mt-0 sm:w-auto sm:text-sm">
             Batal
           </button>
 
@@ -200,17 +197,17 @@
   </div>
 
 
-  <div id="checkoutModal" 
-      class="hidden fixed z-50 inset-0 overflow-y-auto" 
-      aria-labelledby="checkoutModalLabel" 
-      role="dialog" 
-      aria-modal="true">
+  <div id="deleteConfirmModal" 
+       class="hidden fixed z-50 inset-0 overflow-y-auto" 
+       aria-labelledby="delete-modal-title" 
+       role="dialog" 
+       aria-modal="true">
 
     <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
 
       <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
-          aria-hidden="true" 
-          data-modal-hide="checkoutModal">
+           aria-hidden="true" 
+           data-modal-hide="deleteConfirmModal">
       </div>
 
       <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
@@ -222,20 +219,85 @@
           <div class="sm:flex sm:items-start">
 
             <div class="mx-auto flex-shrink-0 flex items-center justify-center 
+                        h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-red-600" 
+                   xmlns="http://www.w3.org/2000/svg" 
+                   fill="none" 
+                   viewBox="0 0 24 24" 
+                   stroke="currentColor" 
+                   aria-hidden="true">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="delete-modal-title">
+                Konfirmasi Hapus
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500">
+                  Apakah Anda yakin untuk menghapus produk ini dari keranjang?
+                </p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+
+          <button type="button" 
+                  id="confirmDeleteYes" 
+                  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 
+                         bg-red-600 text-base font-medium text-white 
+                         hover:bg-red-700 sm:ml-3 sm:w-auto sm:text-sm">
+            Ya, Hapus
+          </button>
+
+          <button type="button" 
+                  data-modal-hide="deleteConfirmModal" 
+                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 
+                         bg-white text-base font-medium text-gray-700 hover:bg-gray-50 
+                         sm:mt-0 sm:w-auto sm:text-sm">
+            Batal
+          </button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="checkoutModal" 
+       class="hidden fixed z-50 inset-0 overflow-y-auto" 
+       aria-labelledby="checkoutModalLabel" 
+       role="dialog" 
+       aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" 
+           aria-hidden="true" 
+           data-modal-hide="checkoutModal">
+      </div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all 
+                  sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center 
                         h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
               <svg class="h-6 w-6 text-green-600" 
-                  xmlns="http://www.w3.org/2000/svg" 
-                  fill="none" 
-                  viewBox="0 0 24 24" 
-                  stroke="currentColor" 
-                  aria-hidden="true">
+                   xmlns="http://www.w3.org/2000/svg" 
+                   fill="none" 
+                   viewBox="0 0 24 24" 
+                   stroke="currentColor" 
+                   aria-hidden="true">
                 <path stroke-linecap="round" 
                       stroke-linejoin="round" 
                       stroke-width="2" 
                       d="M5 13l4 4L19 7" />
               </svg>
             </div>
-
             <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
               <h3 class="text-lg leading-6 font-medium text-gray-900" id="checkoutModalLabel">
                 Checkout Berhasil
@@ -246,27 +308,22 @@
                 </p>
               </div>
             </div>
-
           </div>
         </div>
-
         <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-
           <a href="{% url 'store:product_list' %}"
-            class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 
+             class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 
                     bg-[var(--accent-yellow)] text-base font-medium text-[var(--title)] 
                     hover:bg-[var(--accent-yellow-dark)] focus:outline-none sm:ml-3 sm:w-auto sm:text-sm">
             Kembali Belanja
           </a>
-
           <button type="button" 
                   data-modal-hide="checkoutModal" 
                   class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 
-                        bg-white text-base font-medium text-gray-700 hover:bg-gray-50 
-                        focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
+                         bg-white text-base font-medium text-gray-700 hover:bg-gray-50 
+                         focus:outline-none sm:mt-0 sm:w-auto sm:text-sm">
             Tutup
           </button>
-
         </div>
       </div>
     </div>
@@ -345,41 +402,66 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
+  // === Konfirmasi Delete Item ===
+  const deleteConfirmModalEl = document.getElementById('deleteConfirmModal');
+  const confirmDeleteYesBtn = document.getElementById('confirmDeleteYes');
+  function showDeleteConfirmModal() { deleteConfirmModalEl.classList.remove('hidden'); }
+  function hideDeleteConfirmModal() { deleteConfirmModalEl.classList.add('hidden'); }
+  
+  deleteConfirmModalEl.querySelectorAll('[data-modal-hide]').forEach(btn => btn.addEventListener('click', hideDeleteConfirmModal));
+  deleteConfirmModalEl.addEventListener('click', (e) => {
+    if (e.target === deleteConfirmModalEl.querySelector('.fixed.inset-0')) {
+      hideDeleteConfirmModal();
+    }
+  });
+
+  confirmDeleteYesBtn.addEventListener('click', async function() {
+    const pk = this.dataset.pk;
+    if (!pk) return;
+
+    hideDeleteConfirmModal();
+
+    try {
+      const response = await fetch(`/store/cart/remove/${pk}/`, {
+        method: 'POST',
+        headers: { 'X-CSRFToken': csrftoken, 'X-Requested-With': 'XMLHttpRequest' }
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        if (data.success) {
+          document.getElementById(`cart-item-${pk}`).remove();
+          document.getElementById('grand-total').innerText = data.grand_total_formatted;
+          showToast('Item berhasil dihapus', 'success');
+
+          if (document.querySelectorAll('tbody tr').length === 0) {
+            document.getElementById('cart-container').innerHTML = `
+              <div id="empty-cart-message" class="p-6 text-center">
+                <p class="text-[var(--ink-weak)] mb-4">Keranjang kosong.</p>
+                <a href="{% url 'store:product_list' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-[var(--title)] bg-[var(--accent-yellow)] hover:bg-[var(--accent-yellow-dark)]">
+                  Mulai Belanja
+                </a>
+              </div>
+            `;
+          }
+        } else { showToast(data.error || 'Gagal menghapus item.', 'danger'); }
+      } else { showToast('Error: Server tidak merespon.', 'danger'); }
+    } catch (error) { console.error('Error remove item:', error); showToast('Error koneksi.', 'danger'); }
+
+    this.dataset.pk = '';
+  });
+
 
   // === AJAX REMOVE ITEM ===
   document.querySelectorAll('.btn-remove-item').forEach(button => {
-    button.addEventListener('click', async function() {
+    button.addEventListener('click', function() {
       const pk = this.dataset.pk;
-      if (!confirm('Yakin ingin menghapus item ini?')) return;
 
-      try {
-        const response = await fetch(`/store/cart/remove/${pk}/`, {
-          method: 'POST',
-          headers: { 'X-CSRFToken': csrftoken, 'X-Requested-With': 'XMLHttpRequest' }
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          if (data.success) {
-            document.getElementById(`cart-item-${pk}`).remove();
-            document.getElementById('grand-total').innerText = data.grand_total_formatted;
-            showToast('Item berhasil dihapus', 'success');
-
-            if (document.querySelectorAll('tbody tr').length === 0) {
-              document.getElementById('cart-container').innerHTML = `
-                <div id="empty-cart-message" class="p-6 text-center">
-                  <p class="text-gray-600 mb-4">Keranjang kosong.</p>
-                  <a href="{% url 'store:product_list' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
-                    Mulai Belanja
-                  </a>
-                </div>
-              `;
-            }
-          } else { showToast(data.error || 'Gagal menghapus item.', 'danger'); }
-        } else { showToast('Error: Server tidak merespon.', 'danger'); }
-      } catch (error) { console.error('Error remove item:', error); showToast('Error koneksi.', 'danger'); }
+      confirmDeleteYesBtn.dataset.pk = pk;
+      showDeleteConfirmModal();
     });
   });
+
 
   // === AJAX UPDATE KUANTITAS ===
   document.querySelectorAll('.input-quantity').forEach(input => {
@@ -437,8 +519,8 @@ document.addEventListener('DOMContentLoaded', () => {
               showCheckoutSuccessModal();
               document.getElementById('cart-container').innerHTML = `
                 <div id="empty-cart-message" class="p-6 text-center">
-                  <p class="text-gray-600 mb-4">Keranjang kosong.</p>
-                  <a href="{% url 'store:product_list' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700">
+                  <p class="text-[var(--ink-weak)] mb-4">Keranjang kosong.</p>
+                  <a href="{% url 'store:product_list' %}" class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-[var(--title)] bg-[var(--accent-yellow)] hover:bg-[var(--accent-yellow-dark)]">
                     Mulai Belanja
                   </a>
                 </div>

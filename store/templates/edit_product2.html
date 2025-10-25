@@ -1,0 +1,71 @@
+<div class="w-full bg-[var(--card-bg)] rounded-2xl p-8">
+  <h1 class="text-3xl font-bold text-center text-[var(--title)] mb-2">Edit Produk</h1>
+  <p class="text-center text-[var(--ink-weak)] mb-6">
+    {{ product.name }} (ID: {{ product.pk }})
+  </p>
+
+  <form id="editForm" method="post" class="space-y-5">
+    {% csrf_token %}
+    {% for field in form %}
+      <div>
+        <label for="{{ field.id_for_label }}" class="block text-sm font-semibold text-[var(--ink-weak)] mb-1">
+          {{ field.label }}
+        </label>
+
+        {% if field.field.widget_type == 'select' %}
+          <select
+            name="{{ field.name }}"
+            id="{{ field.id_for_label }}"
+            class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3 bg-white"
+          >
+            {% for value, text in field.field.choices %}
+              <option
+                value="{{ value }}"
+                {% if field.value|stringformat:"s" == value|stringformat:"s" %}selected{% endif %}
+              >
+                {{ text }}
+              </option>
+            {% endfor %}
+          </select>
+        {% else %}
+          <input
+            type="{{ field.field.widget.input_type|default:'text' }}"
+            name="{{ field.name }}"
+            value="{{ field.value|default:'' }}"
+            id="{{ field.id_for_label }}"
+            class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3"
+            {% if field.field.widget.input_type == 'number' %}step="any"{% endif %}
+          >
+        {% endif %}
+
+        {% if field.errors %}
+          <div class="mt-1 text-sm text-red-600">
+            {% for error in field.errors %}
+              <p>{{ error }}</p>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <div class="flex justify-end space-x-3 pt-4">
+      <button
+        type="button"
+        id="cancelEditButton"
+        class="px-5 py-2 rounded-lg border border-[var(--card-brd)] text-[var(--ink-weak)] bg-[var(--card-bg)] hover:bg-gray-100 transition"
+      >
+        Batal
+      </button>
+
+      <button
+        type="submit"
+        id="saveButton"
+        class="px-5 py-2 rounded-lg text-[var(--title)] font-semibold bg-[var(--accent-yellow)] hover:bg-[var(--accent-yellow-dark)] shadow transition"
+      >
+        Simpan Perubahan
+      </button>
+    </div>
+  </form>
+
+  <div id="messageBox" class="hidden mt-4 text-center p-3 rounded-lg font-semibold"></div>
+</div>

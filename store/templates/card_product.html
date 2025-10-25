@@ -1,5 +1,5 @@
 {% load humanize %}
-<div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col">
+<div class="bg-white rounded-lg shadow-sm overflow-hidden flex flex-col" data-product-card="true">
 
   <img src="{{ product.image_url|default:'https://via.placeholder.com/300x180.png?text=No+Image' }}"
        alt="{{ product.name }}"
@@ -36,6 +36,19 @@
         {{ product.units_sold|default:"" }}
       </span>
     </div>
+
+    <!-- ========== VIEW PRODUCT BUTTON (UNTUK USER LOGIN DAN ADMIN) ========== -->
+    {% if user.is_authenticated or request.session.is_admin %}
+      <button type="button" 
+              data-product-id="{{ product.pk }}"
+              class="btn-view-product w-full mb-2 py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500 flex items-center justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1.5" viewBox="0 0 20 20" fill="currentColor">
+          <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
+          <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd" />
+        </svg>
+        View Product
+      </button>
+    {% endif %}
 
     <div class="mt-auto">
       {% if user.is_authenticated or request.session.is_admin %}
