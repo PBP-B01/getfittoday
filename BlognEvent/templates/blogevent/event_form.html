@@ -1,0 +1,381 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if event %}Edit{% else %}Create{% endif %} Event - GetFit.Today</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind = {config: {theme: {extend: {fontFamily: {sans: ['Poppins','ui-sans-serif','system-ui','sans-serif']}}}}}
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAkIG-OMzErXLto5j4iWW8NBn2Gtg0PAis"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <style>
+        /* === GLOBAL COLORS === */
+        :root {
+            --primary: #0E5A64;
+            --primary-dark: #07434B;
+            --on-primary: #FFFFFF;
+            --headline: #1B2B5A;
+            --gradient-top: #EAF2FF;
+            --gradient-bottom: #BFD6F2;
+            --card-bg: #FFFFFF;
+            --card-border: #C8DDF6;
+            --card-border-thick: #DDE7FF;
+            --muted-text: #6B7A99;
+            --accent-yellow: #FFC107;
+            --accent-yellow-dark: #E0A106;
+            --panel-bg: #3A5F9E;
+            --panel-text: #EAF2FF;
+        }
+
+        body {
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(ellipse 1200px 600px at 15% 6%, rgba(255,255,255,0.6), transparent 70%),
+                        linear-gradient(180deg, var(--gradient-top), var(--gradient-bottom));
+        }
+
+        .form-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--on-primary);
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .page-title {
+            color: var(--headline);
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 8px;
+            border: 3px solid var(--card-border-thick);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--headline);
+        }
+
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--card-border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            background: #F8FBFF;
+            color: #0B2E55;
+        }
+
+        .form-group input:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+            box-shadow: 0 0 0 3px #9EC5FF80;
+        }
+
+        .section-title {
+            color: var(--primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        #locationsList {
+            margin-top: 20px;
+        }
+
+        .locations-header h4 {
+            color: var(--headline);
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .locations-header p {
+            color: var(--muted-text);
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid var(--card-border);
+            border-radius: 8px;
+            font-size: 14px;
+            transition: all 0.2s;
+            background-color: #F8FBFF;
+        }
+
+        #searchInput:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+            box-shadow: 0 0 0 3px #9EC5FF80;
+        }
+
+        .locations-scroll {
+            max-height: 350px;
+            overflow-y: auto;
+            border: 2px solid var(--card-border);
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #F9FBFF;
+            margin-top: 15px;
+        }
+
+        .locations-scroll::-webkit-scrollbar-thumb {
+            background: var(--accent-yellow);
+            border-radius: 8px;
+        }
+
+        .locations-scroll::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-yellow-dark);
+        }
+
+        .location-item {
+            padding: 12px;
+            margin: 8px 0;
+            background-color: white;
+            border-radius: 6px;
+            border: 2px solid var(--card-border);
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .location-item:hover {
+            background-color: #FFF9E6;
+            border-color: var(--accent-yellow);
+        }
+
+        .location-item input[type="checkbox"] {
+            margin-right: 12px;
+            cursor: pointer;
+            width: 18px;
+            height: 18px;
+            margin-top: 2px;
+            flex-shrink: 0;
+            accent-color: var(--accent-yellow);
+        }
+
+        .location-name {
+            font-weight: 600;
+            color: var(--headline);
+            margin-bottom: 4px;
+        }
+
+        .location-address {
+            font-size: 0.9em;
+            color: var(--muted-text);
+        }
+
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button[type="submit"] {
+            background-color: var(--accent-yellow);
+            color: #1B2B5A;
+            padding: 12px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        button[type="submit"]:hover {
+            background-color: var(--accent-yellow-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        .cancel-btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: #E74C3C;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .cancel-btn:hover {
+            background-color: #C0392B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <a href="{% url 'BlognEvent:blogevent_page' %}" class="back-btn">← Back</a>
+
+        <h1 class="page-title">{% if event %}Edit Event{% else %}Create New Event{% endif %}</h1>
+
+        <div class="form-card">
+            <form method="POST" action="{% if event %}{% url 'BlognEvent:edit_event' event.id %}{% else %}{% url 'BlognEvent:create_event' %}{% endif %}" id="eventForm">
+                {% csrf_token %}
+                <div class="form-group"><label>Name:</label>{{ form.name }}</div>
+                <div class="form-group"><label>Image URL:</label>{{ form.image }}</div>
+                <div class="form-group"><label>Description:</label>{{ form.description }}</div>
+                <div class="form-group"><label>Starting Date:</label>{{ form.starting_date }}</div>
+                <div class="form-group"><label>Ending Date:</label>{{ form.ending_date }}</div>
+
+                <h3 class="section-title">Select Event Locations</h3>
+                <div id="map"></div>
+
+                <div id="locationsList">
+                    <div class="locations-header">
+                        <h4>Available Fitness Locations:</h4>
+                        <p>Select one or more locations for your event (gyms, sports facilities, stadiums, parks)</p>
+                        <input type="text" id="searchInput" placeholder="Search locations by name or address...">
+                    </div>
+
+                    <div class="locations-scroll">
+                        {% for location in locations %}
+                        <div class="location-item">
+                            <input type="checkbox" name="locations" value="{{ location.place_id }}" id="loc_{{ location.place_id }}">
+                            <label for="loc_{{ location.place_id }}" class="location-item-content">
+                                <div class="location-name">{{ location.name }}</div>
+                                <div class="location-address">{{ location.address }}</div>
+                            </label>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="button-group">
+                    <button type="submit">{% if event %}Update Event{% else %}Create Event{% endif %}</button>
+                    <a href="{% url 'BlognEvent:blogevent_page' %}" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        let map;
+        let markers = {};
+        const locations = JSON.parse('{{ locations_json|escapejs }}');
+        const selectedLocations = JSON.parse('{{ selected_locations|escapejs }}');
+
+        async function initMap() {
+            const { Map } = await google.maps.importLibrary("maps");
+            const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+            let centerLat = -6.2088;
+            let centerLng = 106.8456;
+
+            if (locations.length > 0) {
+                const valid = locations.filter(loc => loc.latitude && loc.longitude);
+                if (valid.length > 0) {
+                    centerLat = valid.reduce((s, l) => s + parseFloat(l.latitude), 0) / valid.length;
+                    centerLng = valid.reduce((s, l) => s + parseFloat(l.longitude), 0) / valid.length;
+                }
+            }
+
+            map = new Map(document.getElementById('map'), {
+                zoom: 13,
+                center: { lat: centerLat, lng: centerLng },
+                mapId: "event_map",
+            });
+
+            locations.forEach((loc) => {
+                const lat = parseFloat(loc.latitude);
+                const lng = parseFloat(loc.longitude);
+                if (isNaN(lat) || isNaN(lng)) return;
+
+                const marker = new AdvancedMarkerElement({ position: { lat, lng }, map, title: loc.name });
+                marker.addListener('click', () => {
+                    const box = document.getElementById('loc_' + loc.id);
+                    if (box) {
+                        box.checked = !box.checked;
+                        box.parentElement.style.backgroundColor = box.checked ? '#FFF9E6' : '';
+                    }
+                });
+                markers[loc.id] = marker;
+            });
+        }
+
+        document.querySelectorAll('.location-item').forEach(item => {
+            const box = item.querySelector('input[type="checkbox"]');
+            if (selectedLocations.includes(box.value)) {
+                box.checked = true;
+                item.style.backgroundColor = '#FFF9E6';
+            }
+            item.addEventListener('click', e => {
+                if (e.target.tagName !== 'INPUT' && e.target.tagName !== 'LABEL') {
+                    box.checked = !box.checked;
+                    item.style.backgroundColor = box.checked ? '#FFF9E6' : '';
+                }
+            });
+            box.addEventListener('change', () => item.style.backgroundColor = box.checked ? '#FFF9E6' : '');
+        });
+
+        const searchInput = document.getElementById('searchInput');
+        const locationItems = document.querySelectorAll('.location-item');
+        searchInput.addEventListener('input', function() {
+            const term = this.value.toLowerCase().trim();
+            locationItems.forEach(item => {
+                const name = item.querySelector('.location-name').textContent.toLowerCase();
+                const address = item.querySelector('.location-address').textContent.toLowerCase();
+                item.style.display = (name.includes(term) || address.includes(term)) ? 'flex' : 'none';
+            });
+        });
+
+        window.onload = initMap;
+    </script>
+</body>
+</html>
