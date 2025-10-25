@@ -55,41 +55,6 @@
         background: var(--card-bg);
     }
 
-    .content-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0;
-    }
-
-    .section-column {
-        padding: 20px 30px;
-        max-height: 70vh;
-        overflow-y: auto;
-        border-right: 1px solid var(--card-border);
-    }
-
-    .section-column:last-child {
-        border-right: none;
-    }
-
-    .section-column::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    .section-column::-webkit-scrollbar-track {
-        background: var(--gradient-top);
-        border-radius: 4px;
-    }
-
-    .section-column::-webkit-scrollbar-thumb {
-        background: var(--primary);
-        border-radius: 4px;
-    }
-
-    .section-column::-webkit-scrollbar-thumb:hover {
-        background: var(--primary-dark);
-    }
-
     .page-header {
         background-color: var(--primary);
         color: var(--on-primary);
@@ -126,19 +91,141 @@
         transform: translateY(-2px);
     }
 
-    .section-header {
-        color: var(--primary);
-        border-left: 5px solid var(--accent-yellow);
-        padding-left: 12px;
-        margin: 0 0 20px 0;
-        font-size: 1.75rem;
+    /* Tab Slider */
+    .tab-container {
+        background: var(--card-bg);
+        padding: 30px 40px 0;
+        position: relative;
+    }
+
+    .search-container {
+        max-width: 600px;
+        margin: 0 auto 25px;
+        position: relative;
+    }
+
+    .search-wrapper {
+        position: relative;
+        margin-bottom: 15px;
+    }
+
+    .filter-checkbox-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 10px;
+    }
+
+    .filter-checkbox-container input[type="checkbox"] {
+        width: 18px;
+        height: 18px;
+        cursor: pointer;
+        accent-color: var(--primary);
+    }
+
+    .filter-checkbox-container label {
+        color: var(--headline);
+        font-size: 0.95rem;
+        cursor: pointer;
+        user-select: none;
+    }
+
+    .search-input {
+        width: 100%;
+        padding: 14px 50px 14px 20px;
+        border: 2px solid var(--card-border);
+        border-radius: 12px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        font-family: 'Poppins', sans-serif;
+        background-color: var(--card-bg);
+        color: var(--headline);
+    }
+    
+    .search-input::placeholder {
+        color: var(--muted-text);
+        opacity: 0.7;
+    }
+
+    .search-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(14, 90, 100, 0.1);
+    }
+
+    .search-icon {
+        position: absolute;
+        right: 18px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted-text);
+        pointer-events: none;
+    }
+
+    .tab-slider {
+        display: flex;
+        justify-content: center;
+        gap: 0;
+        position: relative;
+        background: #F0F4F8;
+        border-radius: 12px;
+        padding: 6px;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+
+    .tab-button {
+        flex: 1;
+        padding: 12px 24px;
+        background: transparent;
+        border: none;
+        font-size: 1.1rem;
         font-weight: 600;
+        color: var(--muted-text);
+        cursor: pointer;
+        transition: color 0.3s ease;
+        position: relative;
+        z-index: 2;
+    }
+
+    .tab-button.active {
+        color: var(--headline);
+    }
+
+    .tab-indicator {
+        position: absolute;
+        height: calc(100% - 12px);
+        background: var(--card-bg);
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(14, 90, 100, 0.15);
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        z-index: 1;
+        top: 6px;
+    }
+
+    .content-container {
+        padding: 30px 40px 40px;
+    }
+
+    .tab-content {
+        display: none;
+    }
+
+    .tab-content.active {
+        display: block;
+        animation: fadeIn 0.3s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
     }
 
     .card-grid {
         display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-        gap: 20px;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 24px;
         margin: 0;
     }
 
@@ -146,7 +233,7 @@
         background: var(--card-bg);
         border-radius: 16px;
         border: 2px solid var(--card-border);
-        padding: 20px;
+        padding: 24px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
         transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
         cursor: pointer;
@@ -159,33 +246,33 @@
     }
 
     .card-title {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
         font-weight: 600;
         color: var(--headline);
-        margin-bottom: 8px;
+        margin-bottom: 10px;
     }
 
     .card-dates {
         color: var(--muted-text);
         font-size: 0.9rem;
-        margin-bottom: 10px;
+        margin-bottom: 12px;
     }
 
     .card-description {
         color: var(--muted-text);
         font-size: 0.95rem;
-        line-height: 1.5;
+        line-height: 1.6;
     }
 
     .card-actions {
-        margin-top: 15px;
+        margin-top: 16px;
         display: flex;
         gap: 10px;
         flex-wrap: wrap;
     }
 
     .edit-btn, .delete-btn {
-        padding: 8px 14px;
+        padding: 8px 16px;
         border-radius: 8px;
         font-size: 0.875rem;
         font-weight: 600;
@@ -214,85 +301,105 @@
 
     .empty-state {
         text-align: center;
-        padding: 40px 20px;
+        padding: 60px 20px;
         color: var(--muted-text);
-        font-style: italic;
+        font-size: 1.1rem;
+    }
+
+    .no-results {
+        text-align: center;
+        padding: 60px 20px;
+        color: var(--muted-text);
+        font-size: 1.1rem;
+    }
+
+    .no-results-icon {
+        font-size: 3rem;
+        margin-bottom: 10px;
     }
 
     @media (max-width: 768px) {
+        .tab-container {
+            padding: 20px 20px 0;
+        }
+
         .content-container {
+            padding: 20px;
+        }
+
+        .card-grid {
             grid-template-columns: 1fr;
         }
 
-        .section-column {
-            border-right: none;
-            border-bottom: 1px solid var(--card-border);
+        .tab-slider {
+            max-width: 100%;
         }
 
-        .section-column:last-child {
-            border-bottom: none;
+        .tab-button {
+            font-size: 1rem;
+            padding: 10px 16px;
         }
     }
 
-/* === Modal === */
-#detailModal {
-    display: none;
-    position: fixed;
-    top: 0; left: 0;
-    width: 100%; height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-}
+    /* === Modal === */
+    #detailModal {
+        display: none;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+    }
 
-#detailModal .modal-content {
-    background: var(--card-bg);
-    border-radius: 20px;
-    padding: 30px;
-    max-width: 650px;
-    width: 90%;
-    position: relative;
-    box-shadow: 0 12px 30px rgba(14, 90, 100, 0.25);
-    color: var(--headline);
-    animation: fadeIn 0.3s ease-in-out;
-}
+    #detailModal .modal-content {
+        background: var(--card-bg);
+        border-radius: 20px;
+        padding: 30px;
+        max-width: 650px;
+        width: 90%;
+        position: relative;
+        box-shadow: 0 12px 30px rgba(14, 90, 100, 0.25);
+        color: var(--headline);
+        animation: modalFadeIn 0.3s ease-in-out;
+    }
 
-#detailModal .modal-header {
-    background: var(--primary);
-    color: var(--on-primary);
-    border-radius: 16px 16px 0 0;
-    padding: 16px 20px;
-    margin: -30px -30px 20px -30px;
-}
+    @keyframes modalFadeIn {
+        from { opacity: 0; transform: scale(0.95); }
+        to { opacity: 1; transform: scale(1); }
+    }
 
-#detailModal .modal-header h2 {
-    margin: 0;
-    font-size: 1.5rem;
-}
+    #detailModal .modal-header {
+        background: var(--primary);
+        color: var(--on-primary);
+        border-radius: 16px 16px 0 0;
+        padding: 16px 20px;
+        margin: -30px -30px 20px -30px;
+    }
 
-#detailModal button {
-    position: absolute;
-    top: 10px; right: 10px;
-    background: var(--accent-yellow);
-    color: var(--headline);
-    border: none;
-    border-radius: 50%;
-    font-size: 18px;
-    cursor: pointer;
-    width: 30px; height: 30px;
-    font-weight: bold;
-    transition: 0.2s;
-}
+    #detailModal .modal-header h2 {
+        margin: 0;
+        font-size: 1.5rem;
+    }
 
-#detailModal button:hover {
-    background: var(--accent-yellow-dark);
-}
+    #detailModal button {
+        position: absolute;
+        top: 10px; right: 10px;
+        background: var(--accent-yellow);
+        color: var(--headline);
+        border: none;
+        border-radius: 50%;
+        font-size: 18px;
+        cursor: pointer;
+        width: 30px; height: 30px;
+        font-weight: bold;
+        transition: 0.2s;
+    }
 
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.95); }
-    to { opacity: 1; transform: scale(1); }
-}
+    #detailModal button:hover {
+        background: var(--accent-yellow-dark);
+    }
 </style>
 {% endblock %}
 
@@ -306,16 +413,54 @@
         </div>
     </div>
 
+    <div class="tab-container">
+        <div class="search-container">
+            <div class="search-wrapper">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search-input" 
+                    placeholder="Search events and blogs..."
+                    onkeyup="performSearch()"
+                >
+                <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+            </div>
+            {% if user.is_authenticated %}
+            <div class="filter-checkbox-container">
+                <input 
+                    type="checkbox" 
+                    id="myContentFilter" 
+                    onchange="performSearch()"
+                >
+                <label for="myContentFilter">Show only my content</label>
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="tab-slider">
+            <button class="tab-button active" onclick="switchTab('events', 0)">Events</button>
+            <button class="tab-button" onclick="switchTab('blogs', 1)">Blogs</button>
+            <div class="tab-indicator" id="tabIndicator"></div>
+        </div>
+    </div>
+
     <div class="content-container">
-        <div class="section-column">
-            <h2 class="section-header">Events</h2>
-            {% if events %}
-            <div class="card-grid">
+        <!-- Events Tab -->
+        <div id="events-content" class="tab-content active">
+            <div id="events-grid" class="card-grid">
+                {% if events %}
                 {% for event in events %}
-                <div class="event-card" onclick="showEventDetails('{{ event.id }}')">
+                <div class="event-card" 
+                     data-search-title="{{ event.name|lower }}" 
+                     data-search-desc="{{ event.description|lower }}" 
+                     data-owner="{{ event.user.username }}"
+                     onclick="showEventDetails('{{ event.id }}')">
                     <div class="card-title">{{ event.name }}</div>
-                    <div class="card-dates">📅 {{ event.starting_date|date:"M d, Y" }} — {{ event.ending_date|date:"M d, Y" }}</div>
-                    <div class="card-description">{{ event.description|slice:":15" }}{% if event.description|length > 15 %}...{% endif %}</div>
+                    <div class="card-dates">📅 {{ event.starting_date|date:"M d, Y" }} – {{ event.ending_date|date:"M d, Y" }}</div>
+                    <div class="card-description">{{ event.description|slice:":100" }}{% if event.description|length > 100 %}...{% endif %}</div>
                     
                     {% if is_admin or event.user == request.user %}
                     <div class="card-actions">
@@ -325,20 +470,29 @@
                     {% endif %}
                 </div>
                 {% endfor %}
+                {% else %}
+                <div class="empty-state">No events yet. Create one to get started!</div>
+                {% endif %}
             </div>
-            {% else %}
-            <div class="empty-state">No events yet. Create one to get started!</div>
-            {% endif %}
+            <div id="events-no-results" class="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <p>No events found matching your search.</p>
+            </div>
         </div>
 
-        <div class="section-column">
-            <h2 class="section-header">Blogs</h2>
-            {% if blogs %}
-            <div class="card-grid">
+        <!-- Blogs Tab -->
+        <div id="blogs-content" class="tab-content">
+            <div id="blogs-grid" class="card-grid">
+                {% if blogs %}
                 {% for blog in blogs %}
-                <div class="blog-card" onclick="showBlogDetails('{{ blog.id }}')">
+                <div class="blog-card" 
+                     data-search-title="{{ blog.title|lower }}" 
+                     data-search-body="{{ blog.body|lower }}" 
+                     data-search-author="{{ blog.author.username|lower }}"
+                     data-owner="{{ blog.author.username }}"
+                     onclick="showBlogDetails('{{ blog.id }}')">
                     <div class="card-title">{{ blog.title }}</div>
-                    <div class="card-description">{{ blog.body|slice:":15" }}{% if blog.body|length > 15 %}...{% endif %}</div>
+                    <div class="card-description">{{ blog.body|slice:":150" }}{% if blog.body|length > 150 %}...{% endif %}</div>
 
                     {% if is_admin or blog.author == request.user %}
                     <div class="card-actions">
@@ -348,10 +502,14 @@
                     {% endif %}
                 </div>
                 {% endfor %}
+                {% else %}
+                <div class="empty-state">No blogs yet. Write one to share your thoughts!</div>
+                {% endif %}
             </div>
-            {% else %}
-            <div class="empty-state">No blogs yet. Write one to share your thoughts!</div>
-            {% endif %}
+            <div id="blogs-no-results" class="no-results" style="display: none;">
+                <div class="no-results-icon">🔍</div>
+                <p>No blogs found matching your search.</p>
+            </div>
         </div>
     </div>
 </div>
@@ -369,10 +527,115 @@
 
 {% block extra_js %}
 <script>
-function confirmDelete(type, id) {
-    // Check if the function is called, to be sure
-    console.log("Confirm delete called for", type, id);
+// Get current user's username from Django template
+const currentUsername = '{{ user.username }}';
+
+// Search functionality
+function performSearch() {
+    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    const myContentOnly = document.getElementById('myContentFilter') ? document.getElementById('myContentFilter').checked : false;
+    const activeTab = document.querySelector('.tab-content.active').id;
     
+    if (activeTab === 'events-content') {
+        searchCards('.event-card', searchTerm, 'events', myContentOnly);
+    } else {
+        searchCards('.blog-card', searchTerm, 'blogs', myContentOnly);
+    }
+}
+
+function searchCards(selector, searchTerm, type, myContentOnly) {
+    const cards = document.querySelectorAll(selector);
+    const grid = document.getElementById(`${type}-grid`);
+    const noResults = document.getElementById(`${type}-no-results`);
+    let visibleCount = 0;
+    
+    cards.forEach(card => {
+        // Skip empty state messages
+        if (card.classList.contains('empty-state')) {
+            return;
+        }
+        
+        const title = card.getAttribute('data-search-title') || '';
+        const desc = card.getAttribute('data-search-desc') || '';
+        const body = card.getAttribute('data-search-body') || '';
+        const author = card.getAttribute('data-search-author') || '';
+        const owner = card.getAttribute('data-owner') || '';
+        
+        const searchableText = `${title} ${desc} ${body} ${author}`;
+        
+        // Check if text matches search term
+        const matchesSearch = searchTerm === '' || searchableText.includes(searchTerm);
+        
+        // Check if belongs to current user (if filter is enabled)
+        const matchesOwner = !myContentOnly || owner === currentUsername;
+        
+        if (matchesSearch && matchesOwner) {
+            card.style.display = 'block';
+            visibleCount++;
+        } else {
+            card.style.display = 'none';
+        }
+    });
+    
+    // Show/hide no results message
+    if (visibleCount === 0) {
+        grid.style.display = 'none';
+        noResults.style.display = 'block';
+    } else {
+        grid.style.display = 'grid';
+        noResults.style.display = 'none';
+    }
+}
+
+// Tab switching functionality
+function switchTab(tabName, index) {
+    // Update active tab button
+    const buttons = document.querySelectorAll('.tab-button');
+    buttons.forEach(btn => btn.classList.remove('active'));
+    buttons[index].classList.add('active');
+
+    // Update tab indicator position
+    const indicator = document.getElementById('tabIndicator');
+    const button = buttons[index];
+    const slider = document.querySelector('.tab-slider');
+    const sliderRect = slider.getBoundingClientRect();
+    const buttonRect = button.getBoundingClientRect();
+    
+    const left = buttonRect.left - sliderRect.left;
+    const width = buttonRect.width;
+    
+    indicator.style.left = left + 'px';
+    indicator.style.width = width + 'px';
+
+    // Show/hide content
+    document.querySelectorAll('.tab-content').forEach(content => {
+        content.classList.remove('active');
+    });
+    document.getElementById(`${tabName}-content`).classList.add('active');
+    
+    // Re-apply search when switching tabs
+    performSearch();
+}
+
+// Initialize tab indicator on page load
+window.addEventListener('DOMContentLoaded', function() {
+    const firstButton = document.querySelector('.tab-button.active');
+    const indicator = document.getElementById('tabIndicator');
+    const slider = document.querySelector('.tab-slider');
+    
+    if (firstButton && indicator && slider) {
+        const sliderRect = slider.getBoundingClientRect();
+        const buttonRect = firstButton.getBoundingClientRect();
+        
+        const left = buttonRect.left - sliderRect.left;
+        const width = buttonRect.width;
+        
+        indicator.style.left = left + 'px';
+        indicator.style.width = width + 'px';
+    }
+});
+
+function confirmDelete(type, id) {
     if (confirm(`Are you sure you want to delete this ${type}?`)) {
         fetch(`/blognevent/${type}/${id}/delete/`, {
             method: 'POST',
@@ -381,7 +644,6 @@ function confirmDelete(type, id) {
             if (res.ok) {
                 location.reload();
             } else {
-                // Try to get a more specific error message from the response
                 res.json().then(data => {
                     console.error('Delete failed:', data);
                     alert(`Delete failed: ${data.error || 'Server error'}`);
@@ -395,7 +657,6 @@ function confirmDelete(type, id) {
         });
     }
 }
-
 
 function closeModal() {
     document.getElementById('detailModal').style.display = 'none';
@@ -411,14 +672,14 @@ function showEventDetails(id) {
         .then(data => {
             const html = `
                 <h2>${data.name}</h2>
-                <p><strong>📅 ${data.starting_date}</strong> — ${data.ending_date}</p>
+                <p><strong>📅 ${data.starting_date}</strong> – ${data.ending_date}</p>
                 <p><em>By ${data.user}</em></p>
                 ${data.image ? `<img src="${data.image}" style="max-width:100%; border-radius:10px; margin:10px 0;">` : ''}
                 <p>${data.description}</p>
                 <p><strong>Locations:</strong> ${data.locations.join(', ') || '—'}</p>
             `;
             document.getElementById('modalContent').innerHTML = html;
-            document.getElementById('modalTitle').innerText = 'Event Details'; // Set title
+            document.getElementById('modalTitle').innerText = 'Event Details';
             document.getElementById('detailModal').style.display = 'flex';
         })
         .catch(err => console.error('Error fetching event:', err));
@@ -438,7 +699,7 @@ function showBlogDetails(id) {
                 <p>${data.body}</p>
             `;
             document.getElementById('modalContent').innerHTML = html;
-            document.getElementById('modalTitle').innerText = 'Blog Details'; // Set title
+            document.getElementById('modalTitle').innerText = 'Blog Details';
             document.getElementById('detailModal').style.display = 'flex';
         })
         .catch(err => console.error('Error fetching blog:', err));
