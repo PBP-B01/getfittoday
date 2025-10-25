@@ -13,6 +13,27 @@ const GRID_ORIGIN_LAT = -6.8;
 const GRID_ORIGIN_LNG = 106.5;
 const GRID_CELL_SIZE_DEG = 0.09;
 
+function setupCommunityModalClosing() {
+    const modal = document.getElementById('community-modal');
+    const closeBtn = document.getElementById('close-community-modal');
+
+    if (modal && closeBtn) {
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('flex'); 
+            modal.style.display = ''; 
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+}
+
 async function initMap() {
     try {
         let initialCoords = { lat: -6.370403, lng: 106.826946 };
@@ -43,6 +64,9 @@ async function initMap() {
         }
 
         await initializeMap(initialCoords, initialZoom, restrictionBounds);
+        
+        setupCommunityModalClosing();
+        
         if (position) {
             updateUserLocationMarker(position);
         }
@@ -68,22 +92,30 @@ async function initializeMap(center, zoom, restriction) {
     });
     
     infoWindow = new google.maps.InfoWindow({
-        pixelOffset: new google.maps.Size(0, -10), 
+        pixelOffset: new google.maps.Size(0, +160), 
     });
 
     google.maps.event.addListener(infoWindow, 'domready', () => {
         const iwOuter = document.querySelector('.gm-style-iw-c');
         if (!iwOuter) return;
 
-        const closeBtn = iwOuter.querySelector('button');
-        if (closeBtn) closeBtn.style.display = 'none';
+        const gClose = iwOuter.querySelector('.gm-ui-hover-effect');
+        if (gClose) {
+            gClose.style.display  = 'block';
+            gClose.style.position = 'absolute';
+            gClose.style.top      = '8px';
+            gClose.style.right    = '8px';
+            gClose.style.left     = 'auto';
+            gClose.style.margin   = '0';
+            gClose.style.transform= 'none';
+        }
 
-        const iwBackground = iwOuter.parentElement;
-        iwBackground.style.boxShadow = 'none';
-        iwBackground.style.background = 'transparent';
-        
-        const tail = iwBackground.querySelector('.gm-style-iw-tc');
-        if (tail) tail.style.display = 'none';
+        const header = iwOuter.querySelector('.iw-header');
+        if (header) {
+            header.querySelectorAll('button, [data-close], .close').forEach(el => el.remove());
+            header.style.paddingRight = '38px';
+            header.style.textAlign = 'left';
+        }
     });
 
     map.addListener('idle', () => updateSpotsForView(map));
@@ -243,7 +275,8 @@ async function updateUserLocationMarker(position) {
 
 function createCenterOnMeButton() {
     const controlButton = document.createElement("button");
-    controlButton.className = 'custom-map-control-button';
+    controlButton.className = 'map-top-right-button'; 
+    controlButton.id = 'center-on-me-btn'; 
     controlButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>`;
     controlButton.title = "Center map on my location";
 
@@ -259,7 +292,12 @@ function createCenterOnMeButton() {
         }
     });
 
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlButton);
+    const mapControlsContainer = document.getElementById('map-controls-container');
+    const sidebarBtn = document.getElementById('sidebar-toggle-btn'); 
+    
+    if (mapControlsContainer && sidebarBtn) {
+        mapControlsContainer.insertBefore(controlButton, sidebarBtn);
+    } 
 }
 
 function highlightSpotCard(placeId) {
@@ -385,21 +423,98 @@ function createInfoContent(spot) {
         `
         : '';
 
-    return `
+    const div = document.createElement('div');
+
+    div.innerHTML = `
         <div class="iw-header">
             <div style="font-weight:600;line-height:1.3;">
-                ${spot.name || 'Detail lokasi'}
+            ${spot.name || 'Detail lokasi'}
             </div>
-            <button
-                title="Close"
-                onclick="infoWindow.close()"
-                style="background:none;border:0;color:#fff;font-size:20px;line-height:1;cursor:pointer;font-weight:300;">
-                &times;
-            </button>
         </div>
         <div class="iw-body">
             <div class="text-sm">${addr}</div>
             ${ratingHtml}
-        </div>
+            
+            <div class="mt-3 text-center">
+                <button class="lihat-komunitas-btn" 
+                        style="background-color: var(--teal-1); 
+                               color: #fff; 
+                               font-weight: 600; 
+                               border-radius: 6px; 
+                               padding: 6px 12px; 
+                               font-size: 0.85rem; 
+                               transition: background 0.2s;">
+                    🔗 Lihat Komunitas di Sini
+                </button>
+            </div>
+            </div>
     `;
+
+    const button = div.querySelector('.lihat-komunitas-btn');
+    if (button) {
+        button.onmouseover = function() { this.style.backgroundColor = 'var(--teal-2)'; };
+        button.onmouseout = function() { this.style.backgroundColor = 'var(--teal-1)'; };
+
+        button.addEventListener('click', () => {
+            const modal = document.getElementById('community-modal');
+            const modalContent = document.getElementById('community-modal-content');
+
+            if (!modal || !modalContent) {
+                console.error("Community modal elements not found!");
+                alert("Error: Cannot open community list modal.");
+                return;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('flex');
+            modal.style.display = 'flex'; 
+
+
+            modalContent.innerHTML = "<p class='text-gray-500 italic'>Memuat komunitas...</p>";
+
+            fetch(`/community/by-place-json/${spot.place_id}/`) 
+                .then(res => {
+                    if (!res.ok) { throw new Error(`HTTP error! Status: ${res.status}`); }
+                    return res.json();
+                })
+                .then(data => {
+                    modalContent.innerHTML = ""; 
+
+                    if (data.error) {
+                        modalContent.innerHTML = `<p class='text-red-500 italic'>Error: ${data.error}</p>`;
+                    }
+                    else if (data.communities && Array.isArray(data.communities) && data.communities.length > 0) {
+                        const ul = document.createElement('ul');
+                        ul.className = "list-none space-y-2 text-left";
+
+                        data.communities.forEach(c => {
+                            if (!c.id || !c.name) { return; }
+
+                            const li = document.createElement('li');
+                            const link = document.createElement('a');
+
+                            link.href = `/community/detail/${c.id}/`;
+                            link.textContent = '▶ ' + c.name;
+                            link.style.color = 'var(--teal-1)'; 
+                            link.style.textDecoration = 'none';
+                            link.onmouseover = () => link.style.textDecoration = 'underline';
+                            link.onmouseout = () => link.style.textDecoration = 'none';
+
+                            li.appendChild(link);
+                            ul.appendChild(li);
+                        });
+
+                        modalContent.appendChild(ul);
+                    }
+                    else {
+                        modalContent.innerHTML = "<p class='text-gray-500 italic'>Belum ada komunitas di lokasi ini.</p>";
+                    }
+                })
+                .catch(err => {
+                    modalContent.innerHTML = "<p class='text-red-500 italic'>Gagal memuat komunitas. Periksa koneksi atau coba lagi nanti.</p>";
+                    console.error("Fetch error for communities:", err);
+                });
+        });
+    }
+    return div; 
 }

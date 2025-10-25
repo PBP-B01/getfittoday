@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Tambah Komunitas | GetFit.Today{% endblock %}
+
+{% block content %}
+<section class="bg-white text-blue-900 rounded-2xl shadow-lg p-8 max-w-3xl mx-auto">
+  <h1 class="text-3xl font-bold mb-6">Tambah Komunitas Baru</h1>
+
+  <form method="POST" enctype="multipart/form-data" class="space-y-4">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+
+    {% for field in form %}
+      <div>
+        <label class="block font-semibold mb-1">{{ field.label }}</label>
+        {{ field }}
+        {% if field.help_text %}
+          <p class="text-gray-500 text-sm">{{ field.help_text }}</p>
+        {% endif %}
+        {% for error in field.errors %}
+          <p class="text-red-500 text-sm">{{ error }}</p>
+        {% endfor %}
+      </div>
+    {% endfor %}
+
+    <button type="submit" 
+            class="bg-yellow-400 text-blue-900 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition mt-4">
+      Tambah Komunitas
+    </button>
+    <a href="{% url 'community:community_home' %}" 
+       class="ml-4 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-200 transition">
+      Batal
+    </a>
+  </form>
+</section>
+{% endblock %}
