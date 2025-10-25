@@ -1,57 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.conf import settings
 from django.utils import timezone
-
-
-class Community(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField()
-    admin = models.ForeignKey(User, on_delete=models.CASCADE, related_name='admin_communities')
-
-    def __str__(self):
-        return self.name
-    
-    def is_admin(self, user):
-        if not user.is_authenticated:
-            return False
-        if self.admin == user:
-            return True
-        return CommunityMember.objects.filter(
-            community=self,
-            user=user,
-            role='admin'
-        ).exists()
-
-
-class CommunityMember(models.Model):
-    """
-    Model untuk membership komunitas dengan role-based access.
-    Untuk support multiple admins di masa depan.
-    """
-    ROLE_CHOICES = [
-        ('admin', 'Admin'),
-        ('member', 'Member'),
-    ]
-
-    community = models.ForeignKey(
-        Community, 
-        on_delete=models.CASCADE, 
-        related_name='memberships'
-    )
-    user = models.ForeignKey(
-        User, 
-        on_delete=models.CASCADE, 
-        related_name='community_memberships'
-    )
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES, default='member')
-    joined_at = models.DateTimeField(auto_now_add=True)
-
-    class Meta:
-        unique_together = ['community', 'user']
-        ordering = ['-joined_at']
-
-    def __str__(self):
-        return f"{self.user.username} - {self.community.name} ({self.role})"
+from community.models import Community
 
 
 class Event(models.Model):
@@ -59,9 +9,38 @@ class Event(models.Model):
     description = models.TextField()
     date = models.DateTimeField()
     location = models.CharField(max_length=100)
-    community = models.ForeignKey(Community, on_delete=models.CASCADE, related_name='events')
-    created_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='created_events')
-    participants = models.ManyToManyField(User, related_name='joined_events', blank=True)
+    
+    community = models.ForeignKey(
+        Community, 
+        on_delete=models.CASCADE, 
+        related_name='events'
+    )
+    
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE, 
+        related_name='created_events'
+    )
+    
+    participants = models.ManyToManyField(
+        settings.AUTH_USER_MODEL, 
+        related_name='joined_events', 
+        blank=True
+    )
+
+    registration_deadline = models.DateTimeField(
+        null=True, 
+        blank=True,
+        help_text='Batas waktu pendaftaran (opsional)'
+    )
+    
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['date']
+        verbose_name = 'Event'
+        verbose_name_plural = 'Events'
 
     def __str__(self):
         return f"{self.name} ({self.community.name})"
@@ -70,21 +49,45 @@ class Event(models.Model):
         return timezone.now() > self.date
 
     def is_ongoing(self):
-        return self.date <= timezone.now() <= (self.date + timezone.timedelta(hours=2))
-
+        now = timezone.now()
+        return self.date <= now <= (self.date + timezone.timedelta(hours=2))
+    
     def registration_open(self):
-        if hasattr(self, 'registration_deadline') and self.registration_deadline:
-            return timezone.now() <= self.registration_deadline
+        now = timezone.now()
+
+        if self.registration_deadline:
+            return now <= self.registration_deadline
+
         return not self.is_past()
     
     def can_edit(self, user):
         if not user.is_authenticated:
             return False
+
         if user.is_staff or user.is_superuser:
             return True
+
         if self.community.is_admin(user):
             return True
+        
         return False
 
     def can_delete(self, user):
         return self.can_edit(user)
+    
+    def can_join(self, user):
+        if not user.is_authenticated:
+            return False
+
+        if self.participants.filter(id=user.id).exists():
+            return False
+
+        if not self.registration_open():
+            return False
+        
+        return True
+    
+    def user_is_participant(self, user):
+        if not user.is_authenticated:
+            return False
+        return self.participants.filter(id=user.id).exists()

@@ -1,0 +1,1067 @@
+[
+  {
+    "model": "community.community",
+    "pk": 1,
+    "fields": {
+      "name": "Gym Enthusiasts Beji",
+      "description": "Komunitas pecinta gym yang rutin latihan di Gymnasium.",
+      "contact_info": "@gymenthusiasts",
+      "fitness_spot": "ChIJr7WDOBzsaS4RHLKNGf24sNQ",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 2,
+    "fields": {
+      "name": "Morning Workout Squad",
+      "description": "Komunitas untuk latihan pagi dan fitness challenge di Gymnasium.",
+      "contact_info": "@morningworkout",
+      "fitness_spot": "ChIJr7WDOBzsaS4RHLKNGf24sNQ",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 3,
+    "fields": {
+      "name": "Depok Bodybuilders",
+      "description": "Komunitas bodybuilding dan powerlifting di Gymnasium.",
+      "contact_info": "@depokbodybuilders",
+      "fitness_spot": "ChIJr7WDOBzsaS4RHLKNGf24sNQ",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 4,
+    "fields": {
+      "name": "Soccer Fanatics Beji",
+      "description": "Komunitas pecinta sepak bola yang rutin latihan dan bermain di Palakali Kukusan Soccer Field.",
+      "contact_info": "@soccerfanatics",
+      "fitness_spot": "ChIJS4WZiqfuaS4RamfDIcXvwWI",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 5,
+    "fields": {
+      "name": "Sunday Football Crew",
+      "description": "Komunitas bermain futsal dan sepak bola setiap akhir pekan di Palakali Kukusan Soccer Field.",
+      "contact_info": "@sundayfootball",
+      "fitness_spot": "ChIJS4WZiqfuaS4RamfDIcXvwWI",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 6,
+    "fields": {
+      "name": "Youth Soccer Team Depok",
+      "description": "Tim muda Depok yang berlatih di Palakali Kukusan Soccer Field untuk turnamen lokal.",
+      "contact_info": "@youthsoccerdepok",
+      "fitness_spot": "ChIJS4WZiqfuaS4RamfDIcXvwWI",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 7,
+    "fields": {
+      "name": "Badminton Lovers Kukusan",
+      "description": "Komunitas pecinta bulutangkis yang rutin latihan di GOR Badminton Kukusan.",
+      "contact_info": "@badmintonlovers",
+      "fitness_spot": "ChIJq4CjqLjvaS4R-A0ECnTQAGo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 8,
+    "fields": {
+      "name": "Junior Smash Club",
+      "description": "Komunitas bulutangkis untuk anak-anak dan remaja di GOR Badminton Kukusan.",
+      "contact_info": "@juniorsmash",
+      "fitness_spot": "ChIJq4CjqLjvaS4R-A0ECnTQAGo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 9,
+    "fields": {
+      "name": "Evening Shuttle Masters",
+      "description": "Komunitas bulutangkis dewasa untuk latihan sore di GOR Badminton Kukusan.",
+      "contact_info": "@eveningshuttle",
+      "fitness_spot": "ChIJq4CjqLjvaS4R-A0ECnTQAGo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 10,
+    "fields": {
+      "name": "SIMa Football Club",
+      "description": "Tim sepak bola lokal yang rutin berlatih di GOR SIMA.",
+      "contact_info": "@simafc",
+      "fitness_spot": "ChIJ--KVegLsaS4R77qfOFjm1Rw",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 11,
+    "fields": {
+      "name": "Weekend Warriors Beji",
+      "description": "Komunitas olahraga multi-aktivitas yang rutin berkumpul di GOR SIMA setiap akhir pekan.",
+      "contact_info": "@weekendwarriors",
+      "fitness_spot": "ChIJ--KVegLsaS4R77qfOFjm1Rw",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 12,
+    "fields": {
+      "name": "GLORIA Fitness Squad",
+      "description": "Komunitas gym dan fitness yang rutin latihan di GOR GLORIA.",
+      "contact_info": "@gloriafitness",
+      "fitness_spot": "ChIJAyElFtHtaS4RxFY01vQSDpU",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 13,
+    "fields": {
+      "name": "Weekend Warriors GLORIA",
+      "description": "Komunitas multi-olahraga untuk latihan akhir pekan di GOR GLORIA.",
+      "contact_info": "@weekendwarriorsgloria",
+      "fitness_spot": "ChIJAyElFtHtaS4RxFY01vQSDpU",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 14,
+    "fields": {
+      "name": "GLORIA Yoga & Stretch",
+      "description": "Komunitas yoga dan stretching yang rutin berkegiatan di GOR GLORIA.",
+      "contact_info": "@gloriayoga",
+      "fitness_spot": "ChIJAyElFtHtaS4RxFY01vQSDpU",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 15,
+    "fields": {
+      "name": "HW Beji Futbol Club",
+      "description": "Komunitas sepak bola untuk latihan dan pertandingan rutin di Lapangan HW Beji Timur.",
+      "contact_info": "@hwbejifc",
+      "fitness_spot": "ChIJ22DC4AbsaS4Rea8nUObt8Zo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 16,
+    "fields": {
+      "name": "Beji Timur Joggers",
+      "description": "Komunitas lari dan jogging pagi di sekitar Lapangan HW Beji Timur.",
+      "contact_info": "@bejitimurjoggers",
+      "fitness_spot": "ChIJ22DC4AbsaS4Rea8nUObt8Zo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 17,
+    "fields": {
+      "name": "HW Beji Outdoor Fitness",
+      "description": "Komunitas workout dan calisthenics untuk latihan di Lapangan HW Beji Timur.",
+      "contact_info": "@hwbejifitness",
+      "fitness_spot": "ChIJ22DC4AbsaS4Rea8nUObt8Zo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 18,
+    "fields": {
+      "name": "Koci Soccer Juniors",
+      "description": "Komunitas anak-anak untuk latihan sepak bola di Koci Soccer Field.",
+      "contact_info": "@kocijuniors",
+      "fitness_spot": "ChIJn1L3UADtaS4RKmXWxBlrchU",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 19,
+    "fields": {
+      "name": "Koci Adult Footballers",
+      "description": "Komunitas dewasa untuk latihan dan liga mini di Koci Soccer Field.",
+      "contact_info": "@kociadults",
+      "fitness_spot": "ChIJn1L3UADtaS4RKmXWxBlrchU",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 20,
+    "fields": {
+      "name": "Koci Goalkeepers Club",
+      "description": "Komunitas khusus penjaga gawang yang rutin berlatih di Koci Soccer Field.",
+      "contact_info": "@kocigoalkeepers",
+      "fitness_spot": "ChIJn1L3UADtaS4RKmXWxBlrchU",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 21,
+    "fields": {
+      "name": "Sparks Fitness Crew",
+      "description": "Komunitas gym dan fitness untuk latihan di Sparks Sports Academy - BSD Tangerang.",
+      "contact_info": "@sparkscrew",
+      "fitness_spot": "ChIJ77CVPDLlaS4RmfTNGw_f1Mo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 22,
+    "fields": {
+      "name": "Sparks Martial Arts",
+      "description": "Komunitas beladiri (karate, taekwondo) di Sparks Sports Academy.",
+      "contact_info": "@sparksmartial",
+      "fitness_spot": "ChIJ77CVPDLlaS4RmfTNGw_f1Mo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 23,
+    "fields": {
+      "name": "Sparks Youth Club",
+      "description": "Komunitas remaja untuk latihan olahraga beragam di Sparks Sports Academy.",
+      "contact_info": "@sparksyouth",
+      "fitness_spot": "ChIJ77CVPDLlaS4RmfTNGw_f1Mo",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 24,
+    "fields": {
+      "name": "Ibnu Mandiri Badminton Club",
+      "description": "Komunitas bulu tangkis untuk latihan rutin di GOR Ibnu Mandiri.",
+      "contact_info": "@ibnumandiribadminton",
+      "fitness_spot": "ChIJpweMtP3taS4RbrjRxF4er1U",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 25,
+    "fields": {
+      "name": "Ibnu Mandiri Fitness Squad",
+      "description": "Komunitas fitness dan body workout di GOR Ibnu Mandiri.",
+      "contact_info": "@ibnumandirifitness",
+      "fitness_spot": "ChIJpweMtP3taS4RbrjRxF4er1U",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 26,
+    "fields": {
+      "name": "Ibnu Mandiri Recreational Sports",
+      "description": "Komunitas olahraga santai dan rekreasi di GOR Ibnu Mandiri.",
+      "contact_info": "@ibnumandirirec",
+      "fitness_spot": "ChIJpweMtP3taS4RbrjRxF4er1U",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 27,
+    "fields": {
+      "name": "Playtopia Kids Club",
+      "description": "Komunitas anak-anak yang suka bermain dan aktif di Playtopia Adventure margoCity.",
+      "contact_info": "@playtopiakids",
+      "fitness_spot": "ChIJ14cbRXTtaS4R7ClFKjYVrJI",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 28,
+    "fields": {
+      "name": "Playtopia Parents Community",
+      "description": "Komunitas orang tua yang rutin menemani anak-anak bermain di Playtopia Adventure.",
+      "contact_info": "@playtopiaparents",
+      "fitness_spot": "ChIJ14cbRXTtaS4R7ClFKjYVrJI",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 29,
+    "fields": {
+      "name": "Playtopia Teen Club",
+      "description": "Komunitas remaja yang suka aktivitas fisik dan permainan interaktif di Playtopia Adventure.",
+      "contact_info": "@playtopiateens",
+      "fitness_spot": "ChIJ14cbRXTtaS4R7ClFKjYVrJI",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 30,
+    "fields": {
+      "name": "Shaninaza Badminton Juniors",
+      "description": "Komunitas anak-anak yang berlatih bulu tangkis secara rutin di Gor Bulutangkis Shaninaza.",
+      "contact_info": "@shaninazajuniors",
+      "fitness_spot": "ChIJZ9eFRmzsaS4RJYO9_q3dQJc",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 31,
+    "fields": {
+      "name": "Shaninaza Adult Badminton",
+      "description": "Komunitas dewasa untuk latihan bulu tangkis dan liga mini di Gor Bulutangkis Shaninaza.",
+      "contact_info": "@shaninazaadults",
+      "fitness_spot": "ChIJZ9eFRmzsaS4RJYO9_q3dQJc",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 32,
+    "fields": {
+      "name": "Shaninaza Social Sports",
+      "description": "Komunitas olahraga santai dan sosial untuk anggota Gor Bulutangkis Shaninaza.",
+      "contact_info": "@shaninazasocial",
+      "fitness_spot": "ChIJZ9eFRmzsaS4RJYO9_q3dQJc",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 33,
+    "fields": {
+      "name": "Harini Ladies Fitness",
+      "description": "Komunitas khusus wanita yang fokus kebugaran dan kelas bodyfit di Harini Studio.",
+      "contact_info": "@hariniladies",
+      "fitness_spot": "ChIJ0_npaWvsaS4RcdiFbzR3Nag",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 34,
+    "fields": {
+      "name": "Harini Morning Stretch",
+      "description": "Kelompok rutin stretching dan pilates pagi di Harini Studio untuk semua level.",
+      "contact_info": "WA: 0812-3456-3344",
+      "fitness_spot": "ChIJ0_npaWvsaS4RcdiFbzR3Nag",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 35,
+    "fields": {
+      "name": "Harini Cardio Crew",
+      "description": "Komunitas cardio dan HIIT yang sering mengadakan sesi kelompok di Harini Studio.",
+      "contact_info": "@harinicardiocrew",
+      "fitness_spot": "ChIJ0_npaWvsaS4RcdiFbzR3Nag",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 36,
+    "fields": {
+      "name": "Gunadarma Runners",
+      "description": "Komunitas lari kampus yang sering start/finish di Sports Center Gunadarma untuk rute pagi.",
+      "contact_info": "@gunadarmarunners",
+      "fitness_spot": "ChIJtUqSdznsaS4RTD8SqOXUHZk",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 37,
+    "fields": {
+      "name": "Gunadarma Multi-Sport",
+      "description": "Komunitas multi-olahraga (basket, futsal, voli) yang aktif di Sports Center Gunadarma.",
+      "contact_info": "@gunadarmamultisport",
+      "fitness_spot": "ChIJtUqSdznsaS4RTD8SqOXUHZk",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 38,
+    "fields": {
+      "name": "Gunadarma Strength Circle",
+      "description": "Komunitas angkat beban dan kekuatan yang menggunakan fasilitas gym di Sports Center Gunadarma.",
+      "contact_info": "WA: 0812-9988-7766",
+      "fitness_spot": "ChIJtUqSdznsaS4RTD8SqOXUHZk",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 39,
+    "fields": {
+      "name": "Felfest Golf Buddies",
+      "description": "Komunitas latihan driving dan short game di Driving Range - Felfest Sportcenter.",
+      "contact_info": "@felfestgolf",
+      "fitness_spot": "ChIJxSyhFIntaS4RqKfvEyA8mW8",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 40,
+    "fields": {
+      "name": "Felfest Weekend Swingers",
+      "description": "Komunitas golf santai yang rutin bertemu akhir pekan di Felfest Sportcenter.",
+      "contact_info": "WA: 0813-2233-4455",
+      "fitness_spot": "ChIJxSyhFIntaS4RqKfvEyA8mW8",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 41,
+    "fields": {
+      "name": "Felfest Family Golf",
+      "description": "Komunitas keluarga untuk belajar golf dan bermain bersama di Driving Range - Felfest.",
+      "contact_info": "@felfestfamily",
+      "fitness_spot": "ChIJxSyhFIntaS4RqKfvEyA8mW8",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 42,
+    "fields": {
+      "name": "Tirta Swim Club",
+      "description": "Latihan renang untuk semua level, dari pemula sampai kompetisi.",
+      "contact_info": "Instagram: @tirtaswimclub",
+      "fitness_spot": "ChIJBWn5jz_taS4RYXDwPE2nhwM",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 43,
+    "fields": {
+      "name": "Tirta Aqua Fitness",
+      "description": "Komunitas aquafitness dan water aerobics, rutin latihan mingguan.",
+      "contact_info": "WA: 0812-1111-2222",
+      "fitness_spot": "ChIJBWn5jz_taS4RYXDwPE2nhwM",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 44,
+    "fields": {
+      "name": "Tirta Masters Swimming",
+      "description": "Komunitas renang dewasa, fokus pada teknik dan lomba regional.",
+      "contact_info": "Email: tirta.masters@example.com",
+      "fitness_spot": "ChIJBWn5jz_taS4RYXDwPE2nhwM",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 45,
+    "fields": {
+      "name": "Yonzikon Football Club",
+      "description": "Komunitas sepakbola amatir, main rutin setiap akhir pekan.",
+      "contact_info": "Instagram: @yonzikonfc",
+      "fitness_spot": "ChIJy52OfDLsaS4RNk-tuFRSc8Y",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 46,
+    "fields": {
+      "name": "Yonzikon Junior League",
+      "description": "Latihan sepakbola untuk anak-anak dan remaja, rutin setiap Sabtu.",
+      "contact_info": "WA: 0812-2222-3333",
+      "fitness_spot": "ChIJy52OfDLsaS4RNk-tuFRSc8Y",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 47,
+    "fields": {
+      "name": "Yonzikon Futsal Team",
+      "description": "Tim futsal dewasa, mengikuti kompetisi lokal.",
+      "contact_info": "Email: yonzikon.futsal@example.com",
+      "fitness_spot": "ChIJy52OfDLsaS4RNk-tuFRSc8Y",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 48,
+    "fields": {
+      "name": "Batoe 54 Swim Academy",
+      "description": "Sekolah renang untuk anak-anak dan dewasa.",
+      "contact_info": "Instagram: @batoe54academy",
+      "fitness_spot": "ChIJn4XCL4PuaS4RxOmvUf4pUks",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 49,
+    "fields": {
+      "name": "Batoe 54 Triathlon Club",
+      "description": "Komunitas triathlon, latihan renang untuk endurance.",
+      "contact_info": "WA: 0812-3333-4444",
+      "fitness_spot": "ChIJn4XCL4PuaS4RxOmvUf4pUks",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 50,
+    "fields": {
+      "name": "Batoe 54 Masters Swim",
+      "description": "Komunitas renang dewasa, fokus latihan teknik dan lomba.",
+      "contact_info": "Email: batoe54.masters@example.com",
+      "fitness_spot": "ChIJn4XCL4PuaS4RxOmvUf4pUks",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 51,
+    "fields": {
+      "name": "Dimensi Badminton Club",
+      "description": "Latihan bulutangkis untuk semua level, fokus teknik dan strategi.",
+      "contact_info": "Instagram: @dimensibadminton",
+      "fitness_spot": "ChIJPVUIuJvvaS4Rs7Awk5R1C-M",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 52,
+    "fields": {
+      "name": "Dimensi Junior Badminton",
+      "description": "Program latihan untuk anak-anak dan remaja, rutin Sabtu pagi.",
+      "contact_info": "WA: 0812-4444-5555",
+      "fitness_spot": "ChIJPVUIuJvvaS4Rs7Awk5R1C-M",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 53,
+    "fields": {
+      "name": "Dimensi Badminton Competitive",
+      "description": "Tim kompetisi, mengikuti turnamen lokal dan regional.",
+      "contact_info": "Email: dimensibadminton.comp@example.com",
+      "fitness_spot": "ChIJPVUIuJvvaS4Rs7Awk5R1C-M",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 54,
+    "fields": {
+      "name": "Telaga Kukusan Fishing Club",
+      "description": "Komunitas pemancingan untuk hobi dan rekreasi, rutin akhir pekan.",
+      "contact_info": "Instagram: @telagafishingclub",
+      "fitness_spot": "ChIJ-3iW-C7vaS4RXxMPwb-udjc",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 55,
+    "fields": {
+      "name": "Telaga Catch & Release",
+      "description": "Latihan teknik memancing sekaligus pelestarian ikan.",
+      "contact_info": "WA: 0812-5555-6666",
+      "fitness_spot": "ChIJ-3iW-C7vaS4RXxMPwb-udjc",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 56,
+    "fields": {
+      "name": "Telaga Anglers Community",
+      "description": "Komunitas pemancingan dewasa, fokus turnamen lokal dan rekreasi.",
+      "contact_info": "Email: telaga.anglers@example.com",
+      "fitness_spot": "ChIJ-3iW-C7vaS4RXxMPwb-udjc",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 57,
+    "fields": {
+      "name": "X Team Strength Club",
+      "description": "Latihan gym dan fitness untuk semua level, fokus strength training.",
+      "contact_info": "Instagram: @xteamgym",
+      "fitness_spot": "ChIJKUjiFk3BaS4RNw1pmjqCm1o",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 58,
+    "fields": {
+      "name": "X Team Cardio Crew",
+      "description": "Komunitas latihan kardio, HIIT, dan bootcamp.",
+      "contact_info": "WA: 0812-6666-7777",
+      "fitness_spot": "ChIJKUjiFk3BaS4RNw1pmjqCm1o",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 59,
+    "fields": {
+      "name": "X Team Masters",
+      "description": "Program latihan dewasa, fokus kebugaran menyeluruh dan coaching.",
+      "contact_info": "Email: xteam.masters@example.com",
+      "fitness_spot": "ChIJKUjiFk3BaS4RNw1pmjqCm1o",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 60,
+    "fields": {
+      "name": "Areman Football Club",
+      "description": "Komunitas sepakbola amatir, rutin latihan tiap akhir pekan.",
+      "contact_info": "Instagram: @aremanfc",
+      "fitness_spot": "ChIJ5Rb7LEXsaS4R7hFK_-uVa7o",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 61,
+    "fields": {
+      "name": "Areman Futsal Team",
+      "description": "Tim futsal dewasa, fokus turnamen lokal.",
+      "contact_info": "WA: 0812-7777-8888",
+      "fitness_spot": "ChIJ5Rb7LEXsaS4R7hFK_-uVa7o",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 62,
+    "fields": {
+      "name": "Areman Junior League",
+      "description": "Latihan sepakbola untuk anak-anak dan remaja.",
+      "contact_info": "Email: areman.junior@example.com",
+      "fitness_spot": "ChIJ5Rb7LEXsaS4R7hFK_-uVa7o",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 63,
+    "fields": {
+      "name": "Juanda Aquatic Club",
+      "description": "Komunitas renang untuk semua usia, latihan rutin tiap sore.",
+      "contact_info": "Instagram: @juanda_aquatic",
+      "fitness_spot": "ChIJR0jI_4fraS4RrnN913JiD3c",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 64,
+    "fields": {
+      "name": "Juanda Swimming Squad",
+      "description": "Program latihan renang kompetitif untuk remaja dan dewasa.",
+      "contact_info": "WA: 0812-8888-9999",
+      "fitness_spot": "ChIJR0jI_4fraS4RrnN913JiD3c",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 65,
+    "fields": {
+      "name": "Juanda Water Fun",
+      "description": "Latihan renang sambil bermain untuk anak-anak, fokus teknik dasar.",
+      "contact_info": "Email: juanda.waterfun@example.com",
+      "fitness_spot": "ChIJR0jI_4fraS4RrnN913JiD3c",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 66,
+    "fields": {
+      "name": "Pesona Swim Club",
+      "description": "Latihan renang untuk semua level, dari pemula hingga advanced.",
+      "contact_info": "Instagram: @pesona_swimclub",
+      "fitness_spot": "ChIJx5NQ5fbraS4RKXZaetRdM14",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 67,
+    "fields": {
+      "name": "Pesona Aqua Teens",
+      "description": "Program renang remaja, fokus teknik dan stamina.",
+      "contact_info": "WA: 0812-9999-0000",
+      "fitness_spot": "ChIJx5NQ5fbraS4RKXZaetRdM14",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 68,
+    "fields": {
+      "name": "Pesona Family Swim",
+      "description": "Latihan renang keluarga, fun activity setiap akhir pekan.",
+      "contact_info": "Email: pesona.family@example.com",
+      "fitness_spot": "ChIJx5NQ5fbraS4RKXZaetRdM14",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 69,
+    "fields": {
+      "name": "Mahakam Football Club",
+      "description": "Komunitas sepakbola amatir, latihan rutin tiap Sabtu dan Minggu.",
+      "contact_info": "Instagram: @mahakamfc",
+      "fitness_spot": "ChIJubOnXznraS4RxK7DXGFckz4",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 70,
+    "fields": {
+      "name": "Mahakam Junior League",
+      "description": "Tim sepakbola anak-anak dan remaja, fokus pembinaan talent.",
+      "contact_info": "WA: 0813-1111-2222",
+      "fitness_spot": "ChIJubOnXznraS4RxK7DXGFckz4",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  },
+  {
+    "model": "community.community",
+    "pk": 71,
+    "fields": {
+      "name": "Mahakam Sports Club",
+      "description": "Latihan olahraga beragam, termasuk futsal, bulutangkis, dan voli.",
+      "contact_info": "Email: mahakam.sports@example.com",
+      "fitness_spot": "ChIJubOnXznraS4RxK7DXGFckz4",
+      "category": null,
+      "founder": 1,
+      "admins": [1],
+      "members": [],
+      "created_at": "2025-10-24T18:30:00Z"
+    }
+  }
+]

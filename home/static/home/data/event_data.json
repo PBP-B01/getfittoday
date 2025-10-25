@@ -1,0 +1,1602 @@
+[
+  {
+    "model": "event.event",
+    "pk": 1,
+    "fields": {
+      "name": "Morning Workout Challenge",
+      "description": "Tantangan workout pagi bersama, cocok untuk semua level. Bring your towel!",
+      "date": "2025-11-01T06:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 1,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-31T23:59:00Z",
+      "created_at": "2025-10-25T10:00:00Z",
+      "updated_at": "2025-10-25T10:00:00Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 2,
+    "fields": {
+      "name": "Friendly Football Match",
+      "description": "Pertandingan persahabatan antar komunitas. Open untuk semua member!",
+      "date": "2025-11-05T16:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 4,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-04T12:00:00Z",
+      "created_at": "2025-10-25T10:15:00Z",
+      "updated_at": "2025-10-25T10:15:00Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 3,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-08-16T12:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 33,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-11T12:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 4,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-11-14T14:00:00Z",
+      "location": "GOR GLORIA",
+      "community": 22,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-12T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 5,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-10-23T06:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 54,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-22T06:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 6,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-09-23T10:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 36,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-09-18T10:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 7,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-11-15T08:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 25,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-14T08:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 8,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-08-05T09:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 54,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-31T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 9,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-10-31T19:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 8,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-28T19:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 10,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-06-25T16:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 17,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-24T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 11,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-06-21T14:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 6,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-18T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 12,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-03-24T09:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 49,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-19T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 13,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-11-13T09:00:00Z",
+      "location": "Harini Studio",
+      "community": 12,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-12T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 14,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-03-10T13:00:00Z",
+      "location": "Felfest Sportcenter",
+      "community": 63,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-06T13:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 15,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-08-15T16:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 44,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-14T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 16,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-08-23T18:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 33,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-20T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 17,
+    "fields": {
+      "name": "Strength Training Class",
+      "description": "Sesi latihan kekuatan dengan pelatih profesional di Gymnasium.",
+      "date": "2025-03-23T15:00:00Z",
+      "location": "GOR Badminton Kukusan",
+      "community": 23,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-18T15:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 18,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-10-25T19:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 8,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-20T19:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 19,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-08-02T08:00:00Z",
+      "location": "GOR GLORIA",
+      "community": 58,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-28T08:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 20,
+    "fields": {
+      "name": "Strength Training Class",
+      "description": "Sesi latihan kekuatan dengan pelatih profesional di Gymnasium.",
+      "date": "2025-06-02T14:00:00Z",
+      "location": "Felfest Sportcenter",
+      "community": 12,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-30T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 21,
+    "fields": {
+      "name": "Cycling Adventure",
+      "description": "Gowes santai mengelilingi area Depok dan sekitarnya, cocok untuk semua level.",
+      "date": "2025-05-04T07:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 26,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-02T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 22,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-02-05T16:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 31,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-02-03T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 23,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-05-29T06:00:00Z",
+      "location": "Felfest Sportcenter",
+      "community": 8,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-28T06:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 24,
+    "fields": {
+      "name": "Calisthenics Jam",
+      "description": "Latihan street workout bareng komunitas calisthenics Beji.",
+      "date": "2025-10-30T14:00:00Z",
+      "location": "Harini Studio",
+      "community": 3,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-26T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 25,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-07-03T18:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 2,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-28T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 26,
+    "fields": {
+      "name": "Strength Training Class",
+      "description": "Sesi latihan kekuatan dengan pelatih profesional di Gymnasium.",
+      "date": "2025-06-17T11:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 24,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-13T11:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 27,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-05-26T19:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 41,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-24T19:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 28,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-11-20T15:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 69,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-17T15:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 29,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-07-23T13:00:00Z",
+      "location": "Harini Studio",
+      "community": 57,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-22T13:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 30,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-03-19T10:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 35,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-14T10:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 31,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-06-24T06:00:00Z",
+      "location": "Harini Studio",
+      "community": 1,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-19T06:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 32,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-07-01T11:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 68,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-26T11:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 33,
+    "fields": {
+      "name": "Cycling Adventure",
+      "description": "Gowes santai mengelilingi area Depok dan sekitarnya, cocok untuk semua level.",
+      "date": "2025-06-28T09:00:00Z",
+      "location": "Harini Studio",
+      "community": 44,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-24T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 34,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-11-16T19:00:00Z",
+      "location": "GOR SIMA",
+      "community": 17,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-15T19:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 35,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-06-20T07:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 36,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-19T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 36,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-05-15T18:00:00Z",
+      "location": "Felfest Sportcenter",
+      "community": 19,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-12T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 37,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-08-16T08:00:00Z",
+      "location": "GOR Badminton Kukusan",
+      "community": 27,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-13T08:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 38,
+    "fields": {
+      "name": "Calisthenics Jam",
+      "description": "Latihan street workout bareng komunitas calisthenics Beji.",
+      "date": "2025-04-15T17:00:00Z",
+      "location": "GOR Badminton Kukusan",
+      "community": 58,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-13T17:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 39,
+    "fields": {
+      "name": "Cycling Adventure",
+      "description": "Gowes santai mengelilingi area Depok dan sekitarnya, cocok untuk semua level.",
+      "date": "2025-05-03T11:00:00Z",
+      "location": "Harini Studio",
+      "community": 5,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-02T11:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 40,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-09-24T18:00:00Z",
+      "location": "GOR SIMA",
+      "community": 11,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-09-22T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 41,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-03-29T17:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 58,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-28T17:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 42,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-06-25T14:00:00Z",
+      "location": "Harini Studio",
+      "community": 66,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-24T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 43,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-04-04T16:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 6,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-30T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 44,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-07-10T11:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 70,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-06T11:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 45,
+    "fields": {
+      "name": "Calisthenics Jam",
+      "description": "Latihan street workout bareng komunitas calisthenics Beji.",
+      "date": "2025-08-06T17:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 27,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-03T17:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 46,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-11-17T13:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 31,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-15T13:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 47,
+    "fields": {
+      "name": "Weekend Football League",
+      "description": "Liga sepak bola mingguan antar komunitas, penuh semangat dan fair play.",
+      "date": "2025-08-07T10:00:00Z",
+      "location": "Felfest Sportcenter",
+      "community": 16,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-05T10:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 48,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-06-21T13:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 50,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-20T13:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 49,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-05-14T20:00:00Z",
+      "location": "Felfest Sportcenter",
+      "community": 20,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-11T20:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 50,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-02-21T09:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 47,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-02-16T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 51,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-04-20T15:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 3,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-16T15:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 52,
+    "fields": {
+      "name": "Calisthenics Jam",
+      "description": "Latihan street workout bareng komunitas calisthenics Beji.",
+      "date": "2025-08-04T18:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 58,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-01T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 53,
+    "fields": {
+      "name": "Calisthenics Jam",
+      "description": "Latihan street workout bareng komunitas calisthenics Beji.",
+      "date": "2025-02-15T07:00:00Z",
+      "location": "GOR GLORIA",
+      "community": 26,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-02-13T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 54,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-02-14T18:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 17,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-02-12T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 55,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-07-10T07:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 9,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-06T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 56,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-02-07T19:00:00Z",
+      "location": "Harini Studio",
+      "community": 34,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-02-04T19:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 57,
+    "fields": {
+      "name": "Calisthenics Jam",
+      "description": "Latihan street workout bareng komunitas calisthenics Beji.",
+      "date": "2025-07-17T07:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 26,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-13T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 58,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-08-04T07:00:00Z",
+      "location": "Harini Studio",
+      "community": 45,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-03T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 59,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-10-15T09:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 41,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-12T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 60,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-03-27T08:00:00Z",
+      "location": "GOR Badminton Kukusan",
+      "community": 43,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-23T08:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 61,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-11-18T16:00:00Z",
+      "location": "GOR GLORIA",
+      "community": 61,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-14T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 62,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-03-31T10:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 28,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-30T10:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 63,
+    "fields": {
+      "name": "Weekend Football League",
+      "description": "Liga sepak bola mingguan antar komunitas, penuh semangat dan fair play.",
+      "date": "2025-04-16T07:00:00Z",
+      "location": "GOR Badminton Kukusan",
+      "community": 33,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-15T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 64,
+    "fields": {
+      "name": "Cycling Adventure",
+      "description": "Gowes santai mengelilingi area Depok dan sekitarnya, cocok untuk semua level.",
+      "date": "2025-11-13T09:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 67,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-10T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 65,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-09-23T11:00:00Z",
+      "location": "GOR GLORIA",
+      "community": 64,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-09-21T11:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 66,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-05-21T10:00:00Z",
+      "location": "GOR Badminton Kukusan",
+      "community": 6,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-20T10:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 67,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-03-14T12:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 36,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-10T12:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 68,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-07-13T07:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 62,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-12T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 69,
+    "fields": {
+      "name": "Strength Training Class",
+      "description": "Sesi latihan kekuatan dengan pelatih profesional di Gymnasium.",
+      "date": "2025-04-22T08:00:00Z",
+      "location": "GOR SIMA",
+      "community": 71,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-20T08:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 70,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-08-04T16:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 62,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-30T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 71,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-03-24T18:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 28,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-22T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 72,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-08-13T17:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 51,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-12T17:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 73,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-11-04T16:00:00Z",
+      "location": "GOR GLORIA",
+      "community": 43,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-03T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 74,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-11-06T17:00:00Z",
+      "location": "Gymnasium Beji",
+      "community": 71,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-04T17:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 75,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-04-10T18:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 3,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-06T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 76,
+    "fields": {
+      "name": "Weekend Football League",
+      "description": "Liga sepak bola mingguan antar komunitas, penuh semangat dan fair play.",
+      "date": "2025-08-26T15:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 1,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-21T15:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 77,
+    "fields": {
+      "name": "Calisthenics Jam",
+      "description": "Latihan street workout bareng komunitas calisthenics Beji.",
+      "date": "2025-02-14T16:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 58,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-02-13T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 78,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-11-20T20:00:00Z",
+      "location": "GOR SIMA",
+      "community": 44,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-18T20:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 79,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-10-18T14:00:00Z",
+      "location": "Harini Studio",
+      "community": 5,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-17T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 80,
+    "fields": {
+      "name": "Strength Training Class",
+      "description": "Sesi latihan kekuatan dengan pelatih profesional di Gymnasium.",
+      "date": "2025-02-13T14:00:00Z",
+      "location": "GOR Badminton Kukusan",
+      "community": 71,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-02-09T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 81,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-05-20T13:00:00Z",
+      "location": "GOR SIMA",
+      "community": 49,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-15T13:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 82,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-05-27T14:00:00Z",
+      "location": "Felfest Sportcenter",
+      "community": 36,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-25T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 83,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-05-09T09:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 25,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-07T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 84,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-10-03T14:00:00Z",
+      "location": "GOR GLORIA",
+      "community": 2,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-01T14:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 85,
+    "fields": {
+      "name": "Weekend Football League",
+      "description": "Liga sepak bola mingguan antar komunitas, penuh semangat dan fair play.",
+      "date": "2025-04-27T20:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 18,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-22T20:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 86,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-04-07T16:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 48,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-06T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 87,
+    "fields": {
+      "name": "Strength Training Class",
+      "description": "Sesi latihan kekuatan dengan pelatih profesional di Gymnasium.",
+      "date": "2025-04-23T13:00:00Z",
+      "location": "Harini Studio",
+      "community": 44,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-19T13:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 88,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-03-04T12:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 52,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-03T12:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 89,
+    "fields": {
+      "name": "Fitness Bootcamp",
+      "description": "Latihan intensif outdoor dengan berbagai tantangan kebugaran.",
+      "date": "2025-07-12T13:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 32,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-11T13:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 90,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-11-21T15:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 20,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-19T15:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 91,
+    "fields": {
+      "name": "Yoga for Everyone",
+      "description": "Sesi yoga santai untuk semua kalangan, tingkatkan keseimbangan tubuh dan pikiran.",
+      "date": "2025-11-14T08:00:00Z",
+      "location": "GOR Badminton Kukusan",
+      "community": 16,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-11-13T08:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 92,
+    "fields": {
+      "name": "Morning Stretch Session",
+      "description": "Sesi peregangan dan relaksasi untuk memulai hari dengan energi positif.",
+      "date": "2025-08-21T15:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 55,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-08-18T15:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 93,
+    "fields": {
+      "name": "Strength Training Class",
+      "description": "Sesi latihan kekuatan dengan pelatih profesional di Gymnasium.",
+      "date": "2025-03-14T09:00:00Z",
+      "location": "Sports Center Gunadarma",
+      "community": 20,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-03-10T09:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 94,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-04-14T19:00:00Z",
+      "location": "GOR SIMA",
+      "community": 67,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-12T19:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 95,
+    "fields": {
+      "name": "Calisthenics Jam",
+      "description": "Latihan street workout bareng komunitas calisthenics Beji.",
+      "date": "2025-07-01T07:00:00Z",
+      "location": "Kolam Renang Tirta Mukti",
+      "community": 25,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-06-27T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 96,
+    "fields": {
+      "name": "Badminton Open",
+      "description": "Turnamen bulutangkis terbuka untuk semua usia dan level kemampuan.",
+      "date": "2025-04-15T16:00:00Z",
+      "location": "Lapangan HW Beji Timur",
+      "community": 40,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-04-12T16:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 97,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-07-07T12:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 46,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-02T12:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 98,
+    "fields": {
+      "name": "Swimming Championship",
+      "description": "Kompetisi renang dengan berbagai kategori, raih medali terbaikmu!",
+      "date": "2025-05-06T07:00:00Z",
+      "location": "Felfest Sportcenter",
+      "community": 44,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-05-05T07:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 99,
+    "fields": {
+      "name": "Cycling Adventure",
+      "description": "Gowes santai mengelilingi area Depok dan sekitarnya, cocok untuk semua level.",
+      "date": "2025-07-06T18:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 48,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-07-05T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  },
+  {
+    "model": "event.event",
+    "pk": 100,
+    "fields": {
+      "name": "Community Fun Run",
+      "description": "Lari santai bersama komunitas sekitar, rute 3K dan 5K tersedia.",
+      "date": "2025-10-10T18:00:00Z",
+      "location": "Palakali Kukusan Soccer Field",
+      "community": 45,
+      "created_by": 1,
+      "participants": [],
+      "registration_deadline": "2025-10-05T18:00:00Z",
+      "created_at": "2025-10-25T17:52:08Z",
+      "updated_at": "2025-10-25T17:52:08Z"
+    }
+  }
+]
