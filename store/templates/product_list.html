@@ -349,35 +349,36 @@
   async function fetchProductList(url) {
     productContainer.innerHTML = '<p class="text-center py-10">Memuat produk...</p>';
     try {
-      const requestUrl = new URL(url, window.location.origin);
-      requestUrl.searchParams.set('ajax', '1');
+        const requestUrl = new URL(url, window.location.href); 
+        requestUrl.searchParams.set('ajax', '1');
 
-      const response = await fetch(requestUrl, {
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest'
+        const response = await fetch(requestUrl, {
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        });
+
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const html = await response.text();
+
+        if (productContainer) {
+            productContainer.innerHTML = html;
         }
-      });
 
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      const html = await response.text();
+        const displayUrl = new URL(requestUrl);
+        displayUrl.searchParams.delete('ajax');
+        window.history.pushState({}, '', displayUrl);
 
-      if (productContainer) {
-          productContainer.innerHTML = html;
-      }
-
-      const displayUrl = new URL(requestUrl);
-      displayUrl.searchParams.delete('ajax');
-      window.history.pushState({}, '', displayUrl);
-
-      attachAddToCartListeners();
-      attachAdminButtonListeners();
+        attachAddToCartListeners();
+        attachAdminButtonListeners();
+        
     } catch (error) {
-      console.error('Gagal fetch produk:', error);
-      if (productContainer) {
-          productContainer.innerHTML = '<p class="text-center py-10 text-red-600">Gagal memuat produk. Silakan coba lagi.</p>';
-      }
+        console.error('Gagal fetch produk:', error);
+        if (productContainer) {
+            productContainer.innerHTML = '<p class="text-center py-10 text-red-600">Gagal memuat produk. Silakan coba lagi.</p>';
+        }
     }
-  }
+}
 
   if (filterForm) {
     filterForm.addEventListener('submit', function (e) {
