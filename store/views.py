@@ -13,6 +13,7 @@ from decimal import Decimal, InvalidOperation
 from .models import Product, Cart, CartItem
 from .forms import ProductForm
 from home.models import FitnessSpot
+from django.http import HttpResponse
 
 def _get_or_create_cart(request):
     if request.user.is_authenticated:
@@ -342,3 +343,24 @@ def view_product_detail(request, pk):
         return render(request, 'view_product_detail.html', context)
     else:
         return redirect('store:product_list')
+    
+def featured_products_api(request):
+    try:
+        # Get 15 newest products
+        products = Product.objects.order_by('-created_at')[:15]
+        
+        data = []
+        for product in products:
+            data.append({
+                'name': product.name,
+                'price_formatted': f"Rp{intcomma(int(product.price))}",
+                'image_url': product.image_url if product.image_url else 'https://via.placeholder.com/300x180.png?text=No+Image',
+                'rating': product.rating or '-',
+                'units_sold': product.units_sold or '',
+                'view_url': reverse('store:product_list')
+            })
+        
+        return JsonResponse({'products': data})
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

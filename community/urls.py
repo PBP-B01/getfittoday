@@ -15,5 +15,6 @@ urlpatterns = [
     path('ajax/leave/<int:community_id>/', views.ajax_leave_community, name='ajax_leave_community'),
     path('api/communities/<str:spot_id>/', views.communities_by_spot, name='communities_by_spot'), 
     path('by-place-json/<str:place_id>/', views.communities_by_place_json, name='communities_by_place_json'), 
+    path('api/featured/', views.featured_communities_api, name='featured_communities_api'),
 
 ]

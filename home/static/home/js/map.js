@@ -71,8 +71,53 @@ async function initMap() {
             updateUserLocationMarker(position);
         }
 
+        fetchAndRenderCommunities(); 
+
+        fetchAndRenderProducts();
+
     } catch (error) {
         console.error("Failed to initialize map:", error);
+    }
+}
+
+async function fetchAndRenderProducts() {
+    const container = document.getElementById('product-scroll-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/store/api/featured/'); 
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.json();
+
+        if (data.products && data.products.length > 0) {
+            container.innerHTML = ''; 
+            data.products.forEach(product => {
+                const cardLink = document.createElement('a');
+                cardLink.href = product.view_url; 
+                cardLink.className = 'simple-product-card';
+
+                cardLink.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}">
+                    <div class="simple-product-card-content">
+                        <h3 class="simple-product-card-title" title="${product.name}">
+                            ${product.name}
+                        </h3>
+                        <p class="simple-product-card-price">${product.price_formatted}</p>
+                        <div class="simple-product-card-stats">
+                            <span>⭐ ${product.rating}</span>
+                            <span>${product.units_sold}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardLink);
+            });
+        } else {
+            container.innerHTML = '<p class="text-center muted px-4">Belum ada produk yang terdaftar.</p>';
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured products:", error);
+        container.innerHTML = '<p class="text-center muted px-4">Gagal memuat produk.</p>';
     }
 }
 
@@ -92,7 +137,7 @@ async function initializeMap(center, zoom, restriction) {
     });
     
     infoWindow = new google.maps.InfoWindow({
-        pixelOffset: new google.maps.Size(0, +160), 
+        pixelOffset: new google.maps.Size(0, -0), 
     });
 
     google.maps.event.addListener(infoWindow, 'domready', () => {
@@ -517,4 +562,42 @@ function createInfoContent(spot) {
         });
     }
     return div; 
+    
+}
+
+async function fetchAndRenderCommunities() {
+    const container = document.getElementById('community-scroll-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/community/api/featured/');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.json();
+
+        if (data.communities && data.communities.length > 0) {
+            container.innerHTML = ''; 
+            data.communities.forEach(community => {
+                const card = document.createElement('a');
+                card.href = community.detail_url; 
+                card.className = 'community-card';
+
+                const description = community.description ? 
+                    `<p class="card-text mb-2">${community.description}</p>` : 
+                    '<p class="card-text mb-2" style="min-height: 2.5em;"></p>';
+
+                card.innerHTML = `
+                    <h3 class="card-title">${community.name}</h3>
+                    ${description}
+                    <p class="card-subline">📍 ${community.fitness_spot_name}</p>
+                `;
+                container.appendChild(card);
+            });
+        } else {
+            container.innerHTML = '<p class="text-center muted px-4">Belum ada komunitas yang terdaftar.</p>';
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured communities:", error);
+        container.innerHTML = '<p class="text-center muted px-4">Gagal memuat komunitas.</p>';
+    }
 }

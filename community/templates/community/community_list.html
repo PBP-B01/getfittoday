@@ -4,15 +4,16 @@
 {% block body_class %}community-theme{% endblock %}
 
 {% block content %}
-<!-- HERO -->
+
+<div class="bg-gradient-to-b flex items-center justify-center rounded-b-3xl mb-20">
+    <h1 class="text-6xl md:text-6xl font-extrabold text-[var(--title)] tracking-wide drop-shadow-2xl">
+      COMMUNITY
+    </h1>
+</div>
+
 <div class="relative h-[40rem] w-full mb-16 z-[1]">
   <img src="{% static 'community/image/community-hero.jpg' %}" alt="Community Banner"
-       class="w-full h-full object-cover rounded-b-3xl shadow-lg">
-  <div class="absolute inset-0 bg-gradient-to-b from-black/40 to-black/45 flex items-center justify-center rounded-b-3xl">
-    <h1 class="text-6xl md:text-7xl font-extrabold text-[var(--accent)] tracking-wide drop-shadow-2xl">
-      Community
-    </h1>
-  </div>
+       class="w-full h-full object-cover rounded-b-3xl shadow-lg object-top">
 </div>
 
 <div class="max-w-6xl mx-auto px-4">
@@ -22,7 +23,6 @@
   </div>
   {% endif %}
 
-  <!-- CARDS -->
   <div id="community-cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for community in communities %}
       <div class="community-card community-item cursor-pointer"
@@ -57,7 +57,6 @@
   </div>
 </div>
 
-<!-- MODAL: list komunitas dari map -->
 <div id="community-modal"
      class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-300 z-40">
   <div class="modal-card relative">
@@ -67,7 +66,6 @@
   </div>
 </div>
 
-<!-- MODAL: add/edit -->
 <div id="edit-modal"
      class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity z-50">
   <div class="modal-card relative">
@@ -171,7 +169,6 @@
   .chip-teal{ background: var(--nav-bg); color:#fff; border-color: var(--nav-bg-darker); }
   .chip-teal:hover{ filter: brightness(1.05); }
 
-  /* Modal card */
   .modal-card{
     background: var(--card-bg);
     border: 1px solid var(--card-brd);
@@ -254,30 +251,30 @@
 
   .nav-user { position: relative; }
 
-  #userMenu, #mUserMenu {
-    position: absolute;
-    right: 0;
-    top: calc(100% + 8px);
-    z-index: 9999;
-    pointer-events: auto;
-    background: #fff;
-    border: 1px solid #DDE7FF;
-    border-radius: 12px;
-    box-shadow: 0 20px 40px rgba(0,0,0,.18);
-  }
-
-  #userMenu a, #mUserMenu a {
-    display: block;
-    color: #0B2E55;
-    padding: 10px 12px;
-  }
-  #userMenu a:hover, #mUserMenu a:hover { background: #EFF6FF; }
-
   .community-hero,
   .community-hero .overlay,
   .home-hero .overlay {
     position: relative;
     z-index: 1;
+  }
+
+  #userMenu .font-semibold, #mUserMenu .font-semibold {
+      color: rgb(0, 0, 0); 
+      opacity: 1;
+  }
+
+  #userMenu .text-red-600, #mUserMenu .text-red-600 {
+      color: red !important;
+  }
+
+  text-gray-800
+  #userMenu .px-4 .py-2, #mUserMenu .px-4 .py-2 {
+      color: red !important;
+  }
+
+  #userMenu a.text-red-600:hover, #mUserMenu a.text-red-600:hover {
+      background: rgb(255, 255, 255) !important;
+      color: rgb(139, 0, 0) !important;
   }
 </style>
 {% endblock %}
