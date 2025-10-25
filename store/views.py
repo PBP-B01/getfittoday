@@ -346,8 +346,7 @@ def view_product_detail(request, pk):
     
 def featured_products_api(request):
     try:
-        # Get 15 newest products
-        products = Product.objects.order_by('-created_at')[:15]
+        products = Product.objects.order_by('-units_sold')[:15]
         
         data = []
         for product in products:
