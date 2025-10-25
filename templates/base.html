@@ -34,6 +34,32 @@
       --nav-bg-darker: #07434B;
     }
 
+    nav {
+      position: sticky !important;
+      top: 0 !important;
+      position: relative;
+      will-change: transform; 
+      z-index: 100;
+    }
+
+    body {
+        margin: 0; 
+    }
+
+    #mobile-menu {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important; 
+        z-index: 50 !important; 
+
+        background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-700) 100%) !important;
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+        box-shadow: 0 16px 40px rgba(0,0,0,.25);
+    }
+
     #map-wrapper {
       border: 3px solid #DDE7FF;
       border-radius: 24px;
@@ -233,18 +259,18 @@
         </svg>
       </button>
     </div>
-  </nav>
 
-  <div id="mobile-menu" class="md:hidden hidden absolute top-16 left-0 w-full rounded-b-lg py-4 z-50 shadow-md">
+    <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 w-full rounded-b-lg py-4 z-50 shadow-md">
     <a href="{% url 'home:home' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">HOME</a>
-    <a href="#" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">KOMUNITAS</a>
+    <a href="{% url 'community_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">KOMUNITAS</a> {# <-- Fixed the # href #}
     <a href="{% url 'store:product_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">STORE</a>
     {% if request.user.is_authenticated or request.session.is_admin %}
       <a href="{% url 'booking:page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BOOKING</a>
     {% else %}
       <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BOOKING</a>
     {% endif %}
-  </div>
+    </div>
+  </nav>
 
   <main class="container mx-auto px-4 py-8 pt-6 relative z-0">
     {% block content %}{% endblock %}
