@@ -442,6 +442,26 @@
         color: var(--nav-text) !important;
         }
     }
+
+    #sidebar {
+        scrollbar-width: thin; 
+        scrollbar-color: var(--card-brd) var(--bg-1); 
+    }
+
+    #sidebar::-webkit-scrollbar {
+        width: 10px; 
+    }
+
+    #sidebar::-webkit-scrollbar-track {
+        background: var(--bg-1); 
+        border-radius: 10px;
+    }
+
+    #sidebar::-webkit-scrollbar-thumb {
+        background-color: var(--card-brd); 
+        border-radius: 10px;
+        border: 2px solid var(--bg-1); 
+    }
 </style>
 {% endblock %}
 
