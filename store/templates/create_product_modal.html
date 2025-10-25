@@ -1,0 +1,112 @@
+{% load static %}
+
+<div id="createProductModalContent"> <div class="flex items-center justify-between p-4 border-b">
+    <div>
+      <h3 class="text-xl font-semibold text-gray-900" id="create-modal-title"> Tambah Produk Baru
+      </h3>
+      <p class="text-sm text-gray-600 mt-1">Isi form di bawah untuk menambah produk</p>
+    </div>
+    <button type="button" 
+            class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center"
+            data-modal-hide="createProductModal">
+      <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+        <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+      </svg>
+      <span class="sr-only">Tutup modal</span>
+    </button>
+  </div>
+
+  <div class="px-6 py-4 max-h-[70vh] overflow-y-auto"> <form id="createProductForm" novalidate> {% csrf_token %}
+      
+      <div class="mb-4">
+        <label for="create_name" class="block text-sm font-medium text-gray-700">Nama Produk *</label>
+        <input type="text" id="create_name" name="name" required
+               class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 text-black bg-white"
+               placeholder="Masukkan nama produk">
+        <span class="text-red-600 text-sm mt-1 block" id="error-name"></span> </div>
+
+      <div class="mb-4">
+        <label for="create_price" class="block text-sm font-medium text-gray-700">Harga (Rp) *</label>
+        <input type="number" id="create_price" name="price" required min="0"
+               class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 text-black bg-white"
+               placeholder="Masukkan harga produk (contoh: 50000)">
+        <span class="text-red-600 text-sm mt-1 block" id="error-price"></span>
+      </div>
+
+      <div class="mb-4">
+        <label for="create_store" class="block text-sm font-medium text-gray-700">Toko *</label>
+        <select id="create_store" name="store" required
+                class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 text-black bg-white">
+          <option value="" disabled selected>-- Pilih Toko --</option> {% for spot in fitness_spots %} 
+            <option value="{{ spot.pk }}">{{ spot.name }}</option>
+          {% empty %}
+            <option value="" disabled>Tidak ada toko tersedia</option>
+          {% endfor %}
+        </select>
+        <span class="text-red-600 text-sm mt-1 block" id="error-store"></span>
+      </div>
+
+      <div class="mb-4">
+        <label for="create_image_url" class="block text-sm font-medium text-gray-700">URL Gambar *</label>
+        <input type="url" id="create_image_url" name="image_url" required
+               class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 text-black bg-white"
+               placeholder="https://example.com/image.jpg">
+        <span class="text-red-600 text-sm mt-1 block" id="error-image_url"></span>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4"> <div>
+          <label for="create_rating" class="block text-sm font-medium text-gray-700">Rating (0-5)</label>
+          <input type="number" id="create_rating" name="rating" step="0.1" min="0" max="5"
+                 class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 text-black bg-white"
+                 placeholder="Opsional (contoh: 4.5)">
+          <span class="text-red-600 text-sm mt-1 block" id="error-rating"></span>
+        </div>
+
+        <div>
+          <label for="create_units_sold" class="block text-sm font-medium text-gray-700">Jumlah Terjual</label>
+          <input type="text" id="create_units_sold" name="units_sold"
+                 class="mt-1 block w-full border border-gray-300 rounded-md px-3 py-2 focus:ring-indigo-500 focus:border-indigo-500 text-black bg-white"
+                 placeholder="Opsional (contoh: 100 atau 1rb+)">
+          <span class="text-red-600 text-sm mt-1 block" id="error-units_sold"></span>
+        </div>
+      </div>
+
+      <div id="generalError" class="hidden mb-4 p-3 bg-red-100 text-red-700 rounded-md text-sm"></div>
+    </form>
+  </div>
+
+  <div class="bg-gray-50 px-6 py-3 flex flex-col sm:flex-row-reverse gap-3 border-t"> <button type="button" id="submitCreateProduct"
+            class="w-full sm:w-auto px-6 py-2 bg-indigo-600 text-white rounded-md font-medium hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 disabled:opacity-50"
+            disabled> Simpan Produk
+    </button>
+    <button type="button" data-modal-hide="createProductModal"
+            class="w-full sm:w-auto px-6 py-2 border border-gray-300 text-gray-700 rounded-md font-medium hover:bg-gray-50">
+      Batal
+    </button>
+  </div>
+
+</div>
+
+<script>
+  (function() {
+    const form = document.getElementById('createProductForm');
+    const submitButton = document.getElementById('submitCreateProduct');
+    if (form && submitButton) {
+      const requiredInputs = form.querySelectorAll('[required]');
+      const checkValidity = () => {
+        let allValid = true;
+        requiredInputs.forEach(input => {
+          if (!input.value) {
+            allValid = false;
+          }
+        });
+        submitButton.disabled = !allValid;
+      };
+      requiredInputs.forEach(input => {
+        input.addEventListener('input', checkValidity);
+        input.addEventListener('change', checkValidity);
+      });
+      checkValidity();
+    }
+  })();
+</script>

@@ -1,275 +1,1076 @@
+{% extends 'base.html' %}
 {% load static humanize %}
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Store — Produk</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-gray-50">
-<div class="container mx-auto px-4 py-8">
 
-  <div class="flex justify-between items-center mb-6">
-    <a href="{% url 'home:home' %}" class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-indigo-600 mr-4 whitespace-nowrap">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
-        <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-      </svg>
-      Kembali ke Home
-    </a>
-    <h2 class="text-3xl font-bold text-gray-800 flex-grow text-center">Store</h2>
-    <div class="ml-4 whitespace-nowrap">
-      <a href="{% url 'store:view_cart' %}" class="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-        Keranjang
-        <span id="cart-count" class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-600 text-white">
-          {{ cart_count|default:0 }}
-        </span>
+{% block title %}Store — Produk{% endblock %}
+
+{% block extra_css %}
+  {{ block.super }}
+
+  <style>
+    :root {
+      --nav-bg: #0E5A64;
+      --nav-text: #FFFFFF;
+      --title: #1B2B5A;
+      --bg-1: #EAF2FF;
+      --bg-2: #BFD6F2;
+      --card-bg: #FFFFFF;
+      --card-brd: #C8DDF6;
+      --ink-weak: #6B7A99;
+      --accent-yellow: #FFC107;
+      --accent-yellow-dark: #E0A106;
+      --nav-bg-darker: #07434B;
+    }
+    body.home-theme {
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      min-height: 100vh;
+      color: var(--title);
+    }
+    body.home-theme > nav {
+      background: var(--nav-bg) !important;
+    }
+    body.home-theme > nav .hidden.md\:flex > a {
+      color: var(--nav-text) !important;
+    }
+    body.home-theme > nav .hidden.md\:flex > a:hover {
+      color: #e5e7eb !important; /* gray-200 */
+    }
+    body.home-theme > nav .brand {
+      color: var(--nav-text) !important;
+    }
+  </style>
+{% endblock %}
+
+{% block body_class %}home-theme{% endblock %}
+
+{% block content %}
+  <div class="container mx-auto px-4 py-8">
+    <div class="flex flex-wrap justify-between items-center mb-6 gap-4"> <a href="{% url 'home:home' %}"
+         class="inline-flex items-center text-sm font-medium text-[var(--ink-weak)] hover:text-[var(--title)] mr-4 whitespace-nowrap order-1">
+        <svg xmlns="http://www.w3.org/2000/svg"
+             class="h-5 w-5 mr-1"
+             viewBox="0 0 20 20"
+             fill="currentColor">
+          <path fill-rule="evenodd"
+                d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z"
+                clip-rule="evenodd" />
+        </svg>
+        Kembali ke Home
       </a>
+      <h2 class="text-3xl font-extrabold text-[var(--title)] flex-grow text-center order-2 w-full sm:w-auto">STORE</h2>
+      <div class="ml-auto whitespace-nowrap order-3"> {% if not request.session.is_admin %}
+        <a href="{% url 'store:view_cart' %}"
+           class="inline-flex items-center px-4 py-2 border border-[var(--card-brd)] shadow-sm text-sm font-medium rounded-md text-[var(--ink-weak)] bg-[var(--card-bg)] hover:bg-gray-50">
+          Keranjang
+          <span id="cart-count"
+                class="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-600 text-white">
+            {{ cart_count|default:0 }}
+          </span>
+        </a>
+        {% endif %}
+      </div>
+    </div>
+
+    <form method="get" id="filter-form" class="flex flex-wrap items-center gap-3 mb-6">
+      <div>
+        <input type="text" name="q" value="{{ q }}"
+               class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3 text-gray-900"
+               placeholder="Cari produk...">
+      </div>
+      <div>
+        <select name="sort" id="sort-select"
+                class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3 text-gray-900">
+          <option value="">Terbaru</option>
+          <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Harga: Termurah</option>
+          <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Harga: Termahal</option>
+          <option value="rating_desc" {% if sort == 'rating_desc' %}selected{% endif %}>Rating: Tertinggi</option>
+          <option value="rating_asc" {% if sort == 'rating_asc' %}selected{% endif %}>Rating: Terendah</option>
+        </select>
+      </div>
+      <div>
+        <button type="submit"
+                class="inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-[var(--title)] bg-[var(--accent-yellow)] hover:bg-[var(--accent-yellow-dark)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[var(--accent-yellow)]">
+          Filter
+        </button>
+      </div>
+      
+      {% if request.session.is_admin %}
+      <div class="ml-auto"> <button type="button" id="btnShowCreateModal"
+                class="inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" clip-rule="evenodd" />
+          </svg>
+          Tambah Produk
+        </button>
+      </div>
+      {% endif %}
+    </form>
+
+    <div id="product-list-container" class="text-gray-900">
+      {% include 'product_list2.html' %} 
     </div>
   </div>
-  <form method="get" class="flex flex-wrap items-center gap-3 mb-6" id="filter-form">
-    <div>
-      <input type="text" name="q" value="{{ q }}"
-             class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3"
-             placeholder="Cari produk...">
-    </div>
-    <div>
-      <select name="sort"
-              class="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 py-2 px-3"
-              id="sort-select">
-        <option value="">Terbaru</option>
-        <option value="price_asc" {% if sort == 'price_asc' %}selected{% endif %}>Harga: Termurah</option>
-        <option value="price_desc" {% if sort == 'price_desc' %}selected{% endif %}>Harga: Termahal</option>
-        <option value="rating_desc" {% if sort == 'rating_desc' %}selected{% endif %}>Rating: Tertinggi</option>
-        <option value="rating_asc" {% if sort == 'rating_asc' %}selected{% endif %}>Rating: Terendah</option>
-      </select>
-    </div>
-    <div>
-      <button type="submit" class="inline-flex items-center px-4 py-2 border border-transparent font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-        Filter
-      </button>
-    </div>
-  </form>
 
-  <div id="product-list-container">
-    {% include 'product_list2.html' %}
-  </div>
-
-</div>
-
-<div id="addToCartModal" class="hidden fixed z-50 inset-0 overflow-y-auto" aria-labelledby="modal-title" role="dialog" aria-modal="true">
-  <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
-    <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" aria-hidden="true" data-modal-hide="addToCartModal"></div>
-    <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
-    <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
-      <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-        <div class="sm:flex sm:items-start">
-          <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
-            <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
-            </svg>
-          </div>
-          <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-            <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
-              Berhasil Ditambahkan!
-            </h3>
-            <div class="mt-2">
-              <p class="text-sm text-gray-500" id="addToCartModalMessage"></p>
+  <div id="addToCartModal"
+       class="hidden fixed z-[2147483648] inset-0 overflow-y-auto"
+       aria-labelledby="modal-title"
+       role="dialog"
+       aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+           aria-hidden="true"
+           data-modal-hide="addToCartModal"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-sm sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+             <div id="addToCartModalIconContainer" class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-green-100 sm:mx-0 sm:h-10 sm:w-10">
+                <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="addToCartModalTitle">
+                Berhasil! </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500" id="addToCartModalMessage"></p>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-        <button type="button" data-modal-hide="addToCartModal" class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
-          Tutup
-        </button>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button type="button"
+                  data-modal-hide="addToCartModal"
+                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm">
+            Tutup
+          </button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+  <div id="deleteConfirmModal"
+       class="hidden fixed z-[2147483648] inset-0 overflow-y-auto"
+       aria-labelledby="delete-modal-title"
+       role="dialog"
+       aria-modal="true">
+    <div class="flex items-end justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+           aria-hidden="true"
+           data-modal-hide="deleteConfirmModal"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+      <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
+        <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+          <div class="sm:flex sm:items-start">
+            <div class="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-red-100 sm:mx-0 sm:h-10 sm:w-10">
+              <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg"
+                   fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                   aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <div class="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
+              <h3 class="text-lg leading-6 font-medium text-gray-900" id="delete-modal-title">
+                Konfirmasi Hapus
+              </h3>
+              <div class="mt-2">
+                <p class="text-sm text-gray-500" id="deleteModalMessage">
+                  Apakah Anda yakin untuk menghapus produk ini? Aksi ini tidak bisa dibatalkan.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+          <button type="button" id="confirmDeleteYes"
+                  class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-red-600 text-base font-medium text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 sm:ml-3 sm:w-auto sm:text-sm">
+            Ya, hapus
+          </button>
+          <button type="button"
+                  data-modal-hide="deleteConfirmModal"
+                  class="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:mt-0 sm:w-auto sm:text-sm">
+            Batal
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="editProductModal"
+       class="hidden fixed z-[2147483648] inset-0 overflow-y-auto"
+       aria-labelledby="edit-modal-title"
+       role="dialog"
+       aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+           aria-hidden="true"
+           data-modal-hide="editProductModal"></div>
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen" aria-hidden="true">&#8203;</span>
+
+      <div id="editProductModalContentContainer"
+           class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+           <div class="p-12 text-center">
+             <svg class="animate-spin h-8 w-8 text-gray-600 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+               <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+               <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+             </svg>
+             <p class="text-gray-600 mt-3">Memuat form edit...</p>
+           </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="createProductModal"
+       class="hidden fixed z-[2147483648] inset-0 overflow-y-auto"
+       aria-labelledby="create-modal-title"
+       role="dialog"
+       aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+           aria-hidden="true"
+           data-modal-hide="createProductModal"></div>
+      
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+      
+      <div id="createProductModalContainer" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-2xl sm:w-full">
+           {% include "create_product_modal.html" %}
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== MODAL VIEW PRODUCT DETAIL ========== -->
+  <div id="viewProductModal"
+       class="hidden fixed z-[2147483648] inset-0 overflow-y-auto"
+       aria-labelledby="view-product-modal-title"
+       role="dialog"
+       aria-modal="true">
+    <div class="flex items-center justify-center min-h-screen px-4 text-center sm:block sm:p-0">
+      <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
+           aria-hidden="true"
+           data-modal-hide="viewProductModal"></div>
+      
+      <span class="hidden sm:inline-block sm:align-middle sm:h-screen">&#8203;</span>
+      
+      <div id="viewProductModalContent" class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-3xl sm:w-full">
+        <div class="p-12 text-center">
+          <svg class="animate-spin h-8 w-8 text-gray-600 inline-block" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+          </svg>
+          <p class="text-gray-600 mt-3">Memuat detail produk...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+{% endblock %}
+
+
+{% block extra_js %}
 <script>
-// === Fungsi CSRF ===
-function getCookie(name) {
-  let cookieValue = null;
-  if (document.cookie && document.cookie !== '') {
-    const cookies = document.cookie.split(';');
-    for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].trim();
-      if (cookie.substring(0, name.length + 1) === (name + '=')) {
-        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-        break;
+  // === Fungsi CSRF ===
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+
+  const notificationModalEl = document.getElementById('addToCartModal');
+  const notificationModalMessageEl = document.getElementById('addToCartModalMessage');
+  const notificationModalTitleEl = document.getElementById('addToCartModalTitle');
+  const notificationModalIconContainer = document.getElementById('addToCartModalIconContainer');
+
+  const successIconSVG = `
+      <svg class="h-6 w-6 text-green-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+      </svg>`;
+  const errorIconSVG = `
+      <svg class="h-6 w-6 text-red-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>`;
+
+  function showNotificationModal(message, title = "Berhasil!", type = "success") {
+      if (notificationModalTitleEl) {
+          notificationModalTitleEl.textContent = title;
+      }
+      if (notificationModalMessageEl) {
+          notificationModalMessageEl.textContent = message;
+      }
+      if (notificationModalIconContainer) {
+          if (type === "error") {
+              notificationModalIconContainer.innerHTML = errorIconSVG;
+              notificationModalIconContainer.className = notificationModalIconContainer.className.replace(/bg-green-100/g, 'bg-red-100'); // Ensure replacement
+              notificationModalIconContainer.className = notificationModalIconContainer.className.replace(/text-green-600/g, 'text-red-600'); 
+          } else {
+              notificationModalIconContainer.innerHTML = successIconSVG;
+              notificationModalIconContainer.className = notificationModalIconContainer.className.replace(/bg-red-100/g, 'bg-green-100'); // Ensure replacement
+              notificationModalIconContainer.className = notificationModalIconContainer.className.replace(/text-red-600/g, 'text-green-600');
+          }
+      }
+      if (notificationModalEl) {
+          notificationModalEl.classList.remove('hidden');
+      }
+  }
+
+  function hideNotificationModal() {
+     if (notificationModalEl) {
+        notificationModalEl.classList.add('hidden');
+    }
+  }
+
+  if (notificationModalEl) {
+    notificationModalEl.querySelectorAll('[data-modal-hide]').forEach(btn => {
+      btn.addEventListener('click', hideNotificationModal);
+    });
+    notificationModalEl.addEventListener('click', (e) => {
+      if (e.target === notificationModalEl.querySelector('.fixed.inset-0')) {
+        hideNotificationModal();
+      }
+    });
+  }
+
+  // === AJAX Filter dan Paginasi ===
+  const productContainer = document.getElementById('product-list-container');
+  const filterForm = document.getElementById('filter-form');
+  const sortSelect = document.getElementById('sort-select');
+
+
+  async function fetchProductList(url) {
+    productContainer.innerHTML = '<p class="text-center py-10">Memuat produk...</p>';
+    try {
+      const requestUrl = new URL(url, window.location.origin);
+      requestUrl.searchParams.set('ajax', '1');
+
+      const response = await fetch(requestUrl, {
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        }
+      });
+
+      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+      const html = await response.text();
+
+      if (productContainer) {
+          productContainer.innerHTML = html;
+      }
+
+      const displayUrl = new URL(requestUrl);
+      displayUrl.searchParams.delete('ajax');
+      window.history.pushState({}, '', displayUrl);
+
+      attachAddToCartListeners();
+      attachAdminButtonListeners();
+    } catch (error) {
+      console.error('Gagal fetch produk:', error);
+      if (productContainer) {
+          productContainer.innerHTML = '<p class="text-center py-10 text-red-600">Gagal memuat produk. Silakan coba lagi.</p>';
       }
     }
   }
-  return cookieValue;
-}
-const csrftoken = getCookie('csrftoken');
 
-// === Modal Add to Cart ===
-const addToCartModalEl = document.getElementById('addToCartModal');
-const addToCartModalMessageEl = document.getElementById('addToCartModalMessage');
-function showAddToCartModal(message) {
-  addToCartModalMessageEl.textContent = message;
-  addToCartModalEl.classList.remove('hidden');
-}
-function hideAddToCartModal() {
-  addToCartModalEl.classList.add('hidden');
-}
-addToCartModalEl.querySelectorAll('[data-modal-hide]').forEach(btn => {
-    btn.addEventListener('click', hideAddToCartModal);
-});
-addToCartModalEl.addEventListener('click', (e) => {
-    if (e.target === addToCartModalEl.querySelector('.fixed.inset-0')) {
-        hideAddToCartModal();
-    }
-});
-
-// === AJAX Filter dan Paginasi ===
-const productContainer = document.getElementById('product-list-container');
-const filterForm = document.getElementById('filter-form');
-const sortSelect = document.getElementById('sort-select');
-
-async function fetchProductList(url) {
-  try {
-    const isAbsolute = url.startsWith('http');
-    let relativeUrl = url;
-    if (!isAbsolute && !url.startsWith('/')) {
-        relativeUrl = (window.location.pathname.endsWith('/') ? window.location.pathname : window.location.pathname + '/') + url;
-    } else if (!isAbsolute) {
-         relativeUrl = url;
-    }
-
-    const fullUrl = isAbsolute ? url : window.location.origin + relativeUrl;
-    const ajaxUrl = new URL(fullUrl);
-    ajaxUrl.searchParams.set('ajax', '1');
-
-    const response = await fetch(ajaxUrl);
-    if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-    const html = await response.text();
-
-    productContainer.innerHTML = html;
-
-    ajaxUrl.searchParams.delete('ajax');
-    window.history.pushState({}, '', ajaxUrl.pathname + ajaxUrl.search);
-
-    attachAddToCartListeners();
-    attachAdminButtonListeners();
-  } catch (error) {
-    console.error('Gagal fetch produk:', error);
-    productContainer.innerHTML = '<p class="text-red-600">Gagal memuat produk. Silakan coba lagi.</p>';
-  }
-}
-
-filterForm.addEventListener('submit', function(e) {
-  e.preventDefault();
-  const formData = new FormData(this);
-  const params = new URLSearchParams(formData);
-  fetchProductList(`?${params.toString()}`);
-});
-
-productContainer.addEventListener('click', function(e) {
-  const linkElement = e.target.closest('.page-link');
-  if (linkElement) {
-    e.preventDefault();
-    const url = linkElement.getAttribute('href');
-    if (url) {
-        fetchProductList(url);
-    }
-  }
-});
-
-// === AJAX ADD TO CART ===
-const cartCountEl = document.getElementById('cart-count');
-
-function attachAddToCartListeners() {
-  document.querySelectorAll('.form-add-to-cart').forEach(form => {
-    if (form._submitListener) {
-        form.removeEventListener('submit', form._submitListener);
-    }
-    form._submitListener = async function(e) {
+  if (filterForm) {
+    filterForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      const url = this.action;
       const formData = new FormData(this);
+      const params = new URLSearchParams(formData);
+      const currentPath = window.location.pathname;
+      fetchProductList(`${currentPath}?${params.toString()}`);
+    });
+  }
+
+  if (productContainer) {
+    productContainer.addEventListener('click', function (e) {
+      const linkElement = e.target.closest('.page-link');
+      if (linkElement && linkElement.tagName === 'A') {
+        e.preventDefault();
+        const url = linkElement.getAttribute('href');
+        if (url) fetchProductList(url);
+      }
+    });
+  }
+
+  // === AJAX ADD TO CART ===
+  const cartCountEl = document.getElementById('cart-count');
+
+  function attachAddToCartListeners() {
+    document.querySelectorAll('.form-add-to-cart').forEach(form => {
+      if (form._submitListenerAttached) {
+        form.removeEventListener('submit', form._submitListener);
+      }
+      
+      const submitHandler = async function (e) {
+        e.preventDefault();
+        const url = this.action;
+        const formData = new FormData(this);
+        const button = this.querySelector('button[type="submit"]');
+        const originalButtonText = button ? button.textContent : '...';
+        if(button) {
+            button.disabled = true;
+            button.textContent = 'Menambahkan...';
+        }
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'X-CSRFToken': csrftoken,
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          });
+          const data = await response.json();
+          if (data.success) {
+            showNotificationModal(data.message, 'Berhasil Ditambahkan!', 'success');
+            if (cartCountEl && data.cart_count !== undefined) {
+                cartCountEl.innerText = data.cart_count;
+            }
+          } else {
+             showNotificationModal(data.error || 'Gagal menambahkan produk.', 'Error!', 'error');
+          }
+        } catch (error) {
+          console.error('Error add to cart:', error);
+          showNotificationModal('Terjadi masalah koneksi.', 'Error!', 'error');
+        } finally {
+            if(button){
+                button.disabled = false;
+                button.textContent = originalButtonText;
+            }
+        }
+      };
+      
+      form.addEventListener('submit', submitHandler);
+      form._submitListener = submitHandler;
+      form._submitListenerAttached = true;
+    });
+  }
+
+  // === Modal Delete Produk (untuk Admin) ===
+  const deleteConfirmModalEl = document.getElementById('deleteConfirmModal');
+  const confirmDeleteYesBtn = document.getElementById('confirmDeleteYes');
+  const deleteModalMessageEl = document.getElementById('deleteModalMessage');
+
+  function showDeleteConfirmModal(productId, cardElement) {
+    if (confirmDeleteYesBtn && cardElement) {
+      confirmDeleteYesBtn.dataset.productId = productId;
+      const cardId = 'card-to-delete-' + Date.now();
+      cardElement.id = cardId;
+      confirmDeleteYesBtn.dataset.cardId = cardId;
+    }
+    if (deleteConfirmModalEl) {
+        deleteConfirmModalEl.classList.remove('hidden');
+    }
+  }
+
+  function hideDeleteConfirmModal() {
+    if (confirmDeleteYesBtn) {
+      delete confirmDeleteYesBtn.dataset.productId;
+      delete confirmDeleteYesBtn.dataset.cardId;
+    }
+    if (deleteConfirmModalEl) {
+        deleteConfirmModalEl.classList.add('hidden');
+    }
+  }
+
+  if (deleteConfirmModalEl) {
+    deleteConfirmModalEl.querySelectorAll('[data-modal-hide]').forEach(btn => {
+      btn.addEventListener('click', hideDeleteConfirmModal);
+    });
+    deleteConfirmModalEl.addEventListener('click', (e) => {
+      if (e.target === deleteConfirmModalEl.querySelector('.fixed.inset-0')) {
+        hideDeleteConfirmModal();
+      }
+    });
+  }
+  
+  if (confirmDeleteYesBtn) {
+    confirmDeleteYesBtn.addEventListener('click', async function () {
+      const productId = this.dataset.productId;
+      const cardId = this.dataset.cardId;
+      const cardElement = document.getElementById(cardId); 
+
+      if (!productId) {
+        console.error('Error: Missing product ID for deletion.');
+        hideDeleteConfirmModal();
+        return;
+      }
+
+      hideDeleteConfirmModal(); 
+
       try {
-        const response = await fetch(url, {
+        const response = await fetch(`/store/product/${productId}/delete/`, { 
           method: 'POST',
-          body: formData,
-          headers: { 'X-CSRFToken': csrftoken, 'X-Requested-With': 'XMLHttpRequest' }
+          headers: {
+            'X-CSRFToken': csrftoken,
+            'X-Requested-With': 'XMLHttpRequest'
+          }
         });
         const data = await response.json();
-        if (data.success) {
-          showAddToCartModal(data.message);
-          cartCountEl.innerText = data.cart_count;
+        if (response.ok && data.success) {
+          showNotificationModal(data.message, "Berhasil Dihapus!", "success");
+          if (cardElement) {
+             cardElement.remove(); 
+          } else {
+             console.warn('Card element not found by ID after delete confirmation, refreshing list.');
+             fetchProductList(window.location.href);
+          }
         } else {
-          alert(data.error || 'Gagal menambahkan produk.');
+           showNotificationModal(data.error || 'Gagal menghapus produk.', 'Error!', 'error');
         }
       } catch (error) {
-        console.error('Error add to cart:', error);
-        alert('Terjadi masalah koneksi.');
+        console.error('Error deleting product:', error);
+        showNotificationModal('Terjadi masalah koneksi saat mencoba menghapus produk.', 'Error!', 'error');
       }
-    };
-    form.addEventListener('submit', form._submitListener);
-  });
-}
+    });
+  }
 
+  // === Modal Edit Produk (untuk Admin) ===
 
-function attachAdminButtonListeners() {
-    document.querySelectorAll('.btn-delete').forEach(button => {
-        if (button._deleteListener) {
-            button.removeEventListener('click', button._deleteListener);
-        }
-        button._deleteListener = async function() {
-            const productId = this.dataset.productId;
+  const editProductModalEl = document.getElementById('editProductModal');
+  const editProductModalContentContainer = document.getElementById('editProductModalContentContainer');
+  const defaultSpinnerHtmlEdit = editProductModalContentContainer ? editProductModalContentContainer.innerHTML : ''; 
+  let isEditModalSubmitting = false;
 
-            if (!confirm(`Yakin ingin menghapus produk ini (ID: ${productId})? Aksi ini tidak bisa dibatalkan.`)) {
-                 return;
+  function showEditModal() {
+    if (editProductModalEl) editProductModalEl.classList.remove('hidden');
+  }
+
+  function hideEditModal() {
+    if (editProductModalEl) editProductModalEl.classList.add('hidden');
+    if (editProductModalContentContainer && defaultSpinnerHtmlEdit) {
+        editProductModalContentContainer.innerHTML = defaultSpinnerHtmlEdit;
+    }
+    isEditModalSubmitting = false;
+  }
+
+  if (editProductModalEl) {
+    editProductModalEl.addEventListener('click', (e) => {
+      const hideButton = e.target.closest('[data-modal-hide="editProductModal"]');
+      if (hideButton || e.target === editProductModalEl.querySelector('.fixed.inset-0')) {
+        hideEditModal();
+      }
+    });
+  }
+
+  function attachEditFormSubmitListener(form, submitUrl) {
+    const messageBox = editProductModalContentContainer.querySelector('#messageBox');
+    const saveButton = form.querySelector('#saveButton');
+    const cancelButton = form.querySelector('#cancelEditButton');
+
+    if (cancelButton) {
+      if (!cancelButton._clickListenerAttached) {
+          cancelButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          hideEditModal();
+        });
+        cancelButton._clickListenerAttached = true;
+      }
+    }
+
+    if (form._submitListenerAttached) return; 
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (isEditModalSubmitting) return;
+
+      isEditModalSubmitting = true;
+      if (saveButton) {
+        saveButton.disabled = true;
+        saveButton.textContent = "Menyimpan...";
+      }
+      if (messageBox) messageBox.classList.add('hidden'); 
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(submitUrl, {
+          method: "POST",
+          body: formData,
+          headers: {
+            "X-Requested-With": "XMLHttpRequest",
+            "X-CSRFToken": csrftoken
+          }
+        });
+
+        const contentType = response.headers.get("content-type");
+        if (contentType && contentType.includes("application/json")) {
+            const data = await response.json();
+            if (response.ok && data.success) {
+              if (messageBox) { 
+                messageBox.classList.remove("hidden", "bg-red-100", "text-red-700");
+                messageBox.classList.add("bg-green-100", "text-green-700");
+                messageBox.textContent = data.message || "Perubahan berhasil disimpan!";
+              }
+              setTimeout(() => {
+                hideEditModal();
+                showNotificationModal(data.message || "Perubahan berhasil disimpan!", "Sukses!", "success"); 
+                fetchProductList(window.location.href); 
+              }, 1000); 
+            } else {
+              if (messageBox) {
+                messageBox.classList.remove("hidden", "bg-green-100", "text-green-700");
+                messageBox.classList.add("bg-red-100", "text-red-700");
+                messageBox.textContent = data.error || "Gagal menyimpan perubahan. Coba lagi.";
+              }
+              throw new Error(data.error || 'Unknown error'); 
             }
+        } else if (contentType && contentType.includes("text/html") && !response.ok) {
+            const formHtml = await response.text();
+            editProductModalContentContainer.innerHTML = formHtml;
+            const newForm = editProductModalContentContainer.querySelector('#editForm');
+            if (newForm) {
+                attachEditFormSubmitListener(newForm, submitUrl); 
+            }
+             if (saveButton) { 
+                const newSaveButton = editProductModalContentContainer.querySelector('#saveButton');
+                if(newSaveButton) {
+                    newSaveButton.disabled = false;
+                    newSaveButton.textContent = "Simpan Perubahan";
+                }
+            }
+            isEditModalSubmitting = false; 
+            return; 
+        } else {
+             throw new Error('Format respons tidak dikenali.');
+        }
 
-            try {
-                const response = await fetch(`/store/product/${productId}/delete/`, {
-                    method: 'POST',
-                    headers: {
-                        'X-CSRFToken': csrftoken,
-                        'X-Requested-With': 'XMLHttpRequest'
-                    }
+      } catch (error) {
+        console.error("Error submitting edit form:", error);
+        const currentMessageBox = editProductModalContentContainer.querySelector('#messageBox');
+        if (currentMessageBox) {
+          currentMessageBox.classList.remove("hidden", "bg-green-100", "text-green-700");
+          currentMessageBox.classList.add("bg-red-100", "text-red-700");
+          currentMessageBox.textContent = error.message || "Terjadi kesalahan jaringan.";
+        }
+      } finally {
+         if (isEditModalSubmitting) { 
+            const finalSaveButton = editProductModalContentContainer.querySelector('#saveButton');
+            if (finalSaveButton) {
+                finalSaveButton.disabled = false;
+                finalSaveButton.textContent = "Simpan Perubahan";
+            }
+            isEditModalSubmitting = false;
+         }
+      }
+    });
+     form._submitListenerAttached = true;
+  }
+
+  // === Modal Create Produk (untuk Admin) ===
+
+  const createProductModalEl = document.getElementById('createProductModal');
+  const btnShowCreateModal = document.getElementById('btnShowCreateModal');
+  const createProductModalContainer = document.getElementById('createProductModalContainer'); 
+  let createProductForm = null; 
+  let submitCreateProduct = null; 
+  let generalErrorCreate = null; 
+
+  function showCreateModal() {
+    if (createProductModalEl) createProductModalEl.classList.remove('hidden');
+    if(createProductModalContainer) {
+        createProductForm = createProductModalContainer.querySelector('#createProductForm');
+        submitCreateProduct = createProductModalContainer.querySelector('#submitCreateProduct');
+        generalErrorCreate = createProductModalContainer.querySelector('#generalError');
+        if(createProductForm) createProductForm.reset();
+        clearCreateFormErrors();
+        
+        const submitButtonHelper = document.getElementById('submitCreateProduct');
+        if(submitButtonHelper && createProductForm) {
+             const requiredInputsHelper = createProductForm.querySelectorAll('[required]');
+             let allValidHelper = true;
+             requiredInputsHelper.forEach(input => { if (!input.value) allValidHelper = false; });
+             submitButtonHelper.disabled = !allValidHelper;
+        }
+    }
+  }
+
+  function hideCreateModal() {
+    if (createProductModalEl) {
+      createProductModalEl.classList.add('hidden');
+      if (createProductForm) createProductForm.reset(); 
+      clearCreateFormErrors(); 
+    }
+  }
+
+  function clearCreateFormErrors() {
+    if(!createProductModalContainer) return;
+    createProductModalContainer.querySelectorAll('[id^="error-"]').forEach(el => el.textContent = '');
+    if (generalErrorCreate) {
+      generalErrorCreate.classList.add('hidden');
+      generalErrorCreate.textContent = '';
+    }
+  }
+
+  function showCreateFormErrors(errors) {
+    if(!createProductModalContainer) return;
+    clearCreateFormErrors();
+    let firstErrorField = null;
+    for (const [field, messages] of Object.entries(errors)) {
+      const message = Array.isArray(messages) ? messages[0] : messages;
+      const errorEl = createProductModalContainer.querySelector(`#error-${field}`);
+      if (errorEl) {
+          errorEl.textContent = message;
+          if (!firstErrorField) firstErrorField = field; 
+      }
+    }
+    if (firstErrorField) {
+        const fieldInput = createProductModalContainer.querySelector(`[name="${firstErrorField}"]`);
+        try { if (fieldInput) fieldInput.focus(); } catch(e) { console.warn("Could not focus on error field:", fieldInput); }
+    }
+  }
+
+  if (btnShowCreateModal) {
+    btnShowCreateModal.addEventListener('click', showCreateModal);
+  }
+
+  if (createProductModalEl) {
+     createProductModalEl.addEventListener('click', (e) => {
+      const hideButton = e.target.closest('[data-modal-hide="createProductModal"]');
+      const isBackground = e.target === createProductModalEl.querySelector('.fixed.inset-0'); 
+      if (hideButton || isBackground) {
+        hideCreateModal();
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+      document.body.addEventListener('click', async function(e) {
+          if (e.target && e.target.id === 'submitCreateProduct') {
+              const button = e.target;
+              if(createProductModalContainer) {
+                  createProductForm = createProductModalContainer.querySelector('#createProductForm');
+                  generalErrorCreate = createProductModalContainer.querySelector('#generalError');
+              }
+              if (!createProductForm) { 
+                  console.error('Create form not found on submit');
+                  return;
+              }
+              
+              let isSubmittingCreate = button.dataset.submitting === 'true';
+              if (isSubmittingCreate) return;
+
+              if (!createProductForm.checkValidity()) {
+                const firstInvalid = createProductForm.querySelector(':invalid');
+                if(firstInvalid) firstInvalid.focus();
+                createProductForm.reportValidity(); 
+                return;
+              }
+
+              button.dataset.submitting = 'true';
+              button.disabled = true;
+              button.textContent = 'Menyimpan...';
+              clearCreateFormErrors();
+
+              const formData = new FormData(createProductForm);
+
+              try {
+                const response = await fetch("{% url 'store:create_product_ajax' %}", { 
+                  method: 'POST',
+                  body: formData,
+                  headers: {
+                    'X-CSRFToken': csrftoken,
+                    'X-Requested-With': 'XMLHttpRequest'
+                  }
                 });
+
                 const data = await response.json();
 
                 if (response.ok && data.success) {
-                    showAddToCartModal(data.message);
-                    this.closest('.w-64').remove();
+                  hideCreateModal();
+                  showNotificationModal(data.message, 'Produk Ditambahkan!', 'success');
+                  fetchProductList(window.location.href); 
+                  
+                } else if (!response.ok && data.errors) {
+                  showCreateFormErrors(data.errors);
                 } else {
-                    alert(data.error || 'Gagal menghapus produk. Cek console server.');
+                  if (generalErrorCreate) {
+                    generalErrorCreate.classList.remove('hidden');
+                    generalErrorCreate.textContent = data.error || 'Gagal menambahkan produk. Coba lagi.';
+                  }
                 }
-            } catch (error) {
-                console.error('Error deleting product:', error);
-                alert('Terjadi masalah koneksi saat mencoba menghapus produk.');
-            }
-        };
+              } catch (error) {
+                console.error('Error creating product via AJAX:', error);
+                if (generalErrorCreate) {
+                  generalErrorCreate.classList.remove('hidden');
+                  generalErrorCreate.textContent = 'Terjadi kesalahan jaringan. Silakan coba lagi.';
+                }
+              } finally {
+                  button.dataset.submitting = 'false';
+                  if (createProductForm.checkValidity()) {
+                      button.disabled = false;
+                  }
+                  button.textContent = 'Simpan Produk';
+              }
+          }
+      });
+  });
 
-        button.addEventListener('click', button._deleteListener);
-    });
 
+  // Tombol Admin (Edit / Delete)
+  function attachAdminButtonListeners() {
+    // --- Bagian Delete ---
+    document.querySelectorAll('.btn-delete').forEach(button => {
+      if (button._deleteListenerAttached) {
+        button.removeEventListener('click', button._deleteListener);
+      }
+      const deleteHandler = function () {
+        const productId = this.dataset.productId;
+        const cardElement = this.closest('[data-product-card="true"]') || this.closest('article') || this.closest('div.bg-white');
 
-    document.querySelectorAll('.btn-edit').forEach(button => {
-        if (button._editListener) {
-            button.removeEventListener('click', button._editListener);
+        if (cardElement && productId) {
+          showDeleteConfirmModal(productId, cardElement);
+        } else {
+          console.error('Cannot find product card or product ID for delete button:', this);
+          showNotificationModal('Gagal memulai proses hapus: elemen tidak ditemukan.', 'Error', 'error');
         }
-        button._editListener = function() {
-            const productId = this.dataset.productId;
-            window.location.href = `/store/product/${productId}/edit/`;
-        };
-
-        button.addEventListener('click', button._editListener);
+      };
+      button.addEventListener('click', deleteHandler);
+      button._deleteListener = deleteHandler; 
+      button._deleteListenerAttached = true;
     });
-}
 
-document.addEventListener('DOMContentLoaded', () => {
-  attachAddToCartListeners();
-  attachAdminButtonListeners();
-});
+    // --- Bagian Edit ---
+    document.querySelectorAll('.btn-edit').forEach(button => {
+       if (button._editListenerAttached) {
+        button.removeEventListener('click', button._editListener);
+      }
+      
+      const editHandler = async function () {
+        const productId = this.dataset.productId;
+        if (!productId) {
+            console.error('Missing product ID on edit button:', this);
+            return;
+        }
+        const editUrl = `/store/product/${productId}/edit/`; 
+
+        showEditModal(); 
+
+        try {
+          const response = await fetch(editUrl, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+          });
+
+          if (!response.ok) throw new Error('Gagal memuat form edit. Status: ' + response.status);
+          
+          const formHtml = await response.text();
+
+          editProductModalContentContainer.innerHTML = formHtml; 
+
+          const formElement = editProductModalContentContainer.querySelector('#editForm');
+          if (formElement) {
+            attachEditFormSubmitListener(formElement, editUrl);
+          } else {
+            throw new Error('Form #editForm tidak ditemukan dalam respons HTML.');
+          }
+
+        } catch (error) {
+          console.error('Error fetching/processing edit form:', error);
+          editProductModalContentContainer.innerHTML = `
+              <div class="p-8 text-center">
+                  <p class="text-red-600 mb-4">Gagal memuat form edit: ${error.message}. Silakan tutup dan coba lagi.</p> 
+                  <button type="button" class="mt-4 px-4 py-2 bg-gray-200 rounded text-gray-800" data-modal-hide="editProductModal">Tutup</button>
+              </div>`;
+           const closeButton = editProductModalContentContainer.querySelector('button[data-modal-hide="editProductModal"]');
+           if(closeButton) closeButton.addEventListener('click', hideEditModal);
+        }
+      };
+
+      button.addEventListener('click', editHandler);
+      button._editListener = editHandler; 
+      button._editListenerAttached = true;
+    });
+
+    attachViewProductListeners();
+  }
+
+
+  // MODAL VIEW PRODUCT DETAIL (ini bisa admin atau signed in user, tapi kalo user yg blm login gabisa)
+
+  const viewProductModalEl = document.getElementById('viewProductModal');
+  const viewProductModalContent = document.getElementById('viewProductModalContent');
+  const defaultSpinnerHtmlView = viewProductModalContent ? viewProductModalContent.innerHTML : '';
+
+  function showViewProductModal() {
+    if (viewProductModalEl) viewProductModalEl.classList.remove('hidden');
+  }
+
+  function hideViewProductModal() {
+    if (viewProductModalEl) viewProductModalEl.classList.add('hidden');
+    if (viewProductModalContent && defaultSpinnerHtmlView) {
+      viewProductModalContent.innerHTML = defaultSpinnerHtmlView;
+    }
+  }
+
+  if (viewProductModalEl) {
+    viewProductModalEl.addEventListener('click', (e) => {
+      const hideButton = e.target.closest('[data-modal-hide="viewProductModal"]');
+      if (hideButton || e.target === viewProductModalEl.querySelector('.fixed.inset-0')) {
+        hideViewProductModal();
+      }
+    });
+  }
+
+  function attachViewProductListeners() {
+    document.querySelectorAll('.btn-view-product').forEach(button => {
+      if (button._viewListenerAttached) {
+        button.removeEventListener('click', button._viewListener);
+      }
+
+      const viewHandler = async function() {
+        const productId = this.dataset.productId;
+        if (!productId) {
+          console.error('Missing product ID on view button:', this);
+          return;
+        }
+
+        showViewProductModal();
+
+        try {
+          const response = await fetch(`/store/product/${productId}/view/`, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+          });
+
+          if (!response.ok) throw new Error('Gagal memuat detail produk. Status: ' + response.status);
+
+          const html = await response.text();
+          viewProductModalContent.innerHTML = html;
+
+          attachAddToCartListenersInModal();
+          attachAdminButtonListenersInModal();
+
+        } catch (error) {
+          console.error('Error fetching product detail:', error);
+          viewProductModalContent.innerHTML = `
+            <div class="p-8 text-center">
+              <p class="text-red-600 mb-4">Gagal memuat detail produk: ${error.message}</p>
+              <button type="button" class="mt-4 px-4 py-2 bg-gray-200 rounded text-gray-800" data-modal-hide="viewProductModal">Tutup</button>
+            </div>`;
+          const closeButton = viewProductModalContent.querySelector('button[data-modal-hide="viewProductModal"]');
+          if (closeButton) closeButton.addEventListener('click', hideViewProductModal);
+        }
+      };
+
+      button.addEventListener('click', viewHandler);
+      button._viewListener = viewHandler;
+      button._viewListenerAttached = true;
+    });
+  }
+
+  function attachAddToCartListenersInModal() {
+    const modalForms = viewProductModalContent.querySelectorAll('.form-add-to-cart');
+    modalForms.forEach(form => {
+      if (form._submitListenerAttached) return;
+
+      const submitHandler = async function(e) {
+        e.preventDefault();
+        const url = this.action;
+        const formData = new FormData(this);
+        const button = this.querySelector('button[type="submit"]');
+        const originalButtonText = button ? button.textContent : '...';
+        if (button) {
+          button.disabled = true;
+          button.textContent = 'Menambahkan...';
+        }
+
+        try {
+          const response = await fetch(url, {
+            method: 'POST',
+            body: formData,
+            headers: {
+              'X-CSRFToken': csrftoken,
+              'X-Requested-With': 'XMLHttpRequest'
+            }
+          });
+          const data = await response.json();
+          if (data.success) {
+            hideViewProductModal();
+            showNotificationModal(data.message, 'Berhasil Ditambahkan!', 'success');
+            if (cartCountEl && data.cart_count !== undefined) {
+              cartCountEl.innerText = data.cart_count;
+            }
+          } else {
+            showNotificationModal(data.error || 'Gagal menambahkan produk.', 'Error!', 'error');
+          }
+        } catch (error) {
+          console.error('Error add to cart from modal:', error);
+          showNotificationModal('Terjadi masalah koneksi.', 'Error!', 'error');
+        } finally {
+          if (button) {
+            button.disabled = false;
+            button.textContent = originalButtonText;
+          }
+        }
+      };
+
+      form.addEventListener('submit', submitHandler);
+      form._submitListener = submitHandler;
+      form._submitListenerAttached = true;
+    });
+  }
+
+  function attachAdminButtonListenersInModal() {
+    const editButtons = viewProductModalContent.querySelectorAll('.btn-edit');
+    editButtons.forEach(button => {
+      if (button._editListenerAttached) return;
+
+      button.addEventListener('click', async function() {
+        const productId = this.dataset.productId;
+        if (!productId) return;
+
+        hideViewProductModal();
+        
+        const editUrl = `/store/product/${productId}/edit/`;
+        showEditModal();
+
+        try {
+          const response = await fetch(editUrl, {
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+          });
+          if (!response.ok) throw new Error('Gagal memuat form edit.');
+          const formHtml = await response.text();
+          editProductModalContentContainer.innerHTML = formHtml;
+          const formElement = editProductModalContentContainer.querySelector('#editForm');
+          if (formElement) attachEditFormSubmitListener(formElement, editUrl);
+        } catch (error) {
+          console.error('Error fetching edit form:', error);
+        }
+      });
+      button._editListenerAttached = true;
+    });
+
+    const deleteButtons = viewProductModalContent.querySelectorAll('.btn-delete');
+    deleteButtons.forEach(button => {
+      if (button._deleteListenerAttached) return;
+
+      button.addEventListener('click', function() {
+        const productId = this.dataset.productId;
+        hideViewProductModal();
+        
+        if (confirmDeleteYesBtn) {
+          confirmDeleteYesBtn.dataset.productId = productId;
+          confirmDeleteYesBtn.dataset.fromModal = 'true';
+        }
+        if (deleteConfirmModalEl) deleteConfirmModalEl.classList.remove('hidden');
+      });
+      button._deleteListenerAttached = true;
+    });
+  }
+
+  // === Init ===
+  document.addEventListener('DOMContentLoaded', () => {
+    attachAddToCartListeners();
+    attachAdminButtonListeners();
+    attachViewProductListeners();
+  });
 </script>
-
-</body>
-</html>
+{% endblock %}
