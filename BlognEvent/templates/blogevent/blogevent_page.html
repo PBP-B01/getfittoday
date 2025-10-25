@@ -21,7 +21,6 @@
         --nav-text: #FFFFFF;
     }
 
-    /* Navbar teal styling */
     body.home-theme nav {
         background-color: var(--nav-bg) !important;
         color: var(--nav-text) !important;
@@ -68,7 +67,6 @@
         margin-bottom: 10px;
     }
 
-    /* Tab Slider */
     .tab-container {
         background: var(--card-bg);
         padding: 30px 40px 0;
@@ -139,6 +137,7 @@
 
     .add-dropdown-wrapper {
     position: relative;
+    transform:translateY(-10%);
     z-index: 10;
     }
 
@@ -406,7 +405,6 @@
         }
     }
 
-    /* === Modal === */
     #detailModal {
         display: none;
         position: fixed;
@@ -595,17 +593,14 @@
 
 {% block extra_js %}
 <script>
-// Get current user's username from Django template
 const currentUsername = '{{ user.username }}';
 
-// Toggle add dropdown
 function toggleAddDropdown(event) {
     event.stopPropagation();
     const dropdown = document.getElementById('addDropdown');
     dropdown.classList.toggle('active');
 }
 
-// Close dropdown when clicking outside
 document.addEventListener('click', function(event) {
     const dropdown = document.getElementById('addDropdown');
     if (dropdown && !dropdown.contains(event.target)) {
@@ -613,7 +608,6 @@ document.addEventListener('click', function(event) {
     }
 });
 
-// Search functionality
 function performSearch() {
     const searchTerm = document.getElementById('searchInput').value.toLowerCase();
     const myContentOnly = document.getElementById('myContentFilter') ? document.getElementById('myContentFilter').checked : false;
@@ -633,7 +627,6 @@ function searchCards(selector, searchTerm, type, myContentOnly) {
     let visibleCount = 0;
     
     cards.forEach(card => {
-        // Skip empty state messages
         if (card.classList.contains('empty-state')) {
             return;
         }
@@ -645,11 +638,9 @@ function searchCards(selector, searchTerm, type, myContentOnly) {
         const owner = card.getAttribute('data-owner') || '';
         
         const searchableText = `${title} ${desc} ${body} ${author}`;
-        
-        // Check if text matches search term
+
         const matchesSearch = searchTerm === '' || searchableText.includes(searchTerm);
-        
-        // Check if belongs to current user (if filter is enabled)
+
         const matchesOwner = !myContentOnly || owner === currentUsername;
         
         if (matchesSearch && matchesOwner) {
@@ -660,7 +651,6 @@ function searchCards(selector, searchTerm, type, myContentOnly) {
         }
     });
     
-    // Show/hide no results message
     if (visibleCount === 0) {
         grid.style.display = 'none';
         noResults.style.display = 'block';
@@ -670,14 +660,11 @@ function searchCards(selector, searchTerm, type, myContentOnly) {
     }
 }
 
-// Tab switching functionality
 function switchTab(tabName, index) {
-    // Update active tab button
     const buttons = document.querySelectorAll('.tab-button');
     buttons.forEach(btn => btn.classList.remove('active'));
     buttons[index].classList.add('active');
 
-    // Update tab indicator position
     const indicator = document.getElementById('tabIndicator');
     const button = buttons[index];
     const slider = document.querySelector('.tab-slider');
@@ -690,17 +677,14 @@ function switchTab(tabName, index) {
     indicator.style.left = left + 'px';
     indicator.style.width = width + 'px';
 
-    // Show/hide content
     document.querySelectorAll('.tab-content').forEach(content => {
         content.classList.remove('active');
     });
     document.getElementById(`${tabName}-content`).classList.add('active');
-    
-    // Re-apply search when switching tabs
+
     performSearch();
 }
 
-// Initialize tab indicator on page load
 window.addEventListener('DOMContentLoaded', function() {
     const firstButton = document.querySelector('.tab-button.active');
     const indicator = document.getElementById('tabIndicator');
