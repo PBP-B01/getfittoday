@@ -11,4 +11,5 @@ urlpatterns = [
     path("login/ajax/", views.login_ajax, name="login_ajax"),
     path("register/ajax/", views.register_ajax, name="register_ajax"),
     path("logout/ajax/", views.logout_ajax, name="logout_ajax"),
+
 ]

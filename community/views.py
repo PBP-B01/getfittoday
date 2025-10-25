@@ -212,3 +212,22 @@ def communities_by_place_json(request, place_id):
     except Exception as e:
         print(f"Error in communities_by_place_json for place_id {place_id}: {e}") 
         return JsonResponse({'error': 'An internal error occurred', 'communities': []}, status=500)
+    
+def featured_communities_api(request):
+    try:
+        communities = Community.objects.order_by('-id')[:15]
+
+        data = []
+        for community in communities:
+            data.append({
+                'id': community.id,
+                'name': community.name,
+                'description': community.description,
+                'fitness_spot_name': community.fitness_spot.name if community.fitness_spot else 'Lokasi tidak diketahui',
+                'detail_url': reverse('community_detail', args=[community.id]),
+            })
+        
+        return JsonResponse({'communities': data})
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

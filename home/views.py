@@ -17,7 +17,6 @@ from .models import FitnessSpot
 from .utils.spots_loader import build_index_and_bounds, load_all_spots
 
 
-# --- Grid Configuration ---
 GRID_ORIGIN_LAT = -6.8  # Bottom-left corner of our grid (latitude)
 GRID_ORIGIN_LNG = 106.5 # Bottom-left corner of our grid (longitude)
 GRID_CELL_SIZE_DEG = 0.09 # The size of each grid square in degrees (approx. 10km)
@@ -28,7 +27,7 @@ def get_grid_bounds(grid_id):
         row_str, col_str = grid_id.split('-')
         row, col = int(row_str), int(col_str)
     except (ValueError, IndexError):
-        return None # Invalid grid ID format
+        return None 
 
     sw_lat = GRID_ORIGIN_LAT + row * GRID_CELL_SIZE_DEG
     sw_lng = GRID_ORIGIN_LNG + col * GRID_CELL_SIZE_DEG

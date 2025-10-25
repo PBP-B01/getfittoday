@@ -1,142 +1,291 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Daftar Komunitas{% endblock %}
-
-{% block head %}
-  {{ block.super }}
-  <style>
-    #fitnessSpotList {
-      max-height: 18rem; 
-      overflow-y: auto;
-      border: 1px solid #e5e7eb;
-      z-index: 9999 !important; 
-      background-color: #ffffff;
-      color: #1f2937;
-    }
-    #fitnessSpotList li:hover {
-      background-color: #eff6ff;
-    }
-    #fitnessSpotList li.active-suggestion {
-      background-color: #dbeafe; 
-    }
-    #edit-modal {
-        z-index: 50 !important;
-    }
-  </style>
-{% endblock %}
+{% block body_class %}community-theme{% endblock %}
 
 {% block content %}
-<div class="relative h-[40rem] w-full mb-16">
-  <img src="{% static 'community/image/community-hero.jpg' %}"
-       alt="Community Banner"
-       class="w-full h-full object-cover rounded-b-3xl shadow-lg">
-  <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
-    <h1 class="text-6xl md:text-7xl font-extrabold text-yellow-400 tracking-wide drop-shadow-2xl">
-      Community
+
+<div class="bg-gradient-to-b flex items-center justify-center rounded-b-3xl mb-20">
+    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[var(--title)] tracking-wide drop-shadow-2xl">
+      COMMUNITY
     </h1>
-  </div>
 </div>
 
+<div class="relative h-[40rem] w-full mb-16 z-[1]">
+  <img src="{% static 'community/image/community-hero.jpg' %}" alt="Community Banner"
+       class="w-full h-full object-cover rounded-b-3xl shadow-lg object-top">
+</div>
 
 <div class="max-w-6xl mx-auto px-4">
   {% if request.user.is_authenticated %}
   <div class="mb-6 text-right">
-    <button id="add-community-btn" class="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg transition shadow-md">
-      ➕ Tambah Komunitas
-    </button>
+    <button id="add-community-btn" class="btn-accent">➕ Tambah Komunitas</button>
   </div>
   {% endif %}
 
   <div id="community-cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for community in communities %}
-        <div class="bg-yellow-400 text-black rounded-2xl shadow-md transform transition duration-300 hover:-translate-y-2 hover:shadow-xl relative p-5 border border-yellow-800 cursor-pointer flex flex-col"
-             data-id="{{ community.id }}"
-             data-spot-id="{{ community.fitness_spot.place_id }}" data-url="{% url 'community_detail' community.id %}">
+      <div class="community-card community-item cursor-pointer"
+           data-id="{{ community.id }}"
+           data-spot-id="{{ community.fitness_spot.place_id }}"
+           data-url="{% url 'community_detail' community.id %}">
+        <h3 class="card-title text-center">{{ community.name }}</h3>
 
-        <h3 class="text-xl font-semibold mb-2 text-center">{{ community.name }}</h3>
-        <p class="text-black-100 mb-2">{{ community.description }}</p>
-        <p class="text-sm font-medium mb-1">📍 {{ community.fitness_spot.name }}</p>
+        {% if community.description %}
+          <p class="card-text mb-2">{{ community.description }}</p>
+        {% endif %}
+
+        <p class="card-subline">📍 {{ community.fitness_spot.name }}</p>
+
         {% if community.contact_info %}
-          <p class="text-sm">📞 {{ community.contact_info }}</p>
+          <p class="card-text mt-1">📞 {{ community.contact_info }}</p>
         {% endif %}
 
         {% if request.user in community.admins.all %}
-        <div class="absolute top-3 right-3 flex space-x-2">
-          <button class="edit-btn bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 shadow-sm">Edit</button>
-          <button class="delete-btn bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 shadow-sm">Delete</button>
-        </div>
-        <div class="absolute top-3 left-3">
-          <button class="add-admin-btn bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 shadow-sm" title="Add Admin">➕</button>
-        </div>
+          <div class="abs-actions-right">
+            <button class="chip chip-accent edit-btn">Edit</button>
+            <button class="chip chip-danger delete-btn">Delete</button>
+          </div>
+          <div class="abs-actions-left">
+            <button class="chip chip-teal add-admin-btn" title="Add Admin">➕</button>
+          </div>
         {% endif %}
-        </div>
+      </div>
     {% empty %}
-      <p class="text-center text-gray-700 col-span-3">Belum ada komunitas yang terdaftar.</p>
+      <p class="text-center muted col-span-3">Belum ada komunitas yang terdaftar.</p>
     {% endfor %}
   </div>
 </div>
 
-<div id="community-modal" class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-300 z-40">
-  <div class="bg-white rounded-xl p-6 max-w-md w-full relative text-black">
-    <button id="close-community-modal" class="absolute top-2 right-2 text-gray-500 hover:text-gray-800">&times;</button>
-    <h3 class="font-bold text-lg mb-2">Komunitas di Lokasi Ini</h3>
+<div id="community-modal"
+     class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-300 z-40">
+  <div class="modal-card relative">
+    <button id="close-community-modal" class="modal-close">&times;</button>
+    <h3 class="section-title mb-3">Komunitas di Lokasi Ini</h3>
     <div id="community-modal-content"></div>
   </div>
 </div>
 
-<div id="edit-modal" class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity z-50"> <div class="bg-blue-900 text-white p-6 rounded-xl max-w-md w-full relative shadow-2xl">
-    <button id="close-edit-modal" class="absolute top-3 right-3 text-white hover:text-gray-300 text-2xl leading-none">&times;</button>
-    <h3 class="text-xl font-bold mb-5" id="edit-modal-title">Edit Komunitas</h3>
+<div id="edit-modal"
+     class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity z-50">
+  <div class="modal-card relative">
+    <button id="close-edit-modal" class="modal-close">&times;</button>
+    <h3 class="section-title mb-5" id="edit-modal-title">Edit Komunitas</h3>
 
     <form id="edit-form">
       {% csrf_token %}
       <input type="hidden" name="community_id" id="edit-id">
 
       <div class="mb-4">
-        <label for="id_name" class="block text-sm font-medium mb-1">Nama Komunitas</label>
-        {{ form.name }} </div>
+        <label for="id_name" class="auth-label">Nama Komunitas</label>
+        {{ form.name }}
+      </div>
 
       <div class="mb-4">
-        <label for="id_description" class="block text-sm font-medium mb-1">Deskripsi</label>
-        {{ form.description }} </div>
+        <label for="id_description" class="auth-label">Deskripsi</label>
+        {{ form.description }}
+      </div>
 
       <div class="mb-4">
-        <label for="fitnessSpotSearchInput" class="block text-sm font-medium mb-1">Fitness Spot</label>
+        <label for="fitnessSpotSearchInput" class="auth-label">Fitness Spot</label>
         <div class="relative">
-          <input id="fitnessSpotSearchInput" type="text" placeholder="Cari lokasi..."
-                 autocomplete="off"
-                 class="w-full border rounded p-2 text-black bg-gray-50 placeholder-gray-400">
-          <ul id="fitnessSpotList"
-              class="absolute left-0 right-0 bg-white text-blue-900 rounded-lg shadow-lg mt-1 hidden">
-              </ul>
+          <input id="fitnessSpotSearchInput" type="text" placeholder="Cari lokasi..." autocomplete="off" class="search-input">
+          <ul id="fitnessSpotList" class="suggestion-list hidden"></ul>
         </div>
-        {{ form.fitness_spot }} </div>
-      <div class="mb-5">
-        <label for="id_contact_info" class="block text-sm font-medium mb-1">Kontak</label>
-        {{ form.contact_info }} </div>
+        {{ form.fitness_spot }}
+      </div>
 
-      <div class="flex justify-end space-x-3 pt-2">
-        <button type="button" id="close-edit-modal-btn" class="px-4 py-2 rounded-lg bg-gray-500 hover:bg-gray-600 text-white transition">
-          Batal
-        </button>
-        <button type="submit" class="px-4 py-2 rounded-lg bg-green-600 hover:bg-green-700 text-white transition">
-          Simpan
-        </button>
+      <div class="mb-5">
+        <label for="id_contact_info" class="auth-label">Kontak</label>
+        {{ form.contact_info }}
+      </div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button type="button" id="close-edit-modal-btn" class="btn-muted">Batal</button>
+        <button type="submit" class="btn-teal">Simpan</button>
       </div>
     </form>
   </div>
 </div>
 
 {{ all_fitness_spots_data|json_script:"fitness-spots-data" }}
+{% endblock %}
 
+{% block extra_css %}
+{{ block.super }}
+<style>
+  :root{
+    --nav-bg:#0E5A64; --nav-bg-darker:#07434B; --nav-text:#FFFFFF;
+    --title:#1B2B5A; --bg-1:#EAF2FF; --bg-2:#BFD6F2;
+    --card-bg:#FFFFFF; --card-brd:#C8DDF6; --card-brd-strong:#DDE7FF;
+    --ink-weak:#6B7A99; --accent:#FFC107; --accent-dark:#E0A106;
+    --tile:#4E73B5; --tile-hover:#5E82C2; --ring:#9EC5FF80;
+  }
+
+  body.community-theme{
+    background:
+      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    color: var(--nav-text);
+  }
+  body.community-theme nav{
+    background-color: var(--nav-bg) !important;
+    color: var(--nav-text) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  }
+  body.community-theme nav a{ color: var(--nav-text) !important; }
+  body.community-theme nav a:hover{ opacity:.92; }
+
+  .community-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-brd);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: 0 10px 24px rgba(13,43,63,.10), inset 0 1px 0 rgba(255,255,255,.65);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    position: relative;
+  }
+  .community-card:hover{
+    transform: translateY(-3px);
+    box-shadow: 0 18px 36px rgba(13,43,63,.16);
+    border-color: var(--card-brd-strong);
+  }
+  .card-title{ color: var(--title); font-weight: 800; font-size: 1.15rem; margin-bottom: .4rem; }
+  .card-text{ color:#0B2E55; opacity:.9; }
+  .card-subline{ color:#0B2E55; font-weight:600; }
+
+  .abs-actions-right{ position:absolute; top:10px; right:10px; display:flex; gap:6px; }
+  .abs-actions-left{ position:absolute; top:10px; left:10px; }
+
+  .chip{
+    padding:.25rem .5rem; border-radius:10px; font-size:.8rem; font-weight:700; border:1px solid transparent;
+    box-shadow: 0 4px 10px rgba(0,0,0,.08);
+  }
+  .chip-accent{ background: var(--accent); color:#0B2E55; }
+  .chip-accent:hover{ background: var(--accent-dark); }
+  .chip-danger{ background:#DC2626; color:#fff; border-color:#B91C1C; }
+  .chip-danger:hover{ filter: brightness(1.05); }
+  .chip-teal{ background: var(--nav-bg); color:#fff; border-color: var(--nav-bg-darker); }
+  .chip-teal:hover{ filter: brightness(1.05); }
+
+  .modal-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-brd);
+    border-radius: 16px;
+    padding: 22px;
+    max-width: 560px; width: 100%;
+    color: #0B2E55;
+    box-shadow: 0 40px 80px rgba(13,43,63,.18), 0 12px 24px rgba(13,43,63,.12), inset 0 1px 0 rgba(255,255,255,.65);
+  }
+  .modal-close{
+    position:absolute; top:10px; right:12px; font-size:24px; line-height:1; color:#6B7A99;
+  }
+  .modal-close:hover{ color:#0B2E55; }
+
+  .section-title{ color: var(--title); font-weight: 800; font-size: clamp(18px, 2.4vw, 22px); }
+  .muted{ color: var(--ink-weak); }
+
+  .auth-label{ display:block; margin-bottom:.35rem; font-size:.9rem; color: #0B2E55; }
+  .search-input{
+    width:100%; padding:.6rem .75rem; border-radius:12px; background:#F8FBFF; color:#0B2E55;
+    border:1px solid var(--card-brd); outline:none;
+    box-shadow: 0 0 0 4px var(--tile);
+    transition: box-shadow .18s ease, border-color .18s ease;
+  }
+  .search-input:focus{
+    border-color: var(--card-brd-strong);
+    box-shadow: 0 0 0 4px var(--ring), 0 10px 22px rgba(13,43,63,.12);
+  }
+
+  .suggestion-list{
+    position:absolute; left:0; right:0; max-height:18rem; overflow:auto; z-index:9999;
+    background:#fff; color:#0B2E55; border:1px solid var(--card-brd);
+    border-radius:12px; margin-top:.25rem; box-shadow: 0 16px 36px rgba(13,43,63,.18);
+  }
+  .suggestion-list li{ padding:.5rem .75rem; cursor:pointer; }
+  .suggestion-list li:hover{ background:#F1F6FF; }
+  .suggestion-list li.active-suggestion{ background:#DBEAFF; }
+
+  .btn-accent{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1rem; border-radius:12px; font-weight:800; color:#0B2E55;
+    background: var(--accent); border:1px solid color-mix(in srgb, var(--accent) 90%, #000 0%);
+    box-shadow: 0 12px 28px rgba(224,161,6,.25);
+    transition: background .15s ease, transform .05s ease;
+  }
+  .btn-accent:hover{ background: var(--accent-dark); }
+  .btn-accent:active{ transform: translateY(1px); }
+
+  .btn-teal{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1rem; border-radius:12px; font-weight:700; color:#fff;
+    background: var(--nav-bg); border:1px solid var(--nav-bg-darker);
+    box-shadow: 0 12px 28px rgba(14,90,100,.25);
+    transition: filter .15s ease, transform .05s ease;
+  }
+  .btn-teal:hover{ filter: brightness(1.05); }
+  .btn-teal:active{ transform: translateY(1px); }
+
+  .btn-muted{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1rem; border-radius:12px; font-weight:700; color:#fff;
+    background:#6B7280; border:1px solid #4B5563; box-shadow: 0 8px 18px rgba(75,85,99,.25);
+  }
+  .btn-muted:hover{ filter: brightness(1.05); }
+
+  .community-card{ position:relative; padding-top:48px; }
+  .abs-actions-right,.abs-actions-left{
+    position:absolute; top:10px; display:flex; gap:6px;
+    opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
+    transform: translateY(-4px);
+  }
+  .abs-actions-right{ right:10px; }
+  .abs-actions-left{  left:10px;  }
+  .community-card:hover .abs-actions-right,
+  .community-card:hover .abs-actions-left{
+    opacity:1; pointer-events:auto; transform: translateY(0);
+  }
+
+  nav.site-nav { position: sticky; top: 0; z-index: 200; }
+
+  .nav-user { position: relative; }
+
+  .community-hero,
+  .community-hero .overlay,
+  .home-hero .overlay {
+    position: relative;
+    z-index: 1;
+  }
+
+  #userMenu .font-semibold, #mUserMenu .font-semibold {
+      color: rgb(0, 0, 0); 
+      opacity: 1;
+  }
+
+  #userMenu .text-red-600, #mUserMenu .text-red-600 {
+      color: red !important;
+  }
+
+  text-gray-800
+  #userMenu .px-4 .py-2, #mUserMenu .px-4 .py-2 {
+      color: red !important;
+  }
+
+  #userMenu a.text-red-600:hover, #mUserMenu a.text-red-600:hover {
+      background: rgb(255, 255, 255) !important;
+      color: rgb(139, 0, 0) !important;
+  }
+</style>
 {% endblock %}
 
 {% block extra_js %}
+{{ block.super }}
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const editModal = document.getElementById('edit-modal');
-  const editForm = document.getElementById('edit-form');
-  const closeBtn = document.getElementById('close-edit-modal');
+  const editForm  = document.getElementById('edit-form');
+  const closeBtn  = document.getElementById('close-edit-modal');
   const closeBtnAlt = document.getElementById('close-edit-modal-btn');
   const cardsContainer = document.getElementById('community-cards');
   const addBtn = document.getElementById('add-community-btn');
@@ -161,197 +310,172 @@ document.addEventListener('DOMContentLoaded', () => {
   const fitnessSpotList = document.getElementById('fitnessSpotList');
   const realFitnessSpotInput = document.getElementById('id_fitness_spot');
 
-  let ALL_SPOTS_DATA = []; 
+  let ALL_SPOTS_DATA = [];
   const ALL_SPOTS_DATA_EL = document.getElementById('fitness-spots-data');
   if (ALL_SPOTS_DATA_EL) {
-      try {
-          const rawContent = ALL_SPOTS_DATA_EL.textContent.trim();
-          const jsonData = JSON.parse(rawContent);
-          if (Array.isArray(jsonData)) {
-              ALL_SPOTS_DATA = jsonData;
-              console.log(`Successfully loaded ${ALL_SPOTS_DATA.length} fitness spots.`);
-          } else { console.error("Parsed fitness spots data is not an array:", jsonData); }
-      } catch (e) { console.error("Failed to parse fitness spots JSON:", e); }
-  } else { console.error("Fitness spots data script tag (#fitness-spots-data) not found!"); }
+    try {
+      const jsonData = JSON.parse(ALL_SPOTS_DATA_EL.textContent.trim());
+      if (Array.isArray(jsonData)) ALL_SPOTS_DATA = jsonData;
+    } catch (e) { console.error("Failed to parse fitness spots JSON:", e); }
+  }
 
   let fitnessSpotActiveIdx = -1;
-
   function renderFitnessSpotList(items) {
-      if (!fitnessSpotList) return;
-      const validItems = Array.isArray(items) ? items : [];
-      fitnessSpotList.innerHTML = validItems.map((spot, i) => `
-          <li class="px-3 py-2 cursor-pointer ${i === fitnessSpotActiveIdx ? 'active-suggestion' : ''}"
-              data-id="${spot.place_id}" data-name="${spot.name || ''}">
-              ${spot.name || '(No Name)'}
-          </li>
-      `).join('');
-      fitnessSpotList.classList.toggle('hidden', validItems.length === 0);
+    const valid = Array.isArray(items) ? items : [];
+    fitnessSpotList.innerHTML = valid.map((spot, i) => `
+      <li class="${i===fitnessSpotActiveIdx?'active-suggestion':''}"
+          data-id="${spot.place_id}" data-name="${spot.name||''}">
+        ${spot.name||'(No Name)'}
+      </li>
+    `).join('');
+    fitnessSpotList.classList.toggle('hidden', valid.length === 0);
   }
-
   function chooseFitnessSpot(li) {
-      if (!li || !fitnessSpotSearchInput || !realFitnessSpotInput || !fitnessSpotList) return;
-      fitnessSpotSearchInput.value = li.dataset.name || '';
-      realFitnessSpotInput.value = li.dataset.id || '';
-      fitnessSpotList.classList.add('hidden');
-      fitnessSpotActiveIdx = -1;
+    if (!li) return;
+    fitnessSpotSearchInput.value = li.dataset.name || '';
+    realFitnessSpotInput.value   = li.dataset.id   || '';
+    fitnessSpotList.classList.add('hidden');
+    fitnessSpotActiveIdx = -1;
   }
-
   const debounce = (fn, ms) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; };
-
   const onFitnessSpotType = debounce(() => {
-      if (!fitnessSpotSearchInput || !Array.isArray(ALL_SPOTS_DATA)) return;
-      const query = fitnessSpotSearchInput.value.trim().toLowerCase();
-      if (!query) { fitnessSpotActiveIdx = -1; renderFitnessSpotList([]); return; }
-      const results = ALL_SPOTS_DATA.filter(spot => spot.name && spot.name.toLowerCase().includes(query)).slice(0, 15);
-      fitnessSpotActiveIdx = -1;
-      renderFitnessSpotList(results);
+    const q = (fitnessSpotSearchInput.value||'').trim().toLowerCase();
+    if (!q) { renderFitnessSpotList([]); return; }
+    const results = ALL_SPOTS_DATA.filter(s => s.name && s.name.toLowerCase().includes(q)).slice(0, 15);
+    fitnessSpotActiveIdx = -1; renderFitnessSpotList(results);
   }, 200);
 
   if (fitnessSpotSearchInput && fitnessSpotList && realFitnessSpotInput) {
-      fitnessSpotSearchInput.addEventListener('input', onFitnessSpotType);
-      fitnessSpotSearchInput.addEventListener('focus', () => {  onFitnessSpotType(); });
-      fitnessSpotList.addEventListener('mousedown', (e) => { const li = e.target.closest('li'); if (li) chooseFitnessSpot(li); });
-      fitnessSpotSearchInput.addEventListener('blur', () => { setTimeout(() => { if (!fitnessSpotList.matches(':hover')) { fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; } }, 150); });
-      fitnessSpotSearchInput.addEventListener('keydown', (e) => {
-          const items = Array.from(fitnessSpotList.querySelectorAll('li')); if (items.length === 0) return; let newIndex = fitnessSpotActiveIdx;
-          if (e.key === 'ArrowDown') { e.preventDefault(); newIndex = Math.min(items.length - 1, fitnessSpotActiveIdx + 1); }
-          else if (e.key === 'ArrowUp') { e.preventDefault(); newIndex = Math.max(0, fitnessSpotActiveIdx - 1); }
-          else if (e.key === 'Enter') {
-              e.preventDefault();
-              if (fitnessSpotActiveIdx >= 0 && fitnessSpotActiveIdx < items.length) { chooseFitnessSpot(items[fitnessSpotActiveIdx]); }
-              else if (items.length > 0) { chooseFitnessSpot(items[0]); } 
-              return;
-          }
-          else if (e.key === 'Escape') { fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; return; }
-          if (newIndex !== fitnessSpotActiveIdx) {
-              fitnessSpotActiveIdx = newIndex;
-              const currentQuery = fitnessSpotSearchInput.value.trim().toLowerCase();
-              const currentResults = (Array.isArray(ALL_SPOTS_DATA) ? ALL_SPOTS_DATA : []).filter(spot => spot.name && spot.name.toLowerCase().includes(currentQuery)).slice(0, 15);
-              renderFitnessSpotList(currentResults); 
-              const highlightedItem = fitnessSpotList.querySelector('li.active-suggestion');
-              highlightedItem?.scrollIntoView({ block: 'nearest' });
-          }
-      });
-  } else { console.error("Fitness spot search elements (#fitnessSpotSearchInput, #fitnessSpotList, #id_fitness_spot) not found!"); }
-
-  function closeModal() { if(editModal) editModal.classList.add('opacity-0', 'pointer-events-none'); }
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (closeBtnAlt) closeBtnAlt.addEventListener('click', closeModal);
-
-  if (addBtn) {
-    addBtn.addEventListener('click', () => {
-      if (!editForm || !fitnessSpotSearchInput || !realFitnessSpotInput || !fitnessSpotList || !editModal) return;
-      document.getElementById('edit-modal-title').innerText = "Tambah Komunitas";
-      editForm.reset();
-      fitnessSpotSearchInput.value = ''; realFitnessSpotInput.value = '';
-      fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; 
-      document.getElementById('edit-id').value = "";
-      editModal.classList.remove('opacity-0', 'pointer-events-none');
+    fitnessSpotSearchInput.addEventListener('input', onFitnessSpotType);
+    fitnessSpotSearchInput.addEventListener('focus', onFitnessSpotType);
+    fitnessSpotList.addEventListener('mousedown', (e) => {
+      const li = e.target.closest('li'); if (li) chooseFitnessSpot(li);
+    });
+    fitnessSpotSearchInput.addEventListener('blur', () => {
+      setTimeout(() => fitnessSpotList.classList.add('hidden'), 150);
+    });
+    fitnessSpotSearchInput.addEventListener('keydown', (e) => {
+      const items = Array.from(fitnessSpotList.querySelectorAll('li'));
+      if (!items.length) return;
+      if (e.key === 'ArrowDown') { e.preventDefault(); fitnessSpotActiveIdx = Math.min(items.length-1, fitnessSpotActiveIdx+1); }
+      else if (e.key === 'ArrowUp') { e.preventDefault(); fitnessSpotActiveIdx = Math.max(0, fitnessSpotActiveIdx-1); }
+      else if (e.key === 'Enter') { e.preventDefault(); chooseFitnessSpot(items[fitnessSpotActiveIdx] || items[0]); return; }
+      else if (e.key === 'Escape') { fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; return; }
+      const q = (fitnessSpotSearchInput.value||'').trim().toLowerCase();
+      const results = ALL_SPOTS_DATA.filter(s => s.name && s.name.toLowerCase().includes(q)).slice(0, 15);
+      renderFitnessSpotList(results);
+      fitnessSpotList.querySelector('li.active-suggestion')?.scrollIntoView({block:'nearest'});
     });
   }
 
-  if (cardsContainer) {
-      cardsContainer.addEventListener('click', e => {
-          const card = e.target.closest('[data-id]'); if (!card) return; const id = card.dataset.id;
-          if (e.target.classList.contains('add-admin-btn')) {
-               e.stopPropagation();
-               const username = prompt("Enter username to add as admin:"); if (!username) return;
-               const formData = new FormData(); formData.append('username', username);
-               fetch(`/community/ajax/add_admin/${id}/`, { method: 'POST', body: formData, headers: {'X-Requested-With': 'XMLHttpRequest','X-CSRFToken': csrfToken}})
-               .then(res => res.json()).then(json => { alert(json.success ? json.message : `Error: ${json.error}`); });
-               return;
-           }
-          if (e.target.classList.contains('delete-btn')) {
-               e.stopPropagation();
-               if (confirm("Yakin hapus?")) {
-                   fetch(`/community/ajax/delete/${id}/`, { method: 'POST', headers: {'X-Requested-With': 'XMLHttpRequest','X-CSRFToken': csrfToken}})
-                   .then(res => res.json()).then(json => { if (json.success) card.remove(); else alert(`Error: ${json.error || 'Gagal hapus'}`); });
-               } return;
-           }
-          if (e.target.classList.contains('edit-btn')) {
-              e.stopPropagation();
-              if (!editForm || !fitnessSpotSearchInput || !realFitnessSpotInput || !editModal || !fitnessSpotList) return;
-              document.getElementById('edit-modal-title').innerText = "Edit Komunitas";
-              document.getElementById('edit-id').value = id;
-              document.getElementById('id_name').value = card.querySelector('h3')?.innerText || '';
-              document.getElementById('id_description').value = card.querySelector('p:nth-of-type(1)')?.innerText || '';
-              const spotId = card.dataset.spotId || '';
-              const spotName = card.querySelector('p:nth-of-type(2)')?.innerText.replace('📍 ', '') || '';
-              realFitnessSpotInput.value = spotId;
-              fitnessSpotSearchInput.value = spotName;
-              fitnessSpotList.classList.add('hidden'); 
-              const contactEl = card.querySelector('p:last-of-type'); let contact = ''; if (contactEl && contactEl.innerText.includes('📞')) { contact = contactEl.innerText.replace('📞 ', ''); }
-              const contactInput = document.getElementById('id_contact_info'); if (contactInput) contactInput.value = contact;
-              editModal.classList.remove('opacity-0', 'pointer-events-none'); return;
+  function closeModal(){ editModal.classList.add('opacity-0','pointer-events-none'); }
+  closeBtn?.addEventListener('click', closeModal);
+  closeBtnAlt?.addEventListener('click', closeModal);
+
+  addBtn?.addEventListener('click', () => {
+    document.getElementById('edit-modal-title').innerText = "Tambah Komunitas";
+    editForm.reset();
+    fitnessSpotSearchInput.value = ''; realFitnessSpotInput.value = '';
+    fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1;
+    document.getElementById('edit-id').value = "";
+    editModal.classList.remove('opacity-0','pointer-events-none');
+  });
+
+  cardsContainer?.addEventListener('click', e => {
+    const card = e.target.closest('[data-id]'); if (!card) return;
+    const id = card.dataset.id;
+
+    if (e.target.classList.contains('add-admin-btn')) {
+      e.stopPropagation();
+      const username = prompt("Enter username to add as admin:"); if (!username) return;
+      const formData = new FormData(); formData.append('username', username);
+      fetch(`/community/ajax/add_admin/${id}/`, { method:'POST', body:formData, headers:{'X-Requested-With':'XMLHttpRequest','X-CSRFToken': csrfToken}})
+        .then(res=>res.json()).then(json=>alert(json.success?json.message:`Error: ${json.error}`));
+      return;
+    }
+    if (e.target.classList.contains('delete-btn')) {
+      e.stopPropagation();
+      if (confirm("Yakin hapus?")) {
+        fetch(`/community/ajax/delete/${id}/`, { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest','X-CSRFToken': csrfToken}})
+          .then(res=>res.json()).then(json=>{ if(json.success) card.remove(); else alert(`Error: ${json.error||'Gagal hapus'}`); });
+      }
+      return;
+    }
+    if (e.target.classList.contains('edit-btn')) {
+      e.stopPropagation();
+      document.getElementById('edit-modal-title').innerText = "Edit Komunitas";
+      document.getElementById('edit-id').value = id;
+      document.getElementById('id_name').value = card.querySelector('h3')?.innerText || '';
+      document.getElementById('id_description').value = card.querySelector('p.card-text')?.innerText || '';
+      const spotId = card.dataset.spotId || '';
+      const spotName = card.querySelector('p.card-subline')?.innerText.replace('📍 ','') || '';
+      realFitnessSpotInput.value = spotId;
+      fitnessSpotSearchInput.value = spotName;
+      fitnessSpotList.classList.add('hidden');
+      const contactEl = Array.from(card.querySelectorAll('p')).find(p => p.innerText?.includes('📞'));
+      document.getElementById('id_contact_info').value = contactEl ? contactEl.innerText.replace('📞 ','') : '';
+      editModal.classList.remove('opacity-0','pointer-events-none');
+      return;
+    }
+    if (card.dataset.url) location.href = card.dataset.url;
+  });
+
+  editForm?.addEventListener('submit', e => {
+    e.preventDefault();
+    if (fitnessSpotSearchInput.value && !realFitnessSpotInput.value) { alert('Pilih Fitness Spot yang valid dari daftar.'); return; }
+    if (!fitnessSpotSearchInput.value) { realFitnessSpotInput.value = ''; }
+
+    const formData = new FormData(editForm);
+    const id = document.getElementById('edit-id')?.value || '';
+    const url = id ? `/community/ajax/edit/${id}/` : `/community/ajax/add/`;
+
+    fetch(url, { method:'POST', body:formData, headers:{'X-Requested-With':'XMLHttpRequest','X-CSRFToken': csrfToken}})
+      .then(res => { if(!res.ok) return res.text().then(t=>{throw new Error(`HTTP ${res.status}: ${t}`)}); return res.json(); })
+      .then(json => {
+        if (!json.success) { alert(json.error || 'Terjadi kesalahan.'); return; }
+        const cards = document.getElementById('community-cards');
+        if (id) {
+          const card = cards?.querySelector(`[data-id='${id}']`);
+          if (card) {
+            card.dataset.spotId = json.fitness_spot_id;
+            card.querySelector('h3').innerText = json.name;
+            card.querySelector('p.card-text')?.remove();
+            const descP = document.createElement('p'); descP.className = 'card-text mb-2'; descP.innerText = json.description || '';
+            card.querySelector('.card-subline').before(descP);
+            card.querySelector('.card-subline').innerText = `📍 ${json.fitness_spot_name}`;
+            let contactP = Array.from(card.querySelectorAll('p')).find(p => p.innerText.includes('📞'));
+            if (json.contact_info) {
+              if (!contactP) { contactP = document.createElement('p'); contactP.className = 'card-text mt-1'; card.appendChild(contactP); }
+              contactP.innerText = "📞 " + json.contact_info;
+            } else if (contactP) { contactP.remove(); }
           }
-          if (card.dataset.url) { location.href = card.dataset.url; }
-      });
-  }
-
-  if (editForm) {
-      editForm.addEventListener('submit', e => {
-          e.preventDefault();
-          if (!fitnessSpotSearchInput || !realFitnessSpotInput) { alert("Form error: Fitness spot inputs missing."); return; }
-          if (fitnessSpotSearchInput.value && !realFitnessSpotInput.value) { alert('Pilih Fitness Spot yang valid dari daftar.'); return; }
-          if (!fitnessSpotSearchInput.value) { realFitnessSpotInput.value = ''; }
-
-          const formData = new FormData(editForm);
-          const id = document.getElementById('edit-id')?.value || '';
-          const url = id ? `/community/ajax/edit/${id}/` : `/community/ajax/add/`;
-
-          fetch(url, { method:'POST', body: formData, headers:{'X-Requested-With':'XMLHttpRequest','X-CSRFToken': csrfToken }})
-              .then(res => { if (!res.ok) { return res.text().then(text => {throw new Error(`HTTP error! status: ${res.status}, body: ${text}`)}) } return res.json(); }) 
-              .then(json => {
-                  if (json.success) {
-                      if (id) {
-                          const card = cardsContainer?.querySelector(`[data-id='${id}']`);
-                          if (card) {
-                                card.dataset.spotId = json.fitness_spot_id;
-                                card.querySelector('h3').innerText = json.name;
-                                card.querySelector('p:nth-of-type(1)').innerText = json.description;
-                                card.querySelector('p:nth-of-type(2)').innerText = `📍 ${json.fitness_spot_name}`;
-                                let contactP = Array.from(card.querySelectorAll('p')).find(p => p.innerText.includes('📞'));
-                                if (json.contact_info) {
-                                    if (!contactP) { contactP = document.createElement('p'); contactP.className = "text-sm"; card.querySelector('p:last-of-type').after(contactP); }
-                                    contactP.innerText = "📞 " + json.contact_info;
-                                } else if (contactP) { contactP.remove(); }
-                           }
-                      } else {
-                          if (!cardsContainer) return;
-                          const newCard = document.createElement('div');
-                          newCard.className = "bg-yellow-400 text-black rounded-2xl shadow-md transform transition duration-300 hover:-translate-y-2 hover:shadow-xl relative p-5 border border-yellow-800 cursor-pointer flex flex-col";
-                          newCard.dataset.id = json.id;
-                          newCard.dataset.url = json.detail_url;
-                          newCard.dataset.spotId = json.fitness_spot_id;
-                          newCard.innerHTML = `
-                              <h3 class="text-xl font-semibold mb-2 text-center">${json.name}</h3>
-                              <p class="text-black-100 mb-2">${json.description}</p>
-                              <p class="text-sm font-medium mb-1">📍 ${json.fitness_spot_name}</p>
-                              ${json.contact_info ? `<p class="text-sm">📞 ${json.contact_info}</p>` : ""}
-                              <div class="absolute top-3 right-3 flex space-x-2">
-                                <button class="edit-btn bg-yellow-500 text-white px-2 py-1 rounded hover:bg-yellow-600 shadow-sm">Edit</button>
-                                <button class="delete-btn bg-red-600 text-white px-2 py-1 rounded hover:bg-red-700 shadow-sm">Delete</button>
-                              </div>
-                              <div class="absolute top-3 left-3">
-                                <button class="add-admin-btn bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600 shadow-sm" title="Add Admin">➕</button>
-                              </div>
-                            `;
-                          const emptyMsg = cardsContainer.querySelector('p.text-center');
-                          if (emptyMsg) emptyMsg.remove();
-                          cardsContainer.appendChild(newCard);
-                      }
-                      closeModal();
-                  } else { 
-                      if (json.errors) {
-                           let errorMsg = "Operasi gagal:\n";
-                           for (const field in json.errors) { errorMsg += `\n- ${field}: ${json.errors[field][0].message}`; } 
-                      }
-                      else { alert(`Operasi gagal: ${json.error || 'Terjadi kesalahan.'}`); }
-                  }
-              })
-              .catch(error => { console.error("Fetch error:", error); alert(`Terjadi error di server: ${error.message}`); }); 
-      });
-  }
+        } else {
+          if (!cards) return;
+          const newCard = document.createElement('div');
+          newCard.className = "community-card community-item cursor-pointer";
+          newCard.dataset.id = json.id;
+          newCard.dataset.url = json.detail_url;
+          newCard.dataset.spotId = json.fitness_spot_id;
+          newCard.innerHTML = `
+            <h3 class="card-title text-center">${json.name}</h3>
+            ${json.description ? `<p class="card-text mb-2">${json.description}</p>` : ""}
+            <p class="card-subline">📍 ${json.fitness_spot_name}</p>
+            ${json.contact_info ? `<p class="card-text mt-1">📞 ${json.contact_info}</p>` : ""}
+            <div class="abs-actions-right">
+              <button class="chip chip-accent edit-btn">Edit</button>
+              <button class="chip chip-danger delete-btn">Delete</button>
+            </div>
+            <div class="abs-actions-left">
+              <button class="chip chip-teal add-admin-btn" title="Add Admin">➕</button>
+            </div>
+          `;
+          const emptyMsg = cards.querySelector('p.text-center'); emptyMsg?.remove();
+          cards.appendChild(newCard);
+        }
+        editModal.classList.add('opacity-0','pointer-events-none');
+      })
+      .catch(err => { console.error(err); alert(`Terjadi error di server: ${err.message}`); });
+  });
 });
 </script>
 {% endblock %}
