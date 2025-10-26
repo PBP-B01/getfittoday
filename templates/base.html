@@ -6,18 +6,24 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}GetFit.Today{% endblock %}</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <style>
-    *, ::before, ::after {
-        font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
+  <script>
+    tailwind = {
+      config: {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif']
+            }
+          }
+        }
+      }
     }
-    
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style id="core-nav">
+
     #main-navbar #userMenu a,
     #main-navbar #mUserMenu a { color: var(--teal-700) !important; }
 
@@ -163,7 +169,8 @@
 </head>
 
 <body class="bg-blue-900 min-h-screen font-sans text-white {% block body_class %}{% endblock %}">
-    <nav id="main-navbar" class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500">
+  <!-- Navbar -->
+  <nav id="main-navbar" class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500">
     <div class="brand font-bold text-2xl text-white">GETFIT.TODAY</div>
 
     <div class="hidden md:flex items-center gap-6">
@@ -259,7 +266,7 @@
 
     <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 w-full rounded-b-lg py-4 z-50 shadow-md">
     <a href="{% url 'home:home' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">HOME</a>
-    <a href="{% url 'community_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">KOMUNITAS</a> {# <-- Fixed the # href #}
+    <a href="{% url 'community_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2"> COMMUNITY</a> {# <-- Fixed the # href #}
     <a href="{% url 'store:product_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">STORE</a>
     {% if request.user.is_authenticated or request.session.is_admin %}
       <a href="{% url 'booking:page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BOOKING</a>
