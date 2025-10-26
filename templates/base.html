@@ -22,22 +22,23 @@
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <style id="nav-core">
+  <style id="core-nav">
+
     #main-navbar #userMenu a,
-    #main-navbar #mUserMenu a {
-      color: var(--teal-700) !important;
+    #main-navbar #mUserMenu a { color: var(--teal-700) !important; }
+
+    #main-navbar #userMenu a.logout-link,
+    #main-navbar #mUserMenu a.logout-link { color:#dc2626 !important; }
+    #main-navbar #userMenu a.logout-link:hover,
+    #main-navbar #mUserMenu a.logout-link:hover {
+      color:#b91c1c !important; background:#fee2e2 !important;
     }
 
-    #main-navbar .logout-link {
-      color: #dc2626 !important;
+    #main-navbar .user-avatar-btn,
+    #main-navbar .user-avatar-btn svg {
+      color: var(--title) !important;
+      fill: currentColor !important;
     }
-    #main-navbar .logout-link:hover {
-      color: #b91c1c !important;
-      background: #fee2e2 !important;
-    }
-
-    #main-navbar .user-avatar-btn { color: var(--title) !important; }
-    #main-navbar .user-avatar-btn svg { color: inherit !important; fill: currentColor; }
   </style>
 
   {% block extra_css %}
