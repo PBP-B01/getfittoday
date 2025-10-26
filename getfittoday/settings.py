@@ -73,6 +73,7 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'store',
     'community',
+    'event',
 ]
 
 REST_FRAMEWORK = {

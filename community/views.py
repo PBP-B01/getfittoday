@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -53,7 +52,6 @@ def ajax_leave_community(request, community_id):
             print(f"Error leaving community {community_id}: {e}")
             return JsonResponse({"success": False, "error": "An internal error occurred."}, status=500)
     return JsonResponse({"success": False, "error": "Invalid request method."}, status=405)
-
 
 @login_required
 def ajax_add_community(request):

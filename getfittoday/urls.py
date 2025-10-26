@@ -41,4 +41,5 @@ urlpatterns = [
     path('store/', include('store.urls')),
     path("blognevent/", include("BlognEvent.urls", namespace="BlognEvent")),
     path('community/', include('community.urls')),
+    path('event/', include(('event.urls', 'event'), namespace='event')),
 ]
