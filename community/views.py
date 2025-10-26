@@ -1,4 +1,3 @@
-
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -9,6 +8,7 @@ from .forms import CommunityForm
 from home.models import FitnessSpot
 import json
 from decimal import Decimal 
+from django.views.decorators.csrf import csrf_exempt
 
 User = get_user_model()
 
@@ -18,6 +18,7 @@ class DecimalEncoder(json.JSONEncoder):
             return float(obj) 
         return super(DecimalEncoder, self).default(obj)
 
+@csrf_exempt
 @login_required
 def ajax_join_community(request, community_id):
     if request.method == "POST":
@@ -35,6 +36,7 @@ def ajax_join_community(request, community_id):
             return JsonResponse({"success": False, "error": "An internal error occurred."}, status=500)
     return JsonResponse({"success": False, "error": "Invalid request method."}, status=405)
 
+@csrf_exempt
 @login_required
 def ajax_leave_community(request, community_id):
     if request.method == "POST":
@@ -53,7 +55,6 @@ def ajax_leave_community(request, community_id):
             print(f"Error leaving community {community_id}: {e}")
             return JsonResponse({"success": False, "error": "An internal error occurred."}, status=500)
     return JsonResponse({"success": False, "error": "Invalid request method."}, status=405)
-
 
 @login_required
 def ajax_add_community(request):
@@ -74,7 +75,7 @@ def ajax_add_community(request):
                     "contact_info": community.contact_info,
                     "fitness_spot_name": community.fitness_spot.name if community.fitness_spot else None,
                     "fitness_spot_id": community.fitness_spot.place_id if community.fitness_spot else None,
-                    "detail_url": reverse('community_detail', args=[community.id])
+                    "detail_url": reverse('community:community_detail', args=[community.id])
                 })
             except Exception as e:
                  print(f"Error adding community: {e}")
@@ -103,7 +104,7 @@ def ajax_edit_community(request, community_id):
                     "contact_info": community.contact_info,
                     "fitness_spot_name": community.fitness_spot.name if community.fitness_spot else None,
                     "fitness_spot_id": community.fitness_spot.place_id if community.fitness_spot else None,
-                    "detail_url": reverse('community_detail', args=[community.id])
+                    "detail_url": reverse('community:community_detail', args=[community.id])
                 })
             except Exception as e:
                  print(f"Error editing community {community_id}: {e}")
@@ -177,7 +178,7 @@ def add_community(request):
                 community = form.save(commit=False)
                 community.save()
                 community.admins.add(request.user)
-                return redirect('community_list')
+                return redirect('community:community_list')
             except Exception as e:
                  print(f"Error adding community via non-AJAX: {e}") 
     else:

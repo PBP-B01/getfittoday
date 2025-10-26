@@ -40,7 +40,6 @@ class CommunityModelTest(TestCase):
         self.assertEqual(str(Community._meta.verbose_name_plural), "Komunitas")
         self.assertEqual(str(CommunityCategory._meta.verbose_name_plural), "Kategori Komunitas")
 
-
 class CommunityFormTest(TestCase):
     def test_valid_form(self):
         spot = FitnessSpot.objects.create(
@@ -58,7 +57,6 @@ class CommunityFormTest(TestCase):
     def test_invalid_form(self):
         form = CommunityForm(data={})
         self.assertFalse(form.is_valid())
-
 
 class CommunityAdminTest(TestCase):
     def setUp(self):
@@ -78,7 +76,6 @@ class CommunityAdminTest(TestCase):
         result_admins = self.admin_model.admin_list(self.community)
         self.assertIn("admin", result_admins)
         self.assertEqual(self.admin_model.member_count(self.community), 0)
-
 
 class CommunityViewTest(TestCase):
     def setUp(self):
@@ -251,7 +248,6 @@ class CommunityViewTest(TestCase):
         # trigger exception
         response = self.client.get(reverse("community:communities_by_place_json", args=["unknown"]))
         self.assertIn(response.status_code, [200, 404, 500])
-
 
     def test_invalid_join_leave_methods(self):
         self.login()
