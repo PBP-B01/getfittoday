@@ -184,13 +184,18 @@ async function updateSpotsForView(map) {
     isUpdatingSpots = true;
     try {
         const visibleGridIds = getVisibleGridIds(bounds);
+        console.log("Visible grid IDs:", Array.from(visibleGridIds));
         const newGridIdsToLoad = [...visibleGridIds].filter(id => !clientGridCache[id]);
 
         if (newGridIdsToLoad.length > 0) {
+            console.log(`Need to fetch data for new grids: ${newGridIdsToLoad.join(', ')}`);
             const promises = newGridIdsToLoad.map(id => fetchGridData(id));
             await Promise.all(promises);
+        } else {
+            console.log("All visible grid data already in cache.");
         }
 
+        console.log("Rendering spots from cache for grids:", Array.from(visibleGridIds));
         await renderSpots(visibleGridIds);
         loadedGridIds = visibleGridIds;
 
