@@ -5,7 +5,11 @@ from .models import Community
 class CommunityForm(forms.ModelForm):
     class Meta:
         model = Community
+<<<<<<< HEAD
         fields = ['name', 'description', 'contact_info', 'fitness_spot', 'category']
+=======
+        fields = ['name', 'description', 'contact_info', 'fitness_spot']
+>>>>>>> master
         widgets = {
             'name': forms.TextInput(attrs={
                 'class': 'border rounded p-2 w-full text-black bg-gray-50'
@@ -19,7 +23,10 @@ class CommunityForm(forms.ModelForm):
             'fitness_spot': forms.HiddenInput(attrs={
                 'id': 'id_fitness_spot'
             }),
+<<<<<<< HEAD
             'category': forms.Select(attrs={
                 'class': 'border rounded p-2 w-full text-black bg-gray-50'
             }),
+=======
+>>>>>>> master
         }

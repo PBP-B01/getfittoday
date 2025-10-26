@@ -18,6 +18,19 @@ def event_list(request):
     status_filter = request.GET.get('status', 'all').strip()
     my_events = request.GET.get('my_events', '').strip()
 
+<<<<<<< HEAD
+=======
+    from_community_id = request.GET.get('from_community', '').strip()
+    from_community_name = None
+    
+    if from_community_id:
+        try:
+            from_comm = Community.objects.get(id=from_community_id)
+            from_community_name = from_comm.name
+        except Community.DoesNotExist:
+            from_community_id = None
+
+>>>>>>> master
     events = Event.objects.all().select_related('community', 'created_by')
 
     if my_events and request.user.is_authenticated:
@@ -88,8 +101,16 @@ def event_list(request):
         'filter_date_sort': date_sort,
         'filter_community': community_filter,
         'filter_status': status_filter,
+<<<<<<< HEAD
     })
 
+=======
+        'from_community_id': from_community_id,
+        'from_community_name': from_community_name,
+    })
+
+
+>>>>>>> master
 @login_required
 @require_POST
 def create_event(request):
@@ -117,7 +138,10 @@ def create_event(request):
             }, status=403)
 
         event_date = datetime.strptime(date, '%Y-%m-%dT%H:%M')
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
         event_date = timezone.make_aware(event_date, timezone.get_current_timezone())
         
         reg_deadline = None
@@ -279,13 +303,21 @@ def join_event(request, event_id):
 def leave_event(request, event_id):
     try:
         event = get_object_or_404(Event, id=event_id)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> master
         if not event.user_is_participant(request.user):
             return JsonResponse({
                 'status': 'error',
                 'message': 'Kamu belum terdaftar di event ini.'
             }, status=400)
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> master
         if event.is_past() or event.is_ongoing():
             return JsonResponse({
                 'status': 'error',
@@ -304,4 +336,45 @@ def leave_event(request, event_id):
         return JsonResponse({
             'status': 'error',
             'message': f'Error: {str(e)}'
+<<<<<<< HEAD
+=======
+        }, status=500)
+
+
+def community_events_api(request, community_id):
+    try:
+        community = get_object_or_404(Community, id=community_id)
+        events = Event.objects.filter(community=community).order_by('date')
+        
+        now = timezone.now()
+        events_data = []
+        
+        for event in events:
+            local_date = timezone.localtime(event.date)
+            events_data.append({
+                'id': event.id,
+                'name': event.name,
+                'description': event.description,
+                'date': local_date.strftime('%Y-%m-%d %H:%M'),
+                'date_display': local_date.strftime('%d %B %Y, %H:%M'),
+                'location': event.location,
+                'participant_count': event.participants.count(),
+                'is_past': event.is_past(),
+                'registration_open': event.registration_open(),
+                'can_join': event.can_join(request.user),
+                'is_participant': event.user_is_participant(request.user),
+                'can_edit': event.can_edit(request.user),
+            })
+        
+        return JsonResponse({
+            'success': True,
+            'community_name': community.name,
+            'events': events_data
+        })
+    except Exception as e:
+        print(f"Error fetching community events for community_id {community_id}: {e}")
+        return JsonResponse({
+            'success': False,
+            'error': str(e)
+>>>>>>> master
         }, status=500)

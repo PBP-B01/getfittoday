@@ -1,29 +1,39 @@
-// =================================================================================
-// Global Variables & Configuration
-// =================================================================================
-
 let map;
 let infoWindow;
 let userLocationMarker = null;
-
-// Data & State Management
-let markers = {}; // Caches marker objects by place_id for quick access
-let clientGridCache = {}; // Caches spot data for each grid cell on the client-side
-let loadedGridIds = new Set(); // Tracks which grid cells have been fetched
+let markers = {};
+let clientGridCache = {};
+let loadedGridIds = new Set();
 let currentActiveCardId = null;
 
-// State flags to prevent race conditions and feedback loops
 let isUpdatingSpots = false;
 let programmaticPan = false;
 
-// Grid System Configuration (for efficient data loading)
 const GRID_ORIGIN_LAT = -6.8;
 const GRID_ORIGIN_LNG = 106.5;
-const GRID_CELL_SIZE_DEG = 0.09; // Approx. 10km per grid cell
+const GRID_CELL_SIZE_DEG = 0.09;
 
-// =================================================================================
-// Initialization
-// =================================================================================
+function setupCommunityModalClosing() {
+    const modal = document.getElementById('community-modal');
+    const closeBtn = document.getElementById('close-community-modal');
+
+    if (modal && closeBtn) {
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('flex'); 
+            modal.style.display = ''; 
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+}
+
 async function initMap() {
     try {
         let initialCoords = { lat: -6.370403, lng: 106.826946 };
@@ -42,7 +52,6 @@ async function initMap() {
                 east: boundaries.east + buffer, west: boundaries.west - buffer,
             };
 
-            // If user grants location permission, override the default start point
             if (position) {
                 const { latitude: userLat, longitude: userLng } = position.coords;
                 if (userLat < boundaries.north && userLat > boundaries.south && userLng < boundaries.east && userLng > boundaries.west) {
@@ -54,20 +63,102 @@ async function initMap() {
             console.error("Could not fetch map boundaries. Restrictions disabled.");
         }
 
-        // Create the map with the calculated settings
         await initializeMap(initialCoords, initialZoom, restrictionBounds);
-
-        // If we have an initial position, show the user's location marker
+        
+        setupCommunityModalClosing();
+        
         if (position) {
             updateUserLocationMarker(position);
         }
+
+        fetchAndRenderCommunities(); 
+
+        fetchAndRenderProducts();
 
     } catch (error) {
         console.error("Failed to initialize map:", error);
     }
 }
 
-// Creates the core Google Map object and attaches UI elements and event listeners.
+async function fetchAndRenderProducts() {
+    const container = document.getElementById('product-scroll-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/store/api/featured/'); 
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.json();
+
+        if (data.products && data.products.length > 0) {
+            container.innerHTML = ''; 
+            data.products.forEach(product => {
+                const cardLink = document.createElement('a');
+                cardLink.href = product.view_url; 
+                cardLink.className = 'simple-product-card';
+
+                cardLink.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}">
+                    <div class="simple-product-card-content">
+                        <h3 class="simple-product-card-title" title="${product.name}">
+                            ${product.name}
+                        </h3>
+                        <p class="simple-product-card-price">${product.price_formatted}</p>
+                        <div class="simple-product-card-stats">
+                            <span>⭐ ${product.rating}</span>
+                            <span>${product.units_sold}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardLink);
+            });
+        } else {
+            container.innerHTML = '<p class="text-center muted px-4">Belum ada produk yang terdaftar.</p>';
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured products:", error);
+        container.innerHTML = '<p class="text-center muted px-4">Gagal memuat produk.</p>';
+    }
+}
+
+function filterSidebarSpots(query) {
+    const normalizedQuery = query.toLowerCase().trim();
+    const cardsContainer = document.getElementById('spot-cards-container');
+    if (!cardsContainer) {
+        console.error("Filter function: Card container not found!");
+        return;
+    }
+
+    const cards = cardsContainer.querySelectorAll('.spot-card');
+    const emptyState = document.getElementById('sidebar-empty-state');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const address = card.querySelector('p')?.textContent.toLowerCase() || '';
+
+        if (title.includes(normalizedQuery) || address.includes(normalizedQuery)) {
+            card.style.display = ''; 
+            visibleCount++;
+        } else {
+            card.style.display = 'none'; 
+        }
+    });
+
+    if (emptyState) {
+        const mapHasSpots = cards.length > 0;
+
+        if (mapHasSpots && visibleCount === 0) {
+            emptyState.textContent = 'No spots match your search in this area.';
+            emptyState.classList.remove('hidden');
+        } else if (!mapHasSpots) {
+            emptyState.textContent = 'No Sport Centers spots found in this area. Try panning or zooming the map.';
+        } else {
+            emptyState.classList.add('hidden');
+        }
+    }
+}
+
 async function initializeMap(center, zoom, restriction) {
     const { Map } = await google.maps.importLibrary("maps");
     map = new Map(document.getElementById("map"), {
@@ -84,40 +175,50 @@ async function initializeMap(center, zoom, restriction) {
     });
     
     infoWindow = new google.maps.InfoWindow({
-        pixelOffset: new google.maps.Size(0, -10), 
+        pixelOffset: new google.maps.Size(0, -0), 
     });
 
     google.maps.event.addListener(infoWindow, 'domready', () => {
         const iwOuter = document.querySelector('.gm-style-iw-c');
         if (!iwOuter) return;
 
-        const closeBtn = iwOuter.querySelector('button');
-        if (closeBtn) closeBtn.style.display = 'none';
+        const gClose = iwOuter.querySelector('.gm-ui-hover-effect');
+        if (gClose) {
+            gClose.style.display  = 'block';
+            gClose.style.position = 'absolute';
+            gClose.style.top      = '8px';
+            gClose.style.right    = '8px';
+            gClose.style.left     = 'auto';
+            gClose.style.margin   = '0';
+            gClose.style.transform= 'none';
+        }
 
-        const iwBackground = iwOuter.parentElement;
-        iwBackground.style.boxShadow = 'none';
-        iwBackground.style.background = 'transparent';
-        
-        const tail = iwBackground.querySelector('.gm-style-iw-tc');
-        if (tail) tail.style.display = 'none';
+        const header = iwOuter.querySelector('.iw-header');
+        if (header) {
+            header.querySelectorAll('button, [data-close], .close').forEach(el => el.remove());
+            header.style.paddingRight = '38px';
+            header.style.textAlign = 'left';
+        }
     });
 
-
-    // Attach event listeners
     map.addListener('idle', () => updateSpotsForView(map));
     document.getElementById('fullscreen-toggle-btn').addEventListener('click', toggleFullScreen);
     document.getElementById('sidebar-toggle-btn').addEventListener('click', () => {
         document.body.classList.toggle('sidebar-visible');
     });
-    
+
+    const sidebarSearch = document.getElementById('sidebar-spot-search');
+    if (sidebarSearch) {
+        sidebarSearch.addEventListener('input', (e) => {
+            filterSidebarSpots(e.target.value);
+        });
+    }
+
     createCenterOnMeButton();
 }
 
 initMap();
 
-// =================================================================================
-// Data Loading (Grid System)
-// =================================================================================
 async function updateSpotsForView(map) {
     if (programmaticPan) { programmaticPan = false; return; }
     if (isUpdatingSpots) return;
@@ -143,15 +244,15 @@ async function updateSpotsForView(map) {
     }
 }
 
-// Fetches spot data for a specific grid ID from the Django API.
 async function fetchGridData(gridId) {
-    console.log(`Fetching grid ${gridId} from server...`);
-    const url = `/api/fitness-spots/?gridId=${gridId}`;
+    console.log(`Fetching grid ${gridId} from server using DB/Cache view...`); 
+    const url = `/api/fitness-spots/?gridId=${gridId}`; 
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         clientGridCache[gridId] = data;
+        console.log(`Successfully fetched grid ${gridId} (may have been Django cached)`); 
         return data;
     } catch (error) {
         console.error(`Failed to fetch data for grid ${gridId}:`, error);
@@ -160,7 +261,6 @@ async function fetchGridData(gridId) {
     }
 }
 
-// Renders all markers and sidebar cards for the currently visible grid cells.
 async function renderSpots(visibleGridIds) {
     const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
     
@@ -196,19 +296,21 @@ async function renderSpots(visibleGridIds) {
 
     const emptyState = document.getElementById('sidebar-empty-state');
     if (totalSpotsRendered === 0) {
-        emptyState.classList.remove('hidden');
+         emptyState.textContent = 'No Sport Centers spots found in this area. Try panning or zooming the map.';
+         emptyState.classList.remove('hidden');
     } else {
-        emptyState.classList.add('hidden');
+         emptyState.classList.add('hidden');
     }
 
     if (currentActiveCardId && document.getElementById(`card-${currentActiveCardId}`)) {
         highlightSpotCard(currentActiveCardId);
     }
+
+    const currentQuery = document.getElementById('sidebar-spot-search')?.value || '';
+    filterSidebarSpots(currentQuery);
 }
 
-// =================================================================================
-// UI Interaction & User Location
-// =================================================================================
+
 
 function showSpotDetails(spot, shouldZoom = false) {
     const marker = markers[spot.place_id];
@@ -217,7 +319,6 @@ function showSpotDetails(spot, shouldZoom = false) {
     const isMobile = window.innerWidth < 768;
     const isCardClick = shouldZoom;
 
-    // Pan the map and show the InfoWindow
     const showMarkerInfo = () => {
         programmaticPan = true;
         map.panTo(marker.position);
@@ -228,36 +329,27 @@ function showSpotDetails(spot, shouldZoom = false) {
         highlightSpotCard(spot.place_id);
     };
 
-    let sidebarVisibilityChanged = false; // Flag to track if we need a delay
-
-    // --- Logic for Marker Clicks ---
+    let sidebarVisibilityChanged = false;
     if (!isCardClick) {
-        // On desktop, if sidebar is hidden, show it. This is a change in visibility.
         if (!isMobile && document.body.classList.contains('full-screen-mode') && !document.body.classList.contains('sidebar-visible')) {
             document.body.classList.add('sidebar-visible');
             sidebarVisibilityChanged = true;
         }
     }
-    // --- Logic for Card Clicks ---
     else {
-        // On mobile, hide the sidebar. This is a change in visibility.
         if (isMobile) {
             document.body.classList.remove('sidebar-visible');
             sidebarVisibilityChanged = true;
         }
     }
-    
-    // --- Execute the Action ---
+
     if (sidebarVisibilityChanged) {
-        // If the sidebar started an animation, wait for it to begin before showing the marker info
         setTimeout(showMarkerInfo, 100);
     } else {
-        // If the sidebar's state did not change, show the info immediately
         showMarkerInfo();
     }
 }
 
-//Creates or updates a blue dot marker representing the user's location.
 async function updateUserLocationMarker(position) {
     const { Marker } = await google.maps.importLibrary("marker");
     const userLocation = { lat: position.coords.latitude, lng: position.coords.longitude };
@@ -278,10 +370,10 @@ async function updateUserLocationMarker(position) {
     }
 }
 
-// Creates the "Center on Me" button and adds it to the map controls.
 function createCenterOnMeButton() {
     const controlButton = document.createElement("button");
-    controlButton.className = 'custom-map-control-button';
+    controlButton.className = 'map-top-right-button'; 
+    controlButton.id = 'center-on-me-btn'; 
     controlButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>`;
     controlButton.title = "Center map on my location";
 
@@ -297,12 +389,13 @@ function createCenterOnMeButton() {
         }
     });
 
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlButton);
+    const mapControlsContainer = document.getElementById('map-controls-container');
+    const sidebarBtn = document.getElementById('sidebar-toggle-btn'); 
+    
+    if (mapControlsContainer && sidebarBtn) {
+        mapControlsContainer.insertBefore(controlButton, sidebarBtn);
+    } 
 }
-
-// =================================================================================
-// Helper Functions
-// =================================================================================
 
 function highlightSpotCard(placeId) {
     if (currentActiveCardId && currentActiveCardId !== placeId) {
@@ -312,7 +405,6 @@ function highlightSpotCard(placeId) {
     const newCard = document.getElementById(`card-${placeId}`);
     if (newCard) {
         newCard.classList.add('active');
-        // Only scroll if the sidebar is visible
         if (document.body.classList.contains('sidebar-visible')) {
             setTimeout(() => newCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' }), 50);
         }
@@ -352,23 +444,33 @@ function getUserLocation() {
 
 function toggleFullScreen() {
     const isFullScreen = document.body.classList.toggle('full-screen-mode');
-    
+
+
     if (!isFullScreen) {
         document.body.classList.remove('sidebar-visible');
     }
+
+    const enterIcon = document.getElementById('fullscreen-enter-icon');
+    const exitIcon = document.getElementById('fullscreen-exit-icon');
+
+    if (isFullScreen) {
+        enterIcon.classList.add('hidden');
+        exitIcon.classList.remove('hidden');
+    } else {
+        enterIcon.classList.remove('hidden');
+        exitIcon.classList.add('hidden');
+    }
     
-    const btn = document.getElementById('fullscreen-toggle-btn');
-    const enterIcon = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5"></path></svg>`;
-    const exitIcon = `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5m0 0l-1-1m1 1l1 1m4-11h5m0 0l1 1m-1-1l-1-1M5 19v-4m0 0l-1 1m1-1l1-1m10 4v-4m0 0l1 1m-1-1l-1-1"></path></svg>`;
-    btn.innerHTML = document.body.classList.contains('full-screen-mode') ? exitIcon : enterIcon;
     setTimeout(() => google.maps.event.trigger(map, 'resize'), 400);
 }
 
 async function fetchMapBoundaries() {
+    console.log("Fetching map boundaries using DB/Cache view..."); 
     try {
-        const response = await fetch('/api/map-boundaries/');
+        const response = await fetch('/api/map-boundaries/'); 
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
+        console.log("Successfully fetched map boundaries (may have been Django cached)");
         return (data && typeof data.north === 'number') ? data : null;
     } catch (error) {
         console.error('Failed to fetch map boundaries:', error);
@@ -400,29 +502,156 @@ function getVisibleGridIds(bounds) {
 }
 
 function createInfoContent(spot) {
-    const starIcon = `<svg width="16" height="16" viewBox="0 0 20 20" style="vertical-align: middle; fill: #233D8C;"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"/></svg>`;
-    
-    let ratingHTML = '';
-    if (spot.rating) {
-        ratingHTML = `
-            <div style="display: flex; align-items: center; gap: 5px; font-size: 0.9rem; margin-top: 10px; color: #233D8C;">
-                ${starIcon}
-                <strong style="font-weight: 700;">${spot.rating}</strong>
-                <span style="color: #4a4a4a; font-weight: 400; margin-left: 4px;">(${spot.rating_count} reviews)</span>
-            </div>
-        `;
-    }
+    const addr = spot.address || spot.formatted_address || spot.vicinity || '';
+    const rating = spot.rating ?? '—';
+    const total = spot.rating_count ?? spot.user_ratings_total ?? 0;
 
-    return `
-        <div style="font-family: sans-serif; max-width: 280px; border-radius: 12px; overflow: hidden;">
-            <div style="background-color: #233D8C; color: white; padding: 10px 15px; font-weight: bold; font-size: 1.1rem; position: relative;">
-                ${spot.name}
-                <button title="Close" onclick="infoWindow.close()" style="position: absolute; top: 0px; right: 8px; background: none; border: none; color: white; font-size: 24px; cursor: pointer; line-height: 1.5; font-weight: 300;">&times;</button>
+    const starSvg = `
+        <svg viewBox="0 0 24 24">
+            <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+        </svg>
+    `;
+
+    const ratingHtml = spot.rating
+        ? `
+            <div class="iw-rating">
+                ${starSvg}
+                <strong>${rating}</strong>
+                <span class="text-xs">(${total} reviews)</span>
             </div>
-            <div style="background-color: #E8B400; color: #233D8C; padding: 15px;">
-                <p style="font-size: 0.85rem; color: #333; margin-bottom: 4px; margin-top: 0;">${spot.address}</p>
-                ${ratingHTML}
+        `
+        : '';
+
+    const div = document.createElement('div');
+
+    div.innerHTML = `
+        <div class="iw-header">
+            <div style="font-weight:600;line-height:1.3;">
+            ${spot.name || 'Detail lokasi'}
             </div>
         </div>
+        <div class="iw-body">
+            <div class="text-sm">${addr}</div>
+            ${ratingHtml}
+            
+            <div class="mt-3 text-center">
+                <button class="lihat-komunitas-btn" 
+                        style="background-color: var(--teal-1); 
+                               color: #fff; 
+                               font-weight: 600; 
+                               border-radius: 6px; 
+                               padding: 6px 12px; 
+                               font-size: 0.85rem; 
+                               transition: background 0.2s;">
+                    🔗 Lihat Komunitas di Sini
+                </button>
+            </div>
+            </div>
     `;
+
+    const button = div.querySelector('.lihat-komunitas-btn');
+    if (button) {
+        button.onmouseover = function() { this.style.backgroundColor = 'var(--teal-2)'; };
+        button.onmouseout = function() { this.style.backgroundColor = 'var(--teal-1)'; };
+
+        button.addEventListener('click', () => {
+            const modal = document.getElementById('community-modal');
+            const modalContent = document.getElementById('community-modal-content');
+
+            if (!modal || !modalContent) {
+                console.error("Community modal elements not found!");
+                alert("Error: Cannot open community list modal.");
+                return;
+            }
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.classList.add('flex');
+            modal.style.display = 'flex'; 
+
+
+            modalContent.innerHTML = "<p class='text-gray-500 italic'>Memuat komunitas...</p>";
+
+            fetch(`/community/by-place-json/${spot.place_id}/`) 
+                .then(res => {
+                    if (!res.ok) { throw new Error(`HTTP error! Status: ${res.status}`); }
+                    return res.json();
+                })
+                .then(data => {
+                    modalContent.innerHTML = ""; 
+
+                    if (data.error) {
+                        modalContent.innerHTML = `<p class='text-red-500 italic'>Error: ${data.error}</p>`;
+                    }
+                    else if (data.communities && Array.isArray(data.communities) && data.communities.length > 0) {
+                        const ul = document.createElement('ul');
+                        ul.className = "list-none space-y-2 text-left";
+
+                        data.communities.forEach(c => {
+                            if (!c.id || !c.name) { return; }
+
+                            const li = document.createElement('li');
+                            const link = document.createElement('a');
+
+                            link.href = `/community/detail/${c.id}/`;
+                            link.textContent = '▶ ' + c.name;
+                            link.style.color = 'var(--teal-1)'; 
+                            link.style.textDecoration = 'none';
+                            link.onmouseover = () => link.style.textDecoration = 'underline';
+                            link.onmouseout = () => link.style.textDecoration = 'none';
+
+                            li.appendChild(link);
+                            ul.appendChild(li);
+                        });
+
+                        modalContent.appendChild(ul);
+                    }
+                    else {
+                        modalContent.innerHTML = "<p class='text-gray-500 italic'>Belum ada komunitas di lokasi ini.</p>";
+                    }
+                })
+                .catch(err => {
+                    modalContent.innerHTML = "<p class='text-red-500 italic'>Gagal memuat komunitas. Periksa koneksi atau coba lagi nanti.</p>";
+                    console.error("Fetch error for communities:", err);
+                });
+        });
+    }
+    return div; 
+    
+}
+
+async function fetchAndRenderCommunities() {
+    const container = document.getElementById('community-scroll-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/community/api/featured/');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.json();
+
+        if (data.communities && data.communities.length > 0) {
+            container.innerHTML = ''; 
+            data.communities.forEach(community => {
+                const card = document.createElement('a');
+                card.href = community.detail_url; 
+                card.className = 'community-card';
+
+                const description = community.description ? 
+                    `<p class="card-text mb-2">${community.description}</p>` : 
+                    '<p class="card-text mb-2" style="min-height: 2.5em;"></p>';
+
+                card.innerHTML = `
+                    <h3 class="card-title">${community.name}</h3>
+                    ${description}
+                    <p class="card-subline">📍 ${community.fitness_spot_name}</p>
+                `;
+                container.appendChild(card);
+            });
+        } else {
+            container.innerHTML = '<p class="text-center muted px-4">Belum ada komunitas yang terdaftar.</p>';
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured communities:", error);
+        container.innerHTML = '<p class="text-center muted px-4">Gagal memuat komunitas.</p>';
+    }
 }

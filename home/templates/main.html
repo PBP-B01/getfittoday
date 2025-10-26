@@ -2,167 +2,466 @@
 {% load static %}
 
 {% block title %}GetFit.Today - Home{% endblock %}
+{% block body_class %}home-theme{% endblock %}
 
 {% block content %}
 <main class="container mx-auto px-4 py-8">
-    <section class="text-center py-8">
-        <h1 class="text-yellow-500 text-3xl md:text-5xl font-bold mb-8 hide-on-fullscreen">
-            "YOUR ONE-STOP SOLUTION TO GETTING FIT"
-        </h1>
+  <section class="home-hero text-center pt-5 pb-6">
+    <h1 class="home-hero-title text-[var(--title)] text-2xl md:text-4xl font-extrabold mb-6">
+        "YOUR ONE-STOP SOLUTION TO GET FIT"
+    </h1>
 
-        <div id="map-wrapper">
-            <div id="sidebar">
-                <div class="sidebar-header">Fitness Spots</div>
-                <div id="sidebar-empty-state" class="hidden">
-                    <p>No fitness spots found in this area. Try panning or zooming the map.</p>
-                </div>
-                <div id="spot-cards-container"></div>
-            </div>
-            <div class="map-container-wrapper">
-                <div id="map"></div>
-                <div id="map-controls-container">
-                    <button id="fullscreen-toggle-btn" class="map-top-right-button" title="Toggle Fullscreen">
-                        <svg id="fullscreen-enter-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5"></path></svg>
-                        <svg id="fullscreen-exit-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5m0 0l-1-1m1 1l1 1m4-11h5m0 0l1 1m-1-1l-1-1M5 19v-4m0 0l-1 1m1-1l1-1m10 4v-4m0 0l1 1m-1-1l-1-1"></path></svg>
-                    </button>
-                    <button id="sidebar-toggle-btn" class="map-top-right-button" title="Toggle Sidebar">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7"></path></svg>
-                    </button>
-                </div>
-            </div>
+    <div id="map-wrapper">
+      <div id="sidebar">
+        <div class="sidebar-header">Sport Centers</div>
+
+        <div id="sidebar-search-wrapper">
+          <input type="text" id="sidebar-spot-search" 
+                 placeholder="Cari spot di daftar ini..." 
+                 autocomplete="off">
         </div>
-    </section>
+        <div id="sidebar-empty-state" class="hidden">
+        </div>
+        <div id="spot-cards-container"></div>
+      </div>
+
+      <div class="map-container-wrapper">
+        <div id="map"></div>
+
+        <div id="map-controls-container">
+          <button id="fullscreen-toggle-btn" class="map-top-right-button" title="Toggle Fullscreen">
+            <svg id="fullscreen-enter-icon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 8V4m0 0h4M4 4l5 5m11-5v4m0 0h-4m0 0l-5 5m0 5v4m0 0h4m0 0l-5-5m11 5h-4m0 0v-4m0 0l-5-5" />
+            </svg>
+            <svg id="fullscreen-exit-icon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M10 14H5m0 0l-1-1m1 1l1 1m4-11h5m0 0l1 1m-1-1l-1-1M5 19v-4m0 0l-1 1m1-1l1-1m10 4v-4m0 0l1 1m-1-1l-1-1" />
+            </svg>
+          </button>
+
+          <button id="sidebar-toggle-btn" class="map-top-right-button" title="Toggle Sidebar">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M4 6h16M4 12h16M4 18h7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div id="community-modal"
+    class="fixed inset-0 bg-black bg-opacity-50 opacity-0 pointer-events-none items-center justify-center z-[9999] transition-opacity duration-300">
+    <div class="bg-white text-blue-900 rounded-2xl shadow-2xl w-11/12 sm:w-3/4 md:w-1/2 max-h-[80vh] overflow-y-auto p-6 relative">
+        <button id="close-community-modal"
+        class="absolute top-3 right-4 text-gray-500 hover:text-red-600 text-2xl font-bold">&times;</button>
+        <h3 class="text-2xl font-bold text-blue-800 mb-4 text-center">Komunitas di Lokasi Ini</h3>
+        <div id="community-modal-content" class="space-y-3 text-center"></div>
+    </div>
+    </div>
+  </section>
+
+  <section id="featured-communities" class="max-w-6xl mx-auto pt-8 pb-4">
+    <h2 class="text-3xl font-extrabold text-[var(--title)] mb-5 px-4">
+      Komunitas
+    </h2>
+
+    <div id="community-scroll-wrapper">
+      <div id="community-scroll-container">
+        <p class="text-center muted px-4">Memuat komunitas...</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="featured-products" class="max-w-6xl mx-auto pt-8 pb-4">
+    <h2 class="text-3xl font-extrabold text-[var(--title)] mb-5 px-4">
+      Produk Populer
+    </h2>
+
+    <div id="product-scroll-wrapper">
+      <div id="product-scroll-container">
+        <p class="text-center muted px-4">Memuat produk...</p>
+      </div>
+    </div>
+  </section>
 </main>
 {% endblock %}
 
 {% block extra_css %}
+{{ block.super }}
 <style>
-    :root {
-      --dark-blue: #0D2A4C; /* Or your preferred dark blue */
-      --yellow: #FFC107;   /* Or your preferred yellow */
+    html, body { margin: 0; padding: 0; }
+
+    :root{
+        --nav-bg: #0E5A64;
+        --nav-text: #FFFFFF;
+        --title: #1B2B5A;
+        --bg-1: #EAF2FF;
+        --bg-2: #BFD6F2;
+        --card-bg: #FFFFFF;
+        --card-brd: #C8DDF6;
+        --ink-weak: #6B7A99;
+        --accent-yellow: #FFC107;
+        --accent-yellow-dark: #E0A106;
+        --nav-bg-darker: #07434B;
     }
 
-    html, body { background-color: var(--dark-blue); }
-    main h1 { color: var(--yellow); }
+    #product-scroll-wrapper {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 1.5rem;
+        scrollbar-width: thin;
+        scrollbar-color: var(--card-brd) var(--bg-1);
+    }
+    #product-scroll-wrapper::-webkit-scrollbar { height: 10px; }
+    #product-scroll-wrapper::-webkit-scrollbar-track { background: var(--bg-1); border-radius: 10px; }
+    #product-scroll-wrapper::-webkit-scrollbar-thumb { 
+        background-color: var(--card-brd); 
+        border-radius: 10px; 
+        border: 2px solid var(--bg-1); 
+    }
 
-    #map-wrapper {
+    #product-scroll-container {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 1.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .simple-product-card {
+        display: block; 
+        width: 280px; 
+        flex-shrink: 0; 
+        background: var(--card-bg);
+        border: 1px solid var(--card-brd);
+        border-radius: 16px;
+        box-shadow: 0 10px 24px rgba(13,43,63,.10), inset 0 1px 0 rgba(255,255,255,.65);
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        text-decoration: none;
+        overflow: hidden;
+    }
+    .simple-product-card:hover {
+        transform: translateY(+5px);
+        box-shadow: 0 18px 36px rgba(13,43,63,.16);
+        border-color: var(--card-brd-strong);
+    }
+    .simple-product-card img {
+        width: 100%;
+        height: 180px;
+        object-fit: cover;
+    }
+    .simple-product-card-content {
+        padding: 1rem;
+    }
+    .simple-product-card-title {
+        font-weight: 700;
+        color: var(--title);
+        margin-bottom: 6px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .simple-product-card-price {
+        font-size: 1.25rem;
+        font-weight: 800;
+        color: #0F2C58;
+        margin-bottom: 0.5rem;
+    }
+    .simple-product-card-stats {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.85rem;
+        color: var(--ink-weak);
+    }
+
+    #sidebar-search-wrapper {
+        padding: 10px 12px;
+        position: sticky;
+        top: 58px; 
+        z-index: 1; 
+        background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        border-bottom: 1px solid var(--card-brd);
+    }
+
+    #sidebar-spot-search {
+        width: 100%;
+        padding: .6rem .75rem;
+        border-radius: 12px;
+        background: var(--card-bg);
+        color: #0B2E55;
+        border: 1px solid var(--card-brd);
+        outline: none;
+        box-shadow: 0 2px 4px rgba(0,0,0,.05);
+        transition: box-shadow .18s ease, border-color .18s ease;
+    }
+
+    #sidebar-spot-search:focus {
+        border-color: #9EC5FF;
+        box-shadow: 0 0 0 4px rgba(158,197,255,.25);
+    }
+
+    body.home-theme{
+        background:
+            radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+            linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        color: var(--nav-text);
+    }
+
+    body.home-theme nav{
+        background-color: var(--nav-bg) !important;
+        color: var(--nav-text) !important;
+        position: sticky; top: 0; left: 0; right: 0;
+        width: 100%;
+        margin: 0 !important;
+        border-radius: 0 !important;
+        box-shadow: 0 1px 0 rgba(0,0,0,.06);
+        z-index: 50;
+    }
+
+    body.home-theme nav a{ color: var(--nav-text) !important; }
+    body.home-theme nav a:hover{ opacity: .92; }
+    body.home-theme nav > div:first-child{ color: #fff !important; }
+    body.home-theme .hide-on-fullscreen{ color: var(--title) !important; }
+
+    #map-wrapper{
         height: 500px;
         width: 100%;
-        max-width: 900px;
+        max-width: 1100px;
         margin: 0 auto;
         display: flex;
         position: relative;
-        border-radius: 0.5rem;
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-        transition: all 0.4s ease-in-out;
+        background: var(--card-bg);
+        border: 3px solid #DDE7FF;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow:
+            0 40px 80px rgba(13,43,63,.25),
+            0 12px 24px rgba(13,43,63,.12),
+            inset 0 1px 0 rgba(255,255,255,.65);
+        transition: all .4s ease-in-out;
     }
 
-    body.full-screen-mode #map-wrapper {
+    body.full-screen-mode #map-wrapper{
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-        max-width: 100%; border-radius: 0; z-index: 50;
+        max-width: 100%; border-radius: 0; z-index: 50; margin: 0; box-shadow: none; border: none;
+    }
+
+    #sidebar{
+        width: 0;
+        flex-shrink: 0;
+        background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        overflow-y: auto;
+        transition: width .4s ease-in-out;
+        border-right: 1px solid var(--card-brd);
+        display: flex; flex-direction: column;
+    }
+    body.full-screen-mode.sidebar-visible #sidebar{ width: 340px; }
+
+    .sidebar-header {
+        position: sticky; top: 0; z-index: 2;
+        padding: 1rem; font-size: 1.1rem; font-weight: 700; text-align: center;
+        background: linear-gradient(135deg, var(--nav-bg) 0%, var(--nav-bg-darker) 100%);
+        color: #fff; letter-spacing: .2px; border-bottom: none; box-shadow: 0 2px 10px rgba(0,0,0,.06);
+    }
+
+    #spot-cards-container{ padding: 8px; overflow-y: auto; flex-grow: 1; }
+
+    .spot-card{
+        position: relative;
+        background: linear-gradient(180deg, rgba(234,242,255,.95) 0%, rgba(191,214,242,.92) 100%);
+        color: #193A63;
+        border: 1px solid var(--card-brd);
+        border-radius: 14px;
+        margin: 10px; padding: 14px;
+        cursor: pointer;
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        box-shadow: 0 2px 10px rgba(7,67,75,.06);
+    }
+    .spot-card:hover{
+        transform: translateY(-2px);
+        box-shadow: 0 8px 18px rgba(7,67,75,.14);
+    }
+
+    .spot-card.active{ border: 2px solid #9EC5FF; box-shadow: 0 0 0 4px rgba(158,197,255,.25); }
+    .spot-card h3{ font-weight: 700; color: #0F2C58; margin-bottom: 6px; }
+    .spot-card p{ font-size: .85rem; color: var(--ink-weak); margin-bottom: 4px; }
+    .spot-card .spot-card-rating{ display:flex; align-items:center; gap:6px; margin-top:8px; color:#0D3B4F; }
+    .spot-card .spot-card-rating svg{ width:16px; height:16px; fill:#0D3B4F; flex:0 0 16px; }
+    #spot-cards-container .spot-card > svg:first-child{ display:none; }
+
+    .map-container-wrapper{ flex-grow: 1; position: relative; }
+    #map{ width: 100%; height: 100%; }
+
+    #map-controls-container{
+        position: absolute; top: 12px; right: 12px; z-index: 100;
+        display: flex; flex-direction: column; gap: 8px;
+    }
+    .map-top-right-button{
+        background: #fff; color: #0D3B4F; padding: 8px;
+        border-radius: 10px; border: 1px solid var(--card-brd);
+        box-shadow: 0 2px 8px rgba(0,0,0,.15); width: 42px; height: 42px; cursor: pointer;
+    }
+    .map-top-right-button:hover{ background: #F6FAFF; }
+    #sidebar-toggle-btn{ display: none; }
+    body.full-screen-mode #sidebar-toggle-btn{ display: block; }
+    body.full-screen-mode .hide-on-fullscreen{ display: none; }
+
+    #sidebar-empty-state{ color: #98A6C2; text-align: center; padding: 40px 20px; font-style: italic; }
+
+    main.container{ padding-top: .75rem !important; }
+    .home-hero{ padding-top: 6px; }
+    @media (min-width: 768px){ .home-hero{ padding-top: 2px; } }
+
+    .home-hero-title{
+        font-size: clamp(28px, 4vw, 44px);
+        letter-spacing: .3px;
+        margin-top: -6px;
+        margin-bottom: 10px;
+    }
+
+    #userMenu a, #mUserMenu a{ color: #0f2a6d !important; }
+    #userMenu a:hover, #mUserMenu a:hover{ background: #eff6ff; }
+
+    :root{
+        --teal-1:#0E5A64;
+        --teal-2:#0A4A52;
+        --ink-strong:#0B3440;
+        --gold-soft-1: rgba(234,242,255,.95); 
+        --gold-soft-2: rgba(191,214,242,.92); 
+    }
+
+    .gm-style .gm-style-iw-c{
+        padding:0 !important;
+        background:transparent !important;
+        border-radius:14px !important;
+        box-shadow:0 10px 22px rgba(7,67,75,.22) !important;
+    }
+    .gm-style .gm-style-iw-d{ overflow:hidden !important; }
+    .gm-style .gm-style-iw-t::after{ display:none !important; }
+
+    .iw-header{
+        background:linear-gradient(135deg,var(--teal-1),var(--teal-2)) !important;
+        color:#fff !important;
+        padding:10px 14px !important;
+        border-radius:14px 14px 0 0 !important;
+    }
+    .iw-body{
+        background:linear-gradient(180deg,var(--gold-soft-1),var(--gold-soft-2)) !important;
+        color:var(--ink-strong) !important;
+        padding:12px 14px !important;
+        border-radius:0 0 14px 14px !important;
+    }
+    .iw-rating{ display:flex; align-items:center; gap:6px; margin-top:6px; }
+    .iw-rating svg{ width:14px; height:14px; fill:var(--teal-1) !important; }
+
+    :root{
+        --teal-600:#137A86;
+        --teal-700:#0E5A64;
+    }
+
+    #community-scroll-wrapper {
+        display: flex;
+        overflow-x: auto;
+        padding-bottom: 1.5rem; 
+        scrollbar-width: thin;
+        scrollbar-color: var(--card-brd) var(--bg-1);
+    }
+
+    #community-scroll-wrapper::-webkit-scrollbar {
+        height: 10px;
+    }
+    #community-scroll-wrapper::-webkit-scrollbar-track {
+        background: var(--bg-1);
+        border-radius: 10px;
+    }
+    #community-scroll-wrapper::-webkit-scrollbar-thumb {
+        background-color: var(--card-brd);
+        border-radius: 10px;
+        border: 2px solid var(--bg-1);
+    }
+
+    #community-scroll-container {
+        display: flex;
+        flex-wrap: nowrap;
+        gap: 1.5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .community-card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-brd);
+        border-radius: 16px;
+        padding: 18px;
+        box-shadow: 0 10px 24px rgba(13,43,63,.10), inset 0 1px 0 rgba(255,255,255,.65);
+        transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+        
+        width: 320px; 
+        flex-shrink: 0;  
+        text-decoration: none;
+        color: #0B2E55;
+    }
+    .community-card:hover {
+        transform: translateY(+5px);
+        box-shadow: 0 18px 36px rgba(13,43,63,.16);
+        border-color: var(--card-brd-strong);
+    }
+    .card-title { 
+        color: var(--title); 
+        font-weight: 800; 
+        font-size: 1.15rem; 
+        margin-bottom: .4rem; 
+        text-align: center;
+
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .card-text { 
+        color:#0B2E55; 
+        opacity:.9; 
+        display: -webkit-box;
+        -webkit-line-clamp: 2; 
+        -webkit-box-orient: vertical;  
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-height: 2.5em; 
+    }
+    .card-subline { 
+        color:#0B2E55; 
+        font-weight:600; 
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    @media (min-width: 768px){
+        body.home-theme nav{
+        background-color: var(--nav-bg) !important;
+        color: var(--nav-text) !important;
+        }
     }
 
     #sidebar {
-        width: 0;
-        flex-shrink: 0;
-        background-color: var(--dark-blue);
-        overflow-y: auto;
-        transition: width 0.4s ease-in-out;
-        border-right: 2px solid var(--yellow);
-        display: flex;
-        flex-direction: column;
+        scrollbar-width: thin; 
+        scrollbar-color: var(--card-brd) var(--bg-1); 
     }
 
-    
-    body.full-screen-mode.sidebar-visible #sidebar { width: 350px; }
-
-    .sidebar-header {
-        padding: 1rem;
-        font-size: 1.25rem;
-        font-weight: bold;
-        color: var(--yellow);
-        text-align: center;
-        border-bottom: 2px solid var(--yellow);
-        flex-shrink: 0;
+    #sidebar::-webkit-scrollbar {
+        width: 10px; 
     }
 
-    #spot-cards-container {
-        padding: 8px;
-        overflow-y: auto;
-        flex-grow: 1;
+    #sidebar::-webkit-scrollbar-track {
+        background: var(--bg-1); 
+        border-radius: 10px;
     }
 
-    .spot-card {
-        background-color: var(--yellow);
-        color: var(--dark-blue);
-        margin: 10px;
-        padding: 15px;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: transform 0.2s ease, box-shadow 0.2s ease;
+    #sidebar::-webkit-scrollbar-thumb {
+        background-color: var(--card-brd); 
+        border-radius: 10px;
+        border: 2px solid var(--bg-1); 
     }
-    .spot-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    }
-    .spot-card.active {
-        border: 3px solid white;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-    }
-    .spot-card h3 { 
-        font-weight: 700; 
-        color: #000;
-        margin-bottom: 8px;
-    }
-    .spot-card p { 
-        font-size: 0.85rem; 
-        color: #333;
-        margin-bottom: 4px;
-    }
-    .spot-card-rating {
-        display: flex;
-        align-items: center;
-        gap: 5px;
-        font-size: 0.9rem;
-        margin-top: 10px;
-        color: var(--dark-blue);
-    }
-    .spot-card-rating svg {
-        fill: var(--dark-blue);
-        width: 16px;
-        height: 16px;
-    }
-
-    #sidebar-empty-state {
-        color: #a0aec0; text-align: center; padding: 40px 20px;
-        font-style: italic;
-    }
-    .hidden { display: none; }
-
-    .map-container-wrapper { flex-grow: 1; position: relative; }
-    #map { width: 100%; height: 100%; }
-
-    #map-controls-container {
-        position: absolute; top: 10px; right: 10px;
-        z-index: 100; display: flex; flex-direction: column; gap: 8px;
-    }
-    .map-top-right-button {
-        background-color: white; color: var(--dark-blue); padding: 8px;
-        border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-        cursor: pointer; border: 2px solid var(--dark-blue);
-        width: 40px; height: 40px;
-    }
-    #sidebar-toggle-btn { display: none; }
-    body.full-screen-mode #sidebar-toggle-btn { display: block; }
-
-    body.full-screen-mode .hide-on-fullscreen { display: none; }
-
-    .custom-map-control-button {
-        background-color: #fff; border: 2px solid #fff; border-radius: 8px;
-        box-shadow: 0 2px 6px rgba(0,0,0,.3); cursor: pointer; margin: 10px;
-        padding: 8px; text-align: center; width: 40px; height: 40px;
-    }
-    .custom-map-control-button:hover { background-color: #f4f4f4; }
 </style>
 {% endblock %}
 

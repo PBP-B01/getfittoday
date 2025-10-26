@@ -8,9 +8,20 @@
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <script>
-    tailwind = {config: {theme: {extend: {fontFamily: {sans: ['Poppins','ui-sans-serif','system-ui','sans-serif']}}}}}
+    tailwind = {
+      config: {
+        theme: {
+          extend: {
+            fontFamily: {
+              sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif']
+            }
+          }
+        }
+      }
+    }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
+<<<<<<< HEAD
   {% block extra_css %}
     <style>
       :root{ --nav-bg:#0E5A64; --nav-text:#fff; }
@@ -81,10 +92,147 @@
 <body class="bg-blue-900 min-h-screen font-sans text-white {% block body_class %}{% endblock %}">
     <!-- Navbar -->
   <nav class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500 text-white">
+=======
+
+  <style id="core-nav">
+
+    #main-navbar #userMenu a,
+    #main-navbar #mUserMenu a { color: var(--teal-700) !important; }
+
+    #main-navbar #userMenu a.logout-link,
+    #main-navbar #mUserMenu a.logout-link { color:#dc2626 !important; }
+    #main-navbar #userMenu a.logout-link:hover,
+    #main-navbar #mUserMenu a.logout-link:hover {
+      color:#b91c1c !important; background:#fee2e2 !important;
+    }
+
+    #main-navbar .user-avatar-btn,
+    #main-navbar .user-avatar-btn svg {
+      color: var(--title) !important;
+      fill: currentColor !important;
+    }
+  </style>
+
+  {% block extra_css %}
+  <style>
+    :root {
+      --nav-bg: #0E5A64;
+      --nav-text: #fff;
+      --teal-700: #0E5A64;
+      --teal-600: #137A86;
+      --accent-yellow: #FFC107;
+      --title: #1B2B5A;
+      --nav-bg-darker: #07434B;
+    }
+
+    nav {
+      position: sticky !important;
+      top: 0 !important;
+      position: relative;
+      will-change: transform; 
+      z-index: 100;
+    }
+
+    body {
+        margin: 0; 
+    }
+
+    #mobile-menu {
+        position: absolute !important;
+        top: 100% !important;
+        left: 0 !important;
+        right: 0 !important;
+        width: 100% !important; 
+        z-index: 50 !important; 
+
+        background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-700) 100%) !important;
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+        box-shadow: 0 16px 40px rgba(0,0,0,.25);
+    }
+
+    #map-wrapper {
+      border: 3px solid #DDE7FF;
+      border-radius: 24px;
+      box-shadow: 0 28px 80px rgba(8, 24, 68, .25),
+                  0 10px 28px rgba(8, 24, 68, .15);
+    }
+
+    .home-hero {
+      padding-top: 18px;
+    }
+
+    .home-hero-title {
+      font-size: clamp(28px, 4vw, 44px);
+      margin-top: -2px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 767.98px) {
+      #main-navbar {
+        background-color: var(--teal-600) !important;
+      }
+
+      #main-navbar a.nav-link { 
+        color: var(--nav-text) !important; 
+      }
+
+      #main-navbar button:not(.user-avatar-btn) { 
+        color: var(--nav-text) !important; 
+      }
+
+      #main-navbar .brand {
+        color: var(--nav-text) !important;
+      }
+
+      #mobile-menu {
+        background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-700) 100%) !important;
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+      }
+
+      #main-navbar .brand {
+        color: var(--nav-text) !important;
+      }
+
+      #mobile-menu {
+        background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-700) 100%) !important;
+        border-bottom-left-radius: 14px;
+        border-bottom-right-radius: 14px;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
+      }
+
+      #mobile-menu a {
+        color: #EAF2FF !important;
+      }
+
+      #mobile-menu a:hover {
+        color: #fff !important;
+        background: rgba(255, 255, 255, .08);
+      }
+
+      #mobile-menu-button {
+        color: #EAF2FF !important;
+      }
+
+      nav {
+        background-color: var(--teal-600) !important;
+        color: #fff !important;
+      }
+    }
+    </style>
+  {% endblock %}
+</head>
+
+<body class="bg-blue-900 min-h-screen font-sans text-white {% block body_class %}{% endblock %}">
+  <!-- Navbar -->
+  <nav id="main-navbar" class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500">
+>>>>>>> master
     <div class="brand font-bold text-2xl text-white">GETFIT.TODAY</div>
 
-    <!-- Desktop -->
     <div class="hidden md:flex items-center gap-6">
+<<<<<<< HEAD
       <a href="{% url 'home:home' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
       <a href="{% url 'community_list' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
       <a href="{% url 'event_list' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">EVENTS</a>
@@ -94,82 +242,117 @@
         <a href="{% url 'booking:page' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">BOOKING</a>
       {% else %}
         <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">BOOKING</a>
+=======
+      <a href="{% url 'home:home' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
+      <a href="{% url 'community_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
+      <a href="{% url 'store:product_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
+
+      {% if request.user.is_authenticated or request.session.is_admin %}
+        <a href="{% url 'booking:page' %}" class="text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg">BOOKING</a>
+      {% else %}
+        <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg">BOOKING</a>
+>>>>>>> master
       {% endif %}
 
-      <!-- Desktop widget -->
+      <a href="{% url 'BlognEvent:blogevent_page' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">BLOGS & EVENTS</a>
+
       <div class="relative" id="user-widget-desktop">
-        {% if request.user.is_authenticated %}
-          <button id="userMenuBtn" type="button"
-                  class="relative z-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-yellow-500 text-blue-900 border-2 border-blue-900 shadow"
-                  aria-haspopup="true" aria-expanded="false" aria-controls="userMenu" title="{{ request.user.username }}">
+        {% if request.user.is_authenticated or request.session.is_admin %}
+          <button id="userMenuBtn" class="user-avatar-btn relative z-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent-yellow)] text-[var(--title)] border-2 border-[var(--nav-text)] shadow">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.239-8 5v1h16v-1c0-2.761-3.58-5-8-5Z"/>
             </svg>
           </button>
-          <div id="userMenu"
-               class="absolute right-0 z-50 mt-2 w-56 bg-white text-blue-900 rounded-xl shadow-2xl overflow-hidden hidden">
+
+          <div id="userMenu" class="absolute right-0 z-50 mt-2 w-56 bg-white text-gray-800 rounded-xl shadow-2xl overflow-hidden hidden">
             <div class="px-4 py-3 border-b border-gray-200">
               <p class="text-xs text-gray-500">Signed in as</p>
-              <p class="font-semibold truncate">{{ request.user.username }}</p>
+              {% if request.session.is_admin %}
+                <p class="font-semibold truncate">{{ request.session.admin_name }} (Admin)</p>
+              {% else %}
+                <p class="font-semibold truncate">{{ request.user.username }}</p>
+              {% endif %}
             </div>
+<<<<<<< HEAD
             <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-blue-900 hover:bg-blue-50">My bookings</a>
             <div class="border-t border-blue-100"></div>
             <form method="post" action="{% url 'central:logout' %}" class="p-1">
               {% csrf_token %}
               <button type="submit" class="w-full text-left px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">Logout</button>
             </form>
+=======
+
+            <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My bookings</a>
+            <div class="border-t border-gray-100"></div>
+            <div class="p-1">
+              <a href="{% url 'central:logout' %}" class="logout-link w-full text-left block px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">
+                Logout
+              </a>
+            </div>
+>>>>>>> master
           </div>
         {% else %}
           <a href="{% url 'central:login' %}?next={{ request.get_full_path|urlencode }}"
-             class="inline-flex items-center px-4 py-2 rounded-lg border-2 border-blue-900 text-blue-900 font-semibold hover:bg-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-300">
+             class="inline-flex items-center px-4 py-2 rounded-lg border-2 border-[var(--nav-text)] text-[var(--nav-text)] font-semibold hover:bg-[var(--nav-bg-darker)] focus:outline-none focus:ring-2 focus:ring-gray-300">
             Login
           </a>
         {% endif %}
       </div>
     </div>
 
-    <!-- Mobile -->
     <div class="md:hidden flex items-center space-x-4">
-      {% if request.user.is_authenticated %}
+      {% if request.user.is_authenticated or request.session.is_admin %}
         <div class="relative">
-          <button id="mUserMenuBtn" type="button"
-                  class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-yellow-500 text-blue-900 border-2 border-blue-900 shadow"
-                  aria-haspopup="true" aria-expanded="false" aria-controls="mUserMenu" title="{{ request.user.username }}">
+          <button id="mUserMenuBtn" class="user-avatar-btn inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent-yellow)] text-[var(--title)] border-2 border-[var(--nav-text)] shadow">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.239-8 5v1h16v-1c0-2.761-3.58-5-8-5Z"/>
             </svg>
           </button>
-          <div id="mUserMenu"
-               class="absolute right-0 z-50 mt-2 w-56 bg-white text-blue-900 rounded-xl shadow-2xl overflow-hidden hidden">
+
+          <div id="mUserMenu" class="absolute right-0 z-50 mt-2 w-56 bg-white text-gray-800 rounded-xl shadow-2xl overflow-hidden hidden">
             <div class="px-4 py-3 border-b border-gray-200">
               <p class="text-xs text-gray-500">Signed in as</p>
-              <p class="font-semibold truncate">{{ request.user.username }}</p>
+              {% if request.session.is_admin %}
+                <p class="font-semibold truncate">{{ request.session.admin_name }} (Admin)</p>
+              {% else %}
+                <p class="font-semibold truncate">{{ request.user.username }}</p>
+              {% endif %}
             </div>
+<<<<<<< HEAD
             <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-blue-900 hover:bg-blue-50">My bookings</a>
             <div class="border-t border-blue-100"></div>
             <form method="post" action="{% url 'central:logout' %}" class="p-1">
               {% csrf_token %}
               <button type="submit" class="w-full text-left px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">Logout</button>
             </form>
+=======
+
+            <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My bookings</a>
+            <div class="border-t border-gray-100"></div>
+            <div class="p-1">
+              <a href="{% url 'central:logout' %}" class="logout-link w-full text-left block px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">
+                Logout
+              </a>
+            </div>
+>>>>>>> master
           </div>
         </div>
       {% else %}
         <a href="{% url 'central:login' %}?next={{ request.get_full_path|urlencode }}"
-           class="px-3 py-1.5 rounded-md border-2 border-blue-900 text-blue-900 font-semibold hover:bg-blue-100">
+           class="px-3 py-1.5 rounded-md border-2 border-[var(--nav-text)] text-[var(--nav-text)] font-semibold hover:bg-[var(--nav-bg-darker)]">
           Login
         </a>
       {% endif %}
 
-      <!-- Hamburger -->
-      <button id="mobile-menu-button" type="button" class="text-blue-900 focus:outline-none"
+      <button id="mobile-menu-button" type="button" class="text-[var(--nav-text)] focus:outline-none"
               aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
         <svg xmlns="http://www.w3.org/2000/svg" class="w-7 h-7" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
           <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16"/>
         </svg>
       </button>
     </div>
-  </nav>
 
+<<<<<<< HEAD
   <!-- Mobile Menu Overlay -->
   <div id="mobile-menu" class="md:hidden hidden absolute top-16 left-0 w-full rounded-b-lg py-4 z-50 shadow-md bg-gradient-to-br from-[var(--teal-600)] to-[var(--teal-700)] md:bg-yellow-500">
     <a href="{% url 'home:home' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">HOME</a>
@@ -180,18 +363,28 @@
       <a href="{% url 'booking:page' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">BOOKING</a>
     {% else %}
       <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">BOOKING</a>
+=======
+    <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 w-full rounded-b-lg py-4 z-50 shadow-md">
+    <a href="{% url 'home:home' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">HOME</a>
+    <a href="{% url 'community_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">KOMUNITAS</a> {# <-- Fixed the # href #}
+    <a href="{% url 'store:product_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">STORE</a>
+    {% if request.user.is_authenticated or request.session.is_admin %}
+      <a href="{% url 'booking:page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BOOKING</a>
+    {% else %}
+      <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BOOKING</a>
+>>>>>>> master
     {% endif %}
-  </div>
+    <a href="{% url 'BlognEvent:blogevent_page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BLOGS & EVENTS</a>
+    </div>
+  </nav>
 
   <main class="container mx-auto px-4 py-8 pt-6 relative z-0">
     {% block content %}{% endblock %}
   </main>
 
-  <!-- Scripts -->
   <script>
-    // Mobile menu toggle
     const mobileMenuButton = document.getElementById('mobile-menu-button');
-    const mobileMenu       = document.getElementById('mobile-menu');
+    const mobileMenu = document.getElementById('mobile-menu');
     if (mobileMenuButton && mobileMenu) {
       mobileMenuButton.addEventListener('click', () => {
         const hidden = mobileMenu.classList.toggle('hidden');
@@ -199,15 +392,14 @@
       });
     }
 
-    // Desktop user dropdown
     (() => {
-      const btn  = document.getElementById('userMenuBtn');
+      const btn = document.getElementById('userMenuBtn');
       const menu = document.getElementById('userMenu');
       if (!btn || !menu) return;
       const close = (e) => {
         if (!menu.contains(e.target) && !btn.contains(e.target)) {
           menu.classList.add('hidden');
-          btn.setAttribute('aria-expanded','false');
+          btn.setAttribute('aria-expanded', 'false');
           document.removeEventListener('click', close);
         }
       };
@@ -216,25 +408,24 @@
         const open = !menu.classList.contains('hidden');
         if (open) {
           menu.classList.add('hidden');
-          btn.setAttribute('aria-expanded','false');
+          btn.setAttribute('aria-expanded', 'false');
           document.removeEventListener('click', close);
         } else {
           menu.classList.remove('hidden');
-          btn.setAttribute('aria-expanded','true');
+          btn.setAttribute('aria-expanded', 'true');
           setTimeout(() => document.addEventListener('click', close), 0);
         }
       });
     })();
 
-    // Mobile user dropdown
     (() => {
-      const btn  = document.getElementById('mUserMenuBtn');
+      const btn = document.getElementById('mUserMenuBtn');
       const menu = document.getElementById('mUserMenu');
       if (!btn || !menu) return;
       const close = (e) => {
         if (!menu.contains(e.target) && !btn.contains(e.target)) {
           menu.classList.add('hidden');
-          btn.setAttribute('aria-expanded','false');
+          btn.setAttribute('aria-expanded', 'false');
           document.removeEventListener('click', close);
         }
       };
@@ -243,11 +434,11 @@
         const open = !menu.classList.contains('hidden');
         if (open) {
           menu.classList.add('hidden');
-          btn.setAttribute('aria-expanded','false');
+          btn.setAttribute('aria-expanded', 'false');
           document.removeEventListener('click', close);
         } else {
           menu.classList.remove('hidden');
-          btn.setAttribute('aria-expanded','true');
+          btn.setAttribute('aria-expanded', 'true');
           setTimeout(() => document.addEventListener('click', close), 0);
         }
       });

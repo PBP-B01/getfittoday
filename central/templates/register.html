@@ -2,38 +2,142 @@
 {% load static %}
 
 {% block title %}Register{% endblock %}
+{% block body_class %}auth-theme{% endblock %}
 
 {% block content %}
-<section class="max-w-md mx-auto mt-10 bg-white/10 p-6 rounded-xl">
-  <h1 class="text-2xl font-bold mb-4 text-yellow-400">Register</h1>
+<section class="max-w-md mx-auto mt-10">
+  <div class="auth-card">
+    <h1 class="auth-title">Register</h1>
 
-  <form id="regForm" class="space-y-4">
-    {% csrf_token %}
-    <div>
-      <label class="block text-sm mb-1 text-white/90">Username</label>
-      <input name="username" class="w-full px-3 py-2 rounded text-blue-900" required>
-    </div>
-    <div>
-      <label class="block text-sm mb-1 text-white/90">Password</label>
-      <input type="password" name="password1" class="w-full px-3 py-2 rounded text-blue-900" required>
-    </div>
-    <div>
-      <label class="block text-sm mb-1 text-white/90">Confirm Password</label>
-      <input type="password" name="password2" class="w-full px-3 py-2 rounded text-blue-900" required>
-    </div>
+    <form id="regForm" class="space-y-4">
+      {% csrf_token %}
+      <div>
+        <label class="auth-label">Username</label>
+        <input name="username" class="auth-input" required autocomplete="username">
+      </div>
 
-    <div id="regErrors" class="text-red-300 text-sm"></div>
+      <div>
+        <label class="auth-label">Password</label>
+        <input type="password" name="password1" class="auth-input" required autocomplete="new-password">
+      </div>
 
-    <button id="regBtn"
-            class="w-full bg-yellow-400 hover:bg-yellow-300 text-blue-900 font-bold py-2 rounded">
-      Register
-    </button>
-  </form>
+      <div>
+        <label class="auth-label">Confirm Password</label>
+        <input type="password" name="password2" class="auth-input" required autocomplete="new-password">
+      </div>
 
-  <p class="mt-4 text-white/80 text-sm">
-    Already have an account? <a href="{% url 'central:login_ajax' %}" class="text-yellow-300 underline">Login</a>
-  </p>
+      <div id="regErrors" class="auth-error hidden"></div>
+
+      <button id="regBtn" class="auth-button w-full">Register</button>
+    </form>
+
+    <p class="mt-4 text-center text-[var(--ink-weak)] text-sm">
+      Already have an account?
+      <a href="{% url 'central:login' %}" class="auth-link">Login</a>
+    </p>
+  </div>
 </section>
+<!-- Toast -->
+<div id="toast"
+     class="hidden fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm
+            rounded-xl px-4 py-3 text-sm shadow-[0_12px_30px_rgba(0,0,0,.25)]
+            transition-all duration-300 translate-y-2 opacity-0"
+     role="status" aria-live="polite"></div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+  :root{
+    --nav-bg:#0E5A64; --nav-bg-darker:#07434B; --nav-text:#FFFFFF;
+    --title:#1B2B5A; --bg-1:#EAF2FF; --bg-2:#BFD6F2;
+    --card-bg:#FFFFFF; --card-brd:#C8DDF6; --card-brd-strong:#DDE7FF;
+    --ink-weak:#6B7A99; --accent:#FFC107; --accent-dark:#E0A106;
+    --input-bg:#F8FBFF; --input-text:#0B2E55;
+    --idle-glow: rgba(78,115,181,.12); --focus:#9EC5FF80;
+  }
+  body.auth-theme{
+    background:
+      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    color: var(--nav-text);
+  }
+  body.auth-theme nav{
+    background-color: var(--nav-bg) !important;
+    color: var(--nav-text) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  }
+  body.auth-theme nav a{ color: var(--nav-text) !important; }
+  body.auth-theme nav a:hover{ opacity:.92; }
+
+  .auth-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-brd);
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow:
+      0 40px 80px rgba(13,43,63,.18),
+      0 12px 24px rgba(13,43,63,.12),
+      inset 0 1px 0 rgba(255,255,255,.65);
+  }
+  .auth-title{
+    color: var(--title);
+    font-weight: 800;
+    font-size: clamp(24px, 3vw, 32px);
+    text-align: center;
+    margin-bottom: 16px;
+    letter-spacing:.2px;
+  }
+  .auth-label{ display:block; margin-bottom:.35rem; font-size:.9rem; color: var(--input-text); }
+  .auth-input{
+    width:100%; padding:.7rem .85rem; border-radius:12px;
+    background: var(--input-bg); color: var(--input-text);
+    border:1px solid var(--card-brd); outline:none;
+    transition: box-shadow .18s ease, border-color .18s ease;
+    box-shadow: 0 0 0 2px var(--idle-glow);
+  }
+  .auth-input:focus{
+    border-color: var(--card-brd-strong);
+    box-shadow:
+      0 0 0 3px var(--focus),
+      0 10px 22px rgba(13,43,63,.12);
+  }
+  .auth-button{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.8rem 1rem; border-radius:12px; font-weight:800; color:#0B2E55;
+    background: var(--accent);
+    border:1px solid color-mix(in srgb, var(--accent) 90%, #000 0%);
+    box-shadow: 0 16px 36px rgba(224,161,6,.30);
+    transition: background .15s ease, transform .05s ease, box-shadow .15s ease;
+  }
+  .auth-button:hover{ background: var(--accent-dark); }
+  .auth-button:active{ transform: translateY(1px); }
+  .auth-button:disabled{ opacity:.6; cursor:not-allowed; }
+  .auth-link{ color: var(--accent-dark); text-decoration: underline; }
+  .auth-error{
+    background:#FEE2E2; color:#991B1B; border:1px solid #FCA5A5;
+    border-radius:12px; padding:.65rem .85rem; font-size:.9rem;
+  }
+
+  :root{
+    --toast-ok-bg: var(--nav-bg);
+    --toast-ok-shadow: rgba(14,90,100,.35);
+    --toast-err-bg: #E5484D;
+    --toast-err-shadow: rgba(229,72,77,.35);
+    --toast-text: #FFFFFF;
+  }
+
+  #toast.toast--ok{
+    background: var(--toast-ok-bg);
+    color: var(--toast-text);
+    box-shadow: 0 16px 38px var(--toast-ok-shadow);
+  }
+  #toast.toast--err{
+    background: var(--toast-err-bg);
+    color: var(--toast-text);
+    box-shadow: 0 16px 38px var(--toast-err-shadow);
+  }
+</style>
 {% endblock %}
 
 {% block extra_js %}
@@ -49,35 +153,61 @@
 
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
-    out.textContent = '';
+    out.classList.add('hidden'); out.textContent = '';
     btn.disabled = true;
 
-    const fd = new FormData(form);
     try {
       const r = await fetch("{% url 'central:register_ajax' %}", {
         method: "POST",
         headers: {"X-CSRFToken": getCookie('csrftoken')},
-        body: fd,
+        body: new FormData(form),
         credentials: "same-origin",
       });
 
-      const data = await r.json();
+      const data = await r.json().catch(() => ({}));
+      if (r.ok && data.ok) {
+        toast("Register successful ✓", true, 1000);
+        setTimeout(() => {
+          window.location.href = data.redirect || "{% url 'central:login' %}";
+        }, 900);
+        return;
+      }
       if (!r.ok || !data.ok) {
-        if (data.errors) {
-          out.innerHTML = Object.entries(data.errors)
-            .map(([field, msgs]) => `<div>${field}: ${(Array.isArray(msgs)?msgs.join(', '):msgs)}</div>`)
-            .join('');
-        } else {
-          out.textContent = "Registrasi gagal.";
-        }
+        const html = data?.errors
+          ? Object.entries(data.errors)
+              .map(([f, msgs]) => `<div><strong>${f}</strong>: ${(Array.isArray(msgs)?msgs.join(', '):msgs)}</div>`)
+              .join('')
+          : "Registrasi gagal.";
+        out.innerHTML = html;
+        out.classList.remove('hidden');
         btn.disabled = false;
         return;
       }
       window.location.href = data.redirect || "{% url 'central:login' %}";
     } catch (err) {
       out.textContent = "Terjadi kesalahan jaringan. Cobalah lagi.";
+      out.classList.remove('hidden');
       btn.disabled = false;
     }
   });
+
+  function toast(message, ok = true, delay = 1800) {
+      const el = document.getElementById('toast');
+      const base =
+        "fixed bottom-6 right-6 z-[80] min-w-[240px] max-w-sm rounded-xl px-4 py-3 text-sm transition-all duration-300";
+
+      el.textContent = message;
+      el.className = base + " " + (ok ? "toast--ok" : "toast--err") + " opacity-0 translate-y-2";
+      el.classList.remove("hidden");
+
+      void el.offsetWidth;
+      el.classList.remove("opacity-0","translate-y-2");
+
+      clearTimeout(el._t);
+      el._t = setTimeout(() => {
+        el.classList.add("opacity-0","translate-y-2");
+        setTimeout(() => el.classList.add("hidden"), 300);
+      }, delay);
+    }
 </script>
 {% endblock %}

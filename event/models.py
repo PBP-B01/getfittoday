@@ -90,4 +90,11 @@ class Event(models.Model):
     def user_is_participant(self, user):
         if not user.is_authenticated:
             return False
+<<<<<<< HEAD
         return self.participants.filter(id=user.id).exists()
+=======
+        return self.participants.filter(id=user.id).exists()
+    
+    def participant_count(self):
+        return self.participants.count()
+>>>>>>> master

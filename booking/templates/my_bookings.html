@@ -1,0 +1,150 @@
+{% extends "base.html" %}
+{% block title %}My bookings{% endblock %}
+{% block body_class %}mybookings-theme{% endblock %}
+
+{% block content %}
+<section class="max-w-4xl mx-auto py-10">
+  <h1 class="page-title text-center">MY BOOKINGS</h1>
+  <div class="space-y-4">
+    {% for it in items %}
+    <div class="booking-card">
+      <div>
+        <div class="place">{{ it.place_name }}</div>
+        <div class="when">
+          {{ it.start|date:"Y-m-d H:i" }} — {{ it.end|date:"Y-m-d H:i" }}
+        </div>
+        <div class="mt-2">
+          {% if it.status == "pending" %}
+            <span class="chip chip--pending">Pending</span>
+          {% elif it.status == "confirmed" %}
+            <span class="chip chip--confirmed">Confirmed</span>
+          {% else %}
+            <span class="chip chip--cancelled">Cancelled</span>
+          {% endif %}
+        </div>
+      </div>
+
+      {% if it.can_cancel %}
+      <form method="post" action="{% url 'booking:booking-cancel' it.id %}">
+        {% csrf_token %}
+        <button class="btn-cancel">Cancel</button>
+      </form>
+      {% else %}
+      <span class="cant-cancel">Cannot cancel</span>
+      {% endif %}
+    </div>
+    {% empty %}
+    <div class="empty">Belum ada booking.</div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+  :root{
+    --primary: #0E5A64;
+    --primary-dark: #07434B;
+    --on-primary: #FFFFFF;
+    --headline: #1B2B5A;
+    --bg-top: #EAF2FF;
+    --bg-bottom: #BFD6F2;
+    --card-bg: #FFFFFF;
+    --card-border: #C8DDF6;
+    --card-border-strong: #DDE7FF;
+    --ink-weak: #6B7A99;
+    --accent-yellow: #FFC107;
+    --accent-yellow-dark: #E0A106;
+  }
+
+  body.mybookings-theme{
+    background:
+      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+      linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
+  }
+  body.mybookings-theme nav{
+    background-color: var(--primary) !important;
+    color: var(--on-primary) !important;
+  }
+
+  body.mybookings-theme #main-navbar a.nav-link{
+    color: var(--on-primary) !important;
+  }
+
+  .page-title{
+    color: var(--headline);
+    font-weight: 800;
+    font-size: clamp(24px, 4vw, 32px);
+    margin-bottom: 1.25rem;
+  }
+  .booking-card{
+    display:flex; align-items:flex-start; justify-content:space-between; gap:.75rem;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 14px 16px;
+    box-shadow:
+      0 14px 32px rgba(13,43,63,.14),
+      inset 0 1px 0 rgba(255,255,255,.65);
+  }
+  .place{ font-weight: 700; color: #0F2C58; }
+  .when{ color: var(--ink-weak); font-size: .9rem; }
+
+  .cant-cancel{ color: var(--ink-weak); font-size: .9rem; white-space: nowrap; }
+  .empty{ color: #0B2E55; opacity:.7; }
+
+  .chip{
+    display:inline-block;
+    font-weight:700; font-size:.72rem;
+    padding:.22rem .5rem; border-radius:.5rem;
+  }
+  .chip--pending{
+    background: var(--accent-yellow);
+    color:#0B2E55;
+  }
+  .chip--confirmed{
+    background: var(--primary);
+    color: #fff;
+  }
+  .chip--cancelled{
+    background:#8DA4C2;
+    color:#fff;
+  }
+
+  .btn-cancel{
+    background:#e11d48; color:#fff; font-weight:600;
+    padding:.4rem .7rem; border-radius:.55rem;
+    box-shadow: 0 6px 16px rgba(225,29,72,.25);
+  }
+  .btn-cancel:hover{ background:#be123c; }
+
+  @media (max-width: 480px){
+    .booking-card{ padding: 12px; }
+  }
+
+  nav #userMenu, nav #mUserMenu{
+    background:#fff !important;
+  }
+  #main-navbar #userMenu a:not(.logout-link),
+  #main-navbar #mUserMenu a:not(.logout-link){
+    color:#0F2C58 !important;
+    opacity:1 !important;
+  }
+
+  /* Paksa logout merah */
+  #main-navbar #userMenu a.logout-link,
+  #main-navbar #mUserMenu a.logout-link{
+    color:#dc2626 !important;
+  }
+  #main-navbar #userMenu a.logout-link:hover,
+  #main-navbar #mUserMenu a.logout-link:hover{
+    color:#b91c1c !important;
+    background:#fee2e2 !important;
+  }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+{{ block.super }}
+{% endblock %}

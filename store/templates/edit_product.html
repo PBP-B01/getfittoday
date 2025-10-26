@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Edit Produk: {{ product.name }}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    :root {
+      --nav-bg: #0E5A64;
+      --nav-text: #FFFFFF;
+      --title: #1B2B5A;
+      --bg-1: #EAF2FF;
+      --bg-2: #BFD6F2;
+      --card-bg: #FFFFFF;
+      --card-brd: #C8DDF6;
+      --ink-weak: #6B7A99;
+      --accent-yellow: #FFC107;
+      --accent-yellow-dark: #E0A106;
+      --nav-bg-darker: #07434B;
+    }
+
+    body.home-theme {
+      background: linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+      min-height: 100vh;
+    }
+  </style>
+</head>
+
+<body class="home-theme flex flex-col items-center justify-center px-4 py-12">
+
+   {% include 'edit_product2.html' %}
+
+  </body>
+</html>
