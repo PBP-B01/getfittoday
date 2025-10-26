@@ -67,11 +67,13 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home',
     'booking',
+    'BlognEvent',
     'rest_framework',
     'central',
     'django.contrib.humanize',
     'store',
     'community',
+    'event',
 ]
 
 REST_FRAMEWORK = {

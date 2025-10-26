@@ -14,7 +14,6 @@ from django.urls import reverse
 from community.models import Community 
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
 from .models import FitnessSpot
-from .utils.spots_loader import build_index_and_bounds, load_all_spots
 
 GRID_ORIGIN_LAT = -6.8
 GRID_ORIGIN_LNG = 106.5

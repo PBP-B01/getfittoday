@@ -61,6 +61,13 @@
   {% endif %}
  </div>
 
+  <div class="mt-4 text-center">
+    <a href="{% url 'event:event_list' %}?community={{ community.name|urlencode }}&from_community={{ community.id }}"
+     class="btn-teal inline-flex items-center space-x-2">
+    <span>Lihat Event Komunitas</span>
+    </a>
+  </div>
+
  <div class="mt-6 text-center">
   <a href="{% url 'community:community_list' %}" class="btn-teal">Kembali ke Daftar Komunitas</a>
  </div>

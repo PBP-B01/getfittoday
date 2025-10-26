@@ -169,38 +169,12 @@ def community_list(request):
     }
     return render(request, 'community/community_list.html', context)
 
-@login_required
-def add_community(request):
-    if request.method == 'POST':
-        form = CommunityForm(request.POST)
-        if form.is_valid():
-            try:
-                community = form.save(commit=False)
-                community.save()
-                community.admins.add(request.user)
-                return redirect('community:community_list')
-            except Exception as e:
-                 print(f"Error adding community via non-AJAX: {e}") 
-    else:
-        form = CommunityForm()
-    return render(request, 'community/add_community.html', {'form': form})
-
 def community_detail(request, pk):
     community = get_object_or_404(
         Community.objects.select_related('fitness_spot').prefetch_related('members', 'admins'),
         pk=pk
     )
     return render(request, 'community/community_detail.html', {'community': community})
-
-def communities_by_place(request, place_id):
-    spot = get_object_or_404(FitnessSpot, place_id=place_id)
-    communities = Community.objects.filter(fitness_spot=spot).values('id', 'name')
-    return JsonResponse({'communities': list(communities)})
-
-def communities_by_spot(request, spot_id): 
-    spot = get_object_or_404(FitnessSpot, place_id=spot_id)
-    communities_db = Community.objects.filter(fitness_spot=spot).values('name', 'description', 'contact_info')
-    return JsonResponse({'communities': list(communities_db)})
 
 def communities_by_place_json(request, place_id):
     try:
@@ -213,3 +187,22 @@ def communities_by_place_json(request, place_id):
     except Exception as e:
         print(f"Error in communities_by_place_json for place_id {place_id}: {e}") 
         return JsonResponse({'error': 'An internal error occurred', 'communities': []}, status=500)
+    
+def featured_communities_api(request):
+    try:
+        communities = Community.objects.order_by('-id')[:15]
+
+        data = []
+        for community in communities:
+            data.append({
+                'id': community.id,
+                'name': community.name,
+                'description': community.description,
+                'fitness_spot_name': community.fitness_spot.name if community.fitness_spot else 'Lokasi tidak diketahui',
+                'detail_url': reverse('community_detail', args=[community.id]),
+            })
+        
+        return JsonResponse({'communities': data})
+
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

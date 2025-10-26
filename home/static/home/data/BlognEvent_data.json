@@ -1,0 +1,176 @@
+{
+  "events": [
+    {
+      "id": "e4a9e1b0-7e1f-4a8a-9e0a-1b2c3d4e5f6a",
+      "user": "admin_fit",
+      "name": "Annual City Marathon",
+      "image": "https://example.com/images/marathon.jpg",
+      "description": "Join thousands of runners for the 10th annual City Marathon. All skill levels are welcome. Routes for 5k, 10k, and full marathon.",
+      "starting_date": "2025-11-15T07:00:00Z",
+      "ending_date": "2025-11-15T14:00:00Z",
+      "locations": ["City Center Park", "Downtown Plaza"]
+    },
+    {
+      "id": "f5b9f1c0-8f2e-4b9b-a01b-2c3d4e5f6a7b",
+      "user": "yoga_master",
+      "name": "Sunrise Yoga Session",
+      "image": "https://example.com/images/yoga.jpg",
+      "description": "A peaceful and rejuvenating beginner-friendly yoga session as the sun rises. Please bring your own mat.",
+      "starting_date": "2025-10-30T06:00:00Z",
+      "ending_date": "2025-10-30T07:30:00Z",
+      "locations": ["Oceanview Beach"]
+    },
+    {
+      "id": "a1b2c3d4-e5f6-7890-1234-567890abcdef",
+      "user": "crossfit_central",
+      "name": "CrossFit Open House",
+      "image": "https://example.com/images/crossfit.jpg",
+      "description": "Curious about CrossFit? Come to our Open House! Free trial workouts, meet the coaches, and special membership discounts.",
+      "starting_date": "2025-11-01T10:00:00Z",
+      "ending_date": "2025-11-01T16:00:00Z",
+      "locations": ["CrossFit Central Warehouse"]
+    },
+    {
+      "id": "b2c3d4e5-f6a7-8901-2345-678901bcdef0",
+      "user": "admin_fit",
+      "name": "Advanced Weightlifting Training",
+      "image": "https://example.com/images/lifting.jpg",
+      "description": "An invite-only training seminar for advanced lifters. Focus on Olympic lifts, form correction, and personal record attempts.",
+      "starting_date": "2025-11-08T11:00:00Z",
+      "ending_date": "2025-11-08T15:00:00Z",
+      "locations": ["Powerhouse Gym"]
+    },
+    {
+      "id": "c3d4e5f6-a7b8-9012-3456-789012cdef01",
+      "user": "gym_owner_sarah",
+      "name": "Spinning for Charity",
+      "image": "https://example.com/images/spin.jpg",
+      "description": "A high-energy, 2-hour spinning competition to raise money for the local children's hospital. All proceeds will be donated.",
+      "starting_date": "2025-11-22T09:00:00Z",
+      "ending_date": "2025-11-22T11:00:00Z",
+      "locations": ["Velocity Cycle Studio"]
+    },
+    {
+      "id": "d4e5f6a7-b8c9-0123-4567-890123def012",
+      "user": "yoga_master",
+      "name": "Meditation and Mindfulness Workshop",
+      "image": "https://example.com/images/meditation.jpg",
+      "description": "Learn techniques to reduce stress and increase focus in this 90-minute beginner-friendly workshop.",
+      "starting_date": "2025-11-02T18:00:00Z",
+      "ending_date": "2025-11-02T19:30:00Z",
+      "locations": ["Zen Garden Studio"]
+    },
+    {
+      "id": "e5f6a7b8-c9d0-1234-5678-901234ef0123",
+      "user": "crossfit_central",
+      "name": "Community Fitness Day",
+      "image": "https://example.com/images/community.jpg",
+      "description": "A free day of fitness for the whole family! Group classes, healthy food trucks, and games for kids.",
+      "starting_date": "2025-11-09T12:00:00Z",
+      "ending_date": "2025-11-09T17:00:00Z",
+      "locations": ["Community Park"]
+    },
+    {
+      "id": "f6a7b8c9-d0e1-2345-6789-012345f01234",
+      "user": "admin_fit",
+      "name": "Regional Powerlifting Meet",
+      "image": "https://example.com/images/powerlifting.jpg",
+      "description": "Official competition for squat, bench, and deadlift. Come support the strongest athletes in the region.",
+      "starting_date": "2025-12-06T08:00:00Z",
+      "ending_date": "2025-12-07T18:00:00Z",
+      "locations": ["Powerhouse Gym"]
+    },
+    {
+      "id": "a7b8c9d0-e1f2-3456-7890-123456a01234",
+      "user": "gym_owner_sarah",
+      "name": "Zumba Party!",
+      "image": "https://example.com/images/zumba.jpg",
+      "description": "Dance your way to fitness in this high-energy, 90-minute Zumba party. Open to all members and non-members!",
+      "starting_date": "2025-11-14T19:00:00Z",
+      "ending_date": "2025-11-14T20:30:00Z",
+      "locations": ["Velocity Cycle Studio", "City Center Park"]
+    },
+    {
+      "id": "b8c9d0e1-f2a3-4567-8901-234567b01234",
+      "user": "yoga_master",
+      "name": "Partner Acro-Yoga Basics",
+      "image": "https://example.com/images/acroyoga.jpg",
+      "description": "Bring a friend or find a partner here. Learn the fundamentals of acro-yoga in a safe and supportive environment.",
+      "starting_date": "2025-11-16T14:00:00Z",
+      "ending_date": "2025-11-16T16:00:00Z",
+      "locations": ["Zen Garden Studio"]
+    }
+  ],
+  "blogs": [
+    {
+      "id": "c9d0e1f2-a3b4-5678-9012-345678c01234",
+      "author": "nutrition_jane",
+      "title": "The Top 5 Myths About Nutrition Debunked",
+      "image": "https://example.com/images/nutrition.jpg",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Myth #1: All fats are bad. This is simply not true. Healthy fats from avocados, nuts, and olive oil are essential..."
+    },
+    {
+      "id": "d0e1f2a3-b4c5-6789-0123-456789d01234",
+      "author": "dr_fit",
+      "title": "Why Rest Days Are Just as Important as Workouts",
+      "image": "https://example.com/images/rest.jpg",
+      "body": "Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Muscle is not built in the gym; it's built during recovery. We explore the science of muscle repair and why skipping rest days can hurt your progress."
+    },
+    {
+      "id": "e1f2a3b4-c5d6-7890-1234-567890e01234",
+      "author": "wellness_guru",
+      "title": "10 Simple Ways to Add More Movement to Your Day",
+      "image": "https://example.com/images/movement.jpg",
+      "body": "Aenean vel elit scelerisque mauris pellentesque pulvinar. You don't need a 2-hour gym session to be healthy. Try taking the stairs, a 10-minute walk after lunch, or simple stretches while watching TV. Here are 10 easy tips..."
+    },
+    {
+      "id": "f2a3b4c5-d6e7-8901-2345-678901f01234",
+      "author": "dr_fit",
+      "title": "Understanding Progressive Overload",
+      "image": "https://example.com/images/overload.jpg",
+      "body": "Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; To get stronger, you must continually challenge your muscles. This is the principle of progressive overload. We break down how to apply it safely and effectively."
+    },
+    {
+      "id": "a3b4c5d6-e7f8-9012-3456-789012a01234",
+      "author": "nutrition_jane",
+      "title": "The Truth About 'Superfoods'",
+      "image": "https://example.com/images/superfoods.jpg",
+      "body": "Quisque velit nisi, pretium ut lacinia in, elementum id enim. 'Superfood' is a marketing term, not a scientific one. While foods like blueberries and kale are fantastic, a balanced diet is more important than any single ingredient."
+    },
+    {
+      "id": "b4c5d6e7-f8a9-0123-4567-890123b01234",
+      "author": "wellness_guru",
+      "title": "Mindful Eating: How to Reconnect With Your Food",
+      "image": "https://example.com/images/mindful.jpg",
+      "body": "Donec sollicitudin molestie malesuada. Put down your phone, chew slowly, and savor each bite. Mindful eating can improve digestion, help with weight management, and increase your enjoyment of food. Here's how to start."
+    },
+    {
+      "id": "c5d6e7f8-a9b0-1234-5678-901234c01234",
+      "author": "dr_fit",
+      "title": "Mobility vs. Flexibility: What's the Difference?",
+      "image": "https://example.com/images/mobility.jpg",
+      "body": "Curabitur non nulla sit amet nisl tempus convallis quis ac lectus. Many people use these terms interchangeably, but they are not the same. Flexibility is the ability of a muscle to stretch, while mobility is the ability of a joint to move through its full range of motion."
+    },
+    {
+      "id": "d6e7f8a9-b0c1-2345-6789-012345d01234",
+      "author": "nutrition_jane",
+      "title": "Hydration 101: Are You Drinking Enough Water?",
+      "image": "https://example.com/images/water.jpg",
+      "body": "Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Our bodies are 60% water, but how much do you really need? We look at the factors that influence your hydration needs, from activity level to climate."
+    },
+    {
+      "id": "e7f8a9b0-c1d2-3456-7890-123456e01234",
+      "author": "wellness_guru",
+      "title": "The Amazing Benefits of a Good Night's Sleep",
+      "image": "https://example.com/images/sleep.jpg",
+      "body": "Nulla porttitor accumsan tincidunt. Sleep is not a luxury; it's a biological necessity. It impacts everything from hormone regulation and muscle recovery to mental clarity and mood. Are you getting your 7-9 hours?"
+    },
+    {
+      "id": "f8a9b0c1-d2e3-4567-8901-234567f01234",
+      "author": "dr_fit",
+      "title": "Compound vs. Isolation Lifts: Building Your Routine",
+      "image": "https://example.com/images/squat.jpg",
+      "body": "Vivamus suscipit tortor eget felis porttitor volutpat. Should you focus on squats and deadlifts, or bicep curls and leg extensions? The answer is... both! Learn how to balance compound and isolation exercises for a well-rounded physique."
+    }
+  ]
+}
