@@ -245,13 +245,14 @@ async function updateSpotsForView(map) {
 }
 
 async function fetchGridData(gridId) {
-    console.log(`Fetching grid ${gridId} from server...`);
-    const url = `/api/fitness-spots/?gridId=${gridId}`;
+    console.log(`Fetching grid ${gridId} from server using DB/Cache view...`); 
+    const url = `/api/fitness-spots/?gridId=${gridId}`; 
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         clientGridCache[gridId] = data;
+        console.log(`Successfully fetched grid ${gridId} (may have been Django cached)`); 
         return data;
     } catch (error) {
         console.error(`Failed to fetch data for grid ${gridId}:`, error);
@@ -464,10 +465,12 @@ function toggleFullScreen() {
 }
 
 async function fetchMapBoundaries() {
+    console.log("Fetching map boundaries using DB/Cache view..."); 
     try {
-        const response = await fetch('/api/map-boundaries/');
+        const response = await fetch('/api/map-boundaries/'); 
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
+        console.log("Successfully fetched map boundaries (may have been Django cached)");
         return (data && typeof data.north === 'number') ? data : null;
     } catch (error) {
         console.error('Failed to fetch map boundaries:', error);
