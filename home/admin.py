@@ -2,7 +2,6 @@ from django.contrib import admin
 from django.contrib import admin
 from .models import FitnessSpot, PlaceType
 
-# Sesuaikan tampilan admin untuk FitnessSpot
 class FitnessSpotAdmin(admin.ModelAdmin):
     list_display = ('name', 'address', 'rating', 'rating_count')
     search_fields = ('name', 'address')

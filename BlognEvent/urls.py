@@ -12,7 +12,7 @@ urlpatterns = [
     path('event/<uuid:event_id>/', views.event_detail_api, name='event_detail_api'),
     path('blog/form/', views.blog_form_page, name='blog_form_page'),
     path('blog/create/', views.create_blog, name='create_blog'),
-    path('blog/<uuid:blog_id>/edit/', views.edit_blog, name='edit_blog'),  # Changed to uuid
-    path('blog/<uuid:blog_id>/delete/', views.delete_blog, name='delete_blog'),  # Changed to uuid
-    path('blog/<uuid:blog_id>/', views.blog_detail_api, name='blog_detail_api'),  # Changed to uuid
+    path('blog/<uuid:blog_id>/edit/', views.edit_blog, name='edit_blog'),  
+    path('blog/<uuid:blog_id>/delete/', views.delete_blog, name='delete_blog'),  
+    path('blog/<uuid:blog_id>/', views.blog_detail_api, name='blog_detail_api'),  
 ]

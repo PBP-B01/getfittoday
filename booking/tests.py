@@ -1,4 +1,3 @@
-# booking/tests.py
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.utils import timezone
@@ -15,7 +14,6 @@ from uuid import UUID
 from .serializers import BookingCreateSerializer, _is_uuid
 from django.contrib.auth import get_user_model
 
-# ---------- BASE TEST ----------
 class BookingBaseTest(TestCase):
     def setUp(self):
         self.client = Client()
@@ -30,7 +28,6 @@ class BookingBaseTest(TestCase):
             price_per_hour=Decimal("50000.00")
         )
 
-# ---------- 1. MODEL TESTS ----------
 class BookingModelTests(BookingBaseTest):
     def test_resource_str(self):
         self.assertIn("Jakarta - Lapangan A", str(self.resource))
@@ -48,7 +45,6 @@ class BookingModelTests(BookingBaseTest):
         self.assertEqual(booking.status, BookingStatus.PENDING)
         self.assertEqual(str(booking.resource), "Jakarta - Lapangan A")
 
-# ---------- 2. SERVICE TESTS ----------
 class BookingServiceTests(BookingBaseTest):
     def test_create_booking_success(self):
         start = timezone.now() + timedelta(hours=3)
@@ -67,7 +63,6 @@ class BookingServiceTests(BookingBaseTest):
         with self.assertRaises(ValueError):
             create_booking(self.user, self.resource.id, start, end, Decimal("100000.00"))
 
-# ---------- 3. SERIALIZER TESTS ----------
 class BookingSerializerTests(APITestCase):
     def setUp(self):
         from django.contrib.auth import get_user_model
@@ -86,7 +81,7 @@ class BookingSerializerTests(APITestCase):
             "resource_id": str(self.resource.id),
             "start_time": start,
             "end_time": end,
-            "price": self.resource.price_per_hour,  # wajib ada
+            "price": self.resource.price_per_hour,  
         }
         serializer = BookingCreateSerializer(
             data=data,
@@ -106,7 +101,7 @@ class BookingSerializerTests(APITestCase):
                 "resource_id": str(self.resource.id),
                 "start_time": start,
                 "end_time": end,
-                "price": self.resource.price_per_hour  # tetap kirim price
+                "price": self.resource.price_per_hour  
             }
         )
         self.assertFalse(serializer.is_valid())
@@ -118,7 +113,6 @@ class BookingSerializerTests(APITestCase):
             "resource_id": str(self.resource.id),
             "start_time": start,
             "end_time": end,
-            # price TIDAK dikirim di sini
         }
         serializer = BookingCreateSerializer(
             data=data,
@@ -126,10 +120,8 @@ class BookingSerializerTests(APITestCase):
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         booking = serializer.save()
-        # pastikan serializer otomatis isi price dari resource
         self.assertEqual(booking.price, self.resource.price_per_hour)
 
-# ---------- 4. VIEW TESTS ----------
 class BookingViewTests(BookingBaseTest):
     def setUp(self):
         super().setUp()
@@ -212,11 +204,10 @@ class BookingViewTests(BookingBaseTest):
         self.assertEqual(res.status_code, 200)
         self.assertEqual(booking.status, BookingStatus.CANCELLED)
 
-# ---------------------- SETUP ----------------------
 class BookingExtraBaseTest(TestCase):
     def setUp(self):
         self.api_client = APIClient()
-        self.user = type("User", (), {"id": 1, "username": "tester"})()  # dummy user
+        self.user = type("User", (), {"id": 1, "username": "tester"})()  
         self.resource = Resource.objects.create(
             name="Gym Room",
             location_name="Jakarta",
@@ -224,10 +215,8 @@ class BookingExtraBaseTest(TestCase):
             price_per_hour=Decimal("100.00")
         )
 
-# ---------------------- MODELS ----------------------
 class ResourceModelExtraTests(BookingExtraBaseTest):
     def test_resource_str_no_location(self):
-        # Coverage untuk branch: location_name kosong
         r = Resource.objects.create(
             name="Lapangan B",
             location_name="",
@@ -236,7 +225,6 @@ class ResourceModelExtraTests(BookingExtraBaseTest):
         )
         self.assertEqual(str(r), "Lapangan B")
 
-# ---------------------- SERIALIZERS ----------------------
 class BookingSerializerExtraTests(TestCase):
     def setUp(self):
         self.api_client = APIClient()
@@ -270,11 +258,10 @@ class BookingSerializerExtraTests(TestCase):
         start = timezone.now() + timedelta(hours=1)
         end = start + timedelta(hours=1)
         data = {
-            "resource_id": "not-a-uuid",  # pasti false di _is_uuid
+            "resource_id": "not-a-uuid",  
             "resource_label": "External Spot",
             "start_time": start,
             "end_time": end,
-            # price sengaja tidak dikirim
         }
         serializer = BookingCreateSerializer(
             data=data,
@@ -282,10 +269,9 @@ class BookingSerializerExtraTests(TestCase):
         )
         self.assertTrue(serializer.is_valid(), serializer.errors)
         booking = serializer.save()
-        self.assertEqual(booking.price, 100)  # default price dari create branch
+        self.assertEqual(booking.price, 100)  
         self.assertEqual(booking.resource.name, "External Spot")
 
-# ---------------------- SERVICES ----------------------
 class BookingServiceExtraTests(BookingExtraBaseTest):
     def test_create_booking_invalid_range(self):
         start = timezone.now() + timedelta(hours=2)
@@ -299,23 +285,19 @@ class BookingServiceExtraTests(BookingExtraBaseTest):
         with self.assertRaises(ValueError):
             create_booking(self.user, self.resource.id, start, end, Decimal("100.00"))
 
-# ---------------------- VIEWS ----------------------
 class BookingViewsExtraTests(BookingExtraBaseTest):
     def setUp(self):
         super().setUp()
-        # buat dummy user login untuk API
         from django.contrib.auth.models import User
         self.user_obj = User.objects.create_user(username="apiuser", password="12345")
         self.api_client.force_authenticate(user=self.user_obj)
 
     def test_availability_view_bad_date(self):
-        # Coverage AvailabilityView: date format error
         res = self.api_client.get(reverse("booking:availability"), {"resource": str(self.resource.id), "date": "bad-date"})
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.data["detail"], "bad date")
 
     def test_booking_create_view_clash(self):
-        # Coverage BookingCreateView: time conflict
         start = timezone.now() + timedelta(hours=1)
         end = start + timedelta(hours=1)
         Booking.objects.create(
@@ -328,7 +310,6 @@ class BookingViewsExtraTests(BookingExtraBaseTest):
         self.assertEqual(res.status_code, 409)
 
     def test_booking_create_view_resource_not_found(self):
-        # Coverage BookingCreateView: resource missing
         data = {"resource_id": str(UUID(int=0)), "start_time": (timezone.now() + timedelta(hours=1)).isoformat(),
                 "end_time": (timezone.now() + timedelta(hours=2)).isoformat()}
         res = self.api_client.post(reverse("booking:book"), data, format="json")
@@ -336,14 +317,13 @@ class BookingViewsExtraTests(BookingExtraBaseTest):
         self.assertEqual(res.data["detail"], "resource not found")
 
     def test_booking_create_view_price_computation(self):
-        # Coverage branch: durasi dihitung, price dihitung otomatis
         start = timezone.now() + timedelta(hours=1)
-        end = start + timedelta(hours=2)  # 2 jam
+        end = start + timedelta(hours=2) 
         data = {"resource_id": str(self.resource.id), "start_time": start.isoformat(), "end_time": end.isoformat()}
         res = self.api_client.post(reverse("booking:book"), data, format="json")
         self.assertEqual(res.status_code, 201)
         booking = Booking.objects.get(pk=res.data["id"])
-        self.assertEqual(booking.price, Decimal("200.00"))  # 2 jam * 100 per jam
+        self.assertEqual(booking.price, Decimal("200.00"))  
     
     def test_booking_create_view_bad_datetime(self):
         data = {"resource_id": str(self.resource.id), "start_time": "", "end_time": ""}
@@ -352,7 +332,6 @@ class BookingViewsExtraTests(BookingExtraBaseTest):
         self.assertEqual(res.data["detail"], "bad datetime")
 
     def test_booking_cancel_view_cannot_cancel(self):
-        # buat booking yang sudah lewat waktunya
         past_start = timezone.now() - timedelta(hours=2)
         past_end = past_start + timedelta(hours=1)
         b = Booking.objects.create(
@@ -363,22 +342,18 @@ class BookingViewsExtraTests(BookingExtraBaseTest):
         url = reverse("booking:booking-cancel", args=[b.id])
         res = self.api_client.post(url)
         b.refresh_from_db()
-        # status tidak berubah karena sudah lewat
         self.assertEqual(b.status, BookingStatus.CONFIRMED)
         self.assertEqual(res.status_code, 200)
 
     def test_availability_view_missing_resource_or_date(self):
-        # missing resource
         res1 = self.api_client.get(reverse("booking:availability"), {"date": "2025-10-26"})
         self.assertEqual(res1.status_code, 400)
         self.assertEqual(res1.data["detail"], "missing resource/date")
         
-        # missing date
         res2 = self.api_client.get(reverse("booking:availability"), {"resource": str(self.resource.id)})
         self.assertEqual(res2.status_code, 400)
         self.assertEqual(res2.data["detail"], "missing resource/date")
 
-# ---------------------- ADDITIONAL VIEW TESTS FOR FULL COVERAGE ----------------------
 class BookingViewsFullCoverageTests(BookingExtraBaseTest):
     def setUp(self):
         super().setUp()
@@ -386,7 +361,6 @@ class BookingViewsFullCoverageTests(BookingExtraBaseTest):
         self.user_obj = User.objects.create_user(username="fullcover", password="12345")
         self.api_client.force_authenticate(user=self.user_obj)
 
-    # ---------- AvailabilityView ----------
     def test_availability_missing_params(self):
         res = self.api_client.get(reverse("booking:availability"))
         self.assertEqual(res.status_code, 400)
@@ -400,9 +374,7 @@ class BookingViewsFullCoverageTests(BookingExtraBaseTest):
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.data["detail"], "bad date")
 
-    # ---------- BookingCreateView ----------
     def test_booking_create_view_resource_not_found_branch(self):
-        # pakai UUID acak yang ga ada di DB
         from uuid import UUID
         data = {
             "resource_id": str(UUID(int=0)),
@@ -430,7 +402,6 @@ class BookingViewsFullCoverageTests(BookingExtraBaseTest):
         self.assertEqual(res.status_code, 409)
 
     def test_booking_create_view_exception_branch(self):
-        # paksa exception dengan patching create method supaya raise
         from unittest.mock import patch
         start = timezone.now() + timedelta(hours=1)
         end = start + timedelta(hours=1)
@@ -445,9 +416,7 @@ class BookingViewsFullCoverageTests(BookingExtraBaseTest):
             self.assertEqual(res.status_code, 400)
             self.assertIn("failed", res.data["detail"])
 
-    # ---------- BookingCancelView ----------
     def test_booking_cancel_cannot_cancel(self):
-        # booking start_time sudah lewat
         past_start = timezone.now() - timedelta(hours=2)
         past_end = timezone.now() - timedelta(hours=1)
         booking = Booking.objects.create(
@@ -459,10 +428,8 @@ class BookingViewsFullCoverageTests(BookingExtraBaseTest):
         res = self.api_client.post(url)
         booking.refresh_from_db()
         self.assertEqual(res.status_code, 200)
-        # status harus tetap CONFIRMED
         self.assertEqual(booking.status, BookingStatus.CONFIRMED)
 
-    # ---------- Helper functions ----------
     def test_parse_iso_with_invalid_string(self):
         from booking.views import _parse_iso
         self.assertIsNone(_parse_iso("invalid-string"))
@@ -479,7 +446,6 @@ class BookingViewsFullCoverageTests(BookingExtraBaseTest):
         from booking.views import to_tz
         self.assertIsNone(to_tz(None, None))
 
-    # ---------------------- VIEWS EDGE CASE TESTS ----------------------
 class BookingViewsEdgeCasesTests(BookingExtraBaseTest):
     def setUp(self):
         super().setUp()
@@ -488,7 +454,6 @@ class BookingViewsEdgeCasesTests(BookingExtraBaseTest):
         self.api_client.force_authenticate(user=self.user_obj)
 
     def test_availability_view_with_busy_slots(self):
-        # buat booking supaya busy list ga kosong → nge-cover loop di AvailabilityView
         start = timezone.now() + timedelta(hours=11)
         end = start + timedelta(hours=1)
         Booking.objects.create(
@@ -505,14 +470,12 @@ class BookingViewsEdgeCasesTests(BookingExtraBaseTest):
         self.assertGreater(len(res.data), 0)
 
     def test_booking_create_view_bad_datetime(self):
-        # nge-cover branch: bad datetime
         data = {"resource_id": str(self.resource.id), "start_time": "bad", "end_time": "stillbad"}
         res = self.api_client.post(reverse("booking:book"), data, format="json")
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.data["detail"], "bad datetime")
 
     def test_booking_create_view_resource_label_branch(self):
-        # nge-cover branch: create Resource karena rid ga ada tapi label ada
         data = {
             "resource_id": "non-existent-uuid",
             "resource_label": "New Spot Label",
@@ -525,10 +488,8 @@ class BookingViewsEdgeCasesTests(BookingExtraBaseTest):
         self.assertEqual(booking.resource.name, "New Spot Label")
 
     def test_booking_create_view_price_none_and_bfield_check(self):
-        # nge-cover branch: has_bfield("price") true, compute price otomatis
         start = timezone.now() + timedelta(hours=3)
         end = start + timedelta(hours=2)
-        # buat resource price_per_hour = 0 supaya branch compute price dijalankan
         resource = Resource.objects.create(name="Zero Price Gym", price_per_hour=0)
         data = {"resource_id": str(resource.id),
                 "start_time": start.isoformat(),
@@ -539,14 +500,10 @@ class BookingViewsEdgeCasesTests(BookingExtraBaseTest):
         self.assertEqual(booking.price, Decimal("0.00"))
 
     def test_booking_create_view_exception_handling(self):
-        # nge-cover except Exception branch
-        # kita bisa paksa exception dengan data aneh (misal start_time None)
         data = {"resource_id": str(self.resource.id), "start_time": None, "end_time": None}
         res = self.api_client.post(reverse("booking:book"), data, format="json")
-        # harus return 400 karena failed: TypeError (dari serializer atau create)
         self.assertEqual(res.status_code, 400)
 
-# ---------------------- VIEWS EDGE CASES ----------------------
 class BookingViewsEdgeCaseTests(BookingExtraBaseTest):
     def setUp(self):
         super().setUp()
@@ -554,7 +511,6 @@ class BookingViewsEdgeCaseTests(BookingExtraBaseTest):
         self.user_obj = User.objects.create_user(username="edgeuser", password="12345")
         self.api_client.force_authenticate(user=self.user_obj)
 
-    # ---------------- _resolve_resource ----------------
     def test_resolve_resource_invalid_uuid(self):
         from .views import _resolve_resource
         res = _resolve_resource("not-a-uuid", None)
@@ -566,9 +522,8 @@ class BookingViewsEdgeCaseTests(BookingExtraBaseTest):
         res = _resolve_resource(None, "GymX")
         self.assertEqual(res, r)
 
-    # ---------------- AvailabilityView ----------------
     def test_availability_missing_params(self):
-        res = self.api_client.get("/booking/availability/")  # tanpa param
+        res = self.api_client.get("/booking/availability/")  
         self.assertEqual(res.status_code, 400)
         self.assertEqual(res.data["detail"], "missing resource/date")
 
@@ -579,23 +534,18 @@ class BookingViewsEdgeCaseTests(BookingExtraBaseTest):
         self.assertEqual(res.status_code, 200)
         self.assertIsInstance(res.data, list)
 
-    # ---------------- BookingCreateView ----------------
     def test_booking_create_view_integrity_error(self):
-        # paksa IntegrityError dengan duplikat pk
         data = {
             "resource_id": str(self.resource.id),
             "start_time": (timezone.now() + timedelta(hours=1)).isoformat(),
             "end_time": (timezone.now() + timedelta(hours=2)).isoformat()
         }
-        # buat dummy pk yang sama biar IntegrityError
         from django.db import transaction, IntegrityError
         from .views import BookingCreateView
         view = BookingCreateView.as_view()
-        # here, just test that view handles exception gracefully (status 400)
         res = self.api_client.post(reverse("booking:book"), data, format="json")
-        self.assertIn(res.status_code, [201, 400])  # 201 normal, 400 kalau exception
+        self.assertIn(res.status_code, [201, 400])  
 
-    # ---------------- BookingCancelView ----------------
     def test_booking_cancel_view_html_accept(self):
         start = timezone.now() + timedelta(hours=2)
         end = start + timedelta(hours=1)

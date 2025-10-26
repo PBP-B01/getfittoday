@@ -1,7 +1,6 @@
 from django.contrib import admin
 from .models import CommunityCategory, Community, CommunityPost
 
-
 class CommunityPostInline(admin.TabularInline):
     model = CommunityPost
     extra = 0

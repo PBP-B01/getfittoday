@@ -1,17 +1,12 @@
-# home/tests.py
-# home/tests.py
-# home/tests.py
 import json
 from decimal import Decimal
 from unittest.mock import patch, MagicMock
-
 from django.test import TestCase, Client
 from django.urls import reverse
 from django.core.cache import cache
 from django.contrib.auth.models import User
 from django.http import QueryDict
 from django.contrib.admin.sites import AdminSite
-
 from .models import PlaceType, FitnessSpot
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
 from .views import get_grid_bounds, GRID_ORIGIN_LAT, GRID_ORIGIN_LNG, GRID_CELL_SIZE_DEG
@@ -19,11 +14,9 @@ import json
 from unittest import mock
 from django.test import TestCase, Client, override_settings
 from django.http import Http404
-
-# Import the standalone function to test it directly
 from .views import get_grid_bounds, GRID_ORIGIN_LAT, GRID_ORIGIN_LNG, GRID_CELL_SIZE_DEG
 
-# --- Mock Community Model jika tidak ada ---
+
 try:
     from community.models import Community
 except ImportError:
@@ -41,17 +34,14 @@ except ImportError:
 
     Community = MockCommunity
 
-# ---------------------- BASE SETUP ----------------------
 class HomeSetupMixin(TestCase):
     def setUp(self):
         super().setUp()
         cache.clear()
 
-        # PlaceType
         self.type_gym = PlaceType.objects.create(name='gym')
         self.type_pool = PlaceType.objects.create(name='swimming_pool')
 
-        # Spot Grid 0-0
         self.spot1 = FitnessSpot.objects.create(
             place_id='place_A', name='Spot Populer', address='Jl. Sudirman',
             latitude=Decimal('-6.75'), longitude=Decimal('106.55'),
@@ -69,7 +59,6 @@ class HomeSetupMixin(TestCase):
         self.spot2.types.add(self.type_gym)
         self.spot2.save()
 
-        # Boundary spots
         self.spot_max_lat = FitnessSpot.objects.create(
             place_id='place_MAX_LAT', name='Spot Max Lat', address='Jl. Utara',
             latitude=Decimal('-6.0'), longitude=Decimal('106.50'), rating_count=1
@@ -87,7 +76,6 @@ class HomeSetupMixin(TestCase):
             latitude=Decimal('-6.50'), longitude=Decimal('105.0'), rating_count=1
         )
 
-# ---------------------- MODELS ----------------------
 class HomeModelsTests(HomeSetupMixin):
     def test_place_type_str(self):
         self.assertEqual(str(self.type_gym), 'gym')
@@ -99,7 +87,6 @@ class HomeModelsTests(HomeSetupMixin):
         self.type_pool.delete()
         self.assertIsNone(FitnessSpot.objects.filter(place_id='place_A').first())
 
-# ---------------------- FORMS ----------------------
 class HomeFormsTests(TestCase):
     def test_styled_user_creation_form_widgets(self):
         form = StyledUserCreationForm()
@@ -117,7 +104,6 @@ class StyledFormsTest(TestCase):
         self.assertIn("password1", form.fields)
         self.assertIn("password2", form.fields)
 
-        # Cek placeholder dan class
         self.assertIn("Username", form.fields["username"].widget.attrs["placeholder"])
         self.assertIn("Password", form.fields["password1"].widget.attrs["placeholder"])
         self.assertIn("Ulangi password", form.fields["password2"].widget.attrs["placeholder"])
@@ -135,12 +121,10 @@ class StyledFormsTest(TestCase):
 
     def test_user_creation_form_validation(self):
         """Test valid and invalid form submissions."""
-        # Valid submission
         form_data = {"username": "testuser", "password1": "Secret123!", "password2": "Secret123!"}
         form = StyledUserCreationForm(data=form_data)
         self.assertTrue(form.is_valid())
 
-        # Invalid submission (password mismatch)
         form_data_invalid = {"username": "testuser2", "password1": "Secret123!", "password2": "WrongPass!"}
         form_invalid = StyledUserCreationForm(data=form_data_invalid)
         self.assertFalse(form_invalid.is_valid())
@@ -148,21 +132,17 @@ class StyledFormsTest(TestCase):
 
     def test_authentication_form_validation(self):
         """Test StyledAuthenticationForm login validation."""
-        # Buat user dulu
         user = User.objects.create_user(username="testuser", password="Secret123!")
         
-        # Valid login
         form_data = {"username": "testuser", "password": "Secret123!"}
         form = StyledAuthenticationForm(data=form_data)
         self.assertTrue(form.is_valid())
 
-        # Invalid login
         form_data_invalid = {"username": "testuser", "password": "WrongPass!"}
         form_invalid = StyledAuthenticationForm(data=form_data_invalid)
         self.assertFalse(form_invalid.is_valid())
-        self.assertIn("__all__", form_invalid.errors)  # form-wide error untuk login salah
+        self.assertIn("__all__", form_invalid.errors)  
 
-# ---------------------- VIEWS ----------------------
 import json
 from unittest import mock
 from django.test import TestCase, Client, override_settings
@@ -171,7 +151,6 @@ from django.core.cache import cache
 
 from .views import get_grid_bounds, GRID_ORIGIN_LAT, GRID_ORIGIN_LNG, GRID_CELL_SIZE_DEG
 
-# ----------------- UTILITY FUNCTION TEST -----------------
 class GridBoundsUtilTest(TestCase):
     """
     Tests the get_grid_bounds helper function in isolation.
@@ -197,7 +176,6 @@ class GridBoundsUtilTest(TestCase):
         self.assertIsNone(get_grid_bounds('foo-bar'))
         self.assertIsNone(get_grid_bounds('1'))
 
-# ----------------- VIEWS TEST -----------------
 @override_settings(GOOGLE_MAPS_API_KEY='TEST_API_KEY')
 class HomeViewsTest(TestCase):
     """
@@ -210,14 +188,12 @@ class HomeViewsTest(TestCase):
     def tearDown(self):
         cache.clear()
 
-    # ----- home_view -----
     def test_home_view(self):
         response = self.client.get(reverse('home:home'))
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'main.html')
         self.assertEqual(response.context['google_api_key'], 'TEST_API_KEY')
 
-    # ----- get_fitness_spots_data -----
     def test_get_fitness_spots_data_no_grid_id(self):
         response = self.client.get(reverse('home:get_fitness_spots_data_api'))
         self.assertEqual(response.status_code, 400)
@@ -246,7 +222,7 @@ class HomeViewsTest(TestCase):
     @mock.patch('home.views.FitnessSpot.objects')
     def test_get_fitness_spots_data_cache_miss(self, mock_spot_objects, mock_cache):
         grid_id = '3-5'
-        mock_cache.get.return_value = None  # Cache miss
+        mock_cache.get.return_value = None  
 
         mock_db_data = [
             {'place_id': '1', 'name': 'Spot 1', 'types__name': 'Gym', 'latitude': -6.1, 'longitude': 106.8,
@@ -275,7 +251,6 @@ class HomeViewsTest(TestCase):
         self.assertCountEqual(spot3['types'], [])
         mock_cache.set.assert_called_once_with(f"spots_grid_{grid_id}", data, 60 * 60 * 24)
 
-    # ----- get_map_boundaries -----
     @mock.patch('home.views.cache')
     def test_get_map_boundaries_cache_hit(self, mock_cache):
         cached_data = {'north': 1.0, 'south': -1.0, 'east': 1.0, 'west': -1.0}
@@ -313,7 +288,6 @@ class HomeViewsTest(TestCase):
         data = json.loads(response.content)
         self.assertEqual(data['error'], 'No spots found')
 
-    # ----- communities_by_place -----
     @mock.patch('home.views.Community.objects')
     @mock.patch('home.views.get_object_or_404')
     def test_communities_by_place_found(self, mock_get_obj, mock_comm_objects):
@@ -333,15 +307,12 @@ class HomeViewsTest(TestCase):
 
     @mock.patch('home.views.get_object_or_404')
     def test_communities_by_place_not_found(self, mock_get_obj):
-        # Simulasikan objek tidak ditemukan → Http404
         mock_get_obj.side_effect = Http404
         
         response = self.client.get(reverse('home:communities_by_place', args=['not-found']))
         
-        # Pastikan status code 404
         self.assertEqual(response.status_code, 404)
 
-# ---------------------- ADMIN ----------------------
 class AdminTests(HomeSetupMixin):
     def setUp(self):
         super().setUp()
@@ -358,4 +329,4 @@ class AdminTests(HomeSetupMixin):
         mock_request.GET = QueryDict('types__name__exact=gym', mutable=True)
         changelist = self.fsa.get_changelist_instance(mock_request)
         queryset = changelist.get_queryset(mock_request)
-        self.assertEqual(queryset.count(), 2)  # hanya spot1 & spot2
+        self.assertEqual(queryset.count(), 2)  

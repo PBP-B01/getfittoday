@@ -1,5 +1,3 @@
-# community/urls.py
-# community/urls.py
 from django.urls import path
 from . import views
 from django.urls import path, include
@@ -15,5 +13,4 @@ urlpatterns = [
     path('ajax/leave/<int:community_id>/', views.ajax_leave_community, name='ajax_leave_community'),
     path('by-place-json/<str:place_id>/', views.communities_by_place_json, name='communities_by_place_json'), 
     path('api/featured/', views.featured_communities_api, name='featured_communities_api'),
-
 ]

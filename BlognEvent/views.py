@@ -12,7 +12,6 @@ import json
 def blogevent_page(request):
     is_admin = request.session.get("is_admin", False)
 
-    # Admin and signed users can see all, unsigned can too (read-only)
     events = Event.objects.all().order_by('-starting_date')
     blogs = Blogs.objects.all().order_by('-id')
 
@@ -69,7 +68,6 @@ def edit_event(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     is_admin = request.session.get("is_admin", False)
 
-    # Ownership or admin check
     if not (is_admin or event.user == request.user):
         return JsonResponse({'error': 'Unauthorized'}, status=403)
 
