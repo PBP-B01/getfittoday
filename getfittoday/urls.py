@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 """
 URL configuration for getfittoday project.
 
@@ -32,7 +30,6 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
->>>>>>> master
 from django.contrib import admin
 from django.urls import path, include
 
@@ -42,13 +39,7 @@ urlpatterns = [
     path("booking/", include(("booking.urls", "booking"), namespace="booking")),
     path("central/", include(("central.urls", "central"), namespace="central")),
     path('store/', include('store.urls')),
-<<<<<<< HEAD
-    path('community/', include('community.urls')),
-    path("central/", include(("central.urls", "central"), namespace="central")),
-    path('event/', include('event.urls')),
-=======
     path("blognevent/", include("BlognEvent.urls", namespace="BlognEvent")),
     path('community/', include('community.urls')),
     path('event/', include(('event.urls', 'event'), namespace='event')),
->>>>>>> master
 ]

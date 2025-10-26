@@ -1,100 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %}Detail Komunitas{% endblock %}
-<<<<<<< HEAD
-
-{% block content %}
-<div class="max-w-4xl mx-auto px-4 mt-10">
-    <div class="bg-yellow-400 text-black rounded-2xl shadow-md p-6 border border-yellow-800 mb-6">
-        <h2 class="text-2xl font-bold mb-4 text-center">{{ community.name }}</h2>
-        <p class="mb-4">{{ community.description }}</p>
-        <p class="mb-1 font-medium">📍 {{ community.fitness_spot.name }}</p>
-        {% if community.contact_info %}
-        <p>📞 {{ community.contact_info }}</p>
-        {% endif %}
-    </div>
-
-    <div class="bg-yellow-400 text-black rounded-2xl shadow-md p-6 border border-yellow-800">
-        <h3 class="text-xl font-bold mb-4">Admin & Anggota (<span id="member-count">{{ community.members.count }}</span> anggota)</h3>
-
-        <div>
-            <h4 class="font-semibold mb-1">Admin:</h4>
-            <ul class="list-none pl-2 mb-4 text-sm space-y-1">
-                {% for admin in community.admins.all %}
-                    <li>👤 {{ admin.username }}</li>
-                {% empty %}
-                    <li class="italic text-gray-700">Tidak ada admin yang terdaftar.</li>
-                {% endfor %}
-            </ul>
-        </div>
-
-        <hr class="border-yellow-600 my-4">
-
-        <div>
-            <h4 class="font-semibold mb-1">Anggota:</h4>
-            <ul id="member-list" class="list-disc pl-5 space-y-1 text-sm">
-                {% for member in community.members.all %}
-                    {# Optional: Uncomment to hide admins from member list #}
-                    {# {% if member not in community.admins.all %} #}
-                        <li data-username="{{ member.username }}">{{ member.username }}</li>
-                    {# {% endif %} #}
-                {% empty %}
-                    <li id="empty-member-msg" class="list-none italic text-gray-700">Belum ada anggota yang bergabung.</li>
-                {% endfor %}
-            </ul>
-        </div>
-    </div>
-
-    <div class="mt-6 text-center"
-         data-community-id="{{ community.id }}"
-         data-username="{{ request.user.username }}">
-
-        {% if request.user.is_authenticated and request.user not in community.admins.all %}
-            {% if request.user in community.members.all %}
-                <button id="leave-btn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700">
-                    Keluar Komunitas
-                </button>
-                <button id="join-btn" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 hidden">
-                    Join Komunitas
-                </button>
-            {% else %}
-                <button id="leave-btn" class="px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 hidden">
-                    Keluar Komunitas
-                </button>
-                <button id="join-btn" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700">
-                    Join Komunitas
-                </button>
-            {% endif %}
-        {% endif %}
-    </div>
-
-    <div class="mt-6 text-center">
-        <a href="{% url 'community_list' %}" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">Kembali ke Daftar Komunitas</a>
-    </div>
-</div>
-{% endblock %}
-
-{% block extra_js %}
-<script>
-// === SCRIPT FOR JOIN/LEAVE ===
-document.addEventListener('DOMContentLoaded', () => {
-    function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-    }
-    
-    const csrfToken = getCookie('csrftoken');
-=======
 {% block body_class %}community-theme{% endblock %}
 
 {% block content %}
@@ -314,95 +220,19 @@ document.addEventListener('DOMContentLoaded', () => {
     }, delay);
     }
 
->>>>>>> master
     const joinBtn = document.getElementById('join-btn');
     const leaveBtn = document.getElementById('leave-btn');
     const memberCountEl = document.getElementById('member-count');
     const memberListEl = document.getElementById('member-list');
     const buttonWrapper = document.querySelector('[data-community-id]');
 
-<<<<<<< HEAD
-    if (!buttonWrapper || !joinBtn || !leaveBtn) {
-        console.log("Join/Leave buttons not found or user is admin.");
-        return;
-    }
-=======
     if (!buttonWrapper || !joinBtn || !leaveBtn) return;
->>>>>>> master
 
     const communityId = buttonWrapper.dataset.communityId;
     const currentUsername = buttonWrapper.dataset.username;
     const joinUrl = `/community/ajax/join/${communityId}/`;
     const leaveUrl = `/community/ajax/leave/${communityId}/`;
 
-<<<<<<< HEAD
-    const updateUI = (action, count) => {
-        if (memberCountEl) memberCountEl.innerText = count;
-        if (action === "joined") {
-            joinBtn.classList.add('hidden');
-            leaveBtn.classList.remove('hidden');
-            const emptyMsg = document.getElementById('empty-member-msg');
-            if (emptyMsg) emptyMsg.remove();
-            if (memberListEl && !memberListEl.querySelector(`li[data-username="${currentUsername}"]`)) {
-                const newLi = document.createElement('li');
-                newLi.dataset.username = currentUsername;
-                newLi.innerText = currentUsername;
-                memberListEl.appendChild(newLi);
-            }
-        } else if (action === "left") {
-            joinBtn.classList.remove('hidden');
-            leaveBtn.classList.add('hidden');
-            if(memberListEl){
-                const userLi = memberListEl.querySelector(`li[data-username="${currentUsername}"]`);
-                if (userLi) userLi.remove();
-                if (count === 0 && !document.getElementById('empty-member-msg')) {
-                    const emptyLi = document.createElement('li');
-                    emptyLi.id = 'empty-member-msg';
-                    emptyLi.className = 'list-none italic text-gray-700';
-                    emptyLi.innerText = 'Belum ada anggota yang bergabung.';
-                    memberListEl.appendChild(emptyLi);
-                }
-            }
-        }
-    };
-
-    const handleCommunityAction = (url, action) => {
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': csrfToken
-            }
-        })
-        .then(res => {
-            if (!res.ok) {
-                return res.text().then(text => {
-                    throw new Error(`HTTP error! status: ${res.status}, body: ${text}`)
-                })
-            }
-            return res.json();
-        })
-        .then(json => {
-            if (json.success) {
-                updateUI(action, json.member_count);
-            } else {
-                alert(`Error: ${json.error || 'Unknown error'}`);
-            }
-        })
-        .catch(err => {
-            console.error("Fetch error:", err);
-            alert(`An error occurred: ${err.message}`);
-        });
-    };
-
-    joinBtn.addEventListener('click', () => {
-        handleCommunityAction(joinUrl, "joined");
-    });
-    
-    leaveBtn.addEventListener('click', () => {
-        handleCommunityAction(leaveUrl, "left");
-    });
-=======
     function setLoading(btn, loading){
     if (!btn) return;
     btn.disabled = loading;
@@ -472,7 +302,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     joinBtn.addEventListener('click', () => handleCommunityAction(joinUrl, "joined", joinBtn));
     leaveBtn.addEventListener('click', () => handleCommunityAction(leaveUrl, "left", leaveBtn));
->>>>>>> master
 });
 </script>
 {% endblock %}

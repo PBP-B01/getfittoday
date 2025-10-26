@@ -21,78 +21,6 @@
     }
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
-<<<<<<< HEAD
-  {% block extra_css %}
-    <style>
-      :root{ --nav-bg:#0E5A64; --nav-text:#fff; }
-
-      #map-wrapper{
-        border:3px solid #DDE7FF; border-radius:24px;
-        box-shadow:0 28px 80px rgba(8,24,68,.25), 0 10px 28px rgba(8,24,68,.15);
-      }
-
-      .home-hero{ padding-top:18px; }
-      .home-hero-title{
-        font-size:clamp(28px,4vw,44px);
-        margin-top:-2px; margin-bottom:18px;
-      }
-
-      .gm-style .gm-style-iw-c{
-        position: relative !important;
-      }
-
-      .gm-style .gm-style-iw-c .gm-ui-hover-effect{
-        position: absolute !important;
-        top: 8px !important;
-        right: 8px !important;
-        left: auto !important;
-        margin: 0 !important;
-        transform: none !important;
-      }
-
-      .iw-header{
-        padding-right: 38px !important;
-      }
-
-      .gm-style .gm-style-iw-c{ position:relative !important; }
-      .gm-style .gm-style-iw-c .gm-ui-hover-effect{
-        position:absolute !important;
-        top:8px !important;
-        right:8px !important;
-        left:auto !important;
-        margin:0 !important;
-        transform:none !important;
-        display:block !important;
-      }
-      .iw-header{ padding-right:38px !important; }
-
-      :root{
-        --teal-700:#0E5A64;
-        --teal-600:#137A86;
-      }
-
-      @media (max-width: 767.98px){
-        nav {
-          background-color: var(--teal-600) !important;
-          color:#fff !important;
-        }
-        #mobile-menu{
-          background: linear-gradient(135deg, var(--teal-600) 0%, var(--teal-700) 100%) !important;
-          border-bottom-left-radius: 14px;
-          border-bottom-right-radius: 14px;
-          box-shadow: 0 16px 40px rgba(0,0,0,.25);
-        }
-        #mobile-menu a{ color:#EAF2FF !important; }
-        #mobile-menu a:hover{ color:#fff !important; background: rgba(255,255,255,.08); }
-        #mobile-menu-button{ color:#EAF2FF !important; }
-      }
-    </style>
-  {% endblock %}
-</head>
-<body class="bg-blue-900 min-h-screen font-sans text-white {% block body_class %}{% endblock %}">
-    <!-- Navbar -->
-  <nav class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500 text-white">
-=======
 
   <style id="core-nav">
 
@@ -228,21 +156,9 @@
 <body class="bg-blue-900 min-h-screen font-sans text-white {% block body_class %}{% endblock %}">
   <!-- Navbar -->
   <nav id="main-navbar" class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500">
->>>>>>> master
     <div class="brand font-bold text-2xl text-white">GETFIT.TODAY</div>
 
     <div class="hidden md:flex items-center gap-6">
-<<<<<<< HEAD
-      <a href="{% url 'home:home' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
-      <a href="{% url 'community_list' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
-      <a href="{% url 'event_list' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">EVENTS</a>
-      <a href="{% url 'store:product_list' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
-
-      {% if request.user.is_authenticated %}
-        <a href="{% url 'booking:page' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">BOOKING</a>
-      {% else %}
-        <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">BOOKING</a>
-=======
       <a href="{% url 'home:home' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
       <a href="{% url 'community_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
       <a href="{% url 'store:product_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
@@ -251,7 +167,6 @@
         <a href="{% url 'booking:page' %}" class="text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg">BOOKING</a>
       {% else %}
         <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg">BOOKING</a>
->>>>>>> master
       {% endif %}
 
       <a href="{% url 'BlognEvent:blogevent_page' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">BLOGS & EVENTS</a>
@@ -273,14 +188,6 @@
                 <p class="font-semibold truncate">{{ request.user.username }}</p>
               {% endif %}
             </div>
-<<<<<<< HEAD
-            <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-blue-900 hover:bg-blue-50">My bookings</a>
-            <div class="border-t border-blue-100"></div>
-            <form method="post" action="{% url 'central:logout' %}" class="p-1">
-              {% csrf_token %}
-              <button type="submit" class="w-full text-left px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">Logout</button>
-            </form>
-=======
 
             <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My bookings</a>
             <div class="border-t border-gray-100"></div>
@@ -289,7 +196,6 @@
                 Logout
               </a>
             </div>
->>>>>>> master
           </div>
         {% else %}
           <a href="{% url 'central:login' %}?next={{ request.get_full_path|urlencode }}"
@@ -318,14 +224,6 @@
                 <p class="font-semibold truncate">{{ request.user.username }}</p>
               {% endif %}
             </div>
-<<<<<<< HEAD
-            <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-blue-900 hover:bg-blue-50">My bookings</a>
-            <div class="border-t border-blue-100"></div>
-            <form method="post" action="{% url 'central:logout' %}" class="p-1">
-              {% csrf_token %}
-              <button type="submit" class="w-full text-left px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">Logout</button>
-            </form>
-=======
 
             <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My bookings</a>
             <div class="border-t border-gray-100"></div>
@@ -334,7 +232,6 @@
                 Logout
               </a>
             </div>
->>>>>>> master
           </div>
         </div>
       {% else %}
@@ -352,18 +249,6 @@
       </button>
     </div>
 
-<<<<<<< HEAD
-  <!-- Mobile Menu Overlay -->
-  <div id="mobile-menu" class="md:hidden hidden absolute top-16 left-0 w-full rounded-b-lg py-4 z-50 shadow-md bg-gradient-to-br from-[var(--teal-600)] to-[var(--teal-700)] md:bg-yellow-500">
-    <a href="{% url 'home:home' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">HOME</a>
-    <a href="{% url 'community_list' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">KOMUNITAS</a>
-    <a href="{% url 'event_list' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">EVENT</a>
-    <a href="{% url 'store:product_list' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">STORE</a>
-    {% if request.user.is_authenticated %}
-      <a href="{% url 'booking:page' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">BOOKING</a>
-    {% else %}
-      <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="block text-blue-900 hover:text-blue-700 font-semibold text-lg px-4 py-2">BOOKING</a>
-=======
     <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 w-full rounded-b-lg py-4 z-50 shadow-md">
     <a href="{% url 'home:home' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">HOME</a>
     <a href="{% url 'community_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">KOMUNITAS</a> {# <-- Fixed the # href #}
@@ -372,7 +257,6 @@
       <a href="{% url 'booking:page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BOOKING</a>
     {% else %}
       <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BOOKING</a>
->>>>>>> master
     {% endif %}
     <a href="{% url 'BlognEvent:blogevent_page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BLOGS & EVENTS</a>
     </div>
