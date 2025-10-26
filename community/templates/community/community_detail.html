@@ -150,7 +150,6 @@
 
     .divider{ border-color: var(--card-brd); }
 
-    /* Buttons */
     .btn-accent{
     display:inline-flex; align-items:center; justify-content:center;
     padding:.6rem 1rem; border-radius:12px; font-weight:800;
@@ -182,7 +181,6 @@
     .btn-teal:hover{ filter: brightness(1.05); }
     .btn-teal:active{ transform: translateY(1px); }
 
-    /* Toast theme */
     #toast.toast--ok{
     background: var(--toast-ok-bg);
     color: var(--toast-text);
@@ -211,7 +209,7 @@
     el.textContent = message;
     el.className = base + " " + (ok ? "toast--ok" : "toast--err") + " opacity-0 translate-y-2";
     el.classList.remove("hidden");
-    void el.offsetWidth; // reflow
+    void el.offsetWidth;
     el.classList.remove("opacity-0","translate-y-2");
     clearTimeout(el._t);
     el._t = setTimeout(() => {
