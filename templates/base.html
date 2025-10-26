@@ -168,7 +168,7 @@
 
     <div class="hidden md:flex items-center gap-6">
       <a href="{% url 'home:home' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
-      <a href="{% url 'community_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
+      <a href="{% url 'community_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">COMMUNITY</a>
       <a href="{% url 'store:product_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
 
       {% if request.user.is_authenticated or request.session.is_admin %}
