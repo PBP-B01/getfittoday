@@ -12,29 +12,62 @@
           {{ field.label }}
         </label>
 
-        {% if field.field.widget_type == 'select' %}
+        {% if field.name == 'store' %}
           <select
             name="{{ field.name }}"
             id="{{ field.id_for_label }}"
-            class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3 bg-white"
+            class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3 bg-white text-gray-900"
+            required
           >
+             {% if not field.field.required %}
+              <option value="">---------</option>
+            {% elif field.field.empty_label %}
+               <option value="" disabled {% if not field.value %}selected{% endif %}>{{ field.field.empty_label }}</option>
+             {% endif %}
+
             {% for value, text in field.field.choices %}
-              <option
+              {% if value != "" %}
+               <option
                 value="{{ value }}"
                 {% if field.value|stringformat:"s" == value|stringformat:"s" %}selected{% endif %}
               >
                 {{ text }}
               </option>
+              {% endif %}
             {% endfor %}
           </select>
+
+        {% elif field.field.widget_type == 'select' %}
+           <select
+            name="{{ field.name }}"
+            id="{{ field.id_for_label }}"
+            class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3 bg-white text-gray-900"
+            {% if field.field.required %}required{% endif %}
+          >
+             {% if field.field.empty_label %}
+               <option value="" disabled {% if not field.value %}selected{% endif %}>{{ field.field.empty_label }}</option>
+             {% endif %}
+            {% for value, text in field.field.choices %}
+               {% if value != "" %}
+                 <option
+                  value="{{ value }}"
+                  {% if field.value|stringformat:"s" == value|stringformat:"s" %}selected{% endif %}
+                 >
+                  {{ text }}
+                 </option>
+               {% endif %}
+            {% endfor %}
+          </select>
+
         {% else %}
           <input
             type="{{ field.field.widget.input_type|default:'text' }}"
             name="{{ field.name }}"
             value="{{ field.value|default:'' }}"
             id="{{ field.id_for_label }}"
-            class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3"
+            class="block w-full rounded-md border-[var(--card-brd)] shadow-sm focus:border-[var(--title)] focus:ring-[var(--title)] py-2 px-3 text-gray-900"
             {% if field.field.widget.input_type == 'number' %}step="any"{% endif %}
+            {% if field.field.required %}required{% endif %}
           >
         {% endif %}
 
