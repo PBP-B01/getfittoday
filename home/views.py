@@ -14,7 +14,6 @@ from django.urls import reverse
 from community.models import Community 
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
 from .models import FitnessSpot
-from .utils.spots_loader import build_index_and_bounds, load_all_spots
 
 
 GRID_ORIGIN_LAT = -6.8
@@ -109,15 +108,6 @@ def get_map_boundaries(request):
     }
     cache.set(cache_key, boundaries, 60 * 60 * 24 * 7)
     return JsonResponse(boundaries)
-
-def api_map_boundaries(request):
-    _, bounds = build_index_and_bounds()
-    return JsonResponse(bounds)
-
-def api_fitness_spots(request):
-    grid_id = request.GET.get("gridId", "")
-    index, _ = build_index_and_bounds()
-    return JsonResponse({"gridId": grid_id, "spots": index.get(grid_id, [])})
 
 def communities_by_place(request, place_id):
     """Mengembalikan list komunitas yang ada di FitnessSpot tertentu."""
