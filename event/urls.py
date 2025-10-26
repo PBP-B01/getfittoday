@@ -10,5 +10,6 @@ urlpatterns = [
     path('ajax/delete/<int:event_id>/', views.delete_event, name='delete_event'),
     path('ajax/join/<int:event_id>/', views.join_event, name='join_event'),
     path('ajax/leave/<int:event_id>/', views.leave_event, name='leave_event'),
+    path('ajax/get/<int:event_id>/', views.get_event_detail, name='get_event_detail'),
     path('api/community/<int:community_id>/', views.community_events_api, name='community_events_api'),
 ]

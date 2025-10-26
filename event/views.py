@@ -317,6 +317,38 @@ def leave_event(request, event_id):
         }, status=500)
 
 
+@login_required
+def get_event_detail(request, event_id):
+    try:
+        event = get_object_or_404(Event, id=event_id)
+        local_date = timezone.localtime(event.date)
+        
+        return JsonResponse({
+            'status': 'success',
+            'event': {
+                'id': event.id,
+                'name': event.name,
+                'description': event.description,
+                'date': local_date.strftime('%Y-%m-%d %H:%M'),
+                'date_input': local_date.strftime('%Y-%m-%dT%H:%M'),
+                'location': event.location,
+                'community_id': event.community.id,
+                'community_name': event.community.name,
+                'can_edit': event.can_edit(request.user),
+                'can_join': event.can_join(request.user),
+                'is_participant': event.user_is_participant(request.user),
+                'participant_count': event.participants.count(),
+                'registration_open': event.registration_open(),
+                'is_past': event.is_past(),
+            }
+        })
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e)
+        }, status=500)
+
+
 def community_events_api(request, community_id):
     try:
         community = get_object_or_404(Community, id=community_id)

@@ -23,7 +23,7 @@
   </div>
   {% endif %}
 
-  <div id="community-cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <div id="community-cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 card-grid-container">
     {% for community in communities %}
       <div class="community-card community-item cursor-pointer"
            data-id="{{ community.id }}"

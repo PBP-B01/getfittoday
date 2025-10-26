@@ -74,6 +74,7 @@
     padding: 20px;
     box-shadow: 0 10px 24px rgba(13,43,63,.10), inset 0 1px 0 rgba(255,255,255,.65);
     transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    will-change: transform;
   }
   .event-card:hover{
     transform: translateY(-2px);
@@ -99,6 +100,7 @@
   }
   .btn-accent:hover{ background: var(--accent-dark); }
   .btn-accent:active{ transform: translateY(1px); }
+  .btn-accent:disabled{ opacity: 0.6; cursor: not-allowed; }
 
   .btn-teal{
     display:inline-flex; align-items:center; justify-content:center;
@@ -127,6 +129,7 @@
     transition: filter .15s ease;
   }
   .btn-success:hover{ filter: brightness(1.05); }
+  .btn-success:disabled{ opacity: 0.6; cursor: not-allowed; }
 
   .btn-warning{
     display:inline-flex; align-items:center; justify-content:center;
@@ -136,6 +139,7 @@
     transition: filter .15s ease;
   }
   .btn-warning:hover{ filter: brightness(1.05); }
+  .btn-warning:disabled{ opacity: 0.6; cursor: not-allowed; }
 
   .btn-danger{
     display:inline-flex; align-items:center; justify-content:center;
@@ -191,7 +195,6 @@
 
 {% block content %}
 <div class="max-w-6xl mx-auto px-4 py-8">
-  <!-- Back to Community Button -->
   {% if from_community_id and from_community_name %}
   <div class="mb-6">
     <a href="{% url 'community_detail' from_community_id %}" class="btn-back">
@@ -203,7 +206,6 @@
 
   <h1 class="page-title">Community Events</h1>
 
-  <!-- View Toggle & Create Button -->
   <div class="filter-panel mb-6">
     <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
       <div class="flex justify-center sm:justify-start items-center space-x-3">
@@ -232,7 +234,6 @@
     </div>
   </div>
 
-  <!-- Filter Panel -->
   <div class="filter-panel mb-6">
     <div class="flex items-center justify-between cursor-pointer" id="filterToggle">
       <h3 class="text-lg font-semibold" style="color: var(--title);">▼ Filter Panel</h3>
@@ -307,7 +308,6 @@
     </div>
   </div>
 
-  <!-- Event List / Empty State -->
   {% if not events %}
     <div class="flex flex-col items-center justify-center mt-12 mb-8">
       <div class="text-6xl mb-4">📅</div>
@@ -341,7 +341,7 @@
           <p>📅 {{ event.date }}</p>
           <p>📍 {{ event.location }}</p>
           <p class="font-semibold">🏘️ {{ event.community_name }}</p>
-          <p class="text-muted">👥 {{ event.participant_count }} peserta terdaftar</p>
+          <p class="text-muted participant-count">👥 {{ event.participant_count }} peserta terdaftar</p>
         </div>
 
         <div class="flex justify-between items-center pt-3 border-t" style="border-color: var(--card-brd);">
@@ -360,7 +360,7 @@
             {% endif %}
           </div>
 
-          <div>
+          <div class="action-buttons">
             {% if user.is_authenticated %}
               {% if event.can_join %}
                 <button class="join-btn btn-success" data-id="{{ event.id }}">
@@ -385,7 +385,6 @@
   </div>
 </div>
 
-<!-- Modal Create/Edit Event -->
 <div id="eventModal" class="hidden modal-overlay">
   <div class="modal-card">
     <h2 id="modalTitle" class="text-2xl font-bold mb-4" style="color: var(--title);">Buat Event</h2>
@@ -441,11 +440,10 @@
   </div>
 </div>
 
-<!-- Delete Confirmation Modal -->
 <div id="deleteConfirmModal" class="hidden modal-overlay" style="z-index:60;">
   <div class="modal-card max-w-sm border-2 border-red-500">
-    <h3 class="text-xl font-bold text-red-600 mb-3">Konfirmasi Hapus</h3>
-    <p class="text-muted mb-6">Yakin ingin menghapus event "<span id="deleteEventName" class="font-semibold" style="color: var(--title);"></span>"?</p>
+    <h3 class="text-xl font-bold text-red-600 mb-3" id="confirmModalTitle">Konfirmasi Hapus</h3>
+    <p class="text-muted mb-6"><span id="confirmModalText">Yakin ingin menghapus event</span> "<span id="deleteEventName" class="font-semibold" style="color: var(--title);"></span>"?</p>
     
     <div class="flex space-x-3">
       <button type="button" id="cancelDelete" class="flex-1 btn-muted">
@@ -508,9 +506,12 @@
   
   const deleteConfirmModal = document.getElementById('deleteConfirmModal');
   const deleteEventName = document.getElementById('deleteEventName');
+  const confirmModalTitle = document.getElementById('confirmModalTitle');
+  const confirmModalText = document.getElementById('confirmModalText');
   const cancelDelete = document.getElementById('cancelDelete');
   const confirmDelete = document.getElementById('confirmDelete');
   let currentDeleteId = null;
+  let currentDeleteAction = 'delete';
 
   function getCookie(name) {
     let cookieValue = null;
@@ -554,6 +555,41 @@
     setTimeout(() => toast.remove(), 5000);
   }
 
+  async function updateEventCard(eventId) {
+    try {
+      const response = await fetch(`/event/ajax/get/${eventId}/`);
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        const card = document.getElementById(`event-${eventId}`);
+        if (!card) return;
+
+        const event = result.event;
+        const participantEl = card.querySelector('.participant-count');
+        if (participantEl) {
+          participantEl.textContent = `👥 ${event.participant_count} peserta terdaftar`;
+        }
+
+        const actionContainer = card.querySelector('.action-buttons');
+        if (actionContainer) {
+          let buttonHTML = '';
+          
+          if (event.can_join) {
+            buttonHTML = `<button class="join-btn btn-success" data-id="${eventId}">Join Event</button>`;
+          } else if (event.is_participant) {
+            buttonHTML = `<button class="leave-btn btn-warning" data-id="${eventId}" data-name="${event.name}">← Leave Event</button>`;
+          } else if (!event.registration_open) {
+            buttonHTML = `<button class="btn-muted opacity-50 cursor-not-allowed" disabled>Pendaftaran Ditutup</button>`;
+          }
+          
+          actionContainer.innerHTML = buttonHTML;
+        }
+      }
+    } catch (error) {
+      console.error('Error updating card:', error);
+    }
+  }
+
   if (createBtn) {
     createBtn.addEventListener('click', () => {
       modalTitle.textContent = 'Buat Event';
@@ -583,6 +619,9 @@
     const eventId = document.getElementById('event_id').value;
     const isEdit = !!eventId;
     const url = isEdit ? `/event/ajax/edit/${eventId}/` : `/event/ajax/create/`;
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Menyimpan...';
 
     const formData = {
       name: document.getElementById('event_name').value,
@@ -614,48 +653,114 @@
     } catch (error) {
       showToast('Gagal menghubungi server', 'error');
       console.error('Error:', error);
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = isEdit ? 'Update' : 'Simpan';
     }
   });
 
-  document.querySelectorAll('.edit-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
+  document.getElementById('eventList').addEventListener('click', async (e) => {
+    const target = e.target;
+    
+    if (target.classList.contains('edit-btn')) {
       modalTitle.textContent = 'Edit Event';
       saveBtn.textContent = 'Update';
       
-      const eventId = btn.dataset.id;
+      const eventId = target.dataset.id;
       document.getElementById('event_id').value = eventId;
-      document.getElementById('event_name').value = btn.dataset.name;
-      document.getElementById('event_description').value = btn.dataset.desc;
-      document.getElementById('event_location').value = btn.dataset.loc;
-      document.getElementById('event_community').value = btn.dataset.community;
+      document.getElementById('event_name').value = target.dataset.name;
+      document.getElementById('event_description').value = target.dataset.desc;
+      document.getElementById('event_location').value = target.dataset.loc;
+      document.getElementById('event_community').value = target.dataset.community;
       document.getElementById('event_community').disabled = true;
-      document.getElementById('event_date').value = btn.dataset.date;
+      document.getElementById('event_date').value = target.dataset.date;
       
       deleteBtn.classList.remove('hidden');
       deleteSpacer.style.display = 'none';
-      deleteBtn.dataset.name = btn.dataset.name;
+      deleteBtn.dataset.name = target.dataset.name;
       deleteBtn.dataset.id = eventId;
       
       eventModal.classList.remove('hidden');
-    });
+      return;
+    }
+    
+    if (target.classList.contains('join-btn')) {
+      const eventId = target.dataset.id;
+      target.disabled = true;
+      target.textContent = 'Joining...';
+      
+      try {
+        const response = await fetch(`/event/ajax/join/${eventId}/`, {
+          method: 'POST',
+          headers: {'X-CSRFToken': csrftoken},
+        });
+
+        const result = await response.json();
+        
+        if (response.ok && result.status === 'success') {
+          showToast(result.message, 'success');
+          await updateEventCard(eventId);
+        } else {
+          showToast(result.message || 'Gagal bergabung ke event', 'error');
+          target.disabled = false;
+          target.textContent = 'Join Event';
+        }
+      } catch (error) {
+        showToast('Gagal menghubungi server', 'error');
+        target.disabled = false;
+        target.textContent = 'Join Event';
+      }
+      return;
+    }
+    
+    if (target.classList.contains('leave-btn')) {
+      currentDeleteAction = 'leave';
+      confirmModalTitle.textContent = '⚠️ Konfirmasi Keluar';
+      confirmModalText.textContent = 'Yakin ingin keluar dari event';
+      deleteEventName.textContent = target.dataset.name;
+      currentDeleteId = target.dataset.id;
+      
+      const confirmBtn = document.getElementById('confirmDelete');
+      confirmBtn.textContent = 'Keluar';
+      confirmBtn.className = 'flex-1 btn-warning';
+      
+      deleteConfirmModal.classList.remove('hidden');
+      return;
+    }
   });
 
   deleteBtn.addEventListener('click', () => {
+    currentDeleteAction = 'delete';
+    confirmModalTitle.textContent = 'Konfirmasi Hapus';
+    confirmModalText.textContent = 'Yakin ingin menghapus event';
     deleteEventName.textContent = deleteBtn.dataset.name;
     currentDeleteId = deleteBtn.dataset.id;
+    
+    const confirmBtn = document.getElementById('confirmDelete');
+    confirmBtn.textContent = 'Hapus';
+    confirmBtn.className = 'flex-1 btn-danger';
+    
     deleteConfirmModal.classList.remove('hidden');
   });
 
   cancelDelete.addEventListener('click', () => {
     deleteConfirmModal.classList.add('hidden');
     currentDeleteId = null;
+    currentDeleteAction = 'delete';
   });
 
   confirmDelete.addEventListener('click', async () => {
     if (!currentDeleteId) return;
 
+    const url = currentDeleteAction === 'leave' 
+      ? `/event/ajax/leave/${currentDeleteId}/`
+      : `/event/ajax/delete/${currentDeleteId}/`;
+
+    confirmDelete.disabled = true;
+    confirmDelete.textContent = 'Processing...';
+
     try {
-      const response = await fetch(`/event/ajax/delete/${currentDeleteId}/`, {
+      const response = await fetch(url, {
         method: 'POST',
         headers: {'X-CSRFToken': csrftoken},
       });
@@ -665,109 +770,39 @@
       if (response.ok && result.status === 'success') {
         showToast(result.message, 'success');
         deleteConfirmModal.classList.add('hidden');
-        eventModal.classList.add('hidden');
         
-        const eventElement = document.getElementById(`event-${currentDeleteId}`);
-        if (eventElement) {
-          eventElement.style.transition = 'opacity 0.3s';
-          eventElement.style.opacity = '0';
-          setTimeout(() => eventElement.remove(), 300);
+        if (currentDeleteAction === 'delete') {
+          eventModal.classList.add('hidden');
+          const eventElement = document.getElementById(`event-${currentDeleteId}`);
+          if (eventElement) {
+            eventElement.style.transition = 'opacity 0.3s';
+            eventElement.style.opacity = '0';
+            setTimeout(() => eventElement.remove(), 300);
+          }
+        } else {
+          await updateEventCard(currentDeleteId);
         }
         
         currentDeleteId = null;
+        currentDeleteAction = 'delete';
       } else {
-        showToast(result.message || 'Gagal menghapus event', 'error');
+        showToast(result.message || 'Gagal memproses', 'error');
       }
     } catch (error) {
       showToast('Gagal menghubungi server', 'error');
       console.error('Error:', error);
+    } finally {
+      confirmDelete.disabled = false;
+      confirmDelete.textContent = currentDeleteAction === 'leave' ? 'Keluar' : 'Hapus';
     }
   });
 
-  document.querySelectorAll('.join-btn').forEach(btn => {
-    btn.addEventListener('click', async () => {
-      try {
-        const response = await fetch(`/event/ajax/join/${btn.dataset.id}/`, {
-          method: 'POST',
-          headers: {'X-CSRFToken': csrftoken},
-        });
-
-        const result = await response.json();
-        
-        if (response.ok && result.status === 'success') {
-          showToast(result.message, 'success');
-          setTimeout(() => location.reload(), 1000);
-        } else {
-          showToast(result.message || 'Gagal bergabung ke event', 'error');
-        }
-      } catch (error) {
-        showToast('Gagal menghubungi server', 'error');
-        console.error('Error:', error);
-      }
-    });
-  });
-
-  // Leave Event with Custom Modal
-  document.querySelectorAll('.leave-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      const eventName = btn.dataset.name;
-      const eventId = btn.dataset.id;
-
-      const leaveModal = document.createElement('div');
-      leaveModal.className = 'modal-overlay';
-      leaveModal.style.zIndex = '60';
-      leaveModal.innerHTML = `
-        <div class="modal-card max-w-sm border-2 border-orange-500">
-          <h3 class="text-xl font-bold text-orange-600 mb-3">⚠️ Konfirmasi Keluar</h3>
-          <p class="text-muted mb-6">Yakin ingin keluar dari event "<span class="font-semibold" style="color: var(--title);">${eventName}</span>"?</p>
-          
-          <div class="flex space-x-3">
-            <button type="button" class="cancel-leave flex-1 btn-muted">
-              Batal
-            </button>
-            <button type="button" class="confirm-leave flex-1 btn-warning">
-              Keluar
-            </button>
-          </div>
-        </div>
-      `;
-      
-      document.body.appendChild(leaveModal);
-
-      leaveModal.querySelector('.cancel-leave').addEventListener('click', () => {
-        leaveModal.remove();
-      });
-
-      leaveModal.querySelector('.confirm-leave').addEventListener('click', async () => {
-        try {
-          const response = await fetch(`/event/ajax/leave/${eventId}/`, {
-            method: 'POST',
-            headers: {'X-CSRFToken': csrftoken},
-          });
-
-          const result = await response.json();
-          
-          if (response.ok && result.status === 'success') {
-            showToast(result.message, 'success');
-            leaveModal.remove();
-            setTimeout(() => location.reload(), 1000);
-          } else {
-            showToast(result.message || 'Gagal keluar dari event', 'error');
-            leaveModal.remove();
-          }
-        } catch (error) {
-          showToast('Gagal menghubungi server', 'error');
-          console.error('Error:', error);
-          leaveModal.remove();
-        }
-      });
-
-      leaveModal.addEventListener('click', (e) => {
-        if (e.target === leaveModal) {
-          leaveModal.remove();
-        }
-      });
-    });
+  deleteConfirmModal.addEventListener('click', (e) => {
+    if (e.target === deleteConfirmModal) {
+      deleteConfirmModal.classList.add('hidden');
+      currentDeleteId = null;
+      currentDeleteAction = 'delete';
+    }
   });
 </script>
 {% endblock %}
