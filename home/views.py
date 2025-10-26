@@ -70,7 +70,6 @@ def get_fitness_spots_data(request):
         'name', 'latitude', 'longitude', 'address', 'rating', 
         'place_id', 'rating_count', 'website', 'phone_number', 'types__name'
     )
-    
     spots_data_map = {}
     for spot in spots:
         place_id = spot['place_id']
@@ -125,26 +124,3 @@ def communities_by_place(request, place_id):
     spot = get_object_or_404(FitnessSpot, place_id=place_id)
     communities = Community.objects.filter(fitness_spot=spot).values('id', 'name', 'description')
     return JsonResponse({'communities': list(communities)})
-
-
-def communities_by_place_json(request, place_id):
-    """Mengambil list komunitas dari file JSON lokal di static berdasarkan place_id."""
-    json_path = Path(settings.BASE_DIR) / "static" / "home" / "data" / "community_data.json"
-    try:
-        with open(json_path, encoding="utf-8") as f:
-            all_data = json.load(f)
-    except FileNotFoundError:
-        print("JSON file not found!")
-        return JsonResponse({"communities": []})
-
-    communities = [
-        {
-            "id": c["pk"],
-            "name": c["fields"]["name"],
-            "description": c["fields"]["description"],
-            "contact_info": c["fields"].get("contact_info", "")
-        }
-        for c in all_data if c["fields"]["fitness_spot"] == place_id
-    ]
-
-    return JsonResponse({"communities": communities})
