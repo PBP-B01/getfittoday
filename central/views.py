@@ -51,20 +51,13 @@ def login_ajax(request):
     name = request.POST.get("username")
     password = request.POST.get("password")
 
-    # ==== LOGIN SEBAGAI ADMIN ====
     try:
         admin = Admin.objects.get(name=name)
         if admin.check_password(password):
-            # --- TAMBAHKAN INI ---
-            # Logout dulu user bawaan (jika ada) agar session bersih
             logout(request)
-            # ---------------------
-
-            # Set session admin
             request.session["is_admin"] = True
             request.session["admin_name"] = admin.name
 
-            # Buat response sukses
             resp = JsonResponse({
                 "ok": True,
                 "redirect": "/",
@@ -76,19 +69,15 @@ def login_ajax(request):
     except Admin.DoesNotExist:
         pass
 
-    # ==== LOGIN SEBAGAI USER BIASA ====
     form = AuthenticationForm(request, data=request.POST)
     if form.is_valid():
         user = form.get_user()
         login(request, user)
 
-        # --- TAMBAHKAN INI ---
-        # Pastikan status admin bersih saat user biasa login
         request.session["is_admin"] = False
         if "admin_name" in request.session:
             del request.session["admin_name"]
-        # ---------------------
-
+ 
         resp = JsonResponse({
             "ok": True,
             "redirect": "/",
@@ -98,7 +87,6 @@ def login_ajax(request):
         resp.set_cookie("last_login", str(datetime.datetime.now()))
         return resp
 
-    # ==== GAGAL LOGIN ====
     return JsonResponse(
         {"ok": False, "errors": {"login": ["Username atau password salah."]}},
         status=400

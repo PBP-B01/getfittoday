@@ -22,6 +22,24 @@
   </script>
   <script src="https://cdn.tailwindcss.com"></script>
 
+  <style id="nav-core">
+    #main-navbar #userMenu a,
+    #main-navbar #mUserMenu a {
+      color: var(--teal-700) !important;
+    }
+
+    #main-navbar .logout-link {
+      color: #dc2626 !important;
+    }
+    #main-navbar .logout-link:hover {
+      color: #b91c1c !important;
+      background: #fee2e2 !important;
+    }
+
+    #main-navbar .user-avatar-btn { color: var(--title) !important; }
+    #main-navbar .user-avatar-btn svg { color: inherit !important; fill: currentColor; }
+  </style>
+
   {% block extra_css %}
   <style>
     :root {
@@ -82,9 +100,12 @@
         background-color: var(--teal-600) !important;
       }
 
-      #main-navbar a,
-      #main-navbar button {
-        color: var(--nav-text) !important;
+      #main-navbar a.nav-link { 
+        color: var(--nav-text) !important; 
+      }
+
+      #main-navbar button:not(.user-avatar-btn) { 
+        color: var(--nav-text) !important; 
       }
 
       #main-navbar .brand {
@@ -133,13 +154,13 @@
 
 <body class="bg-blue-900 min-h-screen font-sans text-white {% block body_class %}{% endblock %}">
   <!-- Navbar -->
-  <nav id="main-navbar" class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500 text-white">
+  <nav id="main-navbar" class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500">
     <div class="brand font-bold text-2xl text-white">GETFIT.TODAY</div>
 
     <div class="hidden md:flex items-center gap-6">
-      <a href="{% url 'home:home' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
-      <a href="{% url 'community_list' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
-      <a href="{% url 'store:product_list' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
+      <a href="{% url 'home:home' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
+      <a href="{% url 'community_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">KOMUNITAS</a>
+      <a href="{% url 'store:product_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
 
       {% if request.user.is_authenticated or request.session.is_admin %}
         <a href="{% url 'booking:page' %}" class="text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg">BOOKING</a>
@@ -147,18 +168,11 @@
         <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg">BOOKING</a>
       {% endif %}
 
-      <a href="{% url 'BlognEvent:blogevent_page' %}" class="text-blue-900 hover:text-blue-700 font-semibold text-lg">BLOGS & EVENTS</a>
+      <a href="{% url 'BlognEvent:blogevent_page' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">BLOGS & EVENTS</a>
 
       <div class="relative" id="user-widget-desktop">
         {% if request.user.is_authenticated or request.session.is_admin %}
-          <button
-            id="userMenuBtn"
-            type="button"
-            class="relative z-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent-yellow)] text-[var(--title)] border-2 border-[var(--nav-text)] shadow"
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-controls="userMenu"
-            title="{% if request.session.is_admin %}{{ request.session.admin_name }}{% else %}{{ request.user.username }}{% endif %}">
+          <button id="userMenuBtn" class="user-avatar-btn relative z-10 inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent-yellow)] text-[var(--title)] border-2 border-[var(--nav-text)] shadow">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.239-8 5v1h16v-1c0-2.761-3.58-5-8-5Z"/>
             </svg>
@@ -177,7 +191,7 @@
             <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My bookings</a>
             <div class="border-t border-gray-100"></div>
             <div class="p-1">
-              <a href="{% url 'central:logout' %}" class="w-full text-left block px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">
+              <a href="{% url 'central:logout' %}" class="logout-link w-full text-left block px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">
                 Logout
               </a>
             </div>
@@ -194,14 +208,7 @@
     <div class="md:hidden flex items-center space-x-4">
       {% if request.user.is_authenticated or request.session.is_admin %}
         <div class="relative">
-          <button
-            id="mUserMenuBtn"
-            type="button"
-            class="inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent-yellow)] text-[var(--title)] border-2 border-[var(--nav-text)] shadow"
-            aria-haspopup="true"
-            aria-expanded="false"
-            aria-controls="mUserMenu"
-            title="{% if request.session.is_admin %}{{ request.session.admin_name }}{% else %}{{ request.user.username }}{% endif %}">
+          <button id="mUserMenuBtn" class="user-avatar-btn inline-flex items-center justify-center w-10 h-10 rounded-full bg-[var(--accent-yellow)] text-[var(--title)] border-2 border-[var(--nav-text)] shadow">
             <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5Zm0 2c-4.42 0-8 2.239-8 5v1h16v-1c0-2.761-3.58-5-8-5Z"/>
             </svg>
@@ -220,7 +227,7 @@
             <a href="{% url 'booking:mine_page' %}" class="block px-4 py-2 text-gray-800 hover:bg-gray-100">My bookings</a>
             <div class="border-t border-gray-100"></div>
             <div class="p-1">
-              <a href="{% url 'central:logout' %}" class="w-full text-left block px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">
+              <a href="{% url 'central:logout' %}" class="logout-link w-full text-left block px-3 py-2 text-red-600 hover:text-red-700 hover:bg-red-50">
                 Logout
               </a>
             </div>

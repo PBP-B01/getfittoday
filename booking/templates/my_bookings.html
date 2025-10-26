@@ -41,6 +41,7 @@
 {% endblock %}
 
 {% block extra_css %}
+{{ block.super }}
 <style>
   :root{
     --primary: #0E5A64;
@@ -66,7 +67,10 @@
     background-color: var(--primary) !important;
     color: var(--on-primary) !important;
   }
-  body.mybookings-theme nav a{ color: var(--on-primary) !important; }
+
+  body.mybookings-theme #main-navbar a.nav-link{
+    color: var(--on-primary) !important;
+  }
 
   .page-title{
     color: var(--headline);
@@ -122,12 +126,21 @@
   nav #userMenu, nav #mUserMenu{
     background:#fff !important;
   }
-  nav #userMenu a, nav #mUserMenu a{
+  #main-navbar #userMenu a:not(.logout-link),
+  #main-navbar #mUserMenu a:not(.logout-link){
     color:#0F2C58 !important;
     opacity:1 !important;
   }
-  nav #userMenu a:hover, nav #mUserMenu a:hover{
-    background:#EFF6FF !important;
+
+  /* Paksa logout merah */
+  #main-navbar #userMenu a.logout-link,
+  #main-navbar #mUserMenu a.logout-link{
+    color:#dc2626 !important;
+  }
+  #main-navbar #userMenu a.logout-link:hover,
+  #main-navbar #mUserMenu a.logout-link:hover{
+    color:#b91c1c !important;
+    background:#fee2e2 !important;
   }
 </style>
 {% endblock %}
