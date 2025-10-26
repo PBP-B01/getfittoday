@@ -121,6 +121,44 @@ async function fetchAndRenderProducts() {
     }
 }
 
+function filterSidebarSpots(query) {
+    const normalizedQuery = query.toLowerCase().trim();
+    const cardsContainer = document.getElementById('spot-cards-container');
+    if (!cardsContainer) {
+        console.error("Filter function: Card container not found!");
+        return;
+    }
+
+    const cards = cardsContainer.querySelectorAll('.spot-card');
+    const emptyState = document.getElementById('sidebar-empty-state');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const address = card.querySelector('p')?.textContent.toLowerCase() || '';
+
+        if (title.includes(normalizedQuery) || address.includes(normalizedQuery)) {
+            card.style.display = ''; 
+            visibleCount++;
+        } else {
+            card.style.display = 'none'; 
+        }
+    });
+
+    if (emptyState) {
+        const mapHasSpots = cards.length > 0;
+
+        if (mapHasSpots && visibleCount === 0) {
+            emptyState.textContent = 'No spots match your search in this area.';
+            emptyState.classList.remove('hidden');
+        } else if (!mapHasSpots) {
+            emptyState.textContent = 'No Sport Centers spots found in this area. Try panning or zooming the map.';
+        } else {
+            emptyState.classList.add('hidden');
+        }
+    }
+}
+
 async function initializeMap(center, zoom, restriction) {
     const { Map } = await google.maps.importLibrary("maps");
     map = new Map(document.getElementById("map"), {
@@ -168,7 +206,14 @@ async function initializeMap(center, zoom, restriction) {
     document.getElementById('sidebar-toggle-btn').addEventListener('click', () => {
         document.body.classList.toggle('sidebar-visible');
     });
-    
+
+    const sidebarSearch = document.getElementById('sidebar-spot-search');
+    if (sidebarSearch) {
+        sidebarSearch.addEventListener('input', (e) => {
+            filterSidebarSpots(e.target.value);
+        });
+    }
+
     createCenterOnMeButton();
 }
 
@@ -250,15 +295,21 @@ async function renderSpots(visibleGridIds) {
 
     const emptyState = document.getElementById('sidebar-empty-state');
     if (totalSpotsRendered === 0) {
-        emptyState.classList.remove('hidden');
+         emptyState.textContent = 'No Sport Centers spots found in this area. Try panning or zooming the map.';
+         emptyState.classList.remove('hidden');
     } else {
-        emptyState.classList.add('hidden');
+         emptyState.classList.add('hidden');
     }
 
     if (currentActiveCardId && document.getElementById(`card-${currentActiveCardId}`)) {
         highlightSpotCard(currentActiveCardId);
     }
+
+    const currentQuery = document.getElementById('sidebar-spot-search')?.value || '';
+    filterSidebarSpots(currentQuery);
 }
+
+
 
 function showSpotDetails(spot, shouldZoom = false) {
     const marker = markers[spot.place_id];
