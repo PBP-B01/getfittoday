@@ -7,7 +7,6 @@ from .models import Resource, Booking, BookingStatus
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from .models import Resource, Booking
-from home.utils.spots_loader import load_all_spots
 from django.db import transaction, IntegrityError
 from decimal import Decimal
 from django.shortcuts import render, get_object_or_404, redirect

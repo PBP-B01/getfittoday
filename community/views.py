@@ -166,38 +166,12 @@ def community_list(request):
     }
     return render(request, 'community/community_list.html', context)
 
-@login_required
-def add_community(request):
-    if request.method == 'POST':
-        form = CommunityForm(request.POST)
-        if form.is_valid():
-            try:
-                community = form.save(commit=False)
-                community.save()
-                community.admins.add(request.user)
-                return redirect('community_list')
-            except Exception as e:
-                 print(f"Error adding community via non-AJAX: {e}") 
-    else:
-        form = CommunityForm()
-    return render(request, 'community/add_community.html', {'form': form})
-
 def community_detail(request, pk):
     community = get_object_or_404(
         Community.objects.select_related('fitness_spot').prefetch_related('members', 'admins'),
         pk=pk
     )
     return render(request, 'community/community_detail.html', {'community': community})
-
-def communities_by_place(request, place_id):
-    spot = get_object_or_404(FitnessSpot, place_id=place_id)
-    communities = Community.objects.filter(fitness_spot=spot).values('id', 'name')
-    return JsonResponse({'communities': list(communities)})
-
-def communities_by_spot(request, spot_id): 
-    spot = get_object_or_404(FitnessSpot, place_id=spot_id)
-    communities_db = Community.objects.filter(fitness_spot=spot).values('name', 'description', 'contact_info')
-    return JsonResponse({'communities': list(communities_db)})
 
 def communities_by_place_json(request, place_id):
     try:
