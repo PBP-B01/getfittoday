@@ -6,24 +6,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}GetFit.Today{% endblock %}</title>
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <script>
-    tailwind = {
-      config: {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif']
-            }
-          }
-        }
-      }
+  
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+    *, ::before, ::after {
+        font-family: 'Poppins', ui-sans-serif, system-ui, sans-serif;
     }
-  </script>
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <style id="core-nav">
-
+    
     #main-navbar #userMenu a,
     #main-navbar #mUserMenu a { color: var(--teal-700) !important; }
 
@@ -154,8 +148,7 @@
 </head>
 
 <body class="bg-blue-900 min-h-screen font-sans text-white {% block body_class %}{% endblock %}">
-  <!-- Navbar -->
-  <nav id="main-navbar" class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500">
+    <nav id="main-navbar" class="p-4 flex items-center justify-between shadow-md rounded-b-lg sticky top-0 z-[2147483647] [isolation:isolate] hide-on-fullscreen bg-[var(--teal-600)] md:bg-yellow-500">
     <div class="brand font-bold text-2xl text-white">GETFIT.TODAY</div>
 
     <div class="hidden md:flex items-center gap-6">
