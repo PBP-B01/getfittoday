@@ -15,7 +15,6 @@ from community.models import Community
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
 from .models import FitnessSpot
 
-
 GRID_ORIGIN_LAT = -6.8
 GRID_ORIGIN_LNG = 106.5
 GRID_CELL_SIZE_DEG = 0.09
