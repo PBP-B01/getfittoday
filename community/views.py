@@ -8,7 +8,6 @@ from .forms import CommunityForm
 from home.models import FitnessSpot
 import json
 from decimal import Decimal 
-from django.views.decorators.csrf import csrf_exempt
 
 User = get_user_model()
 
@@ -18,7 +17,6 @@ class DecimalEncoder(json.JSONEncoder):
             return float(obj) 
         return super(DecimalEncoder, self).default(obj)
 
-@csrf_exempt
 @login_required
 def ajax_join_community(request, community_id):
     if request.method == "POST":
@@ -36,7 +34,6 @@ def ajax_join_community(request, community_id):
             return JsonResponse({"success": False, "error": "An internal error occurred."}, status=500)
     return JsonResponse({"success": False, "error": "Invalid request method."}, status=405)
 
-@csrf_exempt
 @login_required
 def ajax_leave_community(request, community_id):
     if request.method == "POST":
@@ -75,7 +72,7 @@ def ajax_add_community(request):
                     "contact_info": community.contact_info,
                     "fitness_spot_name": community.fitness_spot.name if community.fitness_spot else None,
                     "fitness_spot_id": community.fitness_spot.place_id if community.fitness_spot else None,
-                    "detail_url": reverse('community:community_detail', args=[community.id])
+                    "detail_url": reverse('community_detail', args=[community.id])
                 })
             except Exception as e:
                  print(f"Error adding community: {e}")
@@ -104,7 +101,7 @@ def ajax_edit_community(request, community_id):
                     "contact_info": community.contact_info,
                     "fitness_spot_name": community.fitness_spot.name if community.fitness_spot else None,
                     "fitness_spot_id": community.fitness_spot.place_id if community.fitness_spot else None,
-                    "detail_url": reverse('community:community_detail', args=[community.id])
+                    "detail_url": reverse('community_detail', args=[community.id])
                 })
             except Exception as e:
                  print(f"Error editing community {community_id}: {e}")
@@ -169,12 +166,38 @@ def community_list(request):
     }
     return render(request, 'community/community_list.html', context)
 
+@login_required
+def add_community(request):
+    if request.method == 'POST':
+        form = CommunityForm(request.POST)
+        if form.is_valid():
+            try:
+                community = form.save(commit=False)
+                community.save()
+                community.admins.add(request.user)
+                return redirect('community_list')
+            except Exception as e:
+                 print(f"Error adding community via non-AJAX: {e}") 
+    else:
+        form = CommunityForm()
+    return render(request, 'community/add_community.html', {'form': form})
+
 def community_detail(request, pk):
     community = get_object_or_404(
         Community.objects.select_related('fitness_spot').prefetch_related('members', 'admins'),
         pk=pk
     )
     return render(request, 'community/community_detail.html', {'community': community})
+
+def communities_by_place(request, place_id):
+    spot = get_object_or_404(FitnessSpot, place_id=place_id)
+    communities = Community.objects.filter(fitness_spot=spot).values('id', 'name')
+    return JsonResponse({'communities': list(communities)})
+
+def communities_by_spot(request, spot_id): 
+    spot = get_object_or_404(FitnessSpot, place_id=spot_id)
+    communities_db = Community.objects.filter(fitness_spot=spot).values('name', 'description', 'contact_info')
+    return JsonResponse({'communities': list(communities_db)})
 
 def communities_by_place_json(request, place_id):
     try:
