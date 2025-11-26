@@ -41,28 +41,35 @@ def home_view(request):
 
 def get_fitness_spots_data(request):
     """
-    Returns FitnessSpot data for a specific grid square, using grid-based caching.
+    Returns FitnessSpot data. If gridId is provided, it will return spots inside that grid.
+    Otherwise it falls back to returning all spots (cached) so the endpoint does not 400.
     """
     grid_id = request.GET.get('gridId')
-    if not grid_id:
-        return JsonResponse({'spots': [], 'error': 'gridId parameter is required'}, status=400)
 
-    cache_key = f"spots_grid_{grid_id}"
+    if grid_id:
+        cache_key = f"spots_grid_{grid_id}"
+    else:
+        cache_key = "spots_all"
+
     cached_data = cache.get(cache_key)
     if cached_data:
-        print(f"✅ GRID CACHE HIT! Serving grid {grid_id} from memory.")
+        source = f"grid {grid_id}" if grid_id else "all"
+        print(f"[CACHE HIT] Serving spots for {source} from memory.")
         return JsonResponse(cached_data)
 
-    print(f"❌ GRID CACHE MISS! Querying database for grid {grid_id}...")
-
-    bounds = get_grid_bounds(grid_id)
-    if not bounds:
-        return JsonResponse({'spots': [], 'error': 'Invalid gridId format'}, status=400)
-
-    spots_query = FitnessSpot.objects.filter(
-        latitude__gte=bounds['sw_lat'], latitude__lte=bounds['ne_lat'],
-        longitude__gte=bounds['sw_lng'], longitude__lte=bounds['ne_lng']
-    )
+    if grid_id:
+        bounds = get_grid_bounds(grid_id)
+        if not bounds:
+            return JsonResponse({'spots': [], 'error': 'Invalid gridId format'}, status=400)
+        spots_query = FitnessSpot.objects.filter(
+            latitude__gte=bounds['sw_lat'], latitude__lte=bounds['ne_lat'],
+            longitude__gte=bounds['sw_lng'], longitude__lte=bounds['ne_lng']
+        )
+        print(f"[CACHE MISS] Querying database for grid {grid_id}...")
+    else:
+        # Fallback path for clients that forgot to send gridId.
+        spots_query = FitnessSpot.objects.all()
+        print("[CACHE MISS] Querying database for all spots (no gridId provided)...")
     
     spots = spots_query.values(
         'name', 'latitude', 'longitude', 'address', 'rating', 
@@ -85,6 +92,7 @@ def get_fitness_spots_data(request):
     cache.set(cache_key, response_data, 60 * 60 * 24)
 
     return JsonResponse(response_data)
+
 
 def get_map_boundaries(request):
     """Calculates and returns the bounding box for all fitness spots."""
