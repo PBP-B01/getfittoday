@@ -11,7 +11,6 @@ from django.test.utils import override_settings
 
 User = get_user_model()
 
-# --- Model Tests ---
 class AdminModelTest(TestCase):
     """Tests the custom Admin model's password and signal logic."""
 
@@ -42,7 +41,6 @@ class AdminModelTest(TestCase):
         self.assertIsNotNone(default_admin)
         self.assertTrue(default_admin.check_password("Agil123"))
 
-# --- Admin Form Tests ---
 class AdminFormTest(TestCase):
     """Tests the custom AdminChangeForm logic."""
 
@@ -72,8 +70,7 @@ class AdminFormTest(TestCase):
         admin_instance = form.save()
         admin_instance.refresh_from_db()
         self.assertEqual(admin_instance.password, '') 
-        
-# --- View (AJAX Authentication) Tests ---
+
 class AuthViewTest(TestCase):
     """Tests the login_ajax and register_ajax view logic."""
     def setUp(self):
@@ -83,7 +80,6 @@ class AuthViewTest(TestCase):
         self.admin_user.set_password("adminpass")
         self.admin_user.save()
 
-    # --- Login/Logout Tests (Using self.client) ---
     def test_login_ajax_standard_user_success(self):
         """Test successful login for a standard Django user."""
         data = {'username': 'testuser', 'password': 'userpass'}
@@ -129,8 +125,6 @@ class AuthViewTest(TestCase):
         self.assertJSONEqual(response.content, {"ok": True, "redirect": "/"})
         self.assertIsNone(self.client.session.get('_auth_user_id')) 
 
-
-    # --- Registration Tests ---
     def test_register_ajax_success(self):
         """Test successful user registration."""
         new_username = "newuser"
@@ -153,8 +147,7 @@ class AuthViewTest(TestCase):
         json_response = response.json()
         self.assertFalse(json_response['ok'])
         self.assertIn('password', json_response['errors'])
-        
-# --- Helper Function Tests ---
+
 class HelperFunctionTest(TestCase):
     """Tests the _home_url and _login_url helper functions."""
     def test_home_url_no_reverse(self):

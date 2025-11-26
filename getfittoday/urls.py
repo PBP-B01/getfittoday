@@ -42,4 +42,5 @@ urlpatterns = [
     path("blognevent/", include("BlognEvent.urls", namespace="BlognEvent")),
     path('community/', include('community.urls')),
     path('event/', include(('event.urls', 'event'), namespace='event')),
+    path('auth/', include(('authentication.urls', 'authentication'), namespace='authentication')),
 ]

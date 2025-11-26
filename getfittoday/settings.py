@@ -32,7 +32,13 @@ if PRODUCTION:
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id", "wildan-anshari-get-fit-today.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id",
+    "wildan-anshari-get-fit-today.pbp.cs.ui.ac.id",
+    "10.0.2.2",
+]
 
 # --- Google Maps API Key ---
 if PRODUCTION:
@@ -53,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'home',
     'booking',
     'BlognEvent',
@@ -62,6 +69,7 @@ INSTALLED_APPS = [
     'store',
     'community',
     'event',
+    'authentication',
 ]
 
 REST_FRAMEWORK = {
@@ -77,6 +85,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -176,3 +185,10 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'None'

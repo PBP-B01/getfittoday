@@ -19,10 +19,6 @@ from django.shortcuts import redirect
 from django.urls import reverse
 
 def user_or_admin_required(view_func):
-    """
-    Decorator: Memerlukan login Django ATAU session admin.
-    Jika tidak, redirect ke login.
-    """
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         if request.user.is_authenticated or request.session.get('is_admin', False):
