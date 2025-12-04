@@ -1,8 +1,10 @@
-# community/urls.py
 from django.urls import path
 from . import views
 
+app_name = 'community'
+
 urlpatterns = [
+    # --- URL untuk Web (HTML/AJAX) ---
     path('', views.community_list, name='community_list'),
     path('list/', views.community_list, name='community_list'),
     path('add/', views.add_community, name='add_community'),
@@ -13,8 +15,13 @@ urlpatterns = [
     path('ajax/add_admin/<int:community_id>/', views.ajax_add_community_admin, name='ajax_add_community_admin'),
     path('ajax/join/<int:community_id>/', views.ajax_join_community, name='ajax_join_community'),
     path('ajax/leave/<int:community_id>/', views.ajax_leave_community, name='ajax_leave_community'),
-    path('api/communities/<str:spot_id>/', views.communities_by_spot, name='communities_by_spot'), 
-    path('by-place-json/<str:place_id>/', views.communities_by_place_json, name='communities_by_place_json'), 
-    path('api/featured/', views.featured_communities_api, name='featured_communities_api'),
+    path('by-place-json/<str:place_id>/', views.communities_by_place_json, name='communities_by_place_json'),
 
+    # --- API JSON untuk Flutter (PENTING!) ---
+    path('api/featured/', views.featured_communities_api, name='featured_communities_api'),
+    path('api/communities/', views.communities_json, name='communities_json'), # List Community
+    path('api/community/<int:pk>/', views.community_detail_json, name='community_detail_json'), # Detail Community
+    path('api/create/', views.create_community_flutter, name='create_community_flutter'), # Create Community
+    path('api/edit/<int:community_id>/', views.edit_community_flutter, name='edit_community_flutter'), # Edit Community
+    path('api/fitness-spots/', views.get_fitness_spots_json, name='get_fitness_spots_json'), # Dropdown Lokasi
 ]
