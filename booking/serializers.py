@@ -15,6 +15,9 @@ class BookingCreateSerializer(serializers.Serializer):
     resource_label = serializers.CharField(required=False, allow_blank=True)
     start_time = serializers.DateTimeField()
     end_time = serializers.DateTimeField()
+    price = serializers.DecimalField(
+        max_digits=10, decimal_places=2, required=False
+    )  
 
     def validate(self, attrs):
         start, end = attrs['start_time'], attrs['end_time']
@@ -41,6 +44,7 @@ class BookingCreateSerializer(serializers.Serializer):
                     is_active=True,
                     slot_minutes=60,
                     sport_type='other',
+                    price_per_hour=100,  
                 )
             )
 
@@ -49,10 +53,13 @@ class BookingCreateSerializer(serializers.Serializer):
         if timezone.is_naive(start): start = timezone.make_aware(start, tz)
         if timezone.is_naive(end):   end   = timezone.make_aware(end, tz)
 
+        price = validated.get('price', res.price_per_hour if hasattr(res, 'price_per_hour') else 100)
+
         return Booking.objects.create(
             user=user,
             resource=res,
             start_time=start,
             end_time=end,
             status=BookingStatus.CONFIRMED,
+            price=price,  
         )

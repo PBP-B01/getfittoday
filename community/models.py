@@ -1,4 +1,3 @@
-# community/models.py
 from django.db import models
 from django.conf import settings
 
@@ -51,6 +50,18 @@ class Community(models.Model):
 
     def __str__(self):
         return self.name
+
+    def is_admin(self, user):
+        """Check if user is admin of this community"""
+        if not user.is_authenticated:
+            return False
+        return self.admins.filter(id=user.id).exists()
+    
+    def is_member(self, user):
+        """Check if user is member of this community"""
+        if not user.is_authenticated:
+            return False
+        return self.members.filter(id=user.id).exists()
 
 class CommunityPost(models.Model):
     community = models.ForeignKey(Community, on_delete=models.deletion.CASCADE, related_name='posts')

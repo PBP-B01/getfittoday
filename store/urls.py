@@ -12,4 +12,7 @@ urlpatterns = [
     path('cart/checkout/', views.checkout, name='checkout'),
     path('product/<int:pk>/edit/', views.edit_product, name='edit_product'),
     path('product/<int:pk>/delete/', views.delete_product, name='delete_product'),
+    path('product/create/', views.create_product_ajax, name='create_product_ajax'),
+    path('product/<int:pk>/view/', views.view_product_detail, name='view_product_detail'),
+    path('api/featured/', views.featured_products_api, name='featured_products_api'),
 ]

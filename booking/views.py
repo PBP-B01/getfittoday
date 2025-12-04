@@ -14,8 +14,21 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Case, When, Value, IntegerField, BooleanField
 from django.db.models.functions import Coalesce
 from uuid import UUID
+from functools import wraps
+from django.shortcuts import redirect
+from django.urls import reverse
 
-@login_required(login_url="/login/")
+def user_or_admin_required(view_func):
+    @wraps(view_func)
+    def _wrapped_view(request, *args, **kwargs):
+        if request.user.is_authenticated or request.session.get('is_admin', False):
+            return view_func(request, *args, **kwargs)
+        else:
+            login_url = reverse('central:login')
+            return redirect(f'{login_url}?next={request.path}')
+    return _wrapped_view
+
+@user_or_admin_required
 def booking_page(request):
     raw = load_all_spots()
     spots = []
@@ -36,36 +49,51 @@ def booking_page(request):
             })
     return render(request, "booking_form.html", {"spots": spots})
 
-@login_required(login_url="/login/")
+@user_or_admin_required
 def my_bookings_page(request):
     tz = timezone.get_current_timezone()
     now = timezone.now()
 
-    base = (Booking.objects
-            .filter(user=request.user)
-            .select_related("resource")
-            .annotate(
-                status_prio=Case(
-                    When(status=BookingStatus.PENDING, then=Value(0)),
-                    default=Value(1), output_field=IntegerField(),
-                )
+    if request.session.get('is_admin', False):
+        base_query = Booking.objects.select_related("resource", "user").all()
+    else:
+        base_query = Booking.objects.filter(user=request.user).select_related("resource")
+
+    base = (
+        base_query
+        .annotate(
+            status_prio=Case(
+                When(status=BookingStatus.PENDING, then=Value(0)),
+                default=Value(1),
+                output_field=IntegerField(),
             )
-            .order_by("status_prio", "-start_time"))
+        )
+        .order_by("status_prio", "-start_time")
+    )
 
     items = []
     for b in base:
-        place = (getattr(b.resource, "name", None)
-                 or getattr(b.resource, "location_name", None)
-                 or getattr(b.resource, "place_id", ""))
+        place = (
+            getattr(b.resource, "name", None)
+            or getattr(b.resource, "location_name", None)
+            or getattr(b.resource, "place_id", "")
+        )
+
+        user_info = ""
+        if request.session.get('is_admin', False) and hasattr(b, 'user') and b.user:
+            user_info = f" ({b.user.username})"
+
         items.append({
             "id": str(b.id),
-            "place_name": place,
+            "place_name": place + user_info,
             "start": to_local(b.start_time, tz),
-            "end":   to_local(b.end_time, tz),
+            "end": to_local(b.end_time, tz),
             "status": b.status,
             "can_cancel": b.start_time > now and b.status in [BookingStatus.PENDING, BookingStatus.CONFIRMED],
         })
+
     return render(request, "my_bookings.html", {"items": items})
+
 
 def to_local(dt, tz):
     if not dt:

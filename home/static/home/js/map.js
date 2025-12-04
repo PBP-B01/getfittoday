@@ -13,6 +13,27 @@ const GRID_ORIGIN_LAT = -6.8;
 const GRID_ORIGIN_LNG = 106.5;
 const GRID_CELL_SIZE_DEG = 0.09;
 
+function setupCommunityModalClosing() {
+    const modal = document.getElementById('community-modal');
+    const closeBtn = document.getElementById('close-community-modal');
+
+    if (modal && closeBtn) {
+        const closeModal = () => {
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.classList.remove('flex'); 
+            modal.style.display = ''; 
+        };
+
+        closeBtn.addEventListener('click', closeModal);
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModal();
+            }
+        });
+    }
+}
+
 async function initMap() {
     try {
         let initialCoords = { lat: -6.370403, lng: 106.826946 };
@@ -43,12 +64,98 @@ async function initMap() {
         }
 
         await initializeMap(initialCoords, initialZoom, restrictionBounds);
+        
+        setupCommunityModalClosing();
+        
         if (position) {
             updateUserLocationMarker(position);
         }
 
+        fetchAndRenderCommunities(); 
+
+        fetchAndRenderProducts();
+
     } catch (error) {
         console.error("Failed to initialize map:", error);
+    }
+}
+
+async function fetchAndRenderProducts() {
+    const container = document.getElementById('product-scroll-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/store/api/featured/'); 
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.json();
+
+        if (data.products && data.products.length > 0) {
+            container.innerHTML = ''; 
+            data.products.forEach(product => {
+                const cardLink = document.createElement('a');
+                cardLink.href = product.view_url; 
+                cardLink.className = 'simple-product-card';
+
+                cardLink.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}">
+                    <div class="simple-product-card-content">
+                        <h3 class="simple-product-card-title" title="${product.name}">
+                            ${product.name}
+                        </h3>
+                        <p class="simple-product-card-price">${product.price_formatted}</p>
+                        <div class="simple-product-card-stats">
+                            <span>⭐ ${product.rating}</span>
+                            <span>${product.units_sold}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardLink);
+            });
+        } else {
+            container.innerHTML = '<p class="text-center muted px-4">Belum ada produk yang terdaftar.</p>';
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured products:", error);
+        container.innerHTML = '<p class="text-center muted px-4">Gagal memuat produk.</p>';
+    }
+}
+
+function filterSidebarSpots(query) {
+    const normalizedQuery = query.toLowerCase().trim();
+    const cardsContainer = document.getElementById('spot-cards-container');
+    if (!cardsContainer) {
+        console.error("Filter function: Card container not found!");
+        return;
+    }
+
+    const cards = cardsContainer.querySelectorAll('.spot-card');
+    const emptyState = document.getElementById('sidebar-empty-state');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const address = card.querySelector('p')?.textContent.toLowerCase() || '';
+
+        if (title.includes(normalizedQuery) || address.includes(normalizedQuery)) {
+            card.style.display = ''; 
+            visibleCount++;
+        } else {
+            card.style.display = 'none'; 
+        }
+    });
+
+    if (emptyState) {
+        const mapHasSpots = cards.length > 0;
+
+        if (mapHasSpots && visibleCount === 0) {
+            emptyState.textContent = 'No spots match your search in this area.';
+            emptyState.classList.remove('hidden');
+        } else if (!mapHasSpots) {
+            emptyState.textContent = 'No Sport Centers spots found in this area. Try panning or zooming the map.';
+        } else {
+            emptyState.classList.add('hidden');
+        }
     }
 }
 
@@ -68,7 +175,7 @@ async function initializeMap(center, zoom, restriction) {
     });
     
     infoWindow = new google.maps.InfoWindow({
-        pixelOffset: new google.maps.Size(0, -10), 
+        pixelOffset: new google.maps.Size(0, -0), 
     });
 
     google.maps.event.addListener(infoWindow, 'domready', () => {
@@ -99,7 +206,14 @@ async function initializeMap(center, zoom, restriction) {
     document.getElementById('sidebar-toggle-btn').addEventListener('click', () => {
         document.body.classList.toggle('sidebar-visible');
     });
-    
+
+    const sidebarSearch = document.getElementById('sidebar-spot-search');
+    if (sidebarSearch) {
+        sidebarSearch.addEventListener('input', (e) => {
+            filterSidebarSpots(e.target.value);
+        });
+    }
+
     createCenterOnMeButton();
 }
 
@@ -131,13 +245,14 @@ async function updateSpotsForView(map) {
 }
 
 async function fetchGridData(gridId) {
-    console.log(`Fetching grid ${gridId} from server...`);
-    const url = `/api/fitness-spots/?gridId=${gridId}`;
+    console.log(`Fetching grid ${gridId} from server using DB/Cache view...`); 
+    const url = `/api/fitness-spots/?gridId=${gridId}`; 
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         clientGridCache[gridId] = data;
+        console.log(`Successfully fetched grid ${gridId} (may have been Django cached)`); 
         return data;
     } catch (error) {
         console.error(`Failed to fetch data for grid ${gridId}:`, error);
@@ -181,15 +296,21 @@ async function renderSpots(visibleGridIds) {
 
     const emptyState = document.getElementById('sidebar-empty-state');
     if (totalSpotsRendered === 0) {
-        emptyState.classList.remove('hidden');
+         emptyState.textContent = 'No Sport Centers spots found in this area. Try panning or zooming the map.';
+         emptyState.classList.remove('hidden');
     } else {
-        emptyState.classList.add('hidden');
+         emptyState.classList.add('hidden');
     }
 
     if (currentActiveCardId && document.getElementById(`card-${currentActiveCardId}`)) {
         highlightSpotCard(currentActiveCardId);
     }
+
+    const currentQuery = document.getElementById('sidebar-spot-search')?.value || '';
+    filterSidebarSpots(currentQuery);
 }
+
+
 
 function showSpotDetails(spot, shouldZoom = false) {
     const marker = markers[spot.place_id];
@@ -251,7 +372,8 @@ async function updateUserLocationMarker(position) {
 
 function createCenterOnMeButton() {
     const controlButton = document.createElement("button");
-    controlButton.className = 'custom-map-control-button';
+    controlButton.className = 'map-top-right-button'; 
+    controlButton.id = 'center-on-me-btn'; 
     controlButton.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24"><path d="M12 8c-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4-1.79-4-4-4zm8.94 3c-.46-4.17-3.77-7.48-7.94-7.94V1h-2v2.06C6.83 3.52 3.52 6.83 3.06 11H1v2h2.06c.46 4.17 3.77 7.48 7.94 7.94V23h2v-2.06c4.17-.46 7.48-3.77 7.94-7.94H23v-2h-2.06zM12 19c-3.87 0-7-3.13-7-7s3.13-7 7-7 7 3.13 7 7-3.13 7-7 7z"/></svg>`;
     controlButton.title = "Center map on my location";
 
@@ -267,7 +389,12 @@ function createCenterOnMeButton() {
         }
     });
 
-    map.controls[google.maps.ControlPosition.RIGHT_BOTTOM].push(controlButton);
+    const mapControlsContainer = document.getElementById('map-controls-container');
+    const sidebarBtn = document.getElementById('sidebar-toggle-btn'); 
+    
+    if (mapControlsContainer && sidebarBtn) {
+        mapControlsContainer.insertBefore(controlButton, sidebarBtn);
+    } 
 }
 
 function highlightSpotCard(placeId) {
@@ -338,10 +465,12 @@ function toggleFullScreen() {
 }
 
 async function fetchMapBoundaries() {
+    console.log("Fetching map boundaries using DB/Cache view..."); 
     try {
-        const response = await fetch('/api/map-boundaries/');
+        const response = await fetch('/api/map-boundaries/'); 
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
+        console.log("Successfully fetched map boundaries (may have been Django cached)");
         return (data && typeof data.north === 'number') ? data : null;
     } catch (error) {
         console.error('Failed to fetch map boundaries:', error);
@@ -406,7 +535,14 @@ function createInfoContent(spot) {
             ${ratingHtml}
             
             <div class="mt-3 text-center">
-                <button class="lihat-komunitas-btn" style="background-color: var(--accent-yellow); color: var(--ink-strong); font-weight: 600; border-radius: 6px; padding: 6px 12px; font-size: 0.85rem; transition: background 0.2s;">
+                <button class="lihat-komunitas-btn" 
+                        style="background-color: var(--teal-1); 
+                               color: #fff; 
+                               font-weight: 600; 
+                               border-radius: 6px; 
+                               padding: 6px 12px; 
+                               font-size: 0.85rem; 
+                               transition: background 0.2s;">
                     🔗 Lihat Komunitas di Sini
                 </button>
             </div>
@@ -415,6 +551,9 @@ function createInfoContent(spot) {
 
     const button = div.querySelector('.lihat-komunitas-btn');
     if (button) {
+        button.onmouseover = function() { this.style.backgroundColor = 'var(--teal-2)'; };
+        button.onmouseout = function() { this.style.backgroundColor = 'var(--teal-1)'; };
+
         button.addEventListener('click', () => {
             const modal = document.getElementById('community-modal');
             const modalContent = document.getElementById('community-modal-content');
@@ -428,6 +567,7 @@ function createInfoContent(spot) {
             modal.classList.remove('opacity-0', 'pointer-events-none');
             modal.classList.add('flex');
             modal.style.display = 'flex'; 
+
 
             modalContent.innerHTML = "<p class='text-gray-500 italic'>Memuat komunitas...</p>";
 
@@ -462,6 +602,7 @@ function createInfoContent(spot) {
                             li.appendChild(link);
                             ul.appendChild(li);
                         });
+
                         modalContent.appendChild(ul);
                     }
                     else {
@@ -475,4 +616,42 @@ function createInfoContent(spot) {
         });
     }
     return div; 
+    
+}
+
+async function fetchAndRenderCommunities() {
+    const container = document.getElementById('community-scroll-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/community/api/featured/');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.json();
+
+        if (data.communities && data.communities.length > 0) {
+            container.innerHTML = ''; 
+            data.communities.forEach(community => {
+                const card = document.createElement('a');
+                card.href = community.detail_url; 
+                card.className = 'community-card';
+
+                const description = community.description ? 
+                    `<p class="card-text mb-2">${community.description}</p>` : 
+                    '<p class="card-text mb-2" style="min-height: 2.5em;"></p>';
+
+                card.innerHTML = `
+                    <h3 class="card-title">${community.name}</h3>
+                    ${description}
+                    <p class="card-subline">📍 ${community.fitness_spot_name}</p>
+                `;
+                container.appendChild(card);
+            });
+        } else {
+            container.innerHTML = '<p class="text-center muted px-4">Belum ada komunitas yang terdaftar.</p>';
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured communities:", error);
+        container.innerHTML = '<p class="text-center muted px-4">Gagal memuat komunitas.</p>';
+    }
 }
