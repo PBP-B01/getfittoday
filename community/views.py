@@ -87,6 +87,10 @@ def ajax_add_community(request):
     return JsonResponse({"success": False, "error": "Invalid request method."}, status=405)
 
 @login_required
+def add_community(request):
+    return ajax_add_community(request)
+
+@login_required
 def ajax_edit_community(request, community_id):
     community = get_object_or_404(Community, id=community_id)
     if request.user not in community.admins.all():
