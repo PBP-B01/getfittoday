@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CommunityCategory, Community, CommunityPost
+from .models import Community, CommunityPost
 
 class CommunityPostInline(admin.TabularInline):
     model = CommunityPost
@@ -7,13 +7,6 @@ class CommunityPostInline(admin.TabularInline):
     fields = ('title', 'content')
     readonly_fields = ('created_at',)
     show_change_link = True 
-
-@admin.register(CommunityCategory)
-class CommunityCategoryAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
-    search_fields = ('name',)
-    prepopulated_fields = {'slug': ('name',)} 
-
 
 @admin.register(Community)
 class CommunityAdmin(admin.ModelAdmin):

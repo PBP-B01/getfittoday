@@ -1,5 +1,8 @@
 from django.urls import path
 from . import views
+from community.views import (
+    delete_community, promote_admin, # Import views baru
+)
 
 urlpatterns = [
     # --- URL untuk Web (HTML/AJAX) ---
@@ -22,4 +25,6 @@ urlpatterns = [
     path('api/create/', views.create_community_flutter, name='create_community_flutter'), # Create Community
     path('api/edit/<int:community_id>/', views.edit_community_flutter, name='edit_community_flutter'), # Edit Community
     path('api/fitness-spots/', views.get_fitness_spots_json, name='get_fitness_spots_json'), # Dropdown Lokasi
+    path('api/delete/<int:community_id>/', delete_community, name='delete_community_api'),
+    path('api/promote/<int:community_id>/', promote_admin, name='promote_admin_api'),
 ]

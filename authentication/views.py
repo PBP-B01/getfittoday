@@ -38,11 +38,12 @@ def login(request):
                     "username": user.username,
                     "status": True,
                     "message": "Login successful!",
+                    "is_staff": user.is_staff,
                 },
                 status=200,
             )
-
-        return JsonResponse(
+        else:
+            return JsonResponse(
             {
                 "status": False,
                 "message": "Login failed, account is disabled.",
