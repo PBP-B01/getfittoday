@@ -289,6 +289,11 @@ def create_community_flutter(request):
             else:
                 data = request.POST 
             
+            if "application/json" in request.content_type:
+                data = json.loads(request.body)
+            else:
+                data = request.POST 
+            
             name = data.get("name")
             short_description = data.get("short_description", "") 
             category = data.get("category", "General") 
@@ -299,7 +304,18 @@ def create_community_flutter(request):
             image_data = data.get("image")
 
             from home.models import FitnessSpot
+            fitness_spot_id = data.get("fitness_spot_id")
+            schedule = data.get("schedule")
+            image_data = data.get("image")
+
+            from home.models import FitnessSpot
             fitness_spot = FitnessSpot.objects.get(place_id=fitness_spot_id)
+
+            image_file = None
+            if image_data and isinstance(image_data, str) and ";base64," in image_data:
+                format, imgstr = image_data.split(';base64,') 
+                ext = format.split('/')[-1] 
+                image_file = ContentFile(base64.b64decode(imgstr), name=f"{name}_image.{ext}")
 
             image_file = None
             if image_data and isinstance(image_data, str) and ";base64," in image_data:
@@ -316,7 +332,14 @@ def create_community_flutter(request):
                 fitness_spot=fitness_spot,
                 schedule=schedule,
                 image=image_file
+                schedule=schedule,
+                image=image_file
             )
+
+            if request.user.is_authenticated:
+                new_community.admins.add(request.user)
+                new_community.members.add(request.user)
+                new_community.save()
 
             if request.user.is_authenticated:
                 new_community.admins.add(request.user)
@@ -327,7 +350,9 @@ def create_community_flutter(request):
 
         except Exception as e:
             print(f"Error: {e}")
+            print(f"Error: {e}")
             return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
 
     return JsonResponse({"status": "error", "message": "Method not allowed"}, status=401)
 
@@ -420,6 +445,9 @@ def edit_community_flutter(request, community_id):
             community.short_description = data.get("short_description", community.short_description)
             community.category = data.get("category", community.category)
             community.schedule = data.get("schedule", community.schedule)
+            community.short_description = data.get("short_description", community.short_description)
+            community.category = data.get("category", community.category)
+            community.schedule = data.get("schedule", community.schedule)
             
             fitness_spot_id = data.get("fitness_spot_id")
             if fitness_spot_id:
@@ -441,9 +469,14 @@ def edit_community_flutter(request, community_id):
                     print(f"❌ Gagal update gambar: {img_error}")
 
             community.save()
+            print("✅ Berhasil simpan perubahan!")
+            
             return JsonResponse({"status": "success", "message": "Komunitas berhasil diupdate!"}, status=200)
 
         except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print(f"❌ ERROR FATAL DI EDIT: {e}")
             return JsonResponse({"status": "error", "message": str(e)}, status=500)
             
     return JsonResponse({"status": "error", "message": "Method not allowed"}, status=401)
