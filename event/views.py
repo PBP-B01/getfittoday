@@ -8,6 +8,12 @@ from django.db.models import Q
 import json
 from .models import Event
 from community.models import Community
+import json
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+from .models import Community, Event
+from django.utils.dateparse import parse_datetime
 
 
 def event_list(request):
@@ -376,5 +382,191 @@ def community_events_api(request, community_id):
         return JsonResponse({
             'success': False,
             'error': str(e)
+<<<<<<< HEAD
 >>>>>>> master
         }, status=500)
+=======
+        }, status=500)
+
+# 1. API untuk Dropdown Komunitas (Hanya yang dia jadi Admin)
+@login_required
+def get_user_admin_communities(request):
+    # Ambil komunitas dimana user terdaftar sebagai admin
+    # Asumsi: Ada relasi ManyToMany 'admins' di model Community
+    communities = Community.objects.filter(admins=request.user).values('id', 'name')
+    
+    return JsonResponse({
+        'status': 'success',
+        'communities': list(communities)
+    })
+
+@csrf_exempt
+def create_event_flutter(request):
+    if request.method == 'POST':
+        try:
+            # 1. Pastikan User sudah Login
+            # (Jika session mati/belum login, request.user akan AnonymousUser dan bakal error saat save)
+            if not request.user.is_authenticated:
+                return JsonResponse({"status": "error", "message": "Anda harus login terlebih dahulu."}, status=401)
+
+            data = json.loads(request.body)
+            
+            print("DATA DITERIMA:", data) # Debugging
+
+            # 2. Ambil Data Dasar
+            name = data.get("name")
+            description = data.get("description")
+            date_str = data.get("date")
+            location = data.get("location")
+            community_id = data.get("community_id")
+
+            # 3. Validasi Data Wajib
+            if not all([name, description, date_str, location, community_id]):
+                return JsonResponse({"status": "error", "message": "Semua field wajib diisi!"}, status=400)
+
+            # 4. Ambil Object Community dari ID
+            try:
+                community_obj = Community.objects.get(id=community_id)
+            except Community.DoesNotExist:
+                return JsonResponse({"status": "error", "message": "Komunitas tidak ditemukan"}, status=404)
+
+            # 5. Konversi Tanggal (Format dari Flutter: "2025-12-13 17:08:00")
+            try:
+                date_obj = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
+            except ValueError:
+                return JsonResponse({"status": "error", "message": "Format tanggal salah"}, status=400)
+
+            # 6. SIMPAN KE DATABASE (Ini Bagian Kritisnya)
+            new_event = Event.objects.create(
+                created_by=request.user,  # <--- Sesuai model kamu: 'created_by'
+                community=community_obj,  # <--- Sesuai model kamu: butuh object, bukan ID
+                name=name,
+                description=description,
+                date=date_obj,
+                location=location,
+            )
+
+            new_event.save()
+
+            return JsonResponse({"status": "success", "message": "Event berhasil dibuat!"}, status=200)
+
+        except Exception as e:
+            print("❌ ERROR SAAT SAVE:", str(e))
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+    return JsonResponse({"status": "error", "message": "Metode harus POST"}, status=405)
+
+def show_event_api(request):
+    # Ambil semua event, urutkan dari yang terbaru
+    events = Event.objects.all().order_by('-date')
+    
+    data = []
+    for event in events:
+        # Cek apakah user yang request adalah pemilik/admin
+        is_creator = request.user == event.created_by
+        is_community_admin = event.community.is_admin(request.user) if request.user.is_authenticated else False
+        is_joined = event.user_is_participant(request.user) if request.user.is_authenticated else False
+        
+        data.append({
+            "id": event.id,
+            "name": event.name,
+            "description": event.description,
+            "date": event.date.strftime("%Y-%m-%d %H:%M:%S"), # Format string
+            "location": event.location,
+            "community_name": event.community.name,
+            "participant_count": event.participant_count(),
+            "can_edit": is_creator or is_community_admin, # Logic tombol Edit
+            "is_active": event.is_ongoing() or event.registration_open(), # Logic status
+            "is_joined": is_joined,
+        })
+        
+    return JsonResponse(data, safe=False)
+
+@csrf_exempt
+def join_event_flutter(request, event_id):
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({"status": "error", "message": "Harap login dulu."}, status=401)
+            
+        try:
+            event = Event.objects.get(id=event_id)
+            
+            # Cek apakah user sudah join?
+            if event.participants.filter(id=request.user.id).exists():
+                return JsonResponse({"status": "error", "message": "Anda sudah join event ini!"}, status=400)
+                
+            # LOGIKA JOIN:
+            event.participants.add(request.user)
+            return JsonResponse({"status": "success", "message": "Berhasil join event!"}, status=200)
+            
+        except Event.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Event tidak ditemukan."}, status=404)
+
+    return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+
+@csrf_exempt
+def leave_event_flutter(request, event_id):
+    if request.method == 'POST':
+        if not request.user.is_authenticated:
+            return JsonResponse({"status": "error", "message": "Harap login dulu."}, status=401)
+            
+        try:
+            event = Event.objects.get(id=event_id)
+            
+            # Cek apakah user memang peserta?
+            if not event.participants.filter(id=request.user.id).exists():
+                return JsonResponse({"status": "error", "message": "Anda belum join event ini."}, status=400)
+                
+            # LOGIKA LEAVE:
+            event.participants.remove(request.user)
+            return JsonResponse({"status": "success", "message": "Berhasil keluar dari event."}, status=200)
+            
+        except Event.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Event tidak ditemukan."}, status=404)
+
+    return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+
+@csrf_exempt
+def edit_event_flutter(request, event_id):
+    if request.method == 'POST':
+        try:
+            event = Event.objects.get(id=event_id)
+            data = json.loads(request.body)
+            
+            # Cek apakah user berhak edit (Admin/Creator)
+            # Sesuaikan logic ini dengan model kamu
+            # if event.created_by != request.user: 
+            #    return JsonResponse({"status": "error", "message": "Tidak ada izin"}, status=403)
+
+            # Update Field
+            event.name = data.get("name", event.name)
+            event.description = data.get("description", event.description)
+            event.location = data.get("location", event.location)
+            
+            # Update Tanggal (Perlu parsing ulang)
+            if "date" in data:
+                event.date = datetime.strptime(data["date"], "%Y-%m-%d %H:%M:%S")
+
+            event.save()
+            
+            return JsonResponse({"status": "success", "message": "Event berhasil diupdate!"}, status=200)
+
+        except Event.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Event tidak ditemukan"}, status=404)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+    return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+
+@csrf_exempt
+def delete_event_flutter(request, event_id):
+    if request.method == 'POST':
+        try:
+            event = Event.objects.get(id=event_id)
+            event.delete()
+            return JsonResponse({"status": "success", "message": "Event berhasil dihapus!"}, status=200)
+        except Event.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Event tidak ditemukan"}, status=404)
+    
+    return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+>>>>>>> 6095427 (Integrasi community dan community event (django))

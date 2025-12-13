@@ -36,7 +36,10 @@ if PRODUCTION:
     CSRF_COOKIE_SECURE = True     # Send CSRF cookie only over HTTPS
     CSRF_TRUSTED_ORIGINS = [
         'https://samuel-indriano-get-fit-today.pbp.cs.ui.ac.id',
-        'https://wildan-anshari-get-fit-today.pbp.cs.ui.ac.id' # Add your domain(s) here
+        'https://wildan-anshari-get-fit-today.pbp.cs.ui.ac.id',
+        "http://localhost",
+        "http://127.0.0.1",
+        "http://localhost:65130",
     ]
 else:
     DEBUG = True
@@ -189,3 +192,16 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
+
+CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_CREDENTIALS = True
+CSRF_COOKIE_SECURE = not DEBUG
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SAMESITE = 'Lax'
+
+# Base url to serve media files
+MEDIA_URL = '/media/'
+
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
