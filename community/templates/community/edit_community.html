@@ -1,37 +1,399 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Edit {{ community.name }} | GetFit.Today{% endblock %}
+{% block title %}
+    {% if form.instance.pk %}Edit Community{% else %}Create Community{% endif %}
+{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+    :root {
+        --primary: #0E5A64;
+        --primary-dark: #07434B;
+        --on-primary: #FFFFFF;
+        --headline: #1B2B5A;
+        --gradient-top: #EAF2FF;
+        --gradient-bottom: #BFD6F2;
+        --card-bg: #FFFFFF;
+        --card-border: #C8DDF6;
+        --card-border-thick: #DDE7FF;
+        --muted-text: #6B7A99;
+        --accent-yellow: #FFC107;
+        --accent-yellow-dark: #E0A106;
+        --panel-bg: #3A5F9E;
+        --panel-text: #EAF2FF;
+        --input-bg: #F8FBFF;
+        --cancel-red: #E74C3C;
+        --cancel-red-dark: #C0392B;
+    }
+
+    body {
+        min-height: 100vh;
+        font-family: 'Poppins', sans-serif;
+        background: radial-gradient(ellipse 1200px 600px at 15% 6%, rgba(255,255,255,0.6), transparent 70%),
+                    linear-gradient(180deg, var(--gradient-top), var(--gradient-bottom)) !important;
+    }
+
+    .form-container {
+        max-width: 1200px; 
+        margin: 0 auto;
+        padding: 40px 20px;
+    }
+
+    .back-btn {
+        display: inline-block;
+        padding: 10px 20px;
+        background: var(--primary);
+        color: var(--on-primary);
+        text-decoration: none;
+        border-radius: 8px;
+        margin-bottom: 30px;
+        font-weight: 600;
+        transition: all 0.2s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .back-btn:hover {
+        background-color: var(--primary-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        color: white;
+    }
+
+    .page-title {
+        color: var(--headline);
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 30px;
+    }
+
+    .form-card {
+        background: var(--card-bg);
+        border: 2px solid var(--card-border);
+        border-radius: 12px;
+        padding: 30px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        position: relative;
+    }
+    .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 8px;
+        color: var(--headline);
+    }
+    .form-group input[type="text"], 
+    .form-group textarea, 
+    .form-group select {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--card-border);
+        border-radius: 8px;
+        font-size: 14px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        background: var(--input-bg); 
+        color: #0B2E55;
+        outline: none;
+        font-family: 'Poppins', sans-serif;
+    }
+    .form-group input:focus, 
+    .form-group textarea:focus, 
+    .form-group select:focus {
+        outline: none;
+        border-color: var(--accent-yellow);
+        box-shadow: 0 0 0 3px #9EC5FF80;
+    }
+
+    .help-text {
+        font-size: 0.85rem;
+        color: var(--muted-text);
+        margin-top: 6px;
+        line-height: 1.4;
+    }
+
+    .image-upload-box {
+        width: 100%;
+        height: 200px;
+        border: 2px dashed var(--card-border);
+        border-radius: 8px;
+        background-color: var(--input-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        transition: all 0.2s;
+    }
+    .image-upload-box:hover {
+        border-color: var(--accent-yellow);
+        background-color: #fff;
+    }
+    .preview-img { width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; }
+
+    .custom-dropdown-options {
+        position: absolute; top: 100%; left: 0; right: 0;
+        background: white; border: 2px solid var(--card-border); border-top: none;
+        border-radius: 0 0 8px 8px; max-height: 250px; overflow-y: auto;
+        z-index: 50; display: none; box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    .custom-option { padding: 10px 14px; cursor: pointer; color: #0B2E55; transition: background 0.1s; font-size: 14px; }
+    .custom-option:hover { background-color: #FFF9E6; border-left: 3px solid var(--accent-yellow); }
+    .custom-option.selected { background-color: #E0F7FA; font-weight: 600; color: var(--primary); }
+    .no-result { padding: 10px 14px; color: var(--muted-text); font-style: italic; font-size: 14px; }
+
+    .button-group {
+        margin-top: 30px;
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+    button[type="submit"] {
+        background-color: var(--accent-yellow);
+        color: #1B2B5A;
+        padding: 12px 32px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    button[type="submit"]:hover {
+        background-color: var(--accent-yellow-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    }
+    button[type="submit"]:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+    .cancel-btn {
+        display: inline-block;
+        padding: 12px 32px;
+        background: var(--cancel-red);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: 600;
+        transition: all 0.2s;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
+    .cancel-btn:hover {
+        background-color: var(--cancel-red-dark);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        color: white;
+    }
+</style>
+{% endblock %}
 
 {% block content %}
-<section class="bg-white text-blue-900 rounded-2xl shadow-lg p-8 max-w-3xl mx-auto">
-  <h1 class="text-3xl font-bold mb-6">Edit Komunitas: {{ community.name }}</h1>
+<div class="form-container">
+    
+    <a href="{% url 'community_list' %}" class="back-btn">← Back</a>
+    <h1 class="page-title">{% if form.instance.pk %}Edit Community{% else %}Create New Community{% endif %}</h1>
 
-  <form method="POST" enctype="multipart/form-data" class="space-y-4">
-    {% csrf_token %}
-    {{ form.non_field_errors }}
+    <div class="form-card">
+        <form id="communityForm" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
 
-    {% for field in form %}
-      <div>
-        <label class="block font-semibold mb-1">{{ field.label }}</label>
-        {{ field }}
-        {% if field.help_text %}
-          <p class="text-gray-500 text-sm">{{ field.help_text }}</p>
-        {% endif %}
-        {% for error in field.errors %}
-          <p class="text-red-500 text-sm">{{ error }}</p>
-        {% endfor %}
-      </div>
-    {% endfor %}
+            <div class="form-group">
+                <label>Community Profile Photo</label>
+                <div class="image-upload-box" onclick="document.getElementById('id_image').click()">
+                    <img id="image-preview" 
+                         src="{% if form.instance.image %}{{ form.instance.image.url }}{% endif %}" 
+                         class="preview-img {% if not form.instance.image %}hidden{% endif %}">
+                    
+                    <div id="image-placeholder" class="text-center {% if form.instance.image %}hidden{% endif %}">
+                        <svg class="w-10 h-10 text-[#6B7A99] mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                        <span class="text-sm font-semibold text-[#6B7A99]">Tap to upload photo</span>
+                    </div>
+                </div>
+                <input type="file" name="image" id="id_image" accept="image/*" class="hidden" onchange="previewImage(event)">
+            </div>
 
-    <button type="submit" 
-            class="bg-yellow-400 text-blue-900 px-6 py-2 rounded-lg font-semibold hover:bg-yellow-300 transition mt-4">
-      Simpan Perubahan
-    </button>
-    <a href="{% url 'community:community_detail' community.pk %}" 
-       class="ml-4 bg-gray-300 text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-200 transition">
-      Batal
-    </a>
-  </form>
-</section>
+            <div class="form-group">
+                <label>Community Name</label>
+                {{ form.name }}
+            </div>
+
+            <div class="form-group">
+                <label>Tagline (Short Description)</label>
+                {{ form.short_description }}
+                <div class="help-text" style="background-color: #FFF9E6; padding: 12px; border-radius: 8px; border: 1px solid var(--accent-yellow);">
+                    <p style="font-size: 0.8rem; color: #6B7A99; margin: 0;">Example: <em>Casual Sunday Runners Jakarta</em></p>
+                </div>
+            </div>
+
+            <div class="form-group" id="wrapper-category">
+                <label>Sport Category</label>
+                <input type="text" id="search-category" placeholder="Search category (e.g. Futsal, Yoga)..." autocomplete="off">
+                <div id="options-category" class="custom-dropdown-options"></div>
+                <div class="absolute right-4 top-[45px] pointer-events-none text-gray-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </div>
+                <div class="hidden">{{ form.category }}</div>
+            </div>
+
+            <div class="form-group">
+                <label>Full Description</label>
+                {{ form.description }}
+            </div>
+
+            <div class="form-group">
+                <label>Contact (WA / Instagram)</label>
+                {{ form.contact_info }}
+            </div>
+
+            <div class="form-group">
+                <label>Training Schedule</label>
+                {{ form.schedule }}
+                <div class="help-text" style="background-color: #FFF9E6; padding: 12px; border-radius: 8px; border: 1px solid var(--accent-yellow);">
+                    <p style="margin-bottom: 4px; color: #1B2B5A; font-weight: 600; font-size: 0.85rem;">Format: <code>Day Time - Activity Name</code></p>
+                    <p style="font-size: 0.8rem; color: #6B7A99; margin: 0;">Example: <em>Monday 19.00-20.00 - Night Run</em></p>
+                    <p style="font-size: 0.8rem; color: #0E5A64; font-weight: 500;">💡 Tip: Press <strong>Enter</strong> to add a new line for multiple sessions.</p>
+                </div>
+            </div>
+
+            <div class="form-group" id="wrapper-fitness_spot">
+                <label>Training Location (Fitness Spot)</label>
+                <input type="text" id="search-fitness_spot" placeholder="Search location..." autocomplete="off">
+                <div id="options-fitness_spot" class="custom-dropdown-options"></div>
+                <div class="absolute right-4 top-[45px] pointer-events-none text-gray-400">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </div>
+                <div class="hidden">{{ form.fitness_spot }}</div>
+            </div>
+
+            <div class="button-group">
+                <button type="submit" id="submitBtn">
+                    {% if form.instance.pk %}Update Community{% else %}Create Community{% endif %}
+                </button>
+                <a href="{% url 'community_list' %}" class="cancel-btn">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div id="toast" class="hidden fixed bottom-6 right-6 z-[1000] bg-[#0E5A64] text-white px-5 py-3 rounded-xl shadow-xl transform transition-all duration-300 translate-y-10 opacity-0 flex items-center gap-3 font-bold">
+    <span id="toast-msg">Notification</span>
+</div>
+
+<script>
+    // 1. Preview Image
+    function previewImage(event) {
+        const reader = new FileReader();
+        reader.onload = function(){
+            document.getElementById('image-preview').src = reader.result;
+            document.getElementById('image-preview').classList.remove('hidden');
+            document.getElementById('image-placeholder').classList.add('hidden');
+        };
+        if(event.target.files[0]) reader.readAsDataURL(event.target.files[0]);
+    }
+
+    // 2. Searchable Dropdown Logic
+    function setupSearchableDropdown(fieldId) {
+        const realSelect = document.getElementById(`id_${fieldId}`); 
+        const searchInput = document.getElementById(`search-${fieldId}`);
+        const optionsContainer = document.getElementById(`options-${fieldId}`);
+        const wrapper = document.getElementById(`wrapper-${fieldId}`);
+
+        if (!realSelect) return;
+
+        const options = Array.from(realSelect.options).map(opt => ({
+            value: opt.value, text: opt.text
+        }));
+
+        const currentVal = realSelect.value;
+        if(currentVal) {
+            const found = options.find(o => o.value === currentVal);
+            if(found) searchInput.value = found.text;
+        }
+
+        function renderOptions(filterText = '') {
+            optionsContainer.innerHTML = '';
+            const filtered = options.filter(opt => opt.text.toLowerCase().includes(filterText.toLowerCase()));
+            
+            if (filtered.length === 0) {
+                optionsContainer.innerHTML = '<div class="no-result">Not found</div>';
+            } else {
+                filtered.forEach(opt => {
+                    const div = document.createElement('div');
+                    div.className = 'custom-option';
+                    if (opt.value === realSelect.value) div.classList.add('selected');
+                    div.textContent = opt.text;
+                    div.onclick = () => {
+                        realSelect.value = opt.value;
+                        searchInput.value = opt.text;
+                        optionsContainer.style.display = 'none';
+                    };
+                    optionsContainer.appendChild(div);
+                });
+            }
+            optionsContainer.style.display = 'block';
+        }
+
+        searchInput.addEventListener('focus', () => renderOptions(searchInput.value));
+        searchInput.addEventListener('input', (e) => renderOptions(e.target.value));
+        
+        document.addEventListener('click', function(e) {
+            if (!wrapper.contains(e.target)) optionsContainer.style.display = 'none';
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        setupSearchableDropdown('category');      
+        setupSearchableDropdown('fitness_spot');  
+    });
+
+    // 3. AJAX Submit Logic
+    const form = document.getElementById('communityForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault(); 
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = `Saving...`;
+
+        const formData = new FormData(form);
+
+        fetch(window.location.href, {
+            method: 'POST',
+            body: formData,
+            headers: { 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(r => r.json())
+        .then(d => {
+            if (d.success) {
+                showToast(d.message);
+                setTimeout(() => window.location.href = d.redirect_url, 1500);
+            } else {
+                alert("Error: " + (JSON.stringify(d.errors) || d.error || "Please check your inputs."));
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            }
+        })
+        .catch(error => {
+            console.error(error);
+            alert("Connection error occurred.");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        });
+    });
+
+    function showToast(msg) {
+        const t = document.getElementById('toast');
+        document.getElementById('toast-msg').innerText = msg;
+        t.classList.remove('hidden', 'translate-y-10', 'opacity-0');
+        setTimeout(() => { t.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => t.classList.add('hidden'), 300); }, 3000);
+    }
+</script>
 {% endblock %}
