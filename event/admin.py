@@ -1,10 +1,5 @@
 from django.contrib import admin
-<<<<<<< HEAD
-
-# Register your models here.
-=======
 from .models import Event
-
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
@@ -50,4 +45,3 @@ class EventAdmin(admin.ModelAdmin):
         return obj.registration_open()
     registration_status.short_description = 'Registration Open'
     registration_status.boolean = True
->>>>>>> master

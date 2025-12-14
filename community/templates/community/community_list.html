@@ -1,481 +1,274 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block title %}Daftar Komunitas{% endblock %}
-{% block body_class %}community-theme{% endblock %}
+
+{% block title %}Community List{% endblock %}
+
+{% block body_class %}home-theme font-sans{% endblock %}
 
 {% block content %}
+<div class="w-full bg-[#0E5A64] pt-12 pb-32 px-4 rounded-b-[3rem] shadow-lg relative z-0">
+    <div class="max-w-4xl mx-auto text-center space-y-6">
+        
+        <h1 class="text-4xl md:text-5xl font-extrabold text-white tracking-tight drop-shadow-md">
+            Community
+        </h1>
+        
+        <div class="flex flex-col md:flex-row items-center justify-center gap-4 w-full max-w-2xl mx-auto">
+            <div class="relative w-full">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+                <input type="text" id="searchInput" 
+                       class="w-full pl-11 pr-4 py-3.5 rounded-2xl border-none outline-none focus:ring-4 focus:ring-teal-400/30 text-gray-700 shadow-xl placeholder-gray-400 text-sm" 
+                       placeholder="Search community name or sport...">
+            </div>
 
-<div class="bg-gradient-to-b flex items-center justify-center rounded-b-3xl mb-20">
-    <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold text-[var(--title)] tracking-wide drop-shadow-2xl">
-      COMMUNITY
-    </h1>
-</div>
-
-<div class="relative h-[40rem] w-full mb-16 z-[1]">
-  <img src="{% static 'community/image/community-hero.jpg' %}" alt="Community Banner"
-       class="w-full h-full object-cover rounded-b-3xl shadow-lg object-top">
-</div>
-
-<div class="max-w-6xl mx-auto px-4">
-  {% if request.user.is_authenticated %}
-  <div class="mb-6 text-right">
-    <button id="add-community-btn" class="btn-accent">➕ Tambah Komunitas</button>
-  </div>
-  {% endif %}
-
-  <div id="community-cards" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-    {% for community in communities %}
-      <div class="community-card community-item cursor-pointer"
-           data-id="{{ community.id }}"
-           data-spot-id="{{ community.fitness_spot.place_id }}"
-           data-url="{% url 'community_detail' community.id %}">
-        <h3 class="card-title text-center">{{ community.name }}</h3>
-
-        {% if community.description %}
-          <p class="card-text mb-2">{{ community.description }}</p>
-        {% endif %}
-
-        <p class="card-subline">📍 {{ community.fitness_spot.name }}</p>
-
-        {% if community.contact_info %}
-          <p class="card-text mt-1">📞 {{ community.contact_info }}</p>
-        {% endif %}
-
-        {% if request.user in community.admins.all %}
-          <div class="abs-actions-right">
-            <button class="chip chip-accent edit-btn">Edit</button>
-            <button class="chip chip-danger delete-btn">Delete</button>
-          </div>
-          <div class="abs-actions-left">
-            <button class="chip chip-teal add-admin-btn" title="Add Admin">➕</button>
-          </div>
-        {% endif %}
-      </div>
-    {% empty %}
-      <p class="text-center muted col-span-3">Belum ada komunitas yang terdaftar.</p>
-    {% endfor %}
-  </div>
-</div>
-
-<div id="community-modal"
-     class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity duration-300 z-40">
-  <div class="modal-card relative">
-    <button id="close-community-modal" class="modal-close">&times;</button>
-    <h3 class="section-title mb-3">Komunitas di Lokasi Ini</h3>
-    <div id="community-modal-content"></div>
-  </div>
-</div>
-
-<div id="edit-modal"
-     class="fixed inset-0 bg-black/50 opacity-0 pointer-events-none flex items-center justify-center transition-opacity z-50">
-  <div class="modal-card relative">
-    <button id="close-edit-modal" class="modal-close">&times;</button>
-    <h3 class="section-title mb-5" id="edit-modal-title">Edit Komunitas</h3>
-
-    <form id="edit-form">
-      {% csrf_token %}
-      <input type="hidden" name="community_id" id="edit-id">
-
-      <div class="mb-4">
-        <label for="id_name" class="auth-label">Nama Komunitas</label>
-        {{ form.name }}
-      </div>
-
-      <div class="mb-4">
-        <label for="id_description" class="auth-label">Deskripsi</label>
-        {{ form.description }}
-      </div>
-
-      <div class="mb-4">
-        <label for="fitnessSpotSearchInput" class="auth-label">Fitness Spot</label>
-        <div class="relative">
-          <input id="fitnessSpotSearchInput" type="text" placeholder="Cari lokasi..." autocomplete="off" class="search-input">
-          <ul id="fitnessSpotList" class="suggestion-list hidden"></ul>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'add_community' %}" class="flex-shrink-0 w-12 h-12 bg-white/10 hover:bg-white/20 text-white border border-white/20 rounded-xl flex items-center justify-center backdrop-blur-sm transition-all shadow-md" title="Create Community">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/></svg>
+            </a>
+            {% endif %}
         </div>
-        {{ form.fitness_spot }}
-      </div>
 
-      <div class="mb-5">
-        <label for="id_contact_info" class="auth-label">Kontak</label>
-        {{ form.contact_info }}
-      </div>
+        <div class="inline-flex bg-white/10 p-1 rounded-xl backdrop-blur-md border border-white/10">
+            <button id="tab-all" onclick="switchFilter('all')" class="px-6 py-2 rounded-lg bg-white text-[#0E5A64] text-sm font-bold shadow-sm transition-all">
+                All Communities
+            </button>
+            <button id="tab-my" onclick="switchFilter('my')" class="px-6 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 text-sm font-bold transition-all">
+                My Communities
+            </button>
+        </div>
 
-      <div class="flex justify-end gap-3 pt-2">
-        <button type="button" id="close-edit-modal-btn" class="btn-muted">Batal</button>
-        <button type="submit" class="btn-teal">Simpan</button>
-      </div>
-    </form>
-  </div>
+    </div>
 </div>
 
-{{ all_fitness_spots_data|json_script:"fitness-spots-data" }}
+<div class="max-w-6xl mx-auto px-4 pb-20 relative z-10 -mt-20">
+    
+    <div id="community-cards" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {% for community in communities %}
+        <div id="card-{{ community.id }}" 
+             class="bg-white rounded-2xl p-5 border border-[#C8DDF6] shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)] transition-all duration-300 flex flex-col h-full community-item group"
+             data-name="{{ community.name|lower }}"
+             data-category="{{ community.category|lower }}"
+             data-is-member="{% if request.user in community.members.all or request.user in community.admins.all %}true{% else %}false{% endif %}">
+            
+            <div class="flex items-start gap-4 mb-4">
+                <div class="flex-shrink-0">
+                    <div class="w-16 h-16 rounded-full bg-[#EAF2FF] border border-[#C8DDF6] p-0.5 shadow-sm overflow-hidden group-hover:scale-105 transition-transform duration-300">
+                        {% if community.image %}
+                            <img src="{{ community.image.url }}" alt="{{ community.name }}" class="w-full h-full rounded-full object-cover">
+                        {% else %}
+                            <div class="w-full h-full rounded-full bg-[#EAF2FF] flex items-center justify-center text-[#6B7A99]">
+                                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/></svg>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="flex-grow min-w-0">
+                    <div class="flex justify-between items-start">
+                        <h3 class="text-lg font-bold text-[#1B2B5A] leading-tight truncate pr-2 group-hover:text-[#0E5A64] transition-colors" title="{{ community.name }}">{{ community.name }}</h3>
+                        
+                        {% if request.user in community.admins.all %}
+                        <div class="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
+                            <a href="{% url 'edit_community' community.id %}" class="p-1.5 bg-yellow-50 rounded-lg text-yellow-600 hover:bg-yellow-100 border border-yellow-100 transition-colors" title="Edit Community">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/></svg>
+                            </a>
+                            <button type="button" 
+                                    class="delete-trigger-btn p-1.5 bg-red-50 rounded-lg text-red-600 hover:bg-red-100 border border-red-100 transition-colors" 
+                                    title="Delete Community"
+                                    data-id="{{ community.id }}"
+                                    data-name="{{ community.name }}">
+                                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                            </button>
+                        </div>
+                        {% endif %}
+                    </div>
+                    
+                    <p class="text-xs text-[#6B7A99] line-clamp-2 mt-1 h-8 leading-snug">
+                        {% if community.short_description %}{{ community.short_description }}{% else %}{{ community.description }}{% endif %}
+                    </p>
+
+                    <div class="flex items-center gap-2 mt-3 text-xs font-semibold text-[#6B7A99]">
+                        <span class="flex items-center gap-1 bg-[#F3F4F6] px-2.5 py-1 rounded-lg border border-[#C8DDF6]">
+                            <svg class="w-3 h-3 text-[#6B7A99]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+                            {{ community.members.count }}
+                        </span>
+                        <span class="flex items-center gap-1 bg-[#F3F4F6] px-2.5 py-1 rounded-lg border border-[#C8DDF6]">
+                            <svg class="w-3 h-3 text-[#6B7A99]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                            {{ community.category }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-auto pt-2">
+                <a href="{% url 'community_detail' community.id %}" 
+                   class="block w-full py-2.5 rounded-xl border-[1.5px] border-[#0E5A64] text-[#0E5A64] text-sm font-bold text-center hover:bg-[#0E5A64] hover:text-white transition-all shadow-sm">
+                    View
+                </a>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-span-1 md:col-span-3 text-center py-20 text-[#6B7A99] bg-white rounded-3xl border border-[#C8DDF6] shadow-sm">
+            <p class="text-lg font-medium">No communities found.</p>
+            <p class="text-sm">Be the first to create one!</p>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div id="deleteModal" class="fixed inset-0 z-[999] hidden flex items-center justify-center">
+    <div class="absolute inset-0 bg-black/60 backdrop-blur-sm transition-opacity opacity-0" id="deleteBackdrop"></div>
+    <div class="bg-white rounded-2xl p-6 max-w-sm w-full mx-4 shadow-2xl transform scale-95 opacity-0 transition-all duration-300 relative z-10" id="deleteCard">
+        <div class="text-center">
+            <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4 text-red-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+            </div>
+            <h3 class="text-lg font-bold text-[#1B2B5A] mb-2">Delete Community?</h3>
+            <p class="text-[#6B7A99] text-sm mb-6">Are you sure you want to delete <span id="deleteModalName" class="font-bold text-gray-800"></span>? This action cannot be undone.</p>
+            <div class="flex gap-3">
+                <button id="cancelDeleteBtn" class="flex-1 py-2.5 rounded-xl border border-[#C8DDF6] text-[#6B7A99] font-bold hover:bg-[#F3F4F6] transition-colors">Cancel</button>
+                <button id="confirmDeleteBtn" class="flex-1 py-2.5 rounded-xl bg-red-600 text-white font-bold hover:bg-red-700 shadow-md transition-colors">Delete</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="toast" class="hidden fixed bottom-6 right-6 z-[1000] bg-[#0E5A64] text-white px-5 py-3 rounded-xl shadow-xl transform transition-all duration-300 translate-y-10 opacity-0 flex items-center gap-3">
+    <div class="bg-white/20 p-1 rounded-full">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+    </div>
+    <span id="toast-msg" class="font-medium text-sm">Notification</span>
+</div>
+
 {% endblock %}
 
 {% block extra_css %}
 {{ block.super }}
 <style>
-  :root{
-    --nav-bg:#0E5A64; --nav-bg-darker:#07434B; --nav-text:#FFFFFF;
-    --title:#1B2B5A; --bg-1:#EAF2FF; --bg-2:#BFD6F2;
-    --card-bg:#FFFFFF; --card-brd:#C8DDF6; --card-brd-strong:#DDE7FF;
-    --ink-weak:#6B7A99; --accent:#FFC107; --accent-dark:#E0A106;
-    --tile:#4E73B5; --tile-hover:#5E82C2; --ring:#9EC5FF80;
-  }
-
-  body.community-theme{
-    background:
-      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
-      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
-    color: var(--nav-text);
-  }
-  body.community-theme nav{
-    background-color: var(--nav-bg) !important;
-    color: var(--nav-text) !important;
-    border-radius: 0 !important;
-    box-shadow: 0 1px 0 rgba(0,0,0,.06);
-  }
-  body.community-theme nav a{ color: var(--nav-text) !important; }
-  body.community-theme nav a:hover{ opacity:.92; }
-
-  .community-card{
-    background: var(--card-bg);
-    border: 1px solid var(--card-brd);
-    border-radius: 16px;
-    padding: 18px;
-    box-shadow: 0 10px 24px rgba(13,43,63,.10), inset 0 1px 0 rgba(255,255,255,.65);
-    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    position: relative;
-  }
-  .community-card:hover{
-    transform: translateY(-3px);
-    box-shadow: 0 18px 36px rgba(13,43,63,.16);
-    border-color: var(--card-brd-strong);
-  }
-  .card-title{ color: var(--title); font-weight: 800; font-size: 1.15rem; margin-bottom: .4rem; }
-  .card-text{ color:#0B2E55; opacity:.9; }
-  .card-subline{ color:#0B2E55; font-weight:600; }
-
-  .abs-actions-right{ position:absolute; top:10px; right:10px; display:flex; gap:6px; }
-  .abs-actions-left{ position:absolute; top:10px; left:10px; }
-
-  .chip{
-    padding:.25rem .5rem; border-radius:10px; font-size:.8rem; font-weight:700; border:1px solid transparent;
-    box-shadow: 0 4px 10px rgba(0,0,0,.08);
-  }
-  .chip-accent{ background: var(--accent); color:#0B2E55; }
-  .chip-accent:hover{ background: var(--accent-dark); }
-  .chip-danger{ background:#DC2626; color:#fff; border-color:#B91C1C; }
-  .chip-danger:hover{ filter: brightness(1.05); }
-  .chip-teal{ background: var(--nav-bg); color:#fff; border-color: var(--nav-bg-darker); }
-  .chip-teal:hover{ filter: brightness(1.05); }
-
-  .modal-card{
-    background: var(--card-bg);
-    border: 1px solid var(--card-brd);
-    border-radius: 16px;
-    padding: 22px;
-    max-width: 560px; width: 100%;
-    color: #0B2E55;
-    box-shadow: 0 40px 80px rgba(13,43,63,.18), 0 12px 24px rgba(13,43,63,.12), inset 0 1px 0 rgba(255,255,255,.65);
-  }
-  .modal-close{
-    position:absolute; top:10px; right:12px; font-size:24px; line-height:1; color:#6B7A99;
-  }
-  .modal-close:hover{ color:#0B2E55; }
-
-  .section-title{ color: var(--title); font-weight: 800; font-size: clamp(18px, 2.4vw, 22px); }
-  .muted{ color: var(--ink-weak); }
-
-  .auth-label{ display:block; margin-bottom:.35rem; font-size:.9rem; color: #0B2E55; }
-  .search-input{
-    width:100%; padding:.6rem .75rem; border-radius:12px; background:#F8FBFF; color:#0B2E55;
-    border:1px solid var(--card-brd); outline:none;
-    box-shadow: 0 0 0 4px var(--tile);
-    transition: box-shadow .18s ease, border-color .18s ease;
-  }
-  .search-input:focus{
-    border-color: var(--card-brd-strong);
-    box-shadow: 0 0 0 4px var(--ring), 0 10px 22px rgba(13,43,63,.12);
-  }
-
-  .suggestion-list{
-    position:absolute; left:0; right:0; max-height:18rem; overflow:auto; z-index:9999;
-    background:#fff; color:#0B2E55; border:1px solid var(--card-brd);
-    border-radius:12px; margin-top:.25rem; box-shadow: 0 16px 36px rgba(13,43,63,.18);
-  }
-  .suggestion-list li{ padding:.5rem .75rem; cursor:pointer; }
-  .suggestion-list li:hover{ background:#F1F6FF; }
-  .suggestion-list li.active-suggestion{ background:#DBEAFF; }
-
-  .btn-accent{
-    display:inline-flex; align-items:center; justify-content:center;
-    padding:.6rem 1rem; border-radius:12px; font-weight:800; color:#0B2E55;
-    background: var(--accent); border:1px solid color-mix(in srgb, var(--accent) 90%, #000 0%);
-    box-shadow: 0 12px 28px rgba(224,161,6,.25);
-    transition: background .15s ease, transform .05s ease;
-  }
-  .btn-accent:hover{ background: var(--accent-dark); }
-  .btn-accent:active{ transform: translateY(1px); }
-
-  .btn-teal{
-    display:inline-flex; align-items:center; justify-content:center;
-    padding:.6rem 1rem; border-radius:12px; font-weight:700; color:#fff;
-    background: var(--nav-bg); border:1px solid var(--nav-bg-darker);
-    box-shadow: 0 12px 28px rgba(14,90,100,.25);
-    transition: filter .15s ease, transform .05s ease;
-  }
-  .btn-teal:hover{ filter: brightness(1.05); }
-  .btn-teal:active{ transform: translateY(1px); }
-
-  .btn-muted{
-    display:inline-flex; align-items:center; justify-content:center;
-    padding:.6rem 1rem; border-radius:12px; font-weight:700; color:#fff;
-    background:#6B7280; border:1px solid #4B5563; box-shadow: 0 8px 18px rgba(75,85,99,.25);
-  }
-  .btn-muted:hover{ filter: brightness(1.05); }
-
-  .community-card{ position:relative; padding-top:48px; }
-  .abs-actions-right,.abs-actions-left{
-    position:absolute; top:10px; display:flex; gap:6px;
-    opacity:0; pointer-events:none; transition:opacity .15s, transform .15s;
-    transform: translateY(-4px);
-  }
-  .abs-actions-right{ right:10px; }
-  .abs-actions-left{  left:10px;  }
-  .community-card:hover .abs-actions-right,
-  .community-card:hover .abs-actions-left{
-    opacity:1; pointer-events:auto; transform: translateY(0);
-  }
-
-  nav.site-nav { position: sticky; top: 0; z-index: 200; }
-
-  .nav-user { position: relative; }
-
-  .community-hero,
-  .community-hero .overlay,
-  .home-hero .overlay {
-    position: relative;
-    z-index: 1;
-  }
-
-  #userMenu .font-semibold, #mUserMenu .font-semibold {
-      color: rgb(0, 0, 0); 
-      opacity: 1;
-  }
-
-  #userMenu .text-red-600, #mUserMenu .text-red-600 {
-      color: red !important;
-  }
-
-  text-gray-800
-  #userMenu .px-4 .py-2, #mUserMenu .px-4 .py-2 {
-      color: red !important;
-  }
-
-  #userMenu a.text-red-600:hover, #mUserMenu a.text-red-600:hover {
-      background: rgb(255, 255, 255) !important;
-      color: rgb(139, 0, 0) !important;
-  }
+    :root{ --bg-1: #EAF2FF; --bg-2: #BFD6F2; --nav-text: #FFFFFF; }
+    body.home-theme {
+        background: radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%), linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+        min-height: 100vh; color: #1B2B5A;
+    }
 </style>
 {% endblock %}
 
 {% block extra_js %}
 {{ block.super }}
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-  const editModal = document.getElementById('edit-modal');
-  const editForm  = document.getElementById('edit-form');
-  const closeBtn  = document.getElementById('close-edit-modal');
-  const closeBtnAlt = document.getElementById('close-edit-modal-btn');
-  const cardsContainer = document.getElementById('community-cards');
-  const addBtn = document.getElementById('add-community-btn');
+    let currentFilter = 'all'; 
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.community-item');
+    const tabAll = document.getElementById('tab-all');
+    const tabMy = document.getElementById('tab-my');
 
-  function getCookie(name) {
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-      const cookies = document.cookie.split(';');
-      for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].trim();
-        if (cookie.substring(0, name.length + 1) === (name + '=')) {
-          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-          break;
-        }
-      }
+    function updateList() {
+        const term = searchInput.value.toLowerCase();
+
+        cards.forEach(card => {
+            const name = card.dataset.name;
+            const cat = card.dataset.category;
+            const isMember = card.dataset.isMember === 'true'; 
+
+            const matchesSearch = name.includes(term) || cat.includes(term);
+            
+            const matchesTab = (currentFilter === 'all') || (currentFilter === 'my' && isMember);
+
+            if (matchesSearch && matchesTab) {
+                card.style.display = "flex"; 
+            } else {
+                card.style.display = "none";
+            }
+        });
     }
-    return cookieValue;
-  }
-  const csrfToken = getCookie('csrftoken');
 
-  const fitnessSpotSearchInput = document.getElementById('fitnessSpotSearchInput');
-  const fitnessSpotList = document.getElementById('fitnessSpotList');
-  const realFitnessSpotInput = document.getElementById('id_fitness_spot');
+    searchInput.addEventListener('keyup', updateList);
 
-  let ALL_SPOTS_DATA = [];
-  const ALL_SPOTS_DATA_EL = document.getElementById('fitness-spots-data');
-  if (ALL_SPOTS_DATA_EL) {
-    try {
-      const jsonData = JSON.parse(ALL_SPOTS_DATA_EL.textContent.trim());
-      if (Array.isArray(jsonData)) ALL_SPOTS_DATA = jsonData;
-    } catch (e) { console.error("Failed to parse fitness spots JSON:", e); }
-  }
+    function switchFilter(type) {
+        currentFilter = type;
+        
+        const activeStyle = "px-6 py-2 rounded-lg bg-white text-[#0E5A64] text-sm font-bold shadow-sm transition-all";
+        const inactiveStyle = "px-6 py-2 rounded-lg text-white/80 hover:text-white hover:bg-white/10 text-sm font-bold transition-all";
 
-  let fitnessSpotActiveIdx = -1;
-  function renderFitnessSpotList(items) {
-    const valid = Array.isArray(items) ? items : [];
-    fitnessSpotList.innerHTML = valid.map((spot, i) => `
-      <li class="${i===fitnessSpotActiveIdx?'active-suggestion':''}"
-          data-id="${spot.place_id}" data-name="${spot.name||''}">
-        ${spot.name||'(No Name)'}
-      </li>
-    `).join('');
-    fitnessSpotList.classList.toggle('hidden', valid.length === 0);
-  }
-  function chooseFitnessSpot(li) {
-    if (!li) return;
-    fitnessSpotSearchInput.value = li.dataset.name || '';
-    realFitnessSpotInput.value   = li.dataset.id   || '';
-    fitnessSpotList.classList.add('hidden');
-    fitnessSpotActiveIdx = -1;
-  }
-  const debounce = (fn, ms) => { let t; return (...a)=>{ clearTimeout(t); t=setTimeout(()=>fn(...a), ms); }; };
-  const onFitnessSpotType = debounce(() => {
-    const q = (fitnessSpotSearchInput.value||'').trim().toLowerCase();
-    if (!q) { renderFitnessSpotList([]); return; }
-    const results = ALL_SPOTS_DATA.filter(s => s.name && s.name.toLowerCase().includes(q)).slice(0, 15);
-    fitnessSpotActiveIdx = -1; renderFitnessSpotList(results);
-  }, 200);
-
-  if (fitnessSpotSearchInput && fitnessSpotList && realFitnessSpotInput) {
-    fitnessSpotSearchInput.addEventListener('input', onFitnessSpotType);
-    fitnessSpotSearchInput.addEventListener('focus', onFitnessSpotType);
-    fitnessSpotList.addEventListener('mousedown', (e) => {
-      const li = e.target.closest('li'); if (li) chooseFitnessSpot(li);
-    });
-    fitnessSpotSearchInput.addEventListener('blur', () => {
-      setTimeout(() => fitnessSpotList.classList.add('hidden'), 150);
-    });
-    fitnessSpotSearchInput.addEventListener('keydown', (e) => {
-      const items = Array.from(fitnessSpotList.querySelectorAll('li'));
-      if (!items.length) return;
-      if (e.key === 'ArrowDown') { e.preventDefault(); fitnessSpotActiveIdx = Math.min(items.length-1, fitnessSpotActiveIdx+1); }
-      else if (e.key === 'ArrowUp') { e.preventDefault(); fitnessSpotActiveIdx = Math.max(0, fitnessSpotActiveIdx-1); }
-      else if (e.key === 'Enter') { e.preventDefault(); chooseFitnessSpot(items[fitnessSpotActiveIdx] || items[0]); return; }
-      else if (e.key === 'Escape') { fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1; return; }
-      const q = (fitnessSpotSearchInput.value||'').trim().toLowerCase();
-      const results = ALL_SPOTS_DATA.filter(s => s.name && s.name.toLowerCase().includes(q)).slice(0, 15);
-      renderFitnessSpotList(results);
-      fitnessSpotList.querySelector('li.active-suggestion')?.scrollIntoView({block:'nearest'});
-    });
-  }
-
-  function closeModal(){ editModal.classList.add('opacity-0','pointer-events-none'); }
-  closeBtn?.addEventListener('click', closeModal);
-  closeBtnAlt?.addEventListener('click', closeModal);
-
-  addBtn?.addEventListener('click', () => {
-    document.getElementById('edit-modal-title').innerText = "Tambah Komunitas";
-    editForm.reset();
-    fitnessSpotSearchInput.value = ''; realFitnessSpotInput.value = '';
-    fitnessSpotList.classList.add('hidden'); fitnessSpotActiveIdx = -1;
-    document.getElementById('edit-id').value = "";
-    editModal.classList.remove('opacity-0','pointer-events-none');
-  });
-
-  cardsContainer?.addEventListener('click', e => {
-    const card = e.target.closest('[data-id]'); if (!card) return;
-    const id = card.dataset.id;
-
-    if (e.target.classList.contains('add-admin-btn')) {
-      e.stopPropagation();
-      const username = prompt("Enter username to add as admin:"); if (!username) return;
-      const formData = new FormData(); formData.append('username', username);
-      fetch(`/community/ajax/add_admin/${id}/`, { method:'POST', body:formData, headers:{'X-Requested-With':'XMLHttpRequest','X-CSRFToken': csrfToken}})
-        .then(res=>res.json()).then(json=>alert(json.success?json.message:`Error: ${json.error}`));
-      return;
-    }
-    if (e.target.classList.contains('delete-btn')) {
-      e.stopPropagation();
-      if (confirm("Yakin hapus?")) {
-        fetch(`/community/ajax/delete/${id}/`, { method:'POST', headers:{'X-Requested-With':'XMLHttpRequest','X-CSRFToken': csrfToken}})
-          .then(res=>res.json()).then(json=>{ if(json.success) card.remove(); else alert(`Error: ${json.error||'Gagal hapus'}`); });
-      }
-      return;
-    }
-    if (e.target.classList.contains('edit-btn')) {
-      e.stopPropagation();
-      document.getElementById('edit-modal-title').innerText = "Edit Komunitas";
-      document.getElementById('edit-id').value = id;
-      document.getElementById('id_name').value = card.querySelector('h3')?.innerText || '';
-      document.getElementById('id_description').value = card.querySelector('p.card-text')?.innerText || '';
-      const spotId = card.dataset.spotId || '';
-      const spotName = card.querySelector('p.card-subline')?.innerText.replace('📍 ','') || '';
-      realFitnessSpotInput.value = spotId;
-      fitnessSpotSearchInput.value = spotName;
-      fitnessSpotList.classList.add('hidden');
-      const contactEl = Array.from(card.querySelectorAll('p')).find(p => p.innerText?.includes('📞'));
-      document.getElementById('id_contact_info').value = contactEl ? contactEl.innerText.replace('📞 ','') : '';
-      editModal.classList.remove('opacity-0','pointer-events-none');
-      return;
-    }
-    if (card.dataset.url) location.href = card.dataset.url;
-  });
-
-  editForm?.addEventListener('submit', e => {
-    e.preventDefault();
-    if (fitnessSpotSearchInput.value && !realFitnessSpotInput.value) { alert('Pilih Fitness Spot yang valid dari daftar.'); return; }
-    if (!fitnessSpotSearchInput.value) { realFitnessSpotInput.value = ''; }
-
-    const formData = new FormData(editForm);
-    const id = document.getElementById('edit-id')?.value || '';
-    const url = id ? `/community/ajax/edit/${id}/` : `/community/ajax/add/`;
-
-    fetch(url, { method:'POST', body:formData, headers:{'X-Requested-With':'XMLHttpRequest','X-CSRFToken': csrfToken}})
-      .then(res => { if(!res.ok) return res.text().then(t=>{throw new Error(`HTTP ${res.status}: ${t}`)}); return res.json(); })
-      .then(json => {
-        if (!json.success) { alert(json.error || 'Terjadi kesalahan.'); return; }
-        const cards = document.getElementById('community-cards');
-        if (id) {
-          const card = cards?.querySelector(`[data-id='${id}']`);
-          if (card) {
-            card.dataset.spotId = json.fitness_spot_id;
-            card.querySelector('h3').innerText = json.name;
-            card.querySelector('p.card-text')?.remove();
-            const descP = document.createElement('p'); descP.className = 'card-text mb-2'; descP.innerText = json.description || '';
-            card.querySelector('.card-subline').before(descP);
-            card.querySelector('.card-subline').innerText = `📍 ${json.fitness_spot_name}`;
-            let contactP = Array.from(card.querySelectorAll('p')).find(p => p.innerText.includes('📞'));
-            if (json.contact_info) {
-              if (!contactP) { contactP = document.createElement('p'); contactP.className = 'card-text mt-1'; card.appendChild(contactP); }
-              contactP.innerText = "📞 " + json.contact_info;
-            } else if (contactP) { contactP.remove(); }
-          }
+        if (type === 'all') {
+            tabAll.className = activeStyle;
+            tabMy.className = inactiveStyle;
         } else {
-          if (!cards) return;
-          const newCard = document.createElement('div');
-          newCard.className = "community-card community-item cursor-pointer";
-          newCard.dataset.id = json.id;
-          newCard.dataset.url = json.detail_url;
-          newCard.dataset.spotId = json.fitness_spot_id;
-          newCard.innerHTML = `
-            <h3 class="card-title text-center">${json.name}</h3>
-            ${json.description ? `<p class="card-text mb-2">${json.description}</p>` : ""}
-            <p class="card-subline">📍 ${json.fitness_spot_name}</p>
-            ${json.contact_info ? `<p class="card-text mt-1">📞 ${json.contact_info}</p>` : ""}
-            <div class="abs-actions-right">
-              <button class="chip chip-accent edit-btn">Edit</button>
-              <button class="chip chip-danger delete-btn">Delete</button>
-            </div>
-            <div class="abs-actions-left">
-              <button class="chip chip-teal add-admin-btn" title="Add Admin">➕</button>
-            </div>
-          `;
-          const emptyMsg = cards.querySelector('p.text-center'); emptyMsg?.remove();
-          cards.appendChild(newCard);
+            tabAll.className = inactiveStyle;
+            tabMy.className = activeStyle;
         }
-        editModal.classList.add('opacity-0','pointer-events-none');
-      })
-      .catch(err => { console.error(err); alert(`Terjadi error di server: ${err.message}`); });
-  });
-});
+
+        updateList(); 
+    }
+
+    const deleteModal = document.getElementById('deleteModal');
+    const deleteBackdrop = document.getElementById('deleteBackdrop');
+    const deleteCard = document.getElementById('deleteCard');
+    const deleteModalName = document.getElementById('deleteModalName');
+    const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+    const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+    let communityIdToDelete = null;
+
+    function showToast(message) {
+        const toast = document.getElementById('toast');
+        document.getElementById('toast-msg').innerText = message;
+        toast.classList.remove('hidden');
+        void toast.offsetWidth; 
+        toast.classList.remove('translate-y-10', 'opacity-0');
+        setTimeout(() => { toast.classList.add('translate-y-10', 'opacity-0'); setTimeout(() => toast.classList.add('hidden'), 300); }, 3000);
+    }
+
+    document.querySelectorAll('.delete-trigger-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            communityIdToDelete = this.dataset.id;
+            deleteModalName.textContent = `"${this.dataset.name}"`;
+            deleteModal.classList.remove('hidden');
+            setTimeout(() => { deleteBackdrop.classList.remove('opacity-0'); deleteCard.classList.remove('opacity-0', 'scale-95'); }, 10);
+        });
+    });
+
+    function closeDeleteModal() {
+        deleteBackdrop.classList.add('opacity-0'); deleteCard.classList.add('opacity-0', 'scale-95');
+        setTimeout(() => { deleteModal.classList.add('hidden'); communityIdToDelete = null; }, 300);
+    }
+    cancelDeleteBtn.addEventListener('click', closeDeleteModal);
+    deleteBackdrop.addEventListener('click', closeDeleteModal);
+
+    confirmDeleteBtn.addEventListener('click', function() {
+        if (!communityIdToDelete) return;
+        confirmDeleteBtn.disabled = true;
+        confirmDeleteBtn.textContent = 'Deleting...';
+
+        fetch(`/community/ajax/delete/${communityIdToDelete}/`, {
+            method: 'POST',
+            headers: { 'X-CSRFToken': '{{ csrf_token }}', 'X-Requested-With': 'XMLHttpRequest' }
+        })
+        .then(r => r.json())
+        .then(d => {
+            if (d.success) {
+                const cardToRemove = document.getElementById(`card-${communityIdToDelete}`);
+                if (cardToRemove) {
+                    cardToRemove.style.transition = 'all 0.3s';
+                    cardToRemove.style.opacity = '0';
+                    cardToRemove.style.transform = 'scale(0.9)';
+                    setTimeout(() => cardToRemove.remove(), 300);
+                }
+                closeDeleteModal();
+                showToast("The community has been deleted successfully.");
+            } else { alert("Error: " + (d.error || "Unknown error")); }
+        })
+        .catch(error => { console.error('Error:', error); alert("Connection error."); })
+        .finally(() => { confirmDeleteBtn.disabled = false; confirmDeleteBtn.textContent = 'Delete'; });
+    });
+
+    document.addEventListener("DOMContentLoaded", function() {
+        {% if messages %}
+            {% for message in messages %}
+                showToast("{{ message|escapejs }}");
+            {% endfor %}
+        {% endif %}
+    });
 </script>
 {% endblock %}

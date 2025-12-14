@@ -1,4 +1,3 @@
-# store/forms.py
 from django import forms
 from .models import Product
 from home.models import FitnessSpot

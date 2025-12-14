@@ -246,15 +246,64 @@ class StoreViewTests(TestCase):
         prices = [p.price for p in products]
         self.assertEqual(prices, sorted(prices))
 
+    def test_product_list_sort_price_desc(self):
+        response = self.client.get(reverse('store:product_list') + '?sort=price_desc')
+        self.assertEqual(response.status_code, 200)
+        products = list(response.context['products'])
+        self.assertEqual(products[0].name, 'Expensive Product')
+        prices = [p.price for p in products]
+        self.assertEqual(prices, sorted(prices, reverse=True))
+
+    def test_product_list_sort_rating_desc(self):
+        response = self.client.get(reverse('store:product_list') + '?sort=rating_desc')
+        self.assertEqual(response.status_code, 200)
+        products = list(response.context['products'])
+        top_product_names_with_rating = [p.name for p in products if p.rating]
+        self.assertTrue(len(top_product_names_with_rating) > 0)
+        self.assertEqual(top_product_names_with_rating[0], 'View Product 2')
+
+    def test_product_list_sort_rating_asc(self):
+        Product.objects.create(name='Low Rated Product', price=10000, store=self.spot, rating='3.0', image_url='http://e.c/low.jpg')
+        response = self.client.get(reverse('store:product_list') + '?sort=rating_asc')
+        self.assertEqual(response.status_code, 200)
+        products = list(response.context['products'])
+        products_with_rating = [p for p in products if p.rating]
+        self.assertTrue(len(products_with_rating) > 0)
+        self.assertEqual(products_with_rating[0].name, 'Low Rated Product')
+
     def test_product_list_ajax_request(self):
         response = self.client.get(reverse('store:product_list') + '?ajax=1', HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'product_list2.html')
         self.assertNotContains(response, '<title>Store — Produk</title>')
 
+    def test_add_to_cart_anonymous_user_creates_session(self):
+        client_new = Client()
+        response = client_new.post(reverse('store:add_to_cart', args=[self.product1.pk]),
+                                    {'quantity': 1},
+                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        data = response.json()
+        self.assertTrue(data['success'])
+        
+        self.assertTrue(client_new.session.session_key)
+        
+        cart = Cart.objects.get(session_key=client_new.session.session_key)
+        self.assertIsNotNone(cart)
+
     def test_add_to_cart_requires_post(self):
         response = self.client.get(reverse('store:add_to_cart', args=[self.product1.pk]))
         self.assertEqual(response.status_code, 405)
+
+    def test_add_to_cart_quantity_less_than_one(self):
+        self.client.login(username='viewuser', password='password')
+        response = self.client.post(reverse('store:add_to_cart', args=[self.product1.pk]),
+                                    {'quantity': 0},
+                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        cart = Cart.objects.get(owner=self.user)
+        item = CartItem.objects.get(cart=cart, product=self.product1)
+        self.assertEqual(item.quantity, 1)
 
     def test_add_to_cart_ajax_new_item(self):
         self.client.login(username='viewuser', password='password')
@@ -383,6 +432,19 @@ class StoreViewTests(TestCase):
         self.assertIn('dihapus', data['message'])
         self.assertFalse(CartItem.objects.filter(cart=cart, product=self.product1).exists())
 
+    def test_update_cart_invalid_json_ajax(self):
+        self.client.login(username='viewuser', password='password')
+        cart = Cart.objects.create(owner=self.user)
+        CartItem.objects.create(cart=cart, product=self.product1, quantity=1)
+        invalid_json_string = '{"quantity": 5,'
+        response = self.client.post(reverse('store:update_cart', args=[self.product1.pk]),
+                                    invalid_json_string, content_type='application/json',
+                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 400)
+        data = response.json()
+        self.assertFalse(data['success'])
+        self.assertTrue('error' in data)
+
     def test_checkout_requires_post_ajax(self):
         response_get = self.client.get(reverse('store:checkout'))
         self.assertEqual(response_get.status_code, 405)
@@ -424,6 +486,17 @@ class StoreViewTests(TestCase):
         response = self.client.post(reverse('store:create_product_ajax'), {}, HTTP_X_REQUESTED_WITH='XMLHttpRequest')
         self.assertEqual(response.status_code, 403)
 
+    def test_create_product_post_non_ajax_bad_request(self):
+        self._setup_admin_session()
+        product_data = {
+            'name': 'Test Product',
+            'price': 15000,
+            'image_url': 'http://example.com/test.jpg',
+            'store': self.spot.pk
+        }
+        response = self.client.post(reverse('store:create_product_ajax'), product_data)
+        self.assertEqual(response.status_code, 400)
+
     def test_create_product_ajax_success(self):
         self._setup_admin_session()
         product_data = {
@@ -439,6 +512,22 @@ class StoreViewTests(TestCase):
         self.assertTrue(data['success'])
         self.assertIn('berhasil ditambahkan', data['message'])
         self.assertTrue(Product.objects.filter(pk=data['product_id']).exists())
+
+    def test_create_product_ajax_exception_on_save(self):
+        self._setup_admin_session()
+        from unittest.mock import patch
+        product_data = {
+            'name': 'Test Exception',
+            'price': 15000,
+            'image_url': 'http://example.com/test.jpg',
+            'store': self.spot.pk
+        }
+        with patch('store.forms.ProductForm.save', side_effect=Exception('Database error')):
+            response = self.client.post(reverse('store:create_product_ajax'), product_data,
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+            self.assertEqual(response.status_code, 500)
+            data = response.json()
+            self.assertFalse(data['success'])
 
     def test_create_product_ajax_invalid_data(self):
         self._setup_admin_session()
@@ -467,6 +556,13 @@ class StoreViewTests(TestCase):
         self.assertTemplateUsed(response, 'edit_product2.html')
         self.assertContains(response, 'value="View Product 1"')
 
+    def test_edit_product_get_non_ajax_admin_success(self):
+        self._setup_admin_session()
+        response = self.client.get(reverse('store:edit_product', args=[self.product1.pk]))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'edit_product.html')
+        self.assertContains(response, '<form id="editForm"')
+
     def test_edit_product_post_ajax_success(self):
         self._setup_admin_session()
         updated_data = {
@@ -486,6 +582,22 @@ class StoreViewTests(TestCase):
         self.product1.refresh_from_db()
         self.assertEqual(self.product1.name, 'Updated Product Name')
 
+    def test_edit_product_post_ajax_exception_on_save(self):
+        self._setup_admin_session()
+        from unittest.mock import patch
+        updated_data = {
+            'name': 'Updated Name',
+            'price': self.product1.price,
+            'image_url': self.product1.image_url,
+            'store': self.product1.store.pk
+        }
+        with patch('store.forms.ProductForm.save', side_effect=Exception('Save error')):
+            response = self.client.post(reverse('store:edit_product', args=[self.product1.pk]), updated_data,
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+            self.assertEqual(response.status_code, 500)
+            data = response.json()
+            self.assertFalse(data['success'])
+
     def test_edit_product_post_ajax_invalid(self):
         self._setup_admin_session()
         invalid_data = {
@@ -501,6 +613,47 @@ class StoreViewTests(TestCase):
         self.assertEqual(response.status_code, 400)
         self.assertContains(response, 'This field is required.', status_code=400)
 
+    def test_edit_product_post_non_ajax_admin_success_redirect(self):
+        self._setup_admin_session()
+        updated_data = {
+            'name': 'Updated Non-AJAX Name',
+            'price': self.product1.price,
+            'image_url': self.product1.image_url,
+            'store': self.product1.store.pk
+        }
+        response = self.client.post(reverse('store:edit_product', args=[self.product1.pk]), updated_data)
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('store:product_list'))
+        self.product1.refresh_from_db()
+        self.assertEqual(self.product1.name, 'Updated Non-AJAX Name')
+
+    def test_edit_product_post_non_ajax_exception_on_save(self):
+        self._setup_admin_session()
+        from unittest.mock import patch
+        updated_data = {
+            'name': 'Updated Name',
+            'price': self.product1.price,
+            'image_url': self.product1.image_url,
+            'store': self.product1.store.pk
+        }
+        with patch('store.forms.ProductForm.save', side_effect=Exception('Save error')):
+            response = self.client.post(reverse('store:edit_product', args=[self.product1.pk]), updated_data)
+            self.assertEqual(response.status_code, 500)
+            self.assertTemplateUsed(response, 'edit_product.html')
+
+    def test_edit_product_post_non_ajax_admin_invalid_renders_form(self):
+        self._setup_admin_session()
+        invalid_data = {
+            'name': '',
+            'price': self.product1.price,
+            'image_url': self.product1.image_url,
+            'store': self.product1.store.pk
+        }
+        response = self.client.post(reverse('store:edit_product', args=[self.product1.pk]), invalid_data)
+        self.assertEqual(response.status_code, 400)
+        self.assertTemplateUsed(response, 'edit_product.html')
+        self.assertContains(response, 'This field is required.', status_code=400)
+
     def test_delete_product_requires_admin_post_ajax(self):
         response_get = self.client.get(reverse('store:delete_product', args=[self.product1.pk]))
         self.assertEqual(response_get.status_code, 405)
@@ -514,6 +667,12 @@ class StoreViewTests(TestCase):
         response_non_ajax = self.client.post(reverse('store:delete_product', args=[self.product1.pk]))
         self.assertEqual(response_non_ajax.status_code, 400)
 
+    def test_delete_product_post_non_ajax_requires_admin_redirect(self):
+        self.client.login(username='viewuser', password='password')
+        response = self.client.post(reverse('store:delete_product', args=[self.product1.pk]))
+        self.assertEqual(response.status_code, 302)
+        self.assertTrue(reverse('central:login') in response.url)
+
     def test_delete_product_ajax_success(self):
         self._setup_admin_session()
         product_to_delete = Product.objects.create(name='Delete Me', price=100, store=self.spot, image_url='http://e.c/del.jpg')
@@ -526,6 +685,18 @@ class StoreViewTests(TestCase):
         self.assertIn('berhasil dihapus', data['message'])
         self.assertFalse(Product.objects.filter(pk=product_pk).exists())
 
+    def test_delete_product_ajax_exception(self):
+        self._setup_admin_session()
+        from unittest.mock import patch
+        product_to_delete = Product.objects.create(name='Delete Me', price=100, store=self.spot, image_url='http://e.c/del.jpg')
+        with patch.object(Product, 'delete', side_effect=Exception('Delete error')):
+            response = self.client.post(reverse('store:delete_product', args=[product_to_delete.pk]),
+                                        HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+            self.assertEqual(response.status_code, 500)
+            data = response.json()
+            self.assertFalse(data['success'])
+            self.assertEqual(data['error'], 'Gagal menghapus produk.')
+
     def test_view_product_detail_requires_login(self):
         response = self.client.get(reverse('store:view_product_detail', args=[self.product1.pk]),
                                    HTTP_X_REQUESTED_WITH='XMLHttpRequest')
@@ -533,6 +704,13 @@ class StoreViewTests(TestCase):
         data = response.json()
         self.assertFalse(data['success'])
         self.assertIn('Anda harus login', data['error'])
+
+    def test_view_product_detail_non_ajax_requires_login_redirect(self):
+        response = self.client.get(reverse('store:view_product_detail', args=[self.product1.pk]))
+        self.assertEqual(response.status_code, 302)
+        login_url = reverse('central:login')
+        self.assertTrue(response.url.startswith(login_url))
+        self.assertIn(f'?next=/store/product/{self.product1.pk}/view/', response.url)
 
     def test_view_product_detail_success_ajax(self):
         self.client.login(username='viewuser', password='password')
@@ -548,3 +726,18 @@ class StoreViewTests(TestCase):
         response = self.client.get(reverse('store:view_product_detail', args=[self.product1.pk]))
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, reverse('store:product_list'))
+
+    def test_view_product_detail_non_ajax_admin_redirects_to_list(self):
+        self._setup_admin_session()
+        response = self.client.get(reverse('store:view_product_detail', args=[self.product1.pk]))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, reverse('store:product_list'))
+
+    def test_view_product_detail_ajax_admin_success(self):
+        self._setup_admin_session()
+        response = self.client.get(reverse('store:view_product_detail', args=[self.product1.pk]),
+                                   HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'view_product_detail.html')
+        self.assertTrue('product' in response.context)
+        self.assertEqual(response.context['product'], self.product1)

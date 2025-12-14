@@ -168,7 +168,6 @@ class EventFormTest(TestCase):
         }
         form = EventForm(data=form_data)
         self.assertTrue(form.is_valid())
-        # strip_tags removes the tags but keeps the content inside
         self.assertEqual(form.cleaned_data['name'], 'alert("test")Test Event')
     
     def test_event_form_strips_html_tags_from_description(self):
@@ -187,7 +186,6 @@ class EventFormTest(TestCase):
         """Test event form with missing required fields"""
         form_data = {
             'name': 'Test Event',
-            # Missing starting_date and ending_date
         }
         form = EventForm(data=form_data)
         self.assertFalse(form.is_valid())
@@ -227,7 +225,6 @@ class BlogFormTest(TestCase):
         }
         form = BlogsForm(data=form_data)
         self.assertTrue(form.is_valid())
-        # strip_tags removes the tags but keeps the content inside
         self.assertEqual(form.cleaned_data['title'], 'alert("test")Test Blog')
     
     def test_blog_form_strips_html_tags_from_body(self):
@@ -305,7 +302,6 @@ class BlogEventPageViewTest(TestCase):
     
     def test_blogevent_page_ordering(self):
         """Test that events and blogs are ordered correctly"""
-        # Create additional event and blog
         event2 = Event.objects.create(
             user=self.user,
             name='Newer Event',
@@ -316,7 +312,6 @@ class BlogEventPageViewTest(TestCase):
         response = self.client.get(reverse('BlognEvent:blogevent_page'))
         events = list(response.context['events'])
         
-        # Events should be ordered by starting_date descending
         self.assertEqual(events[0], event2)
         self.assertEqual(events[1], self.event)
 
@@ -343,7 +338,7 @@ class EventFormViewTest(TestCase):
     def test_event_form_page_requires_login(self):
         """Test that event form page requires authentication"""
         response = self.client.get(reverse('BlognEvent:event_form_page'))
-        self.assertEqual(response.status_code, 302)  # Redirect to login
+        self.assertEqual(response.status_code, 302)  
         self.assertIn('/central/login', response.url)
     
     def test_event_form_page_accessible_when_logged_in(self):
@@ -365,7 +360,7 @@ class EventFormViewTest(TestCase):
     def test_create_event_requires_login(self):
         """Test that creating event requires authentication"""
         response = self.client.post(reverse('BlognEvent:create_event'))
-        self.assertEqual(response.status_code, 302)  # Redirect to login
+        self.assertEqual(response.status_code, 302)  
     
     def test_create_event_success(self):
         """Test successful event creation"""
@@ -383,7 +378,6 @@ class EventFormViewTest(TestCase):
         self.assertEqual(response.status_code, 302)
         self.assertTrue(Event.objects.filter(name='New Event').exists())
         
-        # Check that location was added
         new_event = Event.objects.get(name='New Event')
         self.assertIn(self.fitness_spot, new_event.locations.all())
     
@@ -501,7 +495,7 @@ class EventEditDeleteTest(TestCase):
         response = self.client.get(
             reverse('BlognEvent:delete_event', kwargs={'event_id': self.event.id})
         )
-        self.assertEqual(response.status_code, 405)  # Method not allowed
+        self.assertEqual(response.status_code, 405)  
     
     def test_delete_event_owner_can_delete(self):
         """Test that owner can delete their event"""
@@ -799,10 +793,8 @@ class EventDetailAPITest(TestCase):
         )
         data = response.json()
         
-        # Check that dates are in correct format (e.g., "October 26, 2025")
         self.assertIn('starting_date', data)
         self.assertIn('ending_date', data)
-        # The format should match strftime('%B %d, %Y')
         import re
         date_pattern = r'^[A-Z][a-z]+ \d{1,2}, \d{4}$'
         self.assertRegex(data['starting_date'], date_pattern)
@@ -944,7 +936,6 @@ class FitnessSpotIntegrationTest(TestCase):
         )
         event.locations.add(self.fitness_spot1)
         
-        # Access events from fitness spot
         related_events = self.fitness_spot1.events.all()
         self.assertEqual(related_events.count(), 1)
         self.assertIn(event, related_events)
@@ -994,9 +985,8 @@ class SecurityTest(TestCase):
         self.client.post(reverse('BlognEvent:create_event'), event_data)
         
         event = Event.objects.first()
-        # strip_tags removes HTML tags but keeps the content
         self.assertNotIn('<script>', event.name)
-        self.assertIn('alert', event.name)  # Content inside tags remains
+        self.assertIn('alert', event.name)  
         self.assertIn('Clean Name', event.name)
     
     def test_xss_prevention_in_blog_title(self):
@@ -1012,7 +1002,6 @@ class SecurityTest(TestCase):
         self.client.post(reverse('BlognEvent:create_blog'), blog_data)
         
         blog = Blogs.objects.first()
-        # strip_tags removes HTML tags but keeps the content
         self.assertNotIn('<img', blog.title)
         self.assertIn('Clean Title', blog.title)
     
@@ -1027,12 +1016,10 @@ class SecurityTest(TestCase):
         
         self.client.login(username='testuser', password='testpass123')
         
-        # With proper authentication and POST, delete should work
         response = self.client.post(
             reverse('BlognEvent:delete_event', kwargs={'event_id': event.id})
         )
         
-        # Delete should succeed with proper auth
         self.assertEqual(response.status_code, 200)
         self.assertFalse(Event.objects.filter(id=event.id).exists())
     

@@ -13,54 +13,48 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 from pathlib import Path
 import os
 from dotenv import load_dotenv
-# Load environment variables from .env file
 load_dotenv()
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# Consider loading SECRET_KEY from environment variables for production
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-6=&ncn+%1i71bwj!z+2)vrs-=1-o5_csauni=xjo&99-o4spsa')
 
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 
-# Set DEBUG based on PRODUCTION environment variable
-if PRODUCTION:
-    DEBUG = False
-    SESSION_COOKIE_SECURE = True  # Send session cookie only over HTTPS
-    CSRF_COOKIE_SECURE = True     # Send CSRF cookie only over HTTPS
-    CSRF_TRUSTED_ORIGINS = [
+CSRF_TRUSTED_ORIGINS = [
         'https://samuel-indriano-get-fit-today.pbp.cs.ui.ac.id',
         'https://wildan-anshari-get-fit-today.pbp.cs.ui.ac.id',
         "http://localhost",
         "http://127.0.0.1",
-        "http://localhost:65130",
     ]
+
+if PRODUCTION:
+    DEBUG = False
+    SESSION_COOKIE_SECURE = True  
+    CSRF_COOKIE_SECURE = True     
 else:
     DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "127.0.0.1", "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id", "wildan-anshari-get-fit-today.pbp.cs.ui.ac.id"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "samuel-indriano-get-fit-today.pbp.cs.ui.ac.id",
+    "wildan-anshari-get-fit-today.pbp.cs.ui.ac.id",
+    "10.0.2.2",
+]
 
 # --- Google Maps API Key ---
 if PRODUCTION:
-    # In production (PaaS), get the key from the 'API_KEY' environment variable
     GOOGLE_MAPS_API_KEY = os.getenv('API_KEY')
     if not GOOGLE_MAPS_API_KEY:
         print("WARNING: GOOGLE_MAPS_API_KEY (from API_KEY env var) is not set in production!")
 else:
-    # In development, get the key from the 'GOOGLE_MAPS_API_KEY' variable in your .env file
     GOOGLE_MAPS_API_KEY = os.getenv('GOOGLE_MAPS_API_KEY')
     if not GOOGLE_MAPS_API_KEY:
         print("WARNING: GOOGLE_MAPS_API_KEY is not set in your .env file for development!")
 
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -68,6 +62,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
     'home',
     'booking',
     'BlognEvent',
@@ -77,6 +72,7 @@ INSTALLED_APPS = [
     'store',
     'community',
     'event',
+    'authentication',
 ]
 
 REST_FRAMEWORK = {
@@ -92,6 +88,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -169,10 +166,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-# This is where collectstatic will gather files for production
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# ✅ Use different storage backends for Development (DEBUG=True) vs Production (DEBUG=False)
+# Use different storage backends for Development (DEBUG=True) vs Production (DEBUG=False)
 if DEBUG:
     # Development: Django's built-in static file finding works well
     STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
@@ -195,10 +191,10 @@ CACHES = {
 
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SECURE = not DEBUG
-SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SAMESITE = 'Lax'
+SESSION_COOKIE_SAMESITE = 'None'
 
 # Base url to serve media files
 MEDIA_URL = '/media/'

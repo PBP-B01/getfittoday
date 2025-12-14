@@ -63,6 +63,7 @@
       radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
       linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
   }
+  
   body.mybookings-theme nav{
     background-color: var(--primary) !important;
     color: var(--on-primary) !important;
@@ -78,6 +79,7 @@
     font-size: clamp(24px, 4vw, 32px);
     margin-bottom: 1.25rem;
   }
+
   .booking-card{
     display:flex; align-items:flex-start; justify-content:space-between; gap:.75rem;
     background: var(--card-bg);
@@ -88,6 +90,7 @@
       0 14px 32px rgba(13,43,63,.14),
       inset 0 1px 0 rgba(255,255,255,.65);
   }
+
   .place{ font-weight: 700; color: #0F2C58; }
   .when{ color: var(--ink-weak); font-size: .9rem; }
 
@@ -99,14 +102,17 @@
     font-weight:700; font-size:.72rem;
     padding:.22rem .5rem; border-radius:.5rem;
   }
+
   .chip--pending{
     background: var(--accent-yellow);
     color:#0B2E55;
   }
+
   .chip--confirmed{
     background: var(--primary);
     color: #fff;
   }
+  
   .chip--cancelled{
     background:#8DA4C2;
     color:#fff;
@@ -126,17 +132,18 @@
   nav #userMenu, nav #mUserMenu{
     background:#fff !important;
   }
+
   #main-navbar #userMenu a:not(.logout-link),
   #main-navbar #mUserMenu a:not(.logout-link){
     color:#0F2C58 !important;
     opacity:1 !important;
   }
 
-  /* Paksa logout merah */
   #main-navbar #userMenu a.logout-link,
   #main-navbar #mUserMenu a.logout-link{
     color:#dc2626 !important;
   }
+
   #main-navbar #userMenu a.logout-link:hover,
   #main-navbar #mUserMenu a.logout-link:hover{
     color:#b91c1c !important;

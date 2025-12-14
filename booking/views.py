@@ -1,7 +1,8 @@
 from django.db.models import Q
 from rest_framework import views, permissions, status
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
-from datetime import datetime, date, timedelta, time as dtime
+from datetime import datetime, date, timedelta, time as dtime, timezone as dt_timezone
 from django.utils import timezone
 from .models import Resource, Booking, BookingStatus
 from django.contrib.auth.decorators import login_required
@@ -17,12 +18,16 @@ from uuid import UUID
 from functools import wraps
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
+
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+    def enforce_csrf(self, request):
+        # Bypass DRF's CSRF enforcement for this authentication class.
+        return
 
 def user_or_admin_required(view_func):
-    """
-    Decorator: Memerlukan login Django ATAU session admin.
-    Jika tidak, redirect ke login.
-    """
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
         if request.user.is_authenticated or request.session.get('is_admin', False):
@@ -193,10 +198,11 @@ def _parse_iso(s: str):
     except Exception:
         return None
     if timezone.is_naive(dt):
-        dt = timezone.make_aware(dt, timezone.utc)
+        dt = timezone.make_aware(dt, dt_timezone.utc)
     return dt
 
 class BookingCreateView(views.APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -273,22 +279,30 @@ class MyBookingAPI(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
+        now = timezone.now()
         qs = (Booking.objects
               .filter(user=request.user)
               .select_related("resource")
               .order_by("-start_time"))
         out = []
         for b in qs:
+            can_cancel = (
+                b.start_time > now
+                and b.status in [BookingStatus.PENDING, BookingStatus.CONFIRMED]
+            )
             out.append({
                 "id": str(b.id),
                 "place_name": getattr(b.resource, "name", "") or getattr(b.resource, "place_id", ""),
                 "start": timezone.localtime(b.start_time).isoformat(),
                 "end": timezone.localtime(b.end_time).isoformat(),
                 "status": b.status,
+                "can_cancel": can_cancel,
             })
         return Response(out, status=200)
 
+@method_decorator(csrf_exempt, name="dispatch")
 class BookingCancelView(views.APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):

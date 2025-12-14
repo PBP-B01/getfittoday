@@ -56,7 +56,7 @@
         </svg>
         Kembali ke Home
       </a>
-      <h2 class="text-3xl font-extrabold text-[var(--title)] flex-grow text-center order-2 w-full sm:w-auto">STORE</h2>
+      <h1 class="text-3xl md:text-4xl font-extrabold text-[var(--title)] flex-grow text-center order-2 w-full sm:w-auto">STORE</h1>
       <div class="ml-auto whitespace-nowrap order-3"> {% if not request.session.is_admin %}
         <a href="{% url 'store:view_cart' %}"
            class="inline-flex items-center px-4 py-2 border border-[var(--card-brd)] shadow-sm text-sm font-medium rounded-md text-[var(--ink-weak)] bg-[var(--card-bg)] hover:bg-gray-50">
