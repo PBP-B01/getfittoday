@@ -13,7 +13,9 @@ from django.urls import reverse
 
 from community.models import Community 
 from .forms import StyledUserCreationForm, StyledAuthenticationForm
-from .models import FitnessSpot
+from .models import FitnessSpot, PlaceType
+from django.views.decorators.csrf import csrf_exempt
+import uuid
 
 GRID_ORIGIN_LAT = -6.8
 GRID_ORIGIN_LNG = 106.5
@@ -39,11 +41,57 @@ def home_view(request):
     context = {'google_api_key': settings.GOOGLE_MAPS_API_KEY}
     return render(request, 'main.html', context)
 
+@csrf_exempt
 def get_fitness_spots_data(request):
     """
     Returns FitnessSpot data. If gridId is provided, it will return spots inside that grid.
     Otherwise it falls back to returning all spots (cached) so the endpoint does not 400.
+    
+    Handles POST requests to create new FitnessSpots.
     """
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            
+            place_id = data.get('place_id')
+            if not place_id:
+                place_id = str(uuid.uuid4())
+            
+            spot = FitnessSpot.objects.create(
+                place_id=place_id,
+                name=data.get('name', ''),
+                address=data.get('address', ''),
+                latitude=data.get('latitude', 0.0),
+                longitude=data.get('longitude', 0.0),
+                website=data.get('website') or None,
+                phone_number=data.get('phone_number') or None,
+            )
+            
+            types_list = data.get('types', [])
+            if isinstance(types_list, list):
+                for type_name in types_list:
+                    place_type, _ = PlaceType.objects.get_or_create(name=type_name)
+                    spot.types.add(place_type)
+            
+            # Invalidate cache
+            cache.delete("spots_all")
+            cache.delete("map_boundaries")
+            
+            # Calculate and invalidate specific grid cache
+            try:
+                row = int((float(spot.latitude) - GRID_ORIGIN_LAT) / GRID_CELL_SIZE_DEG)
+                col = int((float(spot.longitude) - GRID_ORIGIN_LNG) / GRID_CELL_SIZE_DEG)
+                grid_id = f"{row}-{col}"
+                cache.delete(f"spots_grid_{grid_id}")
+                print(f"Invalidated cache for grid {grid_id}")
+            except Exception as e:
+                print(f"Error invalidating grid cache: {e}")
+
+            return JsonResponse({'status': 'success', 'place_id': place_id}, status=201)
+        except Exception as e:
+            print(f"Error creating spot: {e}")
+            return JsonResponse({'status': 'error', 'message': str(e)}, status=400)
+
     grid_id = request.GET.get('gridId')
 
     if grid_id:

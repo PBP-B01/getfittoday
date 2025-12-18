@@ -21,14 +21,17 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-6=&ncn+%1i71bwj!z+2
 
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 
+CSRF_TRUSTED_ORIGINS = [
+        'https://samuel-indriano-get-fit-today.pbp.cs.ui.ac.id',
+        'https://wildan-anshari-get-fit-today.pbp.cs.ui.ac.id',
+        "http://localhost",
+        "http://127.0.0.1",
+    ]
+
 if PRODUCTION:
     DEBUG = False
     SESSION_COOKIE_SECURE = True  
     CSRF_COOKIE_SECURE = True     
-    CSRF_TRUSTED_ORIGINS = [
-        'https://samuel-indriano-get-fit-today.pbp.cs.ui.ac.id',
-        'https://wildan-anshari-get-fit-today.pbp.cs.ui.ac.id' 
-    ]
 else:
     DEBUG = True
 

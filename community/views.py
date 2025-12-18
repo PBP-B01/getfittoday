@@ -18,6 +18,8 @@ class DecimalEncoder(json.JSONEncoder):
             return float(obj) 
         return super(DecimalEncoder, self).default(obj)
 
+# --- BAGIAN AJAX WEB (MODUL LAMA) ---
+
 @csrf_exempt
 @login_required
 def ajax_join_community(request, community_id):
@@ -83,6 +85,10 @@ def ajax_add_community(request):
         else:
             return JsonResponse({"success": False, "errors": form.errors.get_json_data()}, status=400)
     return JsonResponse({"success": False, "error": "Invalid request method."}, status=405)
+
+@login_required
+def add_community(request):
+    return ajax_add_community(request)
 
 @login_required
 def ajax_edit_community(request, community_id):
@@ -206,3 +212,141 @@ def featured_communities_api(request):
 
     except Exception as e:
         return JsonResponse({'error': str(e)}, status=500)
+
+
+# ==========================================
+# BAGIAN 2: API FLUTTER (JSON) - SUDAH DIPERBAIKI
+# ==========================================
+
+def get_fitness_spots_json(request):
+    """
+    Mengambil data tempat olahraga untuk Dropdown Flutter.
+    PENTING: Kita pakai 'place_id' (String) karena model temanmu pakai itu sebagai Primary Key.
+    """
+    # Mengambil semua tempat, ambil place_id dan name
+    spots = list(FitnessSpot.objects.values('place_id', 'name'))
+    
+    # Format ulang biar Flutter nerima field 'id' yang isinya string place_id
+    data = []
+    for spot in spots:
+        data.append({
+            'id': spot['place_id'], # Ini String ID dari Google
+            'name': spot['name']
+        })
+        
+    return JsonResponse(data, safe=False)
+
+def communities_json(request):
+    communities = Community.objects.select_related(
+        'fitness_spot', 'category'
+    ).prefetch_related('members')
+
+    data = []
+    for c in communities:
+        data.append({
+            "id": c.id,
+            "name": c.name,
+            "description": c.description,
+            "contact_info": c.contact_info,
+            "category": c.category.name if c.category else None,
+            "fitness_spot": {
+                "id": c.fitness_spot.place_id, # FIX: Pakai place_id
+                "name": c.fitness_spot.name,
+                "place_id": c.fitness_spot.place_id,
+                "address": c.fitness_spot.address,
+            } if c.fitness_spot else None,
+            "members_count": c.members.count(),
+        })
+
+    return JsonResponse(data, safe=False)
+
+
+def community_detail_json(request, pk):
+    community = get_object_or_404(
+        Community.objects.select_related('fitness_spot', 'category')
+        .prefetch_related('members', 'admins', 'posts'),
+        pk=pk
+    )
+
+    data = {
+        "id": community.id,
+        "name": community.name,
+        "description": community.description,
+        "contact_info": community.contact_info,
+        "fitness_spot": {
+            "id": community.fitness_spot.place_id, # FIX: Pakai place_id
+            "name": community.fitness_spot.name,
+            "place_id": community.fitness_spot.place_id,
+            "address": community.fitness_spot.address,
+        } if community.fitness_spot else None,
+        "members_count": community.members.count(),
+        
+        # Status user
+        "has_joined": request.user in community.members.all(),
+        "is_admin": request.user in community.admins.all(),
+    }
+
+    return JsonResponse(data)
+
+@csrf_exempt
+def create_community_flutter(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            name = data.get("name")
+            description = data.get("description")
+            contact_info = data.get("contact_info")
+            fitness_spot_id = data.get("fitness_spot_id") # Ini String ID
+            
+            from home.models import FitnessSpot 
+            
+            # FIX: Cari berdasarkan place_id, bukan id (karena modelnya pakai place_id sbg PK)
+            fitness_spot = FitnessSpot.objects.get(place_id=fitness_spot_id)
+
+            new_community = Community.objects.create(
+                name=name,
+                description=description,
+                contact_info=contact_info,
+                fitness_spot=fitness_spot,
+            )
+            
+            new_community.admins.add(request.user)
+            new_community.members.add(request.user)
+            new_community.save()
+
+            return JsonResponse({"status": "success", "message": "Komunitas berhasil dibuat!"}, status=200)
+
+        except FitnessSpot.DoesNotExist:
+             return JsonResponse({"status": "error", "message": "Lokasi tidak ditemukan."}, status=404)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+    
+    return JsonResponse({"status": "error", "message": "Method not allowed"}, status=401)
+
+@csrf_exempt
+def edit_community_flutter(request, community_id):
+    if request.method == 'POST':
+        try:
+            community = Community.objects.get(pk=community_id)
+            if request.user not in community.admins.all():
+                return JsonResponse({"status": "error", "message": "Anda bukan admin komunitas ini."}, status=403)
+
+            data = json.loads(request.body)
+            community.name = data.get("name", community.name)
+            community.description = data.get("description", community.description)
+            community.contact_info = data.get("contact_info", community.contact_info)
+            
+            if "fitness_spot_id" in data:
+                from home.models import FitnessSpot
+                # FIX: Cari berdasarkan place_id
+                community.fitness_spot = FitnessSpot.objects.get(place_id=data["fitness_spot_id"])
+            
+            community.save()
+            return JsonResponse({"status": "success", "message": "Komunitas berhasil diupdate!"}, status=200)
+
+        except Community.DoesNotExist:
+            return JsonResponse({"status": "error", "message": "Komunitas tidak ditemukan."}, status=404)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+            
+    return JsonResponse({"status": "error", "message": "Method not allowed"}, status=401)

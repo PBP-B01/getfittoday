@@ -1,7 +1,8 @@
 from django.db.models import Q
 from rest_framework import views, permissions, status
+from rest_framework.authentication import SessionAuthentication
 from rest_framework.response import Response
-from datetime import datetime, date, timedelta, time as dtime
+from datetime import datetime, date, timedelta, time as dtime, timezone as dt_timezone
 from django.utils import timezone
 from .models import Resource, Booking, BookingStatus
 from django.contrib.auth.decorators import login_required
@@ -17,6 +18,14 @@ from uuid import UUID
 from functools import wraps
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
+
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+    def enforce_csrf(self, request):
+        # Bypass DRF's CSRF enforcement for this authentication class.
+        return
 
 def user_or_admin_required(view_func):
     @wraps(view_func)
@@ -189,10 +198,11 @@ def _parse_iso(s: str):
     except Exception:
         return None
     if timezone.is_naive(dt):
-        dt = timezone.make_aware(dt, timezone.utc)
+        dt = timezone.make_aware(dt, dt_timezone.utc)
     return dt
 
 class BookingCreateView(views.APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request):
@@ -269,22 +279,30 @@ class MyBookingAPI(views.APIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get(self, request):
+        now = timezone.now()
         qs = (Booking.objects
               .filter(user=request.user)
               .select_related("resource")
               .order_by("-start_time"))
         out = []
         for b in qs:
+            can_cancel = (
+                b.start_time > now
+                and b.status in [BookingStatus.PENDING, BookingStatus.CONFIRMED]
+            )
             out.append({
                 "id": str(b.id),
                 "place_name": getattr(b.resource, "name", "") or getattr(b.resource, "place_id", ""),
                 "start": timezone.localtime(b.start_time).isoformat(),
                 "end": timezone.localtime(b.end_time).isoformat(),
                 "status": b.status,
+                "can_cancel": can_cancel,
             })
         return Response(out, status=200)
 
+@method_decorator(csrf_exempt, name="dispatch")
 class BookingCancelView(views.APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,)
     permission_classes = [permissions.IsAuthenticated]
 
     def post(self, request, pk):
@@ -297,3 +315,75 @@ class BookingCancelView(views.APIView):
             return redirect("booking:mine_page")
 
         return Response({"status": b.status}, status=200)
+
+@method_decorator(csrf_exempt, name="dispatch")
+class BookingDeleteView(views.APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        b = get_object_or_404(Booking, pk=pk, user=request.user)
+        b.delete()
+
+        if "text/html" in request.META.get("HTTP_ACCEPT", ""):
+            return redirect("booking:mine_page")
+
+        return Response({"status": "deleted"}, status=200)
+
+@method_decorator(csrf_exempt, name="dispatch")
+class BookingUpdateView(views.APIView):
+    authentication_classes = (CsrfExemptSessionAuthentication,)
+    permission_classes = [permissions.IsAuthenticated]
+
+    def post(self, request, pk):
+        b = get_object_or_404(Booking, pk=pk, user=request.user)
+        if not (
+            b.start_time > timezone.now()
+            and b.status in [BookingStatus.PENDING, BookingStatus.CONFIRMED]
+        ):
+            return Response({"detail": "booking cannot be edited"}, status=400)
+
+        data = request.data or {}
+        start = _parse_iso(data.get("start_time"))
+        end = _parse_iso(data.get("end_time"))
+
+        if not (start and end) or end <= start:
+            return Response({"detail": "bad datetime"}, status=400)
+
+        res = b.resource
+
+        clash = (
+            Booking.objects.filter(
+                resource=res,
+                status__in=[BookingStatus.PENDING, BookingStatus.CONFIRMED],
+                start_time__lt=end,
+                end_time__gt=start,
+            )
+            .exclude(pk=b.pk)
+            .exists()
+        )
+        if clash:
+            return Response({"detail": "time conflict"}, status=409)
+
+        def has_bfield(name):
+            return any(getattr(f, "name", None) == name for f in Booking._meta.get_fields())
+
+        b.start_time = start
+        b.end_time = end
+
+        if has_bfield("price"):
+            dur_hours = Decimal((end - start).total_seconds()) / Decimal(3600)
+            price_per_hour = Decimal(getattr(res, "price_per_hour", 0) or 0)
+            b.price = (price_per_hour * dur_hours).quantize(Decimal("0.01"))
+
+        b.save()
+
+        return Response(
+            {
+                "id": str(b.id),
+                "status": b.status,
+                "start": to_tz(b.start_time, timezone.get_current_timezone()).isoformat(),
+                "end": to_tz(b.end_time, timezone.get_current_timezone()).isoformat(),
+            },
+            status=200,
+        )
