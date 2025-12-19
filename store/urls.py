@@ -23,4 +23,5 @@ urlpatterns = [
     path('create-flutter/', views.create_product_flutter, name='create_product_flutter'),
     path('proxy-image/', proxy_image, name='proxy_image'),
     path('api/spots/', views.get_fitness_spots_json, name='get_fitness_spots_json'),
+    path('api/product/<int:pk>/edit/', views.edit_product_flutter, name='edit_product_flutter'),
 ]

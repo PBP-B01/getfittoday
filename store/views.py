@@ -114,39 +114,48 @@ def user_cart_json(request):
         "total_price": int(total_price)
     })
 
+
 # 3. Endpoint Create Product khusus Flutter (CSRF Exempt & JSON Body)
 @csrf_exempt
 def create_product_flutter(request):
-    if request.method == 'POST':
-        try:
-            # Cek apakah login DAN apakah dia admin (superuser)
-            if not request.user.is_authenticated or not request.user.is_superuser:
-                return JsonResponse({"status": "error", "message": "Hanya Admin yang boleh menambah produk"}, status=403)
-                
-            data = json.loads(request.body)
-            
-            # Cari instance FitnessSpot (Toko)
-            store_id = data.get('store')
-            store = None
-            if store_id:
-                store = FitnessSpot.objects.get(pk=store_id)
+    if request.method != 'POST':
+        return JsonResponse({"status": "error", "message": "Invalid method"}, status=401)
 
-            new_product = Product.objects.create(
-                name=data["name"],
-                price=int(data["price"]),
-                rating=data.get("rating", ""), # Opsional
-                units_sold=data.get("units_sold", ""), # Opsional
-                image_url=data["image_url"],
-                store=store
-            )
+    try:
+        # IKUTI LOGIKA YANG SAMA DENGAN admin_session_required
+        is_admin_session = request.session.get('is_admin', False)
+        is_staff_user = bool(getattr(request.user, 'is_authenticated', False) and getattr(request.user, 'is_staff', False))
 
-            new_product.save()
+        if not (is_admin_session or is_staff_user):
+            return JsonResponse({"status": "error", "message": "Hanya Admin yang boleh menambah produk"}, status=403)
 
-            return JsonResponse({"status": "success", "message": "Produk berhasil dibuat!"}, status=200)
-        except Exception as e:
-            return JsonResponse({"status": "error", "message": str(e)}, status=500)
+        data = json.loads(request.body)
 
-    return JsonResponse({"status": "error", "message": "Invalid method"}, status=401)
+        # Cari instance FitnessSpot (Toko)
+        store_id = data.get('store')
+        store = None
+        if store_id:
+            store = FitnessSpot.objects.get(pk=store_id)
+
+        new_product = Product.objects.create(
+            name=data["name"],
+            price=int(data["price"]),
+            rating=data.get("rating", ""),  # Opsional
+            units_sold=data.get("units_sold", ""),  # Opsional
+            image_url=data["image_url"],
+            store=store
+        )
+
+        return JsonResponse({"status": "success", "message": "Produk berhasil dibuat!"}, status=200)
+    except FitnessSpot.DoesNotExist:
+        return JsonResponse({"status": "error", "message": "Toko tidak ditemukan"}, status=400)
+    except KeyError as e:
+        return JsonResponse({"status": "error", "message": f"Field wajib hilang: {e}"}, status=400)
+    except ValueError as e:
+        return JsonResponse({"status": "error", "message": f"Format nilai salah: {e}"}, status=400)
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
 
 
 def proxy_image(request):
@@ -421,45 +430,99 @@ def create_product_ajax(request):
             'errors': errors_dict
         }, status=400)
 
-# ADA PERUBAHAN DI SINI😉
+
 @csrf_exempt
+def edit_product_flutter(request, pk):
+    if request.method != 'POST':
+        return JsonResponse({
+            "status": "error",
+            "message": "Method not allowed"
+        }, status=405)
+
+    # 🔐 cek admin (sesuai sistemmu, BUKAN superuser)
+    if not request.session.get('is_admin'):
+        return JsonResponse({
+            "status": "error",
+            "message": "Hanya Admin yang boleh mengedit produk"
+        }, status=403)
+
+    try:
+        product = Product.objects.get(pk=pk)
+        data = json.loads(request.body)
+
+        product.name = data.get('name', product.name)
+        product.price = int(data.get('price', product.price))
+        product.rating = data.get('rating', product.rating)
+        product.units_sold = data.get('units_sold', product.units_sold)
+        product.image_url = data.get('image_url', product.image_url)
+
+        store_id = data.get('store')
+        if store_id:
+            product.store = FitnessSpot.objects.get(pk=store_id)
+
+        product.save()
+
+        return JsonResponse({
+            "status": "success",
+            "message": "Produk berhasil diperbarui"
+        })
+
+    except Product.DoesNotExist:
+        return JsonResponse({
+            "status": "error",
+            "message": "Produk tidak ditemukan"
+        }, status=404)
+
+    except Exception as e:
+        return JsonResponse({
+            "status": "error",
+            "message": str(e)
+        }, status=500)
+    
+
+@admin_session_required
 def edit_product(request, pk):
-    # Kita gunakan get_object_or_404 agar kalau ID salah langsung 404
     product = get_object_or_404(Product, pk=pk)
+    is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
+
+    template_partial = 'edit_product2.html'
+    template_full = 'edit_product.html'
 
     if request.method == 'POST':
-        try:
-            # 1. Baca data sebagai JSON
-            data = json.loads(request.body)
-            
-            # 2. Update Field Standar
-            product.name = data.get('name', product.name)
-            product.image_url = data.get('image_url', product.image_url)
-            product.rating = data.get('rating', product.rating)
-            product.units_sold = data.get('units_sold', product.units_sold)
-
-            # 3. Konversi Harga ke Integer (PENTING)
-            price_input = data.get('price')
-            if price_input is not None:
-                product.price = int(price_input)
-
-            # 4. Handle Store (Toko)
-            store_id = data.get('store')
-            if store_id:
-                # Ambil object FitnessSpot berdasarkan ID
-                product.store = FitnessSpot.objects.get(pk=store_id)
-            
-            # 5. Simpan
-            product.save()
-            
-            return JsonResponse({'success': True, 'message': 'Produk berhasil diperbarui!'})
-            
-        except Exception as e:
-            # Print error ke terminal agar ketahuan salahnya dimana
-            print(f"❌ ERROR EDIT PRODUCT: {e}") 
-            return JsonResponse({'success': False, 'error': str(e)}, status=400)
-
-    return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
+        form = ProductForm(request.POST, request.FILES or None, instance=product)
+        if form.is_valid():
+            try:
+                form.save()
+                if is_ajax:
+                    return JsonResponse({
+                        'success': True,
+                        'message': 'Produk berhasil diperbarui!'
+                    })
+                else:
+                    return redirect('store:product_list')
+            except Exception as e:
+                 if is_ajax:
+                       return JsonResponse({'success': False, 'error': 'Gagal menyimpan pembaruan.'}, status=500)
+                 else:
+                       context = {'form': form, 'product': product, 'error_message': 'Gagal menyimpan pembaruan.'}
+                       return render(request, template_full, context, status=500)
+        else:
+            context = {'form': form, 'product': product}
+            if is_ajax:
+                html_form = render_to_string(template_partial, context, request=request)
+                return HttpResponseBadRequest(html_form, content_type='text/html')
+            else:
+                return render(request, template_full, context, status=400)
+    else:
+        form = ProductForm(instance=product)
+        context = {
+            'form': form,
+            'product': product
+        }
+        if is_ajax:
+            return render(request, template_partial, context)
+        else:
+            return render(request, template_full, context)
 
 
 @require_POST
