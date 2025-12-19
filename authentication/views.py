@@ -85,26 +85,6 @@ def login(request):
         status=401,
     )
 
-@csrf_exempt
-def logout(request):
-    if request.method != 'POST':
-        return JsonResponse(
-            {
-                "status": False,
-                "message": "Invalid request method.",
-            },
-            status=400,
-        )
-
-    auth_logout(request)
-    return JsonResponse(
-        {
-            "status": True,
-            "message": "Logout successful!",
-        },
-        status=200,
-    )
-
 
 @csrf_exempt
 def register(request):
