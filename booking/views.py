@@ -1,6 +1,7 @@
 from django.db.models import Q
 from rest_framework import views, permissions, status
 from rest_framework.authentication import SessionAuthentication
+from rest_framework.permissions import BasePermission
 from rest_framework.response import Response
 from datetime import datetime, date, timedelta, time as dtime, timezone as dt_timezone
 from django.utils import timezone
@@ -26,6 +27,20 @@ class CsrfExemptSessionAuthentication(SessionAuthentication):
     def enforce_csrf(self, request):
         # Bypass DRF's CSRF enforcement for this authentication class.
         return
+
+def _has_admin_access(request) -> bool:
+    return bool(
+        request.session.get('is_admin', False)
+        or (
+            getattr(request, 'user', None) is not None
+            and request.user.is_authenticated
+            and (request.user.is_staff or request.user.is_superuser)
+        )
+    )
+
+class IsUserOrAdminSession(BasePermission):
+    def has_permission(self, request, view):
+        return bool(request.user and request.user.is_authenticated) or _has_admin_access(request)
 
 def user_or_admin_required(view_func):
     @wraps(view_func)
@@ -276,14 +291,22 @@ class BookingCreateView(views.APIView):
 
     
 class MyBookingAPI(views.APIView):
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsUserOrAdminSession]
 
     def get(self, request):
         now = timezone.now()
-        qs = (Booking.objects
-              .filter(user=request.user)
-              .select_related("resource")
-              .order_by("-start_time"))
+        if _has_admin_access(request):
+            qs = (
+                Booking.objects.select_related("resource", "user")
+                .all()
+                .order_by("-start_time")
+            )
+        else:
+            qs = (
+                Booking.objects.filter(user=request.user)
+                .select_related("resource")
+                .order_by("-start_time")
+            )
         out = []
         for b in qs:
             can_cancel = (
@@ -293,6 +316,7 @@ class MyBookingAPI(views.APIView):
             out.append({
                 "id": str(b.id),
                 "place_name": getattr(b.resource, "name", "") or getattr(b.resource, "place_id", ""),
+                "owner": getattr(b.user, "username", None) if _has_admin_access(request) else None,
                 "start": timezone.localtime(b.start_time).isoformat(),
                 "end": timezone.localtime(b.end_time).isoformat(),
                 "status": b.status,
@@ -319,10 +343,13 @@ class BookingCancelView(views.APIView):
 @method_decorator(csrf_exempt, name="dispatch")
 class BookingDeleteView(views.APIView):
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsUserOrAdminSession]
 
     def post(self, request, pk):
-        b = get_object_or_404(Booking, pk=pk, user=request.user)
+        if _has_admin_access(request):
+            b = get_object_or_404(Booking, pk=pk)
+        else:
+            b = get_object_or_404(Booking, pk=pk, user=request.user)
         b.delete()
 
         if "text/html" in request.META.get("HTTP_ACCEPT", ""):

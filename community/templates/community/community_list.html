@@ -28,7 +28,7 @@
       <div class="community-card community-item cursor-pointer"
            data-id="{{ community.id }}"
            data-spot-id="{{ community.fitness_spot.place_id }}"
-           data-url="{% url 'community_detail' community.id %}">
+           data-url="{% url 'community:community_detail' community.id %}">
         <h3 class="card-title text-center">{{ community.name }}</h3>
 
         {% if community.description %}
