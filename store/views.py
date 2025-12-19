@@ -23,6 +23,16 @@ from django.core import serializers
 from django.utils.html import strip_tags
 from django.core.paginator import Paginator
 
+def _has_admin_access(request) -> bool:
+    return bool(
+        request.session.get('is_admin', False)
+        or (
+            getattr(request, 'user', None) is not None
+            and request.user.is_authenticated
+            and (request.user.is_superuser or request.user.is_staff)
+        )
+    )
+
 def product_list_json(request):
     # 1. Ambil parameter (?q=...&sort=...&page=...)
     q = request.GET.get('q', '')
@@ -118,43 +128,35 @@ def user_cart_json(request):
 # 3. Endpoint Create Product khusus Flutter (CSRF Exempt & JSON Body)
 @csrf_exempt
 def create_product_flutter(request):
-    if request.method != 'POST':
-        return JsonResponse({"status": "error", "message": "Invalid method"}, status=401)
+    if request.method == 'POST':
+        try:
+            if not _has_admin_access(request):
+                return JsonResponse({"status": "error", "message": "Hanya Admin yang boleh menambah produk"}, status=403)
+                
+            data = json.loads(request.body)
+            
+            # Cari instance FitnessSpot (Toko)
+            store_id = data.get('store')
+            store = None
+            if store_id:
+                store = FitnessSpot.objects.get(pk=store_id)
 
-    try:
-        # IKUTI LOGIKA YANG SAMA DENGAN admin_session_required
-        is_admin_session = request.session.get('is_admin', False)
-        is_staff_user = bool(getattr(request.user, 'is_authenticated', False) and getattr(request.user, 'is_staff', False))
+            new_product = Product.objects.create(
+                name=data["name"],
+                price=int(data["price"]),
+                rating=data.get("rating", ""), # Opsional
+                units_sold=data.get("units_sold", ""), # Opsional
+                image_url=data["image_url"],
+                store=store
+            )
 
-        if not (is_admin_session or is_staff_user):
-            return JsonResponse({"status": "error", "message": "Hanya Admin yang boleh menambah produk"}, status=403)
+            new_product.save()
 
-        data = json.loads(request.body)
+            return JsonResponse({"status": "success", "message": "Produk berhasil dibuat!"}, status=200)
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)}, status=500)
 
-        # Cari instance FitnessSpot (Toko)
-        store_id = data.get('store')
-        store = None
-        if store_id:
-            store = FitnessSpot.objects.get(pk=store_id)
-
-        new_product = Product.objects.create(
-            name=data["name"],
-            price=int(data["price"]),
-            rating=data.get("rating", ""),  # Opsional
-            units_sold=data.get("units_sold", ""),  # Opsional
-            image_url=data["image_url"],
-            store=store
-        )
-
-        return JsonResponse({"status": "success", "message": "Produk berhasil dibuat!"}, status=200)
-    except FitnessSpot.DoesNotExist:
-        return JsonResponse({"status": "error", "message": "Toko tidak ditemukan"}, status=400)
-    except KeyError as e:
-        return JsonResponse({"status": "error", "message": f"Field wajib hilang: {e}"}, status=400)
-    except ValueError as e:
-        return JsonResponse({"status": "error", "message": f"Format nilai salah: {e}"}, status=400)
-    except Exception as e:
-        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+    return JsonResponse({"status": "error", "message": "Invalid method"}, status=401)
 
 
 
@@ -396,7 +398,7 @@ def checkout(request):
 def admin_session_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
-        if request.session.get('is_admin', False):
+        if _has_admin_access(request):
             return view_func(request, *args, **kwargs)
         elif request.headers.get('x-requested-with') == 'XMLHttpRequest':
              return JsonResponse({'success': False, 'error': 'Akses ditolak'}, status=403)
@@ -525,12 +527,10 @@ def edit_product(request, pk):
             return render(request, template_full, context)
 
 
+@csrf_exempt
 @require_POST
 @admin_session_required
 def delete_product(request, pk):
-    if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
-         return JsonResponse({'success': False, 'error': 'Bad request'}, status=400)
-
     try:
         product = get_object_or_404(Product, pk=pk)
         product_name = product.name
