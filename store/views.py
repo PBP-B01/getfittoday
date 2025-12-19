@@ -23,6 +23,16 @@ from django.core import serializers
 from django.utils.html import strip_tags
 from django.core.paginator import Paginator
 
+def _has_admin_access(request) -> bool:
+    return bool(
+        request.session.get('is_admin', False)
+        or (
+            getattr(request, 'user', None) is not None
+            and request.user.is_authenticated
+            and (request.user.is_superuser or request.user.is_staff)
+        )
+    )
+
 def product_list_json(request):
     # 1. Ambil parameter (?q=...&sort=...&page=...)
     q = request.GET.get('q', '')
@@ -119,8 +129,7 @@ def user_cart_json(request):
 def create_product_flutter(request):
     if request.method == 'POST':
         try:
-            # Cek apakah login DAN apakah dia admin (superuser)
-            if not request.user.is_authenticated or not request.user.is_superuser:
+            if not _has_admin_access(request):
                 return JsonResponse({"status": "error", "message": "Hanya Admin yang boleh menambah produk"}, status=403)
                 
             data = json.loads(request.body)
@@ -387,7 +396,7 @@ def checkout(request):
 def admin_session_required(view_func):
     @wraps(view_func)
     def _wrapped_view(request, *args, **kwargs):
-        if request.session.get('is_admin', False):
+        if _has_admin_access(request):
             return view_func(request, *args, **kwargs)
         elif request.headers.get('x-requested-with') == 'XMLHttpRequest':
              return JsonResponse({'success': False, 'error': 'Akses ditolak'}, status=403)
@@ -428,6 +437,9 @@ def edit_product(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
     if request.method == 'POST':
+        if not _has_admin_access(request):
+            return JsonResponse({'success': False, 'error': 'Akses ditolak'}, status=403)
+
         try:
             # 1. Baca data sebagai JSON
             data = json.loads(request.body)
@@ -462,12 +474,10 @@ def edit_product(request, pk):
     return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
 
 
+@csrf_exempt
 @require_POST
 @admin_session_required
 def delete_product(request, pk):
-    if not request.headers.get('x-requested-with') == 'XMLHttpRequest':
-         return JsonResponse({'success': False, 'error': 'Bad request'}, status=400)
-
     try:
         product = get_object_or_404(Product, pk=pk)
         product_name = product.name
