@@ -15,4 +15,6 @@ urlpatterns = [
     path('blog/<uuid:blog_id>/edit/', views.edit_blog, name='edit_blog'),  
     path('blog/<uuid:blog_id>/delete/', views.delete_blog, name='delete_blog'),  
     path('blog/<uuid:blog_id>/', views.blog_detail_api, name='blog_detail_api'),  
+    path('api/events/', views.api_events, name='api_events'),
+    path('api/blogs/', views.api_blogs, name='api_blogs'),
 ]

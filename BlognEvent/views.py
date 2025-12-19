@@ -4,8 +4,10 @@ from BlognEvent.forms import EventForm, BlogsForm
 from home.models import FitnessSpot
 from django.http import JsonResponse
 from django.urls import reverse
-from django.views.decorators.http import require_POST
+from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+
 import json
 
 def blogevent_page(request):
@@ -190,3 +192,64 @@ def blog_detail_api(request, blog_id):
         'author': blog.author.username,
         'is_owner': is_owner or is_admin,
     })
+
+@csrf_exempt
+@require_http_methods(["GET", "OPTIONS"])  # Allow OPTIONS for CORS preflight
+def api_events(request):
+    events = Event.objects.all().order_by('-starting_date')
+    events_data = []
+    
+    for event in events:
+        is_owner = False
+        is_admin = False
+        
+        if request.user.is_authenticated:
+            is_owner = event.user == request.user
+            is_admin = request.session.get("is_admin", False)
+        
+        events_data.append({
+            'id': str(event.id),
+            'name': event.name,
+            'image': event.image or '',
+            'description': event.description,
+            'starting_date': event.starting_date.isoformat(),
+            'ending_date': event.ending_date.isoformat(),
+            'user': event.user.username,
+            'locations': [loc.name for loc in event.locations.all()],
+            'is_owner': is_owner or is_admin,
+        })
+    
+    response = JsonResponse(events_data, safe=False)
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
+
+@csrf_exempt
+@require_http_methods(["GET", "OPTIONS"])
+def api_blogs(request):
+    blogs = Blogs.objects.all().order_by('-id')
+    blogs_data = []
+    
+    for blog in blogs:
+        is_owner = False
+        is_admin = False
+        
+        if request.user.is_authenticated:
+            is_owner = blog.author == request.user
+            is_admin = request.session.get("is_admin", False)
+        
+        blogs_data.append({
+            'id': str(blog.id),
+            'title': blog.title,
+            'image': blog.image or '',
+            'body': blog.body,
+            'author': blog.author.username,
+            'is_owner': is_owner or is_admin,
+        })
+    
+    response = JsonResponse(blogs_data, safe=False)
+    response["Access-Control-Allow-Origin"] = "*"
+    response["Access-Control-Allow-Methods"] = "GET, OPTIONS"
+    response["Access-Control-Allow-Headers"] = "*"
+    return response
