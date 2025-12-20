@@ -331,9 +331,7 @@ def create_community_flutter(request):
                 contact_info=contact_info,
                 fitness_spot=fitness_spot,
                 schedule=schedule,
-                image=image_file
-                schedule=schedule,
-                image=image_file
+                image=image_file,
             )
 
             if request.user.is_authenticated:
@@ -469,9 +467,14 @@ def edit_community_flutter(request, community_id):
                     print(f"❌ Gagal update gambar: {img_error}")
 
             community.save()
+            print("✅ Berhasil simpan perubahan!")
+            
             return JsonResponse({"status": "success", "message": "Komunitas berhasil diupdate!"}, status=200)
 
         except Exception as e:
+            import traceback
+            traceback.print_exc()
+            print(f"❌ ERROR FATAL DI EDIT: {e}")
             return JsonResponse({"status": "error", "message": str(e)}, status=500)
             
     return JsonResponse({"status": "error", "message": "Method not allowed"}, status=401)
