@@ -17,4 +17,16 @@ urlpatterns = [
     path('blog/<uuid:blog_id>/', views.blog_detail_api, name='blog_detail_api'),  
     path('api/events/', views.api_events, name='api_events'),
     path('api/blogs/', views.api_blogs, name='api_blogs'),
+    path('api/events/<uuid:event_id>/', views.event_detail_api, name='api_event_detail'),
+    path('api/blogs/<uuid:blog_id>/', views.blog_detail_api, name='api_blog_detail'),
+    path("api/blog/create/", views.create_blog_api),
+    path('api/event/create/', views.create_event_api),
+    path("api/flutter/fitness-spots/", views.api_fitness_spots_flutter),
+    path('api/me/', views.api_me),
+    path('api/events/<uuid:event_id>/delete/', views.delete_event_api),path("api/blog/create/", views.create_blog_api),
+    path("api/blogs/<uuid:blog_id>/delete/", views.delete_blog_api),
+    path("api/events/<uuid:event_id>/edit/", views.edit_event_api),
+    path("api/blogs/<uuid:blog_id>/edit/", views.edit_blog_api),
+
+
 ]

@@ -253,8 +253,7 @@
 
     <div class="hidden md:flex items-center gap-6">
       <a href="{% url 'home:home' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">HOME</a>
-      <a href="{% url 'community_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">COMMUNITY</a>
-      <a href="{% url 'store:product_list' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">STORE</a>
+      
 
       {% if request.user.is_authenticated or request.session.is_admin %}
         <a href="{% url 'booking:page' %}" class="text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg">BOOKING</a>
@@ -262,6 +261,8 @@
         <a href="{% url 'central:login' %}?next={% url 'booking:page' %}" class="text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg">BOOKING</a>
       {% endif %}
 
+      <a href="{% url 'community_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2"> COMMUNITY</a>
+      <a href="{% url 'store:product_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">STORE</a>
       <a href="{% url 'BlognEvent:blogevent_page' %}" class="nav-link text-blue-900 hover:text-blue-700 font-semibold text-lg">BLOGS & EVENTS</a>
 
       <div class="relative" id="user-widget-desktop">
@@ -344,8 +345,6 @@
 
     <div id="mobile-menu" class="md:hidden hidden absolute top-full left-0 w-full rounded-b-lg py-4 z-50 shadow-md">
     <a href="{% url 'home:home' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">HOME</a>
-    <a href="{% url 'community_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2"> COMMUNITY</a>
-    <a href="{% url 'store:product_list' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">STORE</a>
     {% if request.user.is_authenticated or request.session.is_admin %}
       <a href="{% url 'booking:page' %}" class="block text-[var(--nav-text)] hover:text-gray-300 font-semibold text-lg px-4 py-2">BOOKING</a>
     {% else %}
