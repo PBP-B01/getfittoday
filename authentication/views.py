@@ -1,10 +1,11 @@
 import json
-
-from django.contrib.auth import authenticate, login as auth_login
+from django.contrib.auth import authenticate, login as auth_login, logout as auth_logout
 from django.contrib.auth.models import User
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 
+from central.models import Admin
 
 @csrf_exempt
 def login(request):
@@ -29,16 +30,41 @@ def login(request):
             status=400,
         )
 
+    try:
+        admin = Admin.objects.get(name=username)
+        if admin.check_password(password):
+            auth_logout(request)
+            request.session["is_admin"] = True
+            request.session["admin_name"] = admin.name
+            return JsonResponse(
+                {
+                    "username": admin.name,
+                    "status": True,
+                    "message": "Login successful!",
+                    "is_admin": True,
+                    "role": "admin",
+                },
+                status=200,
+            )
+    except Admin.DoesNotExist:
+        pass
+
     user = authenticate(username=username, password=password)
     if user is not None:
         if user.is_active:
             auth_login(request, user)
+            request.session["is_admin"] = False
+            if "admin_name" in request.session:
+                del request.session["admin_name"]
             return JsonResponse(
                 {
                     "username": user.username,
                     "status": True,
                     "message": "Login successful!",
-                    "is_staff": user.is_staff,
+                    "is_admin": bool(user.is_staff or user.is_superuser),
+                    "is_staff": bool(user.is_staff),
+                    "is_superuser": bool(user.is_superuser),
+                    "role": "user",
                 },
                 status=200,
             )
@@ -55,6 +81,66 @@ def login(request):
         {
             "status": False,
             "message": "Login failed, please check your username or password.",
+        },
+        status=401,
+    )
+
+
+@csrf_exempt
+def logout(request):
+    if request.method != 'POST':
+        return JsonResponse(
+            {
+                "status": False,
+                "message": "Invalid request method.",
+            },
+            status=400,
+        )
+
+    auth_logout(request)
+    request.session.pop("is_admin", None)
+    request.session.pop("admin_name", None)
+
+    return JsonResponse(
+        {
+            "status": True,
+            "message": "Logout successful!",
+        },
+        status=200,
+    )
+
+
+@csrf_exempt
+def whoami(request):
+    # Admin login uses custom session flag, not Django user auth
+    if request.session.get("is_admin"):
+        return JsonResponse(
+            {
+                "username": request.session.get("admin_name"),
+                "status": True,
+                "is_admin": True,
+                "role": "admin",
+            },
+            status=200,
+        )
+
+    if request.user.is_authenticated:
+        return JsonResponse(
+            {
+                "username": request.user.username,
+                "status": True,
+                "is_admin": bool(request.user.is_staff or request.user.is_superuser),
+                "is_staff": bool(request.user.is_staff),
+                "is_superuser": bool(request.user.is_superuser),
+                "role": "user",
+            },
+            status=200,
+        )
+
+    return JsonResponse(
+        {
+            "status": False,
+            "message": "Not authenticated.",
         },
         status=401,
     )

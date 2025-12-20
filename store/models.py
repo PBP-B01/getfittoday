@@ -5,14 +5,14 @@ from home.models import FitnessSpot
 
 class Product(models.Model):
     name = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=12, decimal_places=0) 
-    rating = models.CharField(max_length=10, null=True, blank=True) 
+    price = models.DecimalField(max_digits=12, decimal_places=0)
+    rating = models.CharField(max_length=10, null=True, blank=True)
     units_sold = models.CharField(max_length=50, null=True, blank=True)
     image_url = models.URLField(max_length=1000, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
 
     store = models.ForeignKey(
-        FitnessSpot, 
+        FitnessSpot,
         on_delete=models.SET_NULL,
         null=True, 
         blank=True,

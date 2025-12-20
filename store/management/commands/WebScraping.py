@@ -177,7 +177,7 @@ def run_scraper(target_url, search_query):
 def main():
     """Main function to run the Tokopedia product scraper once."""
 
-    SEARCH_QUERY = "bola+basket"
+    SEARCH_QUERY = "bola+voli"
     TARGET_URL = f"https://www.tokopedia.com/search?st=&q={SEARCH_QUERY}&srp_component_id=02.01.00.00&srp_page_id=&srp_page_title=&navsource="
 
     add_logs(f"=== Starting scrape run for query: '{SEARCH_QUERY}'. ===")

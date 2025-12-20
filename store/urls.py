@@ -1,5 +1,6 @@
 from django.urls import path
 from . import views
+from store.views import proxy_image
 
 app_name = 'store'
 
@@ -15,4 +16,12 @@ urlpatterns = [
     path('product/create/', views.create_product_ajax, name='create_product_ajax'),
     path('product/<int:pk>/view/', views.view_product_detail, name='view_product_detail'),
     path('api/featured/', views.featured_products_api, name='featured_products_api'),
+    # START : TAMBAHAN PROJECT PAS🔥
+    # --- API KHUSUS FLUTTER ---
+    path('api/products/', views.product_list_json, name='product_list_json'),
+    path('api/cart/', views.user_cart_json, name='user_cart_json'),
+    path('create-flutter/', views.create_product_flutter, name='create_product_flutter'),
+    path('proxy-image/', proxy_image, name='proxy_image'),
+    path('api/spots/', views.get_fitness_spots_json, name='get_fitness_spots_json'),
+    path('api/product/<int:pk>/edit/', views.edit_product_flutter, name='edit_product_flutter'),
 ]
