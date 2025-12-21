@@ -21,12 +21,18 @@ SECRET_KEY = os.getenv('DJANGO_SECRET_KEY', 'django-insecure-6=&ncn+%1i71bwj!z+2
 
 PRODUCTION = os.getenv('PRODUCTION', 'False').lower() == 'true'
 
-CSRF_TRUSTED_ORIGINS = [
-        'https://samuel-indriano-get-fit-today.pbp.cs.ui.ac.id',
-        'https://wildan-anshari-get-fit-today.pbp.cs.ui.ac.id',
-        "http://localhost",
-        "http://127.0.0.1",
-    ]
+PWS_ORIGINS = [
+    "https://samuel-indriano-get-fit-today.pbp.cs.ui.ac.id",
+    "https://wildan-anshari-get-fit-today.pbp.cs.ui.ac.id",
+]
+
+LOCAL_DEV_ORIGINS = [
+    "http://localhost:8000",
+    "http://127.0.0.1:8000",
+    "http://10.0.2.2:8000",
+]
+
+CSRF_TRUSTED_ORIGINS = PWS_ORIGINS + ([] if PRODUCTION else LOCAL_DEV_ORIGINS)
 
 DEBUG = not PRODUCTION
 
@@ -89,7 +95,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'getfittoday.urls'
@@ -175,8 +180,12 @@ else:
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
+if PRODUCTION:
+    CORS_ALLOW_ALL_ORIGINS = False
+    CORS_ALLOWED_ORIGINS = PWS_ORIGINS
+else:
+    CORS_ALLOW_ALL_ORIGINS = True
 
 if PRODUCTION:
     CSRF_COOKIE_SECURE = True
