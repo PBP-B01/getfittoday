@@ -22,6 +22,21 @@ class DecimalEncoder(json.JSONEncoder):
         return super(DecimalEncoder, self).default(obj)
 
 
+def _has_admin_access(request) -> bool:
+    return bool(
+        request.session.get("is_admin", False)
+        or (
+            getattr(request, "user", None) is not None
+            and request.user.is_authenticated
+            and (request.user.is_superuser or request.user.is_staff)
+        )
+    )
+
+
+def _can_manage_community(request, community: Community) -> bool:
+    return bool(_has_admin_access(request) or community.is_admin(request.user))
+
+
 # BAGIAN 1: WEB VIEW & AJAX (EXISTING)
 @csrf_exempt
 @login_required
@@ -410,6 +425,8 @@ def community_detail_json(request, pk):
             } if c.fitness_spot else None,
             "has_joined": c.is_member(request.user) if request.user.is_authenticated else False,
             "is_admin": c.is_admin(request.user) if request.user.is_authenticated else False,
+            "is_superadmin": _has_admin_access(request),
+            "can_manage": _can_manage_community(request, c),
             "created_at": c.created_at.isoformat() if c.created_at else None,
         }
         return JsonResponse(data, safe=False)
@@ -425,7 +442,7 @@ def edit_community_flutter(request, community_id):
             except Community.DoesNotExist:
                 return JsonResponse({"status": "error", "message": "Komunitas tidak ditemukan."}, status=404)
             
-            if not community.is_admin(request.user):
+            if not _can_manage_community(request, community):
                 return JsonResponse({"status": "error", "message": "Anda bukan admin komunitas ini."}, status=403)
 
             data = None
@@ -483,12 +500,12 @@ def edit_community_flutter(request, community_id):
 def delete_community(request, community_id):
     if request.method == 'POST': 
         try:
-            if not request.user.is_authenticated:
+            if not (request.user.is_authenticated or request.session.get("is_admin", False)):
                 return JsonResponse({"status": "error", "message": "Belum login"}, status=401)
 
             community = get_object_or_404(Community, pk=community_id)
 
-            if not community.is_admin(request.user):
+            if not _can_manage_community(request, community):
                 return JsonResponse({"status": "error", "message": "Hanya admin yang bisa menghapus"}, status=403)
 
             community.delete()
@@ -502,12 +519,12 @@ def delete_community(request, community_id):
 def promote_admin(request, community_id):
     if request.method == 'POST':
         try:
-            if not request.user.is_authenticated:
+            if not (request.user.is_authenticated or request.session.get("is_admin", False)):
                 return JsonResponse({"status": "error", "message": "Belum login"}, status=401)
 
             community = get_object_or_404(Community, pk=community_id)
 
-            if not community.is_admin(request.user):
+            if not _can_manage_community(request, community):
                 return JsonResponse({"status": "error", "message": "Anda bukan admin"}, status=403)
 
             target_username = None

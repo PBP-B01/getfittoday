@@ -28,12 +28,7 @@ CSRF_TRUSTED_ORIGINS = [
         "http://127.0.0.1",
     ]
 
-if PRODUCTION:
-    DEBUG = False
-    SESSION_COOKIE_SECURE = True  
-    CSRF_COOKIE_SECURE = True     
-else:
-    DEBUG = True
+DEBUG = not PRODUCTION
 
 ALLOWED_HOSTS = [
     "localhost",
@@ -182,10 +177,17 @@ else:
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SAMESITE = 'None'
+
+if PRODUCTION:
+    CSRF_COOKIE_SECURE = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SAMESITE = 'None'
+    SESSION_COOKIE_SAMESITE = 'None'
+else:
+    CSRF_COOKIE_SECURE = False
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SAMESITE = 'Lax'
+    SESSION_COOKIE_SAMESITE = 'Lax'
 
 
 # Caching (Keep your existing cache settings)
@@ -195,13 +197,6 @@ CACHES = {
         'LOCATION': 'unique-snowflake',
     }
 }
-
-CORS_ALLOW_ALL_ORIGINS = True
-CORS_ALLOW_CREDENTIALS = True
-CSRF_COOKIE_SECURE = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SAMESITE = 'None'
 
 # Base url to serve media files
 MEDIA_URL = '/media/'

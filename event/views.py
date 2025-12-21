@@ -4,13 +4,47 @@ from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from django.db.models import Q
 from .models import Event
 from community.models import Community
 
+User = get_user_model()
+
 # --- WEB VIEWS (Django Template & AJAX) ---
+
+def _has_admin_access(request) -> bool:
+    return bool(
+        request.session.get("is_admin", False)
+        or (
+            getattr(request, "user", None) is not None
+            and request.user.is_authenticated
+            and (request.user.is_staff or request.user.is_superuser)
+        )
+    )
+
+
+def _admin_session_username(request) -> str | None:
+    if not request.session.get("is_admin", False):
+        return None
+    name = request.session.get("admin_name")
+    if isinstance(name, str) and name.strip():
+        return name.strip()
+    return None
+
+
+def _get_or_create_admin_user(request):
+    username = _admin_session_username(request)
+    if not username:
+        return None
+    user, _created = User.objects.get_or_create(username=username)
+    if _created:
+        user.set_unusable_password()
+        user.save(update_fields=["password"])
+    return user
+
 
 def event_list(request):
     name_filter = request.GET.get('name', '').strip()
@@ -245,10 +279,16 @@ def community_events_api(request, community_id):
 
 # --- FLUTTER API VIEWS ---
 
-@login_required
 def get_user_admin_communities(request):
-    communities = Community.objects.filter(admins=request.user).values('id', 'name')
-    return JsonResponse({'status': 'success', 'communities': list(communities)})
+    if not (request.user.is_authenticated or _has_admin_access(request)):
+        return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
+
+    if _has_admin_access(request):
+        communities = Community.objects.all().values("id", "name")
+    else:
+        communities = Community.objects.filter(admins=request.user).values("id", "name")
+
+    return JsonResponse({"status": "success", "communities": list(communities)})
 
 
 @csrf_exempt
@@ -256,7 +296,7 @@ def create_event_flutter(request):
     if request.method != 'POST':
         return JsonResponse({"status": "error", "message": "Metode harus POST"}, status=405)
     
-    if not request.user.is_authenticated:
+    if not (request.user.is_authenticated or _has_admin_access(request)):
         return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
 
     try:
@@ -267,8 +307,12 @@ def create_event_flutter(request):
         event_date = datetime.strptime(data.get("date"), "%Y-%m-%d %H:%M:%S")
         aware_event_date = timezone.make_aware(event_date, timezone.get_current_timezone())
 
+        created_by = request.user if request.user.is_authenticated else _get_or_create_admin_user(request)
+        if created_by is None:
+            return JsonResponse({"status": "error", "message": "Admin session invalid."}, status=401)
+
         new_event = Event.objects.create(
-            created_by=request.user,
+            created_by=created_by,
             community=community,
             name=data.get("name"),
             description=data.get("description"),
@@ -285,6 +329,8 @@ def show_event_api(request):
     data = []
     for event in events:
         is_authenticated = request.user.is_authenticated
+        is_superadmin = _has_admin_access(request)
+        can_manage = bool(is_superadmin or event.community.is_admin(request.user))
         data.append({
             "id": event.id,
             "name": event.name,
@@ -293,9 +339,11 @@ def show_event_api(request):
             "location": event.location,
             "community_name": event.community.name,
             "participant_count": event.participants.count(),
-            "can_edit": event.can_edit(request.user) if is_authenticated else False,
+            "can_edit": can_manage if (is_authenticated or is_superadmin) else False,
+            "can_delete": can_manage if (is_authenticated or is_superadmin) else False,
             "is_active": not event.is_past(),
             "is_joined": event.user_is_participant(request.user) if is_authenticated else False,
+            "is_superadmin": is_superadmin,
         })
     return JsonResponse(data, safe=False)
 
@@ -304,6 +352,8 @@ def show_event_api(request):
 def join_event_flutter(request, event_id):
     if request.method != 'POST':
         return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+    if _has_admin_access(request):
+        return JsonResponse({"status": "error", "message": "Admin cannot join events."}, status=403)
     if not request.user.is_authenticated:
         return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
     
@@ -319,6 +369,8 @@ def join_event_flutter(request, event_id):
 def leave_event_flutter(request, event_id):
     if request.method != 'POST':
         return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+    if _has_admin_access(request):
+        return JsonResponse({"status": "error", "message": "Admin cannot leave events."}, status=403)
     if not request.user.is_authenticated:
         return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
     
@@ -333,7 +385,7 @@ def edit_event_flutter(request, event_id):
         return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
     
     event = get_object_or_404(Event, id=event_id)
-    if not event.can_edit(request.user):
+    if not (_has_admin_access(request) or event.can_edit(request.user)):
         return JsonResponse({"status": "error", "message": "Izin ditolak."}, status=403)
 
     try:
@@ -358,7 +410,7 @@ def delete_event_flutter(request, event_id):
         return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
     
     event = get_object_or_404(Event, id=event_id)
-    if not event.can_delete(request.user):
+    if not (_has_admin_access(request) or event.can_delete(request.user)):
         return JsonResponse({"status": "error", "message": "Izin ditolak."}, status=403)
         
     event.delete()

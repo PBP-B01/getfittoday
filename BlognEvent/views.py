@@ -6,9 +6,42 @@ from django.http import JsonResponse
 from django.urls import reverse
 from django.views.decorators.http import require_POST, require_http_methods
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.views.decorators.csrf import csrf_exempt
 
 import json
+
+User = get_user_model()
+
+def _has_admin_access(request) -> bool:
+    return bool(
+        request.session.get("is_admin", False)
+        or (
+            getattr(request, "user", None) is not None
+            and request.user.is_authenticated
+            and (request.user.is_superuser or request.user.is_staff)
+        )
+    )
+
+
+def _admin_session_username(request) -> str | None:
+    if not request.session.get("is_admin", False):
+        return None
+    name = request.session.get("admin_name")
+    if isinstance(name, str) and name.strip():
+        return name.strip()
+    return None
+
+
+def _get_or_create_admin_user(request):
+    username = _admin_session_username(request)
+    if not username:
+        return None
+    user, created = User.objects.get_or_create(username=username)
+    if created:
+        user.set_unusable_password()
+        user.save(update_fields=["password"])
+    return user
 
 def blogevent_page(request):
     is_admin = request.session.get("is_admin", False)
@@ -167,12 +200,8 @@ def event_detail_api(request, event_id):
     event = get_object_or_404(Event, id=event_id)
     locations = [loc.name for loc in event.locations.all()]
 
-    is_owner = False
-    is_admin = False
-
-    if request.user.is_authenticated:
-        is_owner = event.user == request.user
-        is_admin = request.session.get("is_admin", False)
+    is_admin = _has_admin_access(request)
+    is_owner = event.user == request.user if request.user.is_authenticated else False
 
     data = {
         'id': str(event.id),
@@ -198,12 +227,8 @@ def event_detail_api(request, event_id):
 def blog_detail_api(request, blog_id):
     blog = get_object_or_404(Blogs, id=blog_id)
 
-    is_owner = False
-    is_admin = False
-
-    if request.user.is_authenticated:
-        is_owner = blog.author == request.user
-        is_admin = request.session.get("is_admin", False)
+    is_admin = _has_admin_access(request)
+    is_owner = blog.author == request.user if request.user.is_authenticated else False
 
     data = {
         'id': str(blog.id),
@@ -228,12 +253,8 @@ def api_events(request):
     events_data = []
     
     for event in events:
-        is_owner = False
-        is_admin = False
-        
-        if request.user.is_authenticated:
-            is_owner = event.user == request.user
-            is_admin = request.session.get("is_admin", False)
+        is_admin = _has_admin_access(request)
+        is_owner = event.user == request.user if request.user.is_authenticated else False
         
         events_data.append({
             'id': str(event.id),
@@ -260,12 +281,8 @@ def api_blogs(request):
     blogs_data = []
     
     for blog in blogs:
-        is_owner = False
-        is_admin = False
-        
-        if request.user.is_authenticated:
-            is_owner = blog.author == request.user
-            is_admin = request.session.get("is_admin", False)
+        is_admin = _has_admin_access(request)
+        is_owner = blog.author == request.user if request.user.is_authenticated else False
         
         blogs_data.append({
             'id': str(blog.id),
@@ -284,7 +301,7 @@ def api_blogs(request):
 
 @csrf_exempt
 def create_blog_api(request):
-    if not request.user.is_authenticated:
+    if not (request.user.is_authenticated or _has_admin_access(request)):
         return JsonResponse({"error": "Unauthorized"}, status=401)
 
     data = request.POST
@@ -296,11 +313,15 @@ def create_blog_api(request):
     if not title or not body:
         return JsonResponse({"error": "Missing fields"}, status=400)
 
+    author = request.user if request.user.is_authenticated else _get_or_create_admin_user(request)
+    if author is None:
+        return JsonResponse({"error": "Unauthorized"}, status=401)
+
     blog = Blogs.objects.create(
         title=title,
         body=body,
         image=image,
-        author=request.user,
+        author=author,
     )
 
     return JsonResponse(
@@ -322,7 +343,7 @@ def create_event_api(request):
     print("session items:", dict(request.session.items()))
     print("===================================")
 
-    if not request.user.is_authenticated:
+    if not (request.user.is_authenticated or _has_admin_access(request)):
         return JsonResponse(
             {"error": "Authentication required"},
             status=401
@@ -345,13 +366,17 @@ def create_event_api(request):
     if not name or not description or not starting_date or not ending_date:
         return JsonResponse({"error": "Missing fields"}, status=400)
 
+    owner = request.user if request.user.is_authenticated else _get_or_create_admin_user(request)
+    if owner is None:
+        return JsonResponse({"error": "Authentication required"}, status=401)
+
     event = Event.objects.create(
         name=name,
         image=image,
         description=description,
         starting_date=starting_date,
         ending_date=ending_date,
-        user=request.user,  
+        user=owner,  
     )
 
     if location_ids:
@@ -386,8 +411,15 @@ def api_fitness_spots_flutter(request):
     return JsonResponse(data, safe=False)
 
 def api_me(request):
+    if request.session.get("is_admin", False):
+        return JsonResponse({
+            "username": request.session.get("admin_name"),
+            "is_admin": True,
+        })
+
     return JsonResponse({
         "username": request.user.username,
+        "is_admin": False,
     })
 
 @csrf_exempt
@@ -395,7 +427,7 @@ def api_me(request):
 def delete_event_api(request, event_id):
     event = get_object_or_404(Event, id=event_id)
 
-    is_admin = request.session.get("is_admin", False)
+    is_admin = _has_admin_access(request)
     if not (is_admin or event.user == request.user):
         return JsonResponse({'error': 'Unauthorized'}, status=403)
 
@@ -405,12 +437,12 @@ def delete_event_api(request, event_id):
 @csrf_exempt
 @require_POST
 def delete_blog_api(request, blog_id):
-    if not request.user.is_authenticated:
+    if not (request.user.is_authenticated or _has_admin_access(request)):
         return JsonResponse({"error": "Unauthorized"}, status=401)
 
     blog = get_object_or_404(Blogs, id=blog_id)
 
-    is_admin = request.session.get("is_admin", False)
+    is_admin = _has_admin_access(request)
     if not (is_admin or blog.author == request.user):
         return JsonResponse({'error': 'Unauthorized'}, status=403)
 
@@ -420,12 +452,12 @@ def delete_blog_api(request, blog_id):
 @csrf_exempt
 @require_POST
 def edit_event_api(request, event_id):
-    if not request.user.is_authenticated:
+    if not (request.user.is_authenticated or _has_admin_access(request)):
         return JsonResponse({"error": "Unauthorized"}, status=401)
 
     event = get_object_or_404(Event, id=event_id)
 
-    is_admin = request.session.get("is_admin", False)
+    is_admin = _has_admin_access(request)
     if not (is_admin or event.user == request.user):
         return JsonResponse({"error": "Unauthorized"}, status=403)
 
@@ -460,12 +492,12 @@ def edit_event_api(request, event_id):
 @csrf_exempt
 @require_POST
 def edit_blog_api(request, blog_id):
-    if not request.user.is_authenticated:
+    if not (request.user.is_authenticated or _has_admin_access(request)):
         return JsonResponse({"error": "Unauthorized"}, status=401)
 
     blog = get_object_or_404(Blogs, id=blog_id)
 
-    is_admin = request.session.get("is_admin", False)
+    is_admin = _has_admin_access(request)
     if not (is_admin or blog.author == request.user):
         return JsonResponse({"error": "Unauthorized"}, status=403)
 

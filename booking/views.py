@@ -7,6 +7,7 @@ from datetime import datetime, date, timedelta, time as dtime, timezone as dt_ti
 from django.utils import timezone
 from .models import Resource, Booking, BookingStatus
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth import get_user_model
 from django.shortcuts import render
 from .models import Resource, Booking
 from home.utils.spots_loader import load_all_spots
@@ -23,6 +24,8 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
 
 
+User = get_user_model()
+
 class CsrfExemptSessionAuthentication(SessionAuthentication):
     def enforce_csrf(self, request):
         # Bypass DRF's CSRF enforcement for this authentication class.
@@ -37,6 +40,25 @@ def _has_admin_access(request) -> bool:
             and (request.user.is_staff or request.user.is_superuser)
         )
     )
+
+def _admin_session_username(request) -> str | None:
+    if not request.session.get("is_admin", False):
+        return None
+    name = request.session.get("admin_name")
+    if isinstance(name, str) and name.strip():
+        return name.strip()
+    return None
+
+
+def _get_or_create_admin_user(request):
+    username = _admin_session_username(request)
+    if not username:
+        return None
+    user, created = User.objects.get_or_create(username=username)
+    if created:
+        user.set_unusable_password()
+        user.save(update_fields=["password"])
+    return user
 
 class IsUserOrAdminSession(BasePermission):
     def has_permission(self, request, view):
@@ -218,7 +240,7 @@ def _parse_iso(s: str):
 
 class BookingCreateView(views.APIView):
     authentication_classes = (CsrfExemptSessionAuthentication,)
-    permission_classes = [permissions.IsAuthenticated]
+    permission_classes = [IsUserOrAdminSession]
 
     def post(self, request):
         data   = request.data or {}
@@ -226,6 +248,7 @@ class BookingCreateView(views.APIView):
         label  = (data.get("resource_label") or "").strip()
         start  = _parse_iso(data.get("start_time"))
         end    = _parse_iso(data.get("end_time"))
+        notes  = (data.get("notes") or "").strip()
 
         if not (start and end) or end <= start:
             return Response({"detail": "bad datetime"}, status=400)
@@ -266,12 +289,19 @@ class BookingCreateView(views.APIView):
         def has_bfield(name):
             return any(getattr(f, "name", None) == name for f in Booking._meta.get_fields())
 
+        booking_user = request.user
+        if not (booking_user and booking_user.is_authenticated):
+            booking_user = _get_or_create_admin_user(request)
+        if booking_user is None:
+            return Response({"detail": "Unauthorized"}, status=401)
+
         b_kwargs = dict(
-            user=request.user,
+            user=booking_user,
             resource=res,
             start_time=start,
             end_time=end,
             status=BookingStatus.PENDING,
+            notes=notes,
         )
 
         if has_bfield("price"):
@@ -321,6 +351,7 @@ class MyBookingAPI(views.APIView):
                 "end": timezone.localtime(b.end_time).isoformat(),
                 "status": b.status,
                 "can_cancel": can_cancel,
+                "notes": getattr(b, "notes", "") or "",
             })
         return Response(out, status=200)
 
