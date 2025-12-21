@@ -28,6 +28,7 @@ FROM python:3.11-alpine AS runtime
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PRODUCTION True
 
 # Install only necessary runtime system dependencies (PostgreSQL client)
 RUN apk add --no-cache libpq
