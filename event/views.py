@@ -1,14 +1,16 @@
+import json
+from datetime import datetime
 from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.http import require_POST
 from django.contrib.auth.decorators import login_required
-from datetime import datetime
+from django.views.decorators.csrf import csrf_exempt
 from django.utils import timezone
 from django.db.models import Q
-import json
 from .models import Event
 from community.models import Community
 
+# --- WEB VIEWS (Django Template & AJAX) ---
 
 def event_list(request):
     name_filter = request.GET.get('name', '').strip()
@@ -36,10 +38,8 @@ def event_list(request):
 
     if name_filter:
         events = events.filter(name__icontains=name_filter)
-    
     if location_filter:
         events = events.filter(location__icontains=location_filter)
-    
     if community_filter:
         events = events.filter(community__name__icontains=community_filter)
 
@@ -49,19 +49,16 @@ def event_list(request):
     elif status_filter == 'past':
         events = events.filter(date__lte=now)
 
-    if date_sort == 'newest':
-        events = events.order_by('-created_at')
-    elif date_sort == 'soonest':
-        events = events.order_by('date')
-    elif date_sort == 'latest':
-        events = events.order_by('-date')
-    else:
-        events = events.order_by('date')
+    sort_mapping = {
+        'newest': '-created_at',
+        'soonest': 'date',
+        'latest': '-date'
+    }
+    events = events.order_by(sort_mapping.get(date_sort, 'date'))
 
     events_data = []
     for event in events:
         local_date = timezone.localtime(event.date)
-        
         events_data.append({
             'id': event.id,
             'name': event.name,
@@ -82,12 +79,9 @@ def event_list(request):
         })
 
     all_communities = Community.objects.all().values('id', 'name').order_by('name')
-
     user_admin_communities = []
     if request.user.is_authenticated:
-        user_admin_communities = Community.objects.filter(
-            admins=request.user
-        ).values('id', 'name')
+        user_admin_communities = Community.objects.filter(admins=request.user).values('id', 'name')
 
     return render(request, 'event/event_list.html', {
         'events': events_data,
@@ -116,26 +110,17 @@ def create_event(request):
         registration_deadline = data.get('registration_deadline')
 
         if not all([name, description, date, location, community_id]):
-            return JsonResponse({
-                'status': 'error', 
-                'message': 'Semua field wajib diisi.'
-            }, status=400)
+            return JsonResponse({'status': 'error', 'message': 'Semua field wajib diisi.'}, status=400)
 
         community = get_object_or_404(Community, pk=community_id)
-
         if not community.is_admin(request.user) and not request.user.is_staff:
-            return JsonResponse({
-                'status': 'error', 
-                'message': 'Hanya admin komunitas yang bisa membuat event.'
-            }, status=403)
+            return JsonResponse({'status': 'error', 'message': 'Hanya admin komunitas yang bisa membuat event.'}, status=403)
 
-        event_date = datetime.strptime(date, '%Y-%m-%dT%H:%M')
-        event_date = timezone.make_aware(event_date, timezone.get_current_timezone())
+        event_date = timezone.make_aware(datetime.strptime(date, '%Y-%m-%dT%H:%M'), timezone.get_current_timezone())
         
         reg_deadline = None
         if registration_deadline:
-            reg_deadline = datetime.strptime(registration_deadline, '%Y-%m-%dT%H:%M')
-            reg_deadline = timezone.make_aware(reg_deadline, timezone.get_current_timezone())
+            reg_deadline = timezone.make_aware(datetime.strptime(registration_deadline, '%Y-%m-%dT%H:%M'), timezone.get_current_timezone())
 
         event = Event.objects.create(
             name=name,
@@ -147,27 +132,9 @@ def create_event(request):
             registration_deadline=reg_deadline
         )
 
-        return JsonResponse({
-            'status': 'success',
-            'message': f'Event "{event.name}" berhasil dibuat.',
-            'event_id': event.id
-        })
-    except Community.DoesNotExist:
-        return JsonResponse({
-            'status': 'error',
-            'message': 'Komunitas tidak ditemukan.'
-        }, status=404)
-    except ValueError as e:
-        return JsonResponse({
-            'status': 'error',
-            'message': f'Format tanggal tidak valid: {str(e)}'
-        }, status=400)
+        return JsonResponse({'status': 'success', 'message': f'Event "{event.name}" berhasil dibuat.', 'event_id': event.id})
     except Exception as e:
-        print(f"Error creating event: {e}")
-        return JsonResponse({
-            'status': 'error',
-            'message': f'Error: {str(e)}'
-        }, status=500)
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 
 @login_required
@@ -175,21 +142,13 @@ def create_event(request):
 def edit_event(request, event_id):
     try:
         event = get_object_or_404(Event, id=event_id)
-
         if not event.can_edit(request.user):
-            return JsonResponse({
-                'status': 'error', 
-                'message': 'Kamu tidak memiliki izin untuk mengedit event ini.'
-            }, status=403)
+            return JsonResponse({'status': 'error', 'message': 'Izin ditolak.'}, status=403)
 
         data = json.loads(request.body)
-
-        if 'name' in data:
-            event.name = data['name']
-        if 'description' in data:
-            event.description = data['description']
-        if 'location' in data:
-            event.location = data['location']
+        event.name = data.get('name', event.name)
+        event.description = data.get('description', event.description)
+        event.location = data.get('location', event.location)
 
         if 'date' in data and data['date']:
             event_date = datetime.strptime(data['date'], '%Y-%m-%dT%H:%M')
@@ -203,185 +162,204 @@ def edit_event(request, event_id):
                 event.registration_deadline = None
         
         event.save()
-
-        return JsonResponse({
-            'status': 'success',
-            'message': 'Event berhasil diperbarui.'
-        })
-    except ValueError as e:
-        return JsonResponse({
-            'status': 'error',
-            'message': f'Format tanggal tidak valid: {str(e)}'
-        }, status=400)
+        return JsonResponse({'status': 'success', 'message': 'Event berhasil diperbarui.'})
     except Exception as e:
-        print(f"Error editing event {event_id}: {e}")
-        return JsonResponse({
-            'status': 'error',
-            'message': f'Error: {str(e)}'
-        }, status=500)
+        return JsonResponse({'status': 'error', 'message': str(e)}, status=500)
 
 
 @login_required
 @require_POST
 def delete_event(request, event_id):
-    try:
-        event = get_object_or_404(Event, id=event_id)
-
-        if not event.can_delete(request.user):
-            return JsonResponse({
-                'status': 'error', 
-                'message': 'Kamu tidak memiliki izin untuk menghapus event ini.'
-            }, status=403)
-
-        event_name = event.name
-        event.delete()
-        
-        return JsonResponse({
-            'status': 'success',
-            'message': f'Event "{event_name}" telah dihapus.'
-        })
-    except Exception as e:
-        print(f"Error deleting event {event_id}: {e}")
-        return JsonResponse({
-            'status': 'error',
-            'message': f'Error: {str(e)}'
-        }, status=500)
+    event = get_object_or_404(Event, id=event_id)
+    if not event.can_delete(request.user):
+        return JsonResponse({'status': 'error', 'message': 'Izin ditolak.'}, status=403)
+    event.delete()
+    return JsonResponse({'status': 'success', 'message': 'Event telah dihapus.'})
 
 
 @login_required
 @require_POST
 def join_event(request, event_id):
-    try:
-        event = get_object_or_404(Event, id=event_id)
+    event = get_object_or_404(Event, id=event_id)
+    if not event.can_join(request.user):
+        if event.user_is_participant(request.user):
+            message = 'Kamu sudah terdaftar di event ini.'
+        elif not event.registration_open():
+            message = 'Pendaftaran event sudah ditutup.'
+        else:
+            message = 'Kamu tidak bisa bergabung ke event ini.'
+        return JsonResponse({'status': 'error', 'message': message}, status=400)
 
-        if not event.can_join(request.user):
-            if event.user_is_participant(request.user):
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Kamu sudah terdaftar di event ini.'
-                }, status=400)
-            elif not event.registration_open():
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Pendaftaran event sudah ditutup.'
-                }, status=400)
-            else:
-                return JsonResponse({
-                    'status': 'error',
-                    'message': 'Kamu tidak bisa bergabung ke event ini.'
-                }, status=400)
-
-        event.participants.add(request.user)
-        
-        return JsonResponse({
-            'status': 'success',
-            'message': f'Berhasil bergabung ke event "{event.name}"!',
-            'participant_count': event.participants.count()
-        })
-    except Exception as e:
-        print(f"Error joining event {event_id}: {e}")
-        return JsonResponse({
-            'status': 'error',
-            'message': f'Error: {str(e)}'
-        }, status=500)
+    event.participants.add(request.user)
+    return JsonResponse({'status': 'success', 'message': f'Berhasil bergabung ke event "{event.name}"!', 'participant_count': event.participants.count()})
 
 
 @login_required
 @require_POST
 def leave_event(request, event_id):
-    try:
-        event = get_object_or_404(Event, id=event_id)
-        if not event.user_is_participant(request.user):
-            return JsonResponse({
-                'status': 'error',
-                'message': 'Kamu belum terdaftar di event ini.'
-            }, status=400)
-        if event.is_past() or event.is_ongoing():
-            return JsonResponse({
-                'status': 'error',
-                'message': 'Event sudah dimulai, kamu tidak bisa keluar.'
-            }, status=400)
+    event = get_object_or_404(Event, id=event_id)
+    if not event.user_is_participant(request.user):
+        return JsonResponse({'status': 'error', 'message': 'Kamu belum terdaftar.'}, status=400)
+    if event.is_past() or event.is_ongoing():
+        return JsonResponse({'status': 'error', 'message': 'Event sudah dimulai.'}, status=400)
 
-        event.participants.remove(request.user)
-        
-        return JsonResponse({
-            'status': 'success',
-            'message': f'Berhasil keluar dari event "{event.name}".',
-            'participant_count': event.participants.count()
-        })
-    except Exception as e:
-        print(f"Error leaving event {event_id}: {e}")
-        return JsonResponse({
-            'status': 'error',
-            'message': f'Error: {str(e)}'
-        }, status=500)
+    event.participants.remove(request.user)
+    return JsonResponse({'status': 'success', 'message': 'Berhasil keluar.', 'participant_count': event.participants.count()})
 
 
 @login_required
 def get_event_detail(request, event_id):
-    try:
-        event = get_object_or_404(Event, id=event_id)
-        local_date = timezone.localtime(event.date)
-        
-        return JsonResponse({
-            'status': 'success',
-            'event': {
-                'id': event.id,
-                'name': event.name,
-                'description': event.description,
-                'date': local_date.strftime('%Y-%m-%d %H:%M'),
-                'date_input': local_date.strftime('%Y-%m-%dT%H:%M'),
-                'location': event.location,
-                'community_id': event.community.id,
-                'community_name': event.community.name,
-                'can_edit': event.can_edit(request.user),
-                'can_join': event.can_join(request.user),
-                'is_participant': event.user_is_participant(request.user),
-                'participant_count': event.participants.count(),
-                'registration_open': event.registration_open(),
-                'is_past': event.is_past(),
-            }
-        })
-    except Exception as e:
-        return JsonResponse({
-            'status': 'error',
-            'message': str(e)
-        }, status=500)
+    event = get_object_or_404(Event, id=event_id)
+    local_date = timezone.localtime(event.date)
+    return JsonResponse({
+        'status': 'success',
+        'event': {
+            'id': event.id,
+            'name': event.name,
+            'description': event.description,
+            'date': local_date.strftime('%Y-%m-%d %H:%M'),
+            'location': event.location,
+            'community_name': event.community.name,
+            'can_edit': event.can_edit(request.user),
+            'is_participant': event.user_is_participant(request.user),
+            'participant_count': event.participants.count(),
+        }
+    })
 
 
 def community_events_api(request, community_id):
-    try:
-        community = get_object_or_404(Community, id=community_id)
-        events = Event.objects.filter(community=community).order_by('date')
-        
-        now = timezone.now()
-        events_data = []
-        
-        for event in events:
-            local_date = timezone.localtime(event.date)
-            events_data.append({
-                'id': event.id,
-                'name': event.name,
-                'description': event.description,
-                'date': local_date.strftime('%Y-%m-%d %H:%M'),
-                'date_display': local_date.strftime('%d %B %Y, %H:%M'),
-                'location': event.location,
-                'participant_count': event.participants.count(),
-                'is_past': event.is_past(),
-                'registration_open': event.registration_open(),
-                'can_join': event.can_join(request.user),
-                'is_participant': event.user_is_participant(request.user),
-                'can_edit': event.can_edit(request.user),
-            })
-        
-        return JsonResponse({
-            'success': True,
-            'community_name': community.name,
-            'events': events_data
+    community = get_object_or_404(Community, id=community_id)
+    events = Event.objects.filter(community=community).order_by('date')
+    events_data = []
+    for event in events:
+        local_date = timezone.localtime(event.date)
+        events_data.append({
+            'id': event.id,
+            'name': event.name,
+            'date': local_date.strftime('%Y-%m-%d %H:%M'),
+            'location': event.location,
+            'participant_count': event.participants.count(),
         })
+    return JsonResponse({'success': True, 'community_name': community.name, 'events': events_data})
+
+
+# --- FLUTTER API VIEWS ---
+
+@login_required
+def get_user_admin_communities(request):
+    communities = Community.objects.filter(admins=request.user).values('id', 'name')
+    return JsonResponse({'status': 'success', 'communities': list(communities)})
+
+
+@csrf_exempt
+def create_event_flutter(request):
+    if request.method != 'POST':
+        return JsonResponse({"status": "error", "message": "Metode harus POST"}, status=405)
+    
+    if not request.user.is_authenticated:
+        return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
+
+    try:
+        data = json.loads(request.body)
+        community = get_object_or_404(Community, id=data.get("community_id"))
+        
+        # Timezone Aware Fix
+        event_date = datetime.strptime(data.get("date"), "%Y-%m-%d %H:%M:%S")
+        aware_event_date = timezone.make_aware(event_date, timezone.get_current_timezone())
+
+        new_event = Event.objects.create(
+            created_by=request.user,
+            community=community,
+            name=data.get("name"),
+            description=data.get("description"),
+            date=aware_event_date,
+            location=data.get("location"),
+        )
+        return JsonResponse({"status": "success", "message": "Event berhasil dibuat!"}, status=200)
     except Exception as e:
-        print(f"Error fetching community events for community_id {community_id}: {e}")
-        return JsonResponse({
-            'success': False,
-            'error': str(e)
-        }, status=500)
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+
+def show_event_api(request):
+    events = Event.objects.all().order_by('-date').select_related('community')
+    data = []
+    for event in events:
+        is_authenticated = request.user.is_authenticated
+        data.append({
+            "id": event.id,
+            "name": event.name,
+            "description": event.description,
+            "date": timezone.localtime(event.date).strftime("%Y-%m-%d %H:%M:%S"),
+            "location": event.location,
+            "community_name": event.community.name,
+            "participant_count": event.participants.count(),
+            "can_edit": event.can_edit(request.user) if is_authenticated else False,
+            "is_active": not event.is_past(),
+            "is_joined": event.user_is_participant(request.user) if is_authenticated else False,
+        })
+    return JsonResponse(data, safe=False)
+
+
+@csrf_exempt
+def join_event_flutter(request, event_id):
+    if request.method != 'POST':
+        return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+    if not request.user.is_authenticated:
+        return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
+    
+    event = get_object_or_404(Event, id=event_id)
+    if event.participants.filter(id=request.user.id).exists():
+        return JsonResponse({"status": "error", "message": "Sudah join."}, status=400)
+    
+    event.participants.add(request.user)
+    return JsonResponse({"status": "success", "message": "Berhasil join!"}, status=200)
+
+
+@csrf_exempt
+def leave_event_flutter(request, event_id):
+    if request.method != 'POST':
+        return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+    if not request.user.is_authenticated:
+        return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
+    
+    event = get_object_or_404(Event, id=event_id)
+    event.participants.remove(request.user)
+    return JsonResponse({"status": "success", "message": "Berhasil keluar."}, status=200)
+
+
+@csrf_exempt
+def edit_event_flutter(request, event_id):
+    if request.method != 'POST':
+        return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+    
+    event = get_object_or_404(Event, id=event_id)
+    if not event.can_edit(request.user):
+        return JsonResponse({"status": "error", "message": "Izin ditolak."}, status=403)
+
+    try:
+        data = json.loads(request.body)
+        event.name = data.get("name", event.name)
+        event.description = data.get("description", event.description)
+        event.location = data.get("location", event.location)
+        
+        if "date" in data:
+            new_date = datetime.strptime(data["date"], "%Y-%m-%d %H:%M:%S")
+            event.date = timezone.make_aware(new_date, timezone.get_current_timezone())
+
+        event.save()
+        return JsonResponse({"status": "success", "message": "Event berhasil diupdate!"}, status=200)
+    except Exception as e:
+        return JsonResponse({"status": "error", "message": str(e)}, status=500)
+
+
+@csrf_exempt
+def delete_event_flutter(request, event_id):
+    if request.method != 'POST':
+        return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
+    
+    event = get_object_or_404(Event, id=event_id)
+    if not event.can_delete(request.user):
+        return JsonResponse({"status": "error", "message": "Izin ditolak."}, status=403)
+        
+    event.delete()
+    return JsonResponse({"status": "success", "message": "Event berhasil dihapus!"}, status=200)

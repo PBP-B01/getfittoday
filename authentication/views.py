@@ -68,8 +68,8 @@ def login(request):
                 },
                 status=200,
             )
-
-        return JsonResponse(
+        else:
+            return JsonResponse(
             {
                 "status": False,
                 "message": "Login failed, account is disabled.",
