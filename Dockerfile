@@ -28,6 +28,7 @@ FROM python:3.11-alpine AS runtime
 # Set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
+ENV PRODUCTION True
 
 # Install only necessary runtime system dependencies (PostgreSQL client)
 RUN apk add --no-cache libpq
@@ -42,8 +43,6 @@ COPY --from=builder /usr/local/bin /usr/local/bin
 # Copy the rest of the application code into the container
 COPY . .
 
-RUN python manage.py migrate --noinput
-
 # Run collectstatic to gather static files for WhiteNoise
 # Use --noinput to automatically confirm
 RUN python manage.py collectstatic --noinput
@@ -54,4 +53,4 @@ EXPOSE 8000
 # Define the command to run the application using Gunicorn
 # Binds to all network interfaces on port 8000
 # Ensure 'getfittoday.wsgi:application' matches your project structure
-CMD ["gunicorn", "--bind", "0.0.0.0:80", "getfittoday.wsgi:application"]
+CMD sh -c "python manage.py migrate --noinput && gunicorn --bind 0.0.0.0:80 getfittoday.wsgi:application"

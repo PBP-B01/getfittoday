@@ -11,7 +11,7 @@
   <!-- Search box -->
   <div class="flex justify-center mb-6">
     <div class="w-full md:w-2/3">
-      <label class="block text-sm mb-2 text-white/90">Choose Location</label>
+      <label class="block text-sm mb-2">.</label>
       <div class="search-wrap">
         <input id="spotCombo" type="text" placeholder="Search location..."
               autocomplete="off"
@@ -42,7 +42,7 @@
       <div id="calGrid" class="grid grid-cols-7 gap-2"></div>
 
       <p id="calHint" class="mt-4 text-white/70 text-sm">
-        Pick a location, then choose a date to check available hours.
+        Pilih lokasi, kemudian pilih tanggal untuk melihat ketersediaan waktu.
       </p>
     </div>
 
@@ -50,9 +50,8 @@
     <div class="bg-white/10 rounded-xl p-4">
       <!-- Durasi booking (1–5 jam) -->
       <div class="mb-4">
-        <label for="durationHours" class="block text-sm text-white/90 mb-1">Duration</label>
-        <select id="durationHours"
-                class="w-40 rounded-lg bg-white/90 text-blue-900 px-2 py-1">
+        <label for="durationHours" class="block text-sm text-white/90 mb-1">Durasi</label>
+        <select id="durationHours" class="w-40 rounded-lg bg-white/90 text-blue-900 px-2 py-1">
           <option value="1">1 jam</option>
           <option value="2">2 jam</option>
           <option value="3">3 jam</option>
@@ -60,7 +59,7 @@
           <option value="5">5 jam</option>
         </select>
       </div>
-      <h3 class="font-semibold mb-3">Available hours</h3>
+      <h3 class="font-semibold mb-3">Waktu tersedia</h3>
       <div id="slots" class="space-y-2 text-sm"></div>
     </div>
 
@@ -152,8 +151,8 @@
       listEl.classList.add('hidden');
       slotsEl.innerHTML = '';
       calHint.textContent = placeIdEl.value
-        ? 'Click a date to show available hours'
-        : 'Pick a location, then choose a date to check available hours.';
+        ? 'Pilih tanggal untuk melihat ketersediaan waktu.'
+        : 'Pilih lokasi, kemudian pilih tanggal untuk melihat ketersediaan waktu.';
     }
 
     if (navigator.geolocation) {
@@ -315,7 +314,7 @@
 
   let lastAvail = null, lastDate = null, lastPlace = null;
   async function loadSlots(placeId, dateISO){
-    slotsEl.innerHTML = '<div class="text-white/80">Memuat…</div>';
+    slotsEl.innerHTML = '<div class="text-white/80">Memuat..</div>';
     const label = (document.getElementById('spotCombo').value || '').trim();
     let data;
     if (lastAvail && lastDate === dateISO && lastPlace === placeId && lastLabel === label) {
@@ -354,7 +353,7 @@
       btn.addEventListener('click', async () => {
         if (btn.dataset.bookingId) {
           const id = btn.dataset.bookingId;
-          btn.disabled = true; btn.textContent = 'Mencabut…';
+          btn.disabled = true; btn.textContent = 'Mencabut..';
           try {
             const r = await fetch(`/booking/cancel/${encodeURIComponent(id)}/`, {
               method: 'POST',
@@ -383,7 +382,7 @@
           resource_id: placeId,
           resource_label: document.getElementById('spotCombo').value || '',
           start_time: w.start.toISOString(),
-          end_time:   w.end.toISOString()
+          end_time: w.end.toISOString()
         };
 
         btn.disabled = true; btn.textContent = 'Memesan…';

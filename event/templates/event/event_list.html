@@ -1,0 +1,808 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Community Events | GetFit.Today{% endblock %}
+{% block body_class %}event-theme{% endblock %}
+
+{% block extra_css %}
+{{ block.super }}
+<style>
+  :root{
+    --nav-bg:#0E5A64; --nav-bg-darker:#07434B; --nav-text:#FFFFFF;
+    --title:#1B2B5A; --bg-1:#EAF2FF; --bg-2:#BFD6F2;
+    --card-bg:#FFFFFF; --card-brd:#C8DDF6; --card-brd-strong:#DDE7FF;
+    --ink-weak:#6B7A99; --accent:#FFC107; --accent-dark:#E0A106;
+  }
+
+  body.event-theme{
+    background:
+      radial-gradient(1200px 600px at 15% 6%, rgba(255,255,255,.6), transparent 70%),
+      linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 100%);
+    color: var(--title);
+  }
+  
+  body.event-theme nav{
+    background-color: var(--nav-bg) !important;
+    color: var(--nav-text) !important;
+    border-radius: 0 !important;
+    box-shadow: 0 1px 0 rgba(0,0,0,.06);
+  }
+  body.event-theme nav > a,
+  body.event-theme nav > div > a{ 
+    color: var(--nav-text) !important; 
+  }
+  body.event-theme nav > a:hover,
+  body.event-theme nav > div > a:hover{ 
+    opacity:.92; 
+  }
+
+  #userMenu .font-semibold, 
+  #mUserMenu .font-semibold {
+    color: #1F2937 !important;
+  }
+
+  #userMenu .text-gray-600,
+  #mUserMenu .text-gray-600 {
+    color: #6B7280 !important;
+  }
+
+  #userMenu a,
+  #mUserMenu a {
+    color: #1F2937 !important;
+  }
+
+  #userMenu a.text-red-600, 
+  #mUserMenu a.text-red-600 {
+    color: #DC2626 !important;
+  }
+
+  #userMenu a:hover, 
+  #mUserMenu a:hover {
+    background: #F3F4F6 !important;
+  }
+
+  #userMenu a.text-red-600:hover,
+  #mUserMenu a.text-red-600:hover {
+    background: #FEE2E2 !important;
+    color: #B91C1C !important;
+  }
+
+  .event-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-brd);
+    border-radius: 16px;
+    padding: 20px;
+    box-shadow: 0 10px 24px rgba(13,43,63,.10), inset 0 1px 0 rgba(255,255,255,.65);
+    transition: transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    will-change: transform;
+  }
+  .event-card:hover{
+    transform: translateY(-2px);
+    box-shadow: 0 16px 32px rgba(13,43,63,.14);
+    border-color: var(--card-brd-strong);
+  }
+
+  .filter-panel{
+    background: var(--card-bg);
+    border: 1px solid var(--card-brd);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 6px 16px rgba(13,43,63,.08);
+  }
+
+  .btn-accent{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1rem; border-radius:12px; font-weight:700;
+    color:#0B2E55; background: var(--accent);
+    border:1px solid color-mix(in srgb, var(--accent) 90%, #000 0%);
+    box-shadow: 0 12px 28px rgba(224,161,6,.25);
+    transition: background .15s ease, transform .05s ease;
+  }
+  .btn-accent:hover{ background: var(--accent-dark); }
+  .btn-accent:active{ transform: translateY(1px); }
+  .btn-accent:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+  .btn-teal{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1rem; border-radius:12px; font-weight:700;
+    background: var(--nav-bg); color:#fff; border:1px solid var(--nav-bg-darker);
+    box-shadow: 0 10px 24px rgba(14,90,100,.25);
+    transition: filter .15s ease, transform .05s ease;
+  }
+  .btn-teal:hover{ filter: brightness(1.05); }
+  .btn-teal:active{ transform: translateY(1px); }
+
+  .btn-muted{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1rem; border-radius:12px; font-weight:700;
+    background:#6B7280; color:#fff; border:1px solid #4B5563;
+    box-shadow: 0 8px 18px rgba(75,85,99,.25);
+    transition: filter .15s ease;
+  }
+  .btn-muted:hover{ filter: brightness(1.05); }
+
+  .btn-success{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1.2rem; border-radius:12px; font-weight:700;
+    background:#10B981; color:#fff; border:1px solid #059669;
+    box-shadow: 0 10px 22px rgba(16,185,129,.25);
+    transition: filter .15s ease;
+  }
+  .btn-success:hover{ filter: brightness(1.05); }
+  .btn-success:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+  .btn-warning{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1.2rem; border-radius:12px; font-weight:700;
+    background:#F59E0B; color:#fff; border:1px solid #D97706;
+    box-shadow: 0 10px 22px rgba(245,158,11,.25);
+    transition: filter .15s ease;
+  }
+  .btn-warning:hover{ filter: brightness(1.05); }
+  .btn-warning:disabled{ opacity: 0.6; cursor: not-allowed; }
+
+  .btn-danger{
+    display:inline-flex; align-items:center; justify-content:center;
+    padding:.6rem 1rem; border-radius:12px; font-weight:700;
+    background:#DC2626; color:#fff; border:1px solid #B91C1C;
+    box-shadow: 0 10px 22px rgba(220,38,38,.25);
+    transition: filter .15s ease;
+  }
+  .btn-danger:hover{ filter: brightness(1.05); }
+
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(0,0,0,.6);
+    display:flex; align-items:center; justify-content:center; z-index:50;
+    padding:1rem;
+  }
+
+  .modal-card{
+    background: var(--card-bg);
+    border: 1px solid var(--card-brd);
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 560px; width: 100%;
+    box-shadow: 0 40px 80px rgba(13,43,63,.18), 0 12px 24px rgba(13,43,63,.12);
+  }
+
+  .form-input{
+    width:100%; padding:.6rem .75rem; border-radius:12px;
+    background:#F8FBFF; color:#0B2E55;
+    border:1px solid var(--card-brd); outline:none;
+    transition: box-shadow .18s ease, border-color .18s ease;
+  }
+  .form-input:focus{
+    border-color: var(--card-brd-strong);
+    box-shadow: 0 0 0 4px rgba(158,197,255,.5), 0 10px 22px rgba(13,43,63,.12);
+  }
+
+  .page-title{ color: var(--title); font-weight: 800; font-size: clamp(28px, 4vw, 36px); text-align:center; margin-bottom:1.5rem; }
+  .card-title{ color: var(--title); font-weight: 700; font-size: 1.25rem; margin-bottom: .5rem; }
+  .text-muted{ color: var(--ink-weak); }
+
+  .btn-back{
+    display:inline-flex; align-items:center; gap: 0.5rem;
+    color: var(--title);
+    font-weight: 600;
+    font-size: 1rem;
+    transition: opacity .2s ease;
+  }
+  .btn-back:hover{ 
+    opacity: 0.7;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto px-4 py-8">
+  {% if from_community_id and from_community_name %}
+  <div class="mb-6">
+    <a href="{% url 'community:community_detail' from_community_id %}" class="btn-back">
+      <span>←</span>
+      <span>Kembali ke {{ from_community_name }}</span>
+    </a>
+  </div>
+  {% endif %}
+
+  <h1 class="page-title">Community Events</h1>
+
+  <div class="filter-panel mb-6">
+    <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3">
+      <div class="flex justify-center sm:justify-start items-center space-x-3">
+        <a href="{% url 'event:event_list' %}{% if from_community_id %}?from_community={{ from_community_id }}{% endif %}" 
+          class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold transition
+          {% if not request.GET.my_events %}btn-accent{% else %}btn-muted{% endif %}">
+          Semua Event
+        </a>
+
+        {% if user.is_authenticated %}
+          <a href="?my_events=true{% if from_community_id %}&from_community={{ from_community_id }}{% endif %}" 
+            class="inline-flex items-center justify-center px-5 py-2.5 rounded-lg font-semibold transition
+            {% if request.GET.my_events %}btn-accent{% else %}btn-muted{% endif %}">
+            Event yang Saya Kelola
+          </a>
+        {% endif %}
+      </div>
+
+      {% if user.is_authenticated and user_admin_communities %}
+        <div class="flex justify-center sm:justify-end">
+          <button id="createBtn" class="btn-accent">
+            ➕ Buat Event Baru
+          </button>
+        </div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="filter-panel mb-6">
+    <div class="flex items-center justify-between cursor-pointer" id="filterToggle">
+      <h3 class="text-lg font-semibold" style="color: var(--title);">▼ Filter Panel</h3>
+    </div>
+
+    <div id="filterPanel" class="hidden mt-4 space-y-3 border-t pt-4" style="border-color: var(--card-brd);">
+      <form id="filterForm" method="GET" action="{% url 'event:event_list' %}" class="space-y-3">
+        {% if request.GET.my_events %}
+          <input type="hidden" name="my_events" value="true">
+        {% endif %}
+        {% if from_community_id %}
+          <input type="hidden" name="from_community" value="{{ from_community_id }}">
+        {% endif %}
+        
+        <div>
+          <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Nama Event</label>
+          <input type="text" name="name" id="filter_name" 
+                 placeholder="Cari nama event..." 
+                 value="{{ filter_name }}"
+                 class="form-input">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Lokasi</label>
+          <input type="text" name="location" id="filter_location" 
+                 placeholder="Masukkan lokasi..." 
+                 value="{{ filter_location }}"
+                 class="form-input">
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Tanggal</label>
+          <select name="date_sort" id="filter_date_sort" class="form-input">
+            <option value="newest" {% if filter_date_sort == 'newest' %}selected{% endif %}>Terbaru Ditambahkan</option>
+            <option value="soonest" {% if filter_date_sort == 'soonest' %}selected{% endif %}>Dari Tercepat</option>
+            <option value="latest" {% if filter_date_sort == 'latest' %}selected{% endif %}>Dari Terlambat</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Komunitas</label>
+          <input type="text" name="community" id="filter_community" 
+                 list="communityList"
+                 placeholder="Cari komunitas..." 
+                 value="{{ filter_community }}"
+                 class="form-input">
+          <datalist id="communityList">
+            {% for comm in all_communities %}
+              <option value="{{ comm.name }}">
+            {% endfor %}
+          </datalist>
+        </div>
+
+        <div>
+          <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Status Event</label>
+          <select name="status" id="filter_status" class="form-input">
+            <option value="all" {% if filter_status == 'all' %}selected{% endif %}>Semua Event</option>
+            <option value="upcoming" {% if filter_status == 'upcoming' %}selected{% endif %}>Event yang Belum Berjalan</option>
+            <option value="past" {% if filter_status == 'past' %}selected{% endif %}>Event yang Sudah Lewat</option>
+          </select>
+        </div>
+
+        <div class="flex space-x-3 pt-2">
+          <button type="button" id="resetFilter" class="flex-1 btn-muted">
+            Reset 
+          </button>
+          <button type="submit" class="flex-1 btn-accent">
+            Terapkan Filter 
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  {% if not events %}
+    <div class="flex flex-col items-center justify-center mt-12 mb-8">
+      <div class="text-6xl mb-4">📅</div>
+      <p class="text-center text-muted text-lg">
+        {% if request.GET.my_events %}
+          Kamu belum mengelola event apapun.
+        {% else %}
+          Tidak ada event yang sesuai dengan filter.
+        {% endif %}
+      </p>
+    </div>
+  {% endif %}
+
+  <div id="eventList" class="space-y-6 mt-8">
+    {% for event in events %}
+      <div id="event-{{ event.id }}" class="event-card">
+        <div class="flex justify-between items-start mb-3">
+          <h3 class="card-title">{{ event.name }}</h3>
+          {% if event.is_past %}
+            <span class="px-3 py-1 text-xs font-bold rounded-full bg-gray-300 text-gray-700">Event Selesai</span>
+          {% elif not event.registration_open %}
+            <span class="px-3 py-1 text-xs font-bold rounded-full bg-red-100 text-red-700">Pendaftaran Ditutup</span>
+          {% else %}
+            <span class="px-3 py-1 text-xs font-bold rounded-full bg-green-100 text-green-700">Pendaftaran Dibuka</span>
+          {% endif %}
+        </div>
+
+        <p class="text-muted mb-3">{{ event.description }}</p>
+        
+        <div class="space-y-1 text-sm mb-4" style="color: var(--title);">
+          <p>📅 {{ event.date }}</p>
+          <p>📍 {{ event.location }}</p>
+          <p class="font-semibold">🏘️ {{ event.community_name }}</p>
+          <p class="text-muted participant-count">👥 {{ event.participant_count }} peserta terdaftar</p>
+        </div>
+
+        <div class="flex justify-between items-center pt-3 border-t" style="border-color: var(--card-brd);">
+          <div class="flex space-x-2">
+            {% if user.is_authenticated and event.can_edit %}
+              <button class="edit-btn px-4 py-2 rounded-lg font-semibold bg-yellow-400 hover:bg-yellow-300 transition"
+                      style="color: var(--title);"
+                      data-id="{{ event.id }}"
+                      data-name="{{ event.name }}"
+                      data-desc="{{ event.description }}"
+                      data-date="{{ event.date_input }}"
+                      data-loc="{{ event.location }}"
+                      data-community="{{ event.community_id }}">
+                Edit
+              </button>
+            {% endif %}
+          </div>
+
+          <div class="action-buttons">
+            {% if user.is_authenticated %}
+              {% if event.can_join %}
+                <button class="join-btn btn-success" data-id="{{ event.id }}">
+                  Join Event
+                </button>
+              {% elif event.is_participant %}
+                <button class="leave-btn btn-warning" data-id="{{ event.id }}" data-name="{{ event.name }}">
+                  ← Leave Event
+                </button>
+              {% elif not event.registration_open %}
+                <button class="btn-muted opacity-50 cursor-not-allowed" disabled>
+                  Pendaftaran Ditutup
+                </button>
+              {% endif %}
+            {% else %}
+              <p class="text-sm text-muted italic">Login untuk bergabung</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+</div>
+
+<div id="eventModal" class="hidden modal-overlay">
+  <div class="modal-card">
+    <h2 id="modalTitle" class="text-2xl font-bold mb-4" style="color: var(--title);">Buat Event</h2>
+    <form id="eventForm" class="space-y-3">
+      <input type="hidden" id="event_id" name="event_id" value="">
+      
+      <div>
+        <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Nama Event</label>
+        <input type="text" id="event_name" name="name" placeholder="Nama event" required class="form-input">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Komunitas</label>
+        <select id="event_community" name="community" required class="form-input">
+          <option value="">-- Pilih Komunitas --</option>
+          {% for comm in user_admin_communities %}
+            <option value="{{ comm.id }}">{{ comm.name }}</option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Tanggal & Waktu</label>
+        <input type="datetime-local" id="event_date" name="date" required class="form-input">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Lokasi</label>
+        <input type="text" id="event_location" name="location" placeholder="Lokasi" required class="form-input">
+      </div>
+
+      <div>
+        <label class="block text-sm font-semibold mb-1" style="color: var(--title);">Deskripsi</label>
+        <textarea id="event_description" name="description" placeholder="Deskripsi" required class="form-input" rows="4"></textarea>
+      </div>
+
+      <div class="flex justify-between items-center pt-4">
+        <button type="button" id="deleteBtn" class="hidden btn-danger">
+          Hapus Event
+        </button>
+        <div id="deleteSpacer"></div>
+
+        <div class="flex space-x-3">
+          <button type="button" id="closeModal" class="btn-muted">
+            Batal
+          </button>
+          <button type="submit" id="saveBtn" class="btn-accent">
+            Simpan
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div id="deleteConfirmModal" class="hidden modal-overlay" style="z-index:60;">
+  <div class="modal-card max-w-sm border-2 border-red-500">
+    <h3 class="text-xl font-bold text-red-600 mb-3" id="confirmModalTitle">Konfirmasi Hapus</h3>
+    <p class="text-muted mb-6"><span id="confirmModalText">Yakin ingin menghapus event</span> "<span id="deleteEventName" class="font-semibold" style="color: var(--title);"></span>"?</p>
+    
+    <div class="flex space-x-3">
+      <button type="button" id="cancelDelete" class="flex-1 btn-muted">
+        Batal
+      </button>
+      <button type="button" id="confirmDelete" class="flex-1 btn-danger">
+        Hapus
+      </button>
+    </div>
+  </div>
+</div>
+
+<div id="toastContainer" class="fixed bottom-8 right-8 z-50 space-y-3"></div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const filterToggle = document.getElementById('filterToggle');
+  const filterPanel = document.getElementById('filterPanel');
+  let isFilterOpen = false;
+
+  filterToggle.addEventListener('click', () => {
+    isFilterOpen = !isFilterOpen;
+    if (isFilterOpen) {
+      filterPanel.classList.remove('hidden');
+      filterToggle.querySelector('h3').textContent = '▲ Filter Panel';
+    } else {
+      filterPanel.classList.add('hidden');
+      filterToggle.querySelector('h3').textContent = '▼ Filter Panel';
+    }
+  });
+
+  const resetFilter = document.getElementById('resetFilter');
+  resetFilter.addEventListener('click', () => {
+    const params = new URLSearchParams(window.location.search);
+    const myEvents = params.get('my_events');
+    const fromCommunity = params.get('from_community');
+    
+    let url = '{% url "event:event_list" %}';
+    const queryParams = [];
+    
+    if (myEvents) queryParams.push('my_events=true');
+    if (fromCommunity) queryParams.push('from_community=' + fromCommunity);
+    
+    if (queryParams.length > 0) {
+      url += '?' + queryParams.join('&');
+    }
+    
+    window.location.href = url;
+  });
+
+  const createBtn = document.getElementById('createBtn');
+  const eventModal = document.getElementById('eventModal');
+  const closeModal = document.getElementById('closeModal');
+  const eventForm = document.getElementById('eventForm');
+  const modalTitle = document.getElementById('modalTitle');
+  const saveBtn = document.getElementById('saveBtn');
+  const deleteBtn = document.getElementById('deleteBtn');
+  const deleteSpacer = document.getElementById('deleteSpacer');
+  
+  const deleteConfirmModal = document.getElementById('deleteConfirmModal');
+  const deleteEventName = document.getElementById('deleteEventName');
+  const confirmModalTitle = document.getElementById('confirmModalTitle');
+  const confirmModalText = document.getElementById('confirmModalText');
+  const cancelDelete = document.getElementById('cancelDelete');
+  const confirmDelete = document.getElementById('confirmDelete');
+  let currentDeleteId = null;
+  let currentDeleteAction = 'delete';
+
+  function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';');
+      for (let i = 0; i < cookies.length; i++) {
+        const cookie = cookies[i].trim();
+        if (cookie.substring(0, name.length + 1) === (name + '=')) {
+          cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+          break;
+        }
+      }
+    }
+    return cookieValue;
+  }
+  const csrftoken = getCookie('csrftoken');
+
+  function showToast(message, type = 'success') {
+    const toastContainer = document.getElementById('toastContainer');
+    const toast = document.createElement('div');
+    toast.className = 'transform transition-all duration-300 ease-in-out max-w-sm';
+
+    let icon, bgColor;
+    if (type === 'success') {
+      icon = '✓';
+      bgColor = 'bg-green-500';
+    } else {
+      icon = '✗';
+      bgColor = 'bg-red-500';
+    }
+    
+    toast.innerHTML = `
+      <div class="${bgColor} text-white px-6 py-4 rounded-lg shadow-lg flex items-center space-x-3">
+        <span class="text-2xl font-bold">${icon}</span>
+        <span class="flex-1">${message}</span>
+        <button class="text-white hover:text-gray-200 font-bold text-xl" onclick="this.parentElement.parentElement.remove()">×</button>
+      </div>
+    `;
+
+    toastContainer.appendChild(toast);
+    setTimeout(() => toast.remove(), 5000);
+  }
+
+  async function updateEventCard(eventId) {
+    try {
+      const response = await fetch(`/event/ajax/get/${eventId}/`);
+      const result = await response.json();
+      
+      if (result.status === 'success') {
+        const card = document.getElementById(`event-${eventId}`);
+        if (!card) return;
+
+        const event = result.event;
+        const participantEl = card.querySelector('.participant-count');
+        if (participantEl) {
+          participantEl.textContent = `👥 ${event.participant_count} peserta terdaftar`;
+        }
+
+        const actionContainer = card.querySelector('.action-buttons');
+        if (actionContainer) {
+          let buttonHTML = '';
+          
+          if (event.can_join) {
+            buttonHTML = `<button class="join-btn btn-success" data-id="${eventId}">Join Event</button>`;
+          } else if (event.is_participant) {
+            buttonHTML = `<button class="leave-btn btn-warning" data-id="${eventId}" data-name="${event.name}">← Leave Event</button>`;
+          } else if (!event.registration_open) {
+            buttonHTML = `<button class="btn-muted opacity-50 cursor-not-allowed" disabled>Pendaftaran Ditutup</button>`;
+          }
+          
+          actionContainer.innerHTML = buttonHTML;
+        }
+      }
+    } catch (error) {
+      console.error('Error updating card:', error);
+    }
+  }
+
+  if (createBtn) {
+    createBtn.addEventListener('click', () => {
+      modalTitle.textContent = 'Buat Event';
+      eventForm.reset();
+      document.getElementById('event_id').value = '';
+      document.getElementById('event_community').disabled = false;
+      saveBtn.textContent = 'Simpan';
+      deleteBtn.classList.add('hidden');
+      deleteSpacer.style.display = 'block';
+      eventModal.classList.remove('hidden');
+    });
+  }
+
+  closeModal.addEventListener('click', () => {
+    eventModal.classList.add('hidden');
+  });
+
+  eventModal.addEventListener('click', (e) => {
+    if (e.target === eventModal) {
+      eventModal.classList.add('hidden');
+    }
+  });
+
+  eventForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const eventId = document.getElementById('event_id').value;
+    const isEdit = !!eventId;
+    const url = isEdit ? `/event/ajax/edit/${eventId}/` : `/event/ajax/create/`;
+
+    saveBtn.disabled = true;
+    saveBtn.textContent = 'Menyimpan...';
+
+    const formData = {
+      name: document.getElementById('event_name').value,
+      description: document.getElementById('event_description').value,
+      date: document.getElementById('event_date').value,
+      location: document.getElementById('event_location').value,
+      community: document.getElementById('event_community').value,
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrftoken,
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+      
+      if (response.ok && result.status === 'success') {
+        showToast(result.message, 'success');
+        eventModal.classList.add('hidden');
+        setTimeout(() => location.reload(), 1000);
+      } else {
+        showToast(result.message || 'Terjadi kesalahan', 'error');
+      }
+    } catch (error) {
+      showToast('Gagal menghubungi server', 'error');
+      console.error('Error:', error);
+    } finally {
+      saveBtn.disabled = false;
+      saveBtn.textContent = isEdit ? 'Update' : 'Simpan';
+    }
+  });
+
+  document.getElementById('eventList').addEventListener('click', async (e) => {
+    const target = e.target;
+    
+    if (target.classList.contains('edit-btn')) {
+      modalTitle.textContent = 'Edit Event';
+      saveBtn.textContent = 'Update';
+      
+      const eventId = target.dataset.id;
+      document.getElementById('event_id').value = eventId;
+      document.getElementById('event_name').value = target.dataset.name;
+      document.getElementById('event_description').value = target.dataset.desc;
+      document.getElementById('event_location').value = target.dataset.loc;
+      document.getElementById('event_community').value = target.dataset.community;
+      document.getElementById('event_community').disabled = true;
+      document.getElementById('event_date').value = target.dataset.date;
+      
+      deleteBtn.classList.remove('hidden');
+      deleteSpacer.style.display = 'none';
+      deleteBtn.dataset.name = target.dataset.name;
+      deleteBtn.dataset.id = eventId;
+      
+      eventModal.classList.remove('hidden');
+      return;
+    }
+    
+    if (target.classList.contains('join-btn')) {
+      const eventId = target.dataset.id;
+      target.disabled = true;
+      target.textContent = 'Joining...';
+      
+      try {
+        const response = await fetch(`/event/ajax/join/${eventId}/`, {
+          method: 'POST',
+          headers: {'X-CSRFToken': csrftoken},
+        });
+
+        const result = await response.json();
+        
+        if (response.ok && result.status === 'success') {
+          showToast(result.message, 'success');
+          await updateEventCard(eventId);
+        } else {
+          showToast(result.message || 'Gagal bergabung ke event', 'error');
+          target.disabled = false;
+          target.textContent = 'Join Event';
+        }
+      } catch (error) {
+        showToast('Gagal menghubungi server', 'error');
+        target.disabled = false;
+        target.textContent = 'Join Event';
+      }
+      return;
+    }
+    
+    if (target.classList.contains('leave-btn')) {
+      currentDeleteAction = 'leave';
+      confirmModalTitle.textContent = '⚠️ Konfirmasi Keluar';
+      confirmModalText.textContent = 'Yakin ingin keluar dari event';
+      deleteEventName.textContent = target.dataset.name;
+      currentDeleteId = target.dataset.id;
+      
+      const confirmBtn = document.getElementById('confirmDelete');
+      confirmBtn.textContent = 'Keluar';
+      confirmBtn.className = 'flex-1 btn-warning';
+      
+      deleteConfirmModal.classList.remove('hidden');
+      return;
+    }
+  });
+
+  deleteBtn.addEventListener('click', () => {
+    currentDeleteAction = 'delete';
+    confirmModalTitle.textContent = 'Konfirmasi Hapus';
+    confirmModalText.textContent = 'Yakin ingin menghapus event';
+    deleteEventName.textContent = deleteBtn.dataset.name;
+    currentDeleteId = deleteBtn.dataset.id;
+    
+    const confirmBtn = document.getElementById('confirmDelete');
+    confirmBtn.textContent = 'Hapus';
+    confirmBtn.className = 'flex-1 btn-danger';
+    
+    deleteConfirmModal.classList.remove('hidden');
+  });
+
+  cancelDelete.addEventListener('click', () => {
+    deleteConfirmModal.classList.add('hidden');
+    currentDeleteId = null;
+    currentDeleteAction = 'delete';
+  });
+
+  confirmDelete.addEventListener('click', async () => {
+    if (!currentDeleteId) return;
+
+    const url = currentDeleteAction === 'leave' 
+      ? `/event/ajax/leave/${currentDeleteId}/`
+      : `/event/ajax/delete/${currentDeleteId}/`;
+
+    confirmDelete.disabled = true;
+    confirmDelete.textContent = 'Processing...';
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {'X-CSRFToken': csrftoken},
+      });
+
+      const result = await response.json();
+      
+      if (response.ok && result.status === 'success') {
+        showToast(result.message, 'success');
+        deleteConfirmModal.classList.add('hidden');
+        
+        if (currentDeleteAction === 'delete') {
+          eventModal.classList.add('hidden');
+          const eventElement = document.getElementById(`event-${currentDeleteId}`);
+          if (eventElement) {
+            eventElement.style.transition = 'opacity 0.3s';
+            eventElement.style.opacity = '0';
+            setTimeout(() => eventElement.remove(), 300);
+          }
+        } else {
+          await updateEventCard(currentDeleteId);
+        }
+        
+        currentDeleteId = null;
+        currentDeleteAction = 'delete';
+      } else {
+        showToast(result.message || 'Gagal memproses', 'error');
+      }
+    } catch (error) {
+      showToast('Gagal menghubungi server', 'error');
+      console.error('Error:', error);
+    } finally {
+      confirmDelete.disabled = false;
+      confirmDelete.textContent = currentDeleteAction === 'leave' ? 'Keluar' : 'Hapus';
+    }
+  });
+
+  deleteConfirmModal.addEventListener('click', (e) => {
+    if (e.target === deleteConfirmModal) {
+      deleteConfirmModal.classList.add('hidden');
+      currentDeleteId = null;
+      currentDeleteAction = 'delete';
+    }
+  });
+</script>
+{% endblock %}

@@ -25,4 +25,4 @@ def create_default_admin(sender, **kwargs):
             admin = Admin(name="Agil")
             admin.set_password("Agil123")
             admin.save()
-            print("✅ Default admin 'Agil' berhasil dibuat.")
+            print("Default admin 'Agil' berhasil dibuat.")

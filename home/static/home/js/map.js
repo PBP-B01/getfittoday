@@ -71,8 +71,91 @@ async function initMap() {
             updateUserLocationMarker(position);
         }
 
+        fetchAndRenderCommunities(); 
+
+        fetchAndRenderProducts();
+
     } catch (error) {
         console.error("Failed to initialize map:", error);
+    }
+}
+
+async function fetchAndRenderProducts() {
+    const container = document.getElementById('product-scroll-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/store/api/featured/'); 
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.json();
+
+        if (data.products && data.products.length > 0) {
+            container.innerHTML = ''; 
+            data.products.forEach(product => {
+                const cardLink = document.createElement('a');
+                cardLink.href = product.view_url; 
+                cardLink.className = 'simple-product-card';
+
+                cardLink.innerHTML = `
+                    <img src="${product.image_url}" alt="${product.name}">
+                    <div class="simple-product-card-content">
+                        <h3 class="simple-product-card-title" title="${product.name}">
+                            ${product.name}
+                        </h3>
+                        <p class="simple-product-card-price">${product.price_formatted}</p>
+                        <div class="simple-product-card-stats">
+                            <span>⭐ ${product.rating}</span>
+                            <span>${product.units_sold}</span>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(cardLink);
+            });
+        } else {
+            container.innerHTML = '<p class="text-center muted px-4">Belum ada produk yang terdaftar.</p>';
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured products:", error);
+        container.innerHTML = '<p class="text-center muted px-4">Gagal memuat produk.</p>';
+    }
+}
+
+function filterSidebarSpots(query) {
+    const normalizedQuery = query.toLowerCase().trim();
+    const cardsContainer = document.getElementById('spot-cards-container');
+    if (!cardsContainer) {
+        console.error("Filter function: Card container not found!");
+        return;
+    }
+
+    const cards = cardsContainer.querySelectorAll('.spot-card');
+    const emptyState = document.getElementById('sidebar-empty-state');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+        const title = card.querySelector('h3')?.textContent.toLowerCase() || '';
+        const address = card.querySelector('p')?.textContent.toLowerCase() || '';
+
+        if (title.includes(normalizedQuery) || address.includes(normalizedQuery)) {
+            card.style.display = ''; 
+            visibleCount++;
+        } else {
+            card.style.display = 'none'; 
+        }
+    });
+
+    if (emptyState) {
+        const mapHasSpots = cards.length > 0;
+
+        if (mapHasSpots && visibleCount === 0) {
+            emptyState.textContent = 'No spots match your search in this area.';
+            emptyState.classList.remove('hidden');
+        } else if (!mapHasSpots) {
+            emptyState.textContent = 'No Sport Centers spots found in this area. Try panning or zooming the map.';
+        } else {
+            emptyState.classList.add('hidden');
+        }
     }
 }
 
@@ -92,7 +175,7 @@ async function initializeMap(center, zoom, restriction) {
     });
     
     infoWindow = new google.maps.InfoWindow({
-        pixelOffset: new google.maps.Size(0, +160), 
+        pixelOffset: new google.maps.Size(0, -0), 
     });
 
     google.maps.event.addListener(infoWindow, 'domready', () => {
@@ -123,7 +206,14 @@ async function initializeMap(center, zoom, restriction) {
     document.getElementById('sidebar-toggle-btn').addEventListener('click', () => {
         document.body.classList.toggle('sidebar-visible');
     });
-    
+
+    const sidebarSearch = document.getElementById('sidebar-spot-search');
+    if (sidebarSearch) {
+        sidebarSearch.addEventListener('input', (e) => {
+            filterSidebarSpots(e.target.value);
+        });
+    }
+
     createCenterOnMeButton();
 }
 
@@ -155,13 +245,14 @@ async function updateSpotsForView(map) {
 }
 
 async function fetchGridData(gridId) {
-    console.log(`Fetching grid ${gridId} from server...`);
-    const url = `/api/fitness-spots/?gridId=${gridId}`;
+    console.log(`Fetching grid ${gridId} from server using DB/Cache view...`); 
+    const url = `/api/fitness-spots/?gridId=${gridId}`; 
     try {
         const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
         clientGridCache[gridId] = data;
+        console.log(`Successfully fetched grid ${gridId} (may have been Django cached)`); 
         return data;
     } catch (error) {
         console.error(`Failed to fetch data for grid ${gridId}:`, error);
@@ -205,15 +296,21 @@ async function renderSpots(visibleGridIds) {
 
     const emptyState = document.getElementById('sidebar-empty-state');
     if (totalSpotsRendered === 0) {
-        emptyState.classList.remove('hidden');
+         emptyState.textContent = 'No Sport Centers spots found in this area. Try panning or zooming the map.';
+         emptyState.classList.remove('hidden');
     } else {
-        emptyState.classList.add('hidden');
+         emptyState.classList.add('hidden');
     }
 
     if (currentActiveCardId && document.getElementById(`card-${currentActiveCardId}`)) {
         highlightSpotCard(currentActiveCardId);
     }
+
+    const currentQuery = document.getElementById('sidebar-spot-search')?.value || '';
+    filterSidebarSpots(currentQuery);
 }
+
+
 
 function showSpotDetails(spot, shouldZoom = false) {
     const marker = markers[spot.place_id];
@@ -368,10 +465,12 @@ function toggleFullScreen() {
 }
 
 async function fetchMapBoundaries() {
+    console.log("Fetching map boundaries using DB/Cache view..."); 
     try {
-        const response = await fetch('/api/map-boundaries/');
+        const response = await fetch('/api/map-boundaries/'); 
         if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
         const data = await response.json();
+        console.log("Successfully fetched map boundaries (may have been Django cached)");
         return (data && typeof data.north === 'number') ? data : null;
     } catch (error) {
         console.error('Failed to fetch map boundaries:', error);
@@ -517,4 +616,42 @@ function createInfoContent(spot) {
         });
     }
     return div; 
+    
+}
+
+async function fetchAndRenderCommunities() {
+    const container = document.getElementById('community-scroll-container');
+    if (!container) return;
+
+    try {
+        const response = await fetch('/community/api/featured/');
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+        
+        const data = await response.json();
+
+        if (data.communities && data.communities.length > 0) {
+            container.innerHTML = ''; 
+            data.communities.forEach(community => {
+                const card = document.createElement('a');
+                card.href = community.detail_url; 
+                card.className = 'community-card';
+
+                const description = community.description ? 
+                    `<p class="card-text mb-2">${community.description}</p>` : 
+                    '<p class="card-text mb-2" style="min-height: 2.5em;"></p>';
+
+                card.innerHTML = `
+                    <h3 class="card-title">${community.name}</h3>
+                    ${description}
+                    <p class="card-subline">📍 ${community.fitness_spot_name}</p>
+                `;
+                container.appendChild(card);
+            });
+        } else {
+            container.innerHTML = '<p class="text-center muted px-4">Belum ada komunitas yang terdaftar.</p>';
+        }
+    } catch (error) {
+        console.error("Failed to fetch featured communities:", error);
+        container.innerHTML = '<p class="text-center muted px-4">Gagal memuat komunitas.</p>';
+    }
 }

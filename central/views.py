@@ -1,4 +1,3 @@
-# central/views.py
 import datetime
 from django.conf import settings
 from django.contrib.auth import login, logout
@@ -54,6 +53,7 @@ def login_ajax(request):
     try:
         admin = Admin.objects.get(name=name)
         if admin.check_password(password):
+            logout(request)
             request.session["is_admin"] = True
             request.session["admin_name"] = admin.name
 
@@ -68,11 +68,15 @@ def login_ajax(request):
     except Admin.DoesNotExist:
         pass
 
-
     form = AuthenticationForm(request, data=request.POST)
     if form.is_valid():
         user = form.get_user()
         login(request, user)
+
+        request.session["is_admin"] = False
+        if "admin_name" in request.session:
+            del request.session["admin_name"]
+ 
         resp = JsonResponse({
             "ok": True,
             "redirect": "/",
@@ -81,7 +85,6 @@ def login_ajax(request):
         })
         resp.set_cookie("last_login", str(datetime.datetime.now()))
         return resp
-
 
     return JsonResponse(
         {"ok": False, "errors": {"login": ["Username atau password salah."]}},

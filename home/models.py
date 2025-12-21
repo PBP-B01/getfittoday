@@ -96,7 +96,6 @@ class FitnessSpot(models.Model):
     def __str__(self):
         return self.name
 
-#berjalan setiap kali sebuah objek PlaceType akan dihapus.
 @receiver(pre_delete, sender=PlaceType)
 def delete_related_fitness_spots(sender, instance, **kwargs):
     """

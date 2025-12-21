@@ -1,0 +1,162 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if blog %}Edit{% else %}Create{% endif %} Blog - GetFit.Today</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --primary: #0E5A64;
+            --primary-dark: #07434B;
+            --on-primary: #FFFFFF;
+            --headline: #1B2B5A;
+            --gradient-top: #EAF2FF;
+            --gradient-bottom: #BFD6F2;
+            --card-bg: #FFFFFF;
+            --card-border: #C8DDF6;
+            --muted-text: #6B7A99;
+            --accent-yellow: #FFC107;
+            --accent-yellow-dark: #E0A106;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(ellipse 1200px 600px at 15% 6%, rgba(255,255,255,0.6), transparent 70%),
+                        linear-gradient(180deg, var(--gradient-top), var(--gradient-bottom));
+            min-height: 100vh;
+        }
+
+        .form-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: var(--primary);
+            color: var(--on-primary);
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-bottom: 30px;
+            transition: all 0.2s;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .back-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .page-title {
+            font-size: 2.5rem;
+            color: var(--headline);
+            font-weight: 600;
+            margin-bottom: 30px;
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border: 2px solid var(--card-border);
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            font-weight: 600;
+            color: var(--headline);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid var(--card-border);
+            border-radius: 8px;
+            background-color: #F8FBFF;
+            color: #0B2E55;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent-yellow);
+            box-shadow: 0 0 0 3px #9EC5FF80;
+        }
+
+        .button-group {
+            margin-top: 30px;
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        button[type="submit"] {
+            background: var(--accent-yellow);
+            color: #1B2B5A;
+            padding: 12px 32px;
+            border-radius: 8px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background: var(--accent-yellow-dark);
+            transform: translateY(-2px);
+        }
+
+        .cancel-btn {
+            background: #E74C3C;
+            color: white;
+            padding: 12px 32px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .cancel-btn:hover {
+            background: #C0392B;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <a href="{% url 'BlognEvent:blogevent_page' %}" class="back-btn">← Back</a>
+
+        <h1 class="page-title">{% if blog %}Edit Blog{% else %}Create New Blog{% endif %}</h1>
+
+        <div class="form-card">
+            <form method="POST" action="{% if blog %}{% url 'BlognEvent:edit_blog' blog.id %}{% else %}{% url 'BlognEvent:create_blog' %}{% endif %}">
+                {% csrf_token %}
+                <div class="form-group"><label>Title:</label>{{ form.title }}</div>
+                <div class="form-group"><label>Image URL:</label>{{ form.image }}</div>
+                <div class="form-group"><label>Body:</label>{{ form.body }}</div>
+
+                <div class="button-group">
+                    <button type="submit">{% if blog %}Update Blog{% else %}Create Blog{% endif %}</button>
+                    <a href="{% url 'BlognEvent:blogevent_page' %}" class="cancel-btn">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

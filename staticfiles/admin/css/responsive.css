@@ -1,4 +1,4 @@
-/* Tablets */
+
 
 input[type="submit"], button {
     -webkit-appearance: none;
@@ -6,7 +6,6 @@ input[type="submit"], button {
 }
 
 @media (max-width: 1024px) {
-    /* Basic */
 
     html {
         -webkit-text-size-adjust: 100%;
@@ -21,7 +20,6 @@ input[type="submit"], button {
         font-size: 0.75rem;
     }
 
-    /* Layout */
 
     #container {
         min-width: 0;
@@ -35,7 +33,6 @@ input[type="submit"], button {
         padding: 10px 30px;
     }
 
-    /* Header */
 
     #header {
         flex-direction: column;
@@ -161,23 +158,19 @@ input[type="submit"], button {
     .filtered .actions,
 
     #changelist .paginator {
-        border-top-color: var(--hairline-color); /* XXX Is this used at all? */
+        border-top-color: var(--hairline-color);
     }
 
     #changelist .results + .paginator {
         border-top: none;
     }
 
-    /* Forms */
 
     label {
         font-size: 1rem;
     }
 
-    /*
-    Minifiers remove the default (text) "type" attribute from "input" HTML
-    tags. Add input:not([type]) to make the CSS stylesheet work the same.
-    */
+   
     .form-row input:not([type]),
     .form-row input[type=text],
     .form-row input[type=password],
@@ -323,7 +316,7 @@ input[type="submit"], button {
     }
 
     .datetimeshortcuts {
-        color: var(--border-color); /* XXX Redundant, .datetime span also sets #ccc */
+        color: var(--border-color);
     }
 
     .form-row .datetime input.vDateField, .form-row .datetime input.vTimeField {
@@ -334,7 +327,6 @@ input[type="submit"], button {
         overflow: auto;
     }
 
-    /* Messages */
 
     ul.messagelist li {
         padding-left: 55px;
@@ -349,7 +341,6 @@ input[type="submit"], button {
         background-position: 30px 14px;
     }
 
-    /* Login */
 
     .login #header {
         padding: 15px 20px;
@@ -359,7 +350,6 @@ input[type="submit"], button {
         margin: 0;
     }
 
-    /* GIS */
 
     div.olMap {
         max-width: calc(100vw - 30px);
@@ -371,7 +361,6 @@ input[type="submit"], button {
         margin-top: 10px;
     }
 
-    /* Docs */
 
     .module table.xfull {
         width: 100%;
@@ -382,10 +371,8 @@ input[type="submit"], button {
     }
 }
 
-/* Mobile */
 
 @media (max-width: 767px) {
-    /* Layout */
 
     #header, #content {
         padding: 15px;
@@ -395,7 +382,6 @@ input[type="submit"], button {
         padding: 10px 15px;
     }
 
-    /* Dashboard */
 
     .colMS, .colSM {
         margin: 0;
@@ -414,8 +400,6 @@ input[type="submit"], button {
         padding: 10px 15px;
         font-size: 1rem;
     }
-
-    /* Changelist */
 
     #changelist {
         align-items: stretch;
@@ -465,7 +449,6 @@ input[type="submit"], button {
         margin-left: 15px;
     }
 
-    /* Forms */
 
     .form-row {
         padding: 15px 0;
@@ -575,7 +558,6 @@ input[type="submit"], button {
         margin-top: 5px;
     }
 
-    /* Related widget */
 
     .related-widget-wrapper {
         width: 100%;
@@ -599,8 +581,6 @@ input[type="submit"], button {
     .related-widget-wrapper > select ~ a {
         align-self: center;
     }
-
-    /* Selector */
 
     .selector {
         flex-direction: column;
