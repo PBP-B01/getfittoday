@@ -4,6 +4,8 @@ from community.views import (
     delete_community, promote_admin, 
 )
 
+app_name = 'community'
+
 urlpatterns = [
     path('', views.community_list, name='community_list'),
     path('list/', views.community_list, name='community_list'),
