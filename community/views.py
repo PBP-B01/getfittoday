@@ -205,7 +205,7 @@ def featured_communities_api(request):
                 'name': community.name,
                 'description': community.description,
                 'fitness_spot_name': community.fitness_spot.name if community.fitness_spot else 'Lokasi tidak diketahui',
-                'detail_url': reverse('community_detail', args=[community.id]),
+                'detail_url': reverse('community:community_detail', args=[community.id]),
             })
         
         return JsonResponse({'communities': data})

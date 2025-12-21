@@ -16,7 +16,7 @@ from home.models import FitnessSpot
 from django.http import HttpResponse
 import requests
 
-# START : TAMBAHAN PROJECT PAS🔥
+# START : TAMBAHAN PROJECT PAS
 
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
@@ -34,19 +34,15 @@ def _has_admin_access(request) -> bool:
     )
 
 def product_list_json(request):
-    # 1. Ambil parameter (?q=...&sort=...&page=...)
     q = request.GET.get('q', '')
     sort = request.GET.get('sort', '')
-    page_number = request.GET.get('page', 1) # Default halaman 1
+    page_number = request.GET.get('page', 1)
 
-    # 2. Query Dasar
     products = Product.objects.select_related('store').all()
 
-    # 3. Logika Search
     if q:
         products = products.filter(name__icontains=q)
 
-    # 4. Logika Sort
     if sort == 'price_asc':
         products = products.order_by('price')
     elif sort == 'price_desc':
@@ -58,16 +54,13 @@ def product_list_json(request):
     else:
         products = products.order_by('-created_at')
 
-    # 5. Logika Pagination (20 Produk per Halaman)
     paginator = Paginator(products, 20) 
     
     try:
         page_obj = paginator.page(page_number)
     except:
-        # Jika halaman tidak valid (misal page=999), kembalikan halaman 1 atau terakhir
         page_obj = paginator.page(1)
 
-    # 6. Serialisasi Data (Hanya data di halaman ini)
     data = []
     for product in page_obj.object_list:
         data.append({
@@ -83,7 +76,6 @@ def product_list_json(request):
             }
         })
     
-    # 7. Return JSON dengan Metadata Pagination
     response_data = {
         'products': data,
         'has_next': page_obj.has_next(),
@@ -94,9 +86,7 @@ def product_list_json(request):
 
     return JsonResponse(response_data, safe=False)
 
-# 2. Endpoint untuk View Cart dalam JSON (Untuk Flutter)
 def user_cart_json(request):
-    # NOTE: allow guest/session-based cart (no authentication required)
     cart = _get_or_create_cart(request)
     items = cart.items.select_related('product').all()
     
@@ -107,7 +97,7 @@ def user_cart_json(request):
         item_total = item.product.price * item.quantity
         total_price += item_total
         cart_data.append({
-            "id": item.pk, # ID CartItem
+            "id": item.pk,
             "product": {
                 "pk": item.product.pk,
                 "name": item.product.name,
@@ -124,7 +114,7 @@ def user_cart_json(request):
         "total_price": int(total_price)
     })
 
-# 3. Endpoint Create Product khusus Flutter (CSRF Exempt & JSON Body)
+
 @csrf_exempt
 def create_product_flutter(request):
     if request.method == 'POST':
@@ -134,7 +124,6 @@ def create_product_flutter(request):
                 
             data = json.loads(request.body)
             
-            # Cari instance FitnessSpot (Toko)
             store_id = data.get('store')
             store = None
             if store_id:
@@ -143,8 +132,8 @@ def create_product_flutter(request):
             new_product = Product.objects.create(
                 name=data["name"],
                 price=int(data["price"]),
-                rating=data.get("rating", ""), # Opsional
-                units_sold=data.get("units_sold", ""), # Opsional
+                rating=data.get("rating", ""),
+                units_sold=data.get("units_sold", ""),
                 image_url=data["image_url"],
                 store=store
             )
@@ -158,17 +147,16 @@ def create_product_flutter(request):
     return JsonResponse({"status": "error", "message": "Invalid method"}, status=401)
 
 
+
 def proxy_image(request):
     image_url = request.GET.get('url')
     if not image_url:
         return HttpResponse('No URL provided', status=400)
     
     try:
-        # Fetch image from external source
         response = requests.get(image_url, timeout=10)
         response.raise_for_status()
         
-        # Return the image with proper content type
         return HttpResponse(
             response.content,
             content_type=response.headers.get('Content-Type', 'image/jpeg')
@@ -177,7 +165,6 @@ def proxy_image(request):
         return HttpResponse(f'Error fetching image: {str(e)}', status=500)
 
 
-# API untuk mengambil daftar Fitness Spot (Toko) untuk Dropdown Flutter
 def get_fitness_spots_json(request):
     spots = FitnessSpot.objects.all().order_by('name')
     data = []
@@ -188,7 +175,7 @@ def get_fitness_spots_json(request):
         })
     return JsonResponse(data, safe=False)
 
-# END : TAMBAHAN PROJECT PAS🔥
+# END : TAMBAHAN PROJECT PAS
 
 def _get_or_create_cart(request):
     if request.user.is_authenticated:
@@ -249,7 +236,6 @@ def product_list(request):
 def add_to_cart(request, pk):
     product = get_object_or_404(Product, pk=pk)
     
-    # Ambil quantity dari request.POST atau JSON Body (Flutter biasa kirim JSON)
     try:
         data = json.loads(request.body)
         quantity = int(data.get('quantity', 1))
@@ -274,7 +260,6 @@ def add_to_cart(request, pk):
         item.quantity = quantity
         item.save()
 
-    # Selalu return JSON untuk API Flutter
     cart.refresh_from_db() 
     return JsonResponse({
         'success': True,
@@ -430,48 +415,98 @@ def create_product_ajax(request):
             'errors': errors_dict
         }, status=400)
 
-# ADA PERUBAHAN DI SINI😉
+
 @csrf_exempt
+def edit_product_flutter(request, pk):
+    if request.method != 'POST':
+        return JsonResponse({
+            "status": "error",
+            "message": "Method not allowed"
+        }, status=405)
+
+    if not request.session.get('is_admin'):
+        return JsonResponse({
+            "status": "error",
+            "message": "Hanya Admin yang boleh mengedit produk"
+        }, status=403)
+
+    try:
+        product = Product.objects.get(pk=pk)
+        data = json.loads(request.body)
+
+        product.name = data.get('name', product.name)
+        product.price = int(data.get('price', product.price))
+        product.rating = data.get('rating', product.rating)
+        product.units_sold = data.get('units_sold', product.units_sold)
+        product.image_url = data.get('image_url', product.image_url)
+
+        store_id = data.get('store')
+        if store_id:
+            product.store = FitnessSpot.objects.get(pk=store_id)
+
+        product.save()
+
+        return JsonResponse({
+            "status": "success",
+            "message": "Produk berhasil diperbarui"
+        })
+
+    except Product.DoesNotExist:
+        return JsonResponse({
+            "status": "error",
+            "message": "Produk tidak ditemukan"
+        }, status=404)
+
+    except Exception as e:
+        return JsonResponse({
+            "status": "error",
+            "message": str(e)
+        }, status=500)
+    
+
+@admin_session_required
 def edit_product(request, pk):
-    # Kita gunakan get_object_or_404 agar kalau ID salah langsung 404
     product = get_object_or_404(Product, pk=pk)
+    is_ajax = request.headers.get('x-requested-with') == 'XMLHttpRequest'
+
+    template_partial = 'edit_product2.html'
+    template_full = 'edit_product.html'
 
     if request.method == 'POST':
-        if not _has_admin_access(request):
-            return JsonResponse({'success': False, 'error': 'Akses ditolak'}, status=403)
-
-        try:
-            # 1. Baca data sebagai JSON
-            data = json.loads(request.body)
-            
-            # 2. Update Field Standar
-            product.name = data.get('name', product.name)
-            product.image_url = data.get('image_url', product.image_url)
-            product.rating = data.get('rating', product.rating)
-            product.units_sold = data.get('units_sold', product.units_sold)
-
-            # 3. Konversi Harga ke Integer (PENTING)
-            price_input = data.get('price')
-            if price_input is not None:
-                product.price = int(price_input)
-
-            # 4. Handle Store (Toko)
-            store_id = data.get('store')
-            if store_id:
-                # Ambil object FitnessSpot berdasarkan ID
-                product.store = FitnessSpot.objects.get(pk=store_id)
-            
-            # 5. Simpan
-            product.save()
-            
-            return JsonResponse({'success': True, 'message': 'Produk berhasil diperbarui!'})
-            
-        except Exception as e:
-            # Print error ke terminal agar ketahuan salahnya dimana
-            print(f"❌ ERROR EDIT PRODUCT: {e}") 
-            return JsonResponse({'success': False, 'error': str(e)}, status=400)
-
-    return JsonResponse({'success': False, 'error': 'Method not allowed'}, status=405)
+        form = ProductForm(request.POST, request.FILES or None, instance=product)
+        if form.is_valid():
+            try:
+                form.save()
+                if is_ajax:
+                    return JsonResponse({
+                        'success': True,
+                        'message': 'Produk berhasil diperbarui!'
+                    })
+                else:
+                    return redirect('store:product_list')
+            except Exception as e:
+                 if is_ajax:
+                       return JsonResponse({'success': False, 'error': 'Gagal menyimpan pembaruan.'}, status=500)
+                 else:
+                       context = {'form': form, 'product': product, 'error_message': 'Gagal menyimpan pembaruan.'}
+                       return render(request, template_full, context, status=500)
+        else:
+            context = {'form': form, 'product': product}
+            if is_ajax:
+                html_form = render_to_string(template_partial, context, request=request)
+                return HttpResponseBadRequest(html_form, content_type='text/html')
+            else:
+                return render(request, template_full, context, status=400)
+    else:
+        form = ProductForm(instance=product)
+        context = {
+            'form': form,
+            'product': product
+        }
+        if is_ajax:
+            return render(request, template_partial, context)
+        else:
+            return render(request, template_full, context)
 
 
 @csrf_exempt

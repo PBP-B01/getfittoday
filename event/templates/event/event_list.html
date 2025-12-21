@@ -197,7 +197,7 @@
 <div class="max-w-6xl mx-auto px-4 py-8">
   {% if from_community_id and from_community_name %}
   <div class="mb-6">
-    <a href="{% url 'community_detail' from_community_id %}" class="btn-back">
+    <a href="{% url 'community:community_detail' from_community_id %}" class="btn-back">
       <span>←</span>
       <span>Kembali ke {{ from_community_name }}</span>
     </a>
