@@ -184,6 +184,10 @@ CORS_ALLOW_CREDENTIALS = True
 if PRODUCTION:
     CORS_ALLOW_ALL_ORIGINS = False
     CORS_ALLOWED_ORIGINS = PWS_ORIGINS
+    CORS_ALLOWED_ORIGIN_REGEXES = [
+        r"^http://localhost(:\\d+)?$",
+        r"^http://127\\.0\\.0\\.1(:\\d+)?$",
+    ]
 else:
     CORS_ALLOW_ALL_ORIGINS = True
 
