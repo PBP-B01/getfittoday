@@ -331,6 +331,18 @@ def show_event_api(request):
         is_authenticated = request.user.is_authenticated
         is_superadmin = _has_admin_access(request)
         can_manage = bool(is_superadmin or event.community.is_admin(request.user))
+        admin_username = _admin_session_username(request)
+        admin_user = (
+            User.objects.filter(username=admin_username).first()
+            if admin_username
+            else None
+        )
+        if is_authenticated:
+            is_joined = event.user_is_participant(request.user)
+        elif admin_user is not None:
+            is_joined = event.user_is_participant(admin_user)
+        else:
+            is_joined = False
         data.append({
             "id": event.id,
             "name": event.name,
@@ -342,7 +354,7 @@ def show_event_api(request):
             "can_edit": can_manage if (is_authenticated or is_superadmin) else False,
             "can_delete": can_manage if (is_authenticated or is_superadmin) else False,
             "is_active": not event.is_past(),
-            "is_joined": event.user_is_participant(request.user) if is_authenticated else False,
+            "is_joined": is_joined,
             "is_superadmin": is_superadmin,
         })
     return JsonResponse(data, safe=False)
@@ -352,16 +364,19 @@ def show_event_api(request):
 def join_event_flutter(request, event_id):
     if request.method != 'POST':
         return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
-    if _has_admin_access(request):
-        return JsonResponse({"status": "error", "message": "Admin cannot join events."}, status=403)
-    if not request.user.is_authenticated:
+    join_user = None
+    if request.user.is_authenticated:
+        join_user = request.user
+    elif _has_admin_access(request):
+        join_user = _get_or_create_admin_user(request)
+    if join_user is None:
         return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
     
     event = get_object_or_404(Event, id=event_id)
-    if event.participants.filter(id=request.user.id).exists():
+    if event.participants.filter(id=join_user.id).exists():
         return JsonResponse({"status": "error", "message": "Sudah join."}, status=400)
     
-    event.participants.add(request.user)
+    event.participants.add(join_user)
     return JsonResponse({"status": "success", "message": "Berhasil join!"}, status=200)
 
 
@@ -369,13 +384,20 @@ def join_event_flutter(request, event_id):
 def leave_event_flutter(request, event_id):
     if request.method != 'POST':
         return JsonResponse({"status": "error", "message": "Method not allowed"}, status=405)
-    if _has_admin_access(request):
-        return JsonResponse({"status": "error", "message": "Admin cannot leave events."}, status=403)
-    if not request.user.is_authenticated:
+    leave_user = None
+    if request.user.is_authenticated:
+        leave_user = request.user
+    elif _has_admin_access(request):
+        admin_username = _admin_session_username(request)
+        if admin_username:
+            leave_user = User.objects.filter(username=admin_username).first()
+    if leave_user is None:
         return JsonResponse({"status": "error", "message": "Harap login."}, status=401)
     
     event = get_object_or_404(Event, id=event_id)
-    event.participants.remove(request.user)
+    if not event.participants.filter(id=leave_user.id).exists():
+        return JsonResponse({"status": "error", "message": "Belum join."}, status=400)
+    event.participants.remove(leave_user)
     return JsonResponse({"status": "success", "message": "Berhasil keluar."}, status=200)
 
 
